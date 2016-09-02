@@ -51,6 +51,8 @@ ApplicationWindow
         property string source: settings.todoTxtLocation
         property string fullText: ''
         property string error: ''
+        property var contexts: [] //+
+        property var projects: [] //@
 
         onFullTextChanged: popModel();
 
