@@ -37,13 +37,14 @@ Page {
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaListView {
+        VerticalScrollDecorator {}
         anchors.fill: parent
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
-                text: qsTr("Show Page 2")
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"))
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
         }
 
@@ -51,21 +52,28 @@ Page {
             title: qsTr("Aufgaben")
             description: qsTr("Alle")
         }
-        model: todoModel
+        model: todoModel.todoList
         delegate: ListItem {
+            height: Math.max(lbl.height,doneSw.height) + Theme.paddingLarge
             Row {
                 Switch {
                     id: doneSw
-                    checked: model.done
+//                    anchors.verticalCenter: parent.verticalCenter
+                    checked: todoModel.todoList[index][0]
+                    iconSource: "image://theme/icon-s-certificates?red"
                 }
+//                TextSwitch {}
 
-            Label {
-                width: page.width - doneSw.width
-                text: model.text
-                wrapMode: Text.Wrap
-                color: (model.done ? Theme.secondaryColor : Theme.primaryColor)
-                font.strikeout: model.done
-            }
+                Label {
+                    id:lbl
+                    width: page.width - doneSw.width
+//                    anchors.bottom: doneSw.bottom
+                    anchors.verticalCenter: doneSw.verticalCenter
+                    text:todoModel.todoList[index][3]
+                    wrapMode: Text.Wrap
+                    color: (doneSw.checked ? Theme.secondaryColor : Theme.primaryColor)
+                    font.strikeout: doneSw.checked
+                }
             }
             menu: ContextMenu {
                 MenuItem {
