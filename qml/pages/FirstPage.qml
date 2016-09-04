@@ -24,7 +24,7 @@ Page {
 
         header: PageHeader {
             title: qsTr("Aufgaben")
-            description: qsTr("Alle")
+            description: (tdt.pfilter.length === 0? "All" : tdt.pfilter.toString())
         }
         model: tdt.todoList
         delegate: ListItem {
