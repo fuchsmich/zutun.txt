@@ -16,6 +16,10 @@ Page {
                 text: qsTr("Settings")
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
+            MenuItem {
+                text: qsTr("Filter Projects")
+                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
+            }
         }
 
         header: PageHeader {
@@ -29,22 +33,22 @@ Page {
             ListView.onRemove: animateRemoval(listItem)
 
             function remove() {
-                remorseAction("Deleting", function() { tdt.remove(index) })
+                remorseAction("Deleting", function() { tdt.removeItem(index) })
             }
 
             Row {
                 Switch {
                     id: doneSw
-//                    anchors.verticalCenter: parent.verticalCenter
+                    //                    anchors.verticalCenter: parent.verticalCenter
                     checked: tdt.getDone(index)
                     iconSource: "image://theme/icon-s-certificates?" + (checked ? "green" : "red")
-//                    Component.onCompleted: console.log(index, typeof tdt.todoList[index][tdt.done])
+                    //                    Component.onCompleted: console.log(index, typeof tdt.todoList[index][tdt.done])
                     onClicked: tdt.setDone(index, checked);
                 }
                 Label {
                     id:lbl
                     width: page.width - doneSw.width
-//                    anchors.bottom: doneSw.bottom
+                    //                    anchors.bottom: doneSw.bottom
                     anchors.verticalCenter: doneSw.verticalCenter
                     text: tdt.getPriority(index) + tdt.todoList[index][tdt.subject]
                     wrapMode: Text.Wrap
@@ -59,7 +63,11 @@ Page {
                 }
             }
         }
-
+    }
+    onStatusChanged: {
+        if (status === PageStatus.Active && pageStack.depth === 1) {
+            pageStack.pushAttached("ProjectFilter.qml", {});
+        }
     }
 }
 

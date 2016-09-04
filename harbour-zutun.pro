@@ -38,5 +38,9 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 #TRANSLATIONS += translations/harbour-zutun-de.ts
 
 DISTFILES += \
-    qml/pages/Settings.qml
+    qml/pages/Settings.qml \
+    qml/pages/ProjectFilter.qml
+
+HEADERS += \
+    src/fileio.hpp
 
