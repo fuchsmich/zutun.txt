@@ -8,6 +8,7 @@ import FileIO 1.0
 //TODO edit
 //TODO set prio
 //TODO filters
+//TODO archive to done.txt
 
 ApplicationWindow
 {
@@ -52,30 +53,23 @@ ApplicationWindow
 //        onTodoTxtChanged: parseTodoTxt();
         onTodoListChanged: listToFile();
 
+
         Item {
+            /* private stuff */
             id: m
             property bool noSyncToFile: false
         }
 
-        function listToFile() {
-            todoList.sort();
-            if (m.noSyncToFile) return;
-            var txt = "";
-            for (var t in todoList) {
-                txt += todoList[t][fullTxt] + "\n";
-            }
-//            console.log("setting content");
-            todoTxtFile.content = txt;
-        }
 
+        /* get done state */
         function getDone(index) {
             if (index >= 0 && index < todoList.length) {
-                return (typeof tdt.todoList[index][tdt.done] !== 'undefined' ? (tdt.todoList[index][tdt.done][0] === 'x') : false);
+                return (typeof todoList[index][done] !== 'undefined' ? (todoList[index][done][0] === 'x') : false);
             } else throw "done: Index out of bounds."
         }
 
+        /* add/remove done state and done date */
         function setDone(index, value) {
-            //TODO datum setzen
 //            console.log(Qt.formatDate(new Date(),"yyyy-MM-dd"));
             if (index >= 0 && index < todoList.length) {
                 if (value && !getDone(index))  todoList[index][fullTxt] = "x " + Qt.formatDate(new Date(),"yyyy-MM-dd") + " " + todoList[index][fullTxt];
@@ -84,6 +78,7 @@ ApplicationWindow
             } else throw "done: Index out of bounds."
         }
 
+        /* delete todo item */
         function removeItem(index) {
             if (index >= 0 && index < todoList.length) {
                 var l = [];
@@ -98,14 +93,26 @@ ApplicationWindow
             } else throw "done: Index out of bounds."
         }
 
-
+        /* get Priority */
         function getPriority(index) {
             if (index >= 0 && index < todoList.length) {
                 return (typeof tdt.todoList[index][tdt.priority] !== 'undefined' ? tdt.todoList[index][tdt.priority] : "");
             } else throw "done: Index out of bounds."
         }
 
+        function raisePriority(index) {
 
+        }
+
+        function lowerPriority(index) {
+
+        }
+
+        function setPriority(index, prio) {
+
+        }
+
+        /* get color due to Priority*/
         ColorPicker {
             id: cp
         }
@@ -123,6 +130,26 @@ ApplicationWindow
             } else throw "done: Index out of bounds."
         }
 
+        /*  */
+        function setFullText(index, txt) {
+            todoList[index][fullTxt] = txt;
+            listToFile();
+        }
+
+        /* sort list and write it to the txtFile*/
+        function listToFile() {
+            todoList.sort();
+            if (m.noSyncToFile) return;
+            var txt = "";
+            for (var t in todoList) {
+                txt += todoList[t][fullTxt] + "\n";
+            }
+//            console.log("setting content");
+            todoTxtFile.content = txt;
+        }
+
+
+        /* parse plain Text*/
         function parseTodoTxt(todoTxt) {
             var list = [];
             var todos = todoTxt.split("\n");

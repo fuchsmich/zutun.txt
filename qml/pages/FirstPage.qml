@@ -62,11 +62,48 @@ Page {
                     onClicked: remove()
                 }
             }
+
+            onClicked: pageStack.push(textDialog, {itemIndex: model.index});
         }
     }
     onStatusChanged: {
         if (status === PageStatus.Active && pageStack.depth === 1) {
             pageStack.pushAttached("ProjectFilter.qml", {});
+        }
+    }
+    Component {
+        id: textDialog
+        Dialog {
+            id: dialog
+            acceptDestination: page
+            acceptDestinationAction: PageStackAction.Pop
+            property int itemIndex
+            onItemIndexChanged: {
+                console.log(itemIndex);
+                ta.text = tdt.todoList[dialog.itemIndex][tdt.fullTxT];
+            }
+
+            Column {
+                anchors.fill: parent
+                DialogHeader {
+                    title: "Edit Item " + itemIndex
+                }
+                TextArea {
+                    id: ta
+                    width: dialog.width
+//                    text: tdt.todoList[dialog.itemIndex][tdt.fullTxT]
+                }
+            }
+            onAccepted: {
+                tdt.setFullText(index, ta.text);
+                pageStack.pop();
+            }
+            onCanceled: {
+                pageStack.pop();
+            }
+            Component.onCompleted: {
+                console.log(itemIndex + tdt.todoList[dialog.itemIndex][tdt.fullTxT]);
+            }
         }
     }
 }
