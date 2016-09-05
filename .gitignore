@@ -1,0 +1,56 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @fuchsmich
+ Watch 1,785
+  Star 40,370
+  Fork 15,938 github/gitignore
+ Code  Pull requests 159  Pulse  Graphs
+Branch: master Find file Copy pathgitignore/Qt.gitignore
+f364332  on Jun 15
+@nocnokneo nocnokneo Ignore all forms of CMakeLists.txt.user
+10 contributors @abrodkin @misterion @tim-sueberkrueb @nocnokneo @tsteinholz @munkhoff @jspahrsummers @jakepetroules @fsw @varhub
+RawBlameHistory    39 lines (30 sloc)  334 Bytes
+# C++ objects and libs
+
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+*.dll
+*.dylib
+
+# Qt-es
+
+/.qmake.cache
+/.qmake.stash
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+Makefile*
+*build-*
+
+# QtCreator
+
+*.autosave
+
+# QtCtreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# QtCtreator CMake
+CMakeLists.txt.user*
+
+Contact GitHub API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Status Help
