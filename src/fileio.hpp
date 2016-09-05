@@ -26,7 +26,7 @@ public:
     QString readContent() {
         QString m_content = "";
         if (!m_path.isEmpty()) {
-            qDebug() << "reading content";
+//            qDebug() << "reading content";
             QFile textfile(m_path.path());
 //            qDebug() << m_path.toString() << m_path.path();
             textfile.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -41,7 +41,7 @@ public:
 
     void writeContent(const QString &data) {
         if (!m_path.isEmpty()) {
-            qDebug() << "writing content";
+//            qDebug() << "writing content";
             QFile textfile(m_path.path());
             textfile.open(QIODevice::WriteOnly | QIODevice::Text);
             QTextStream out(&textfile);

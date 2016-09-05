@@ -64,7 +64,7 @@ ApplicationWindow
             for (var t in todoList) {
                 txt += todoList[t][fullTxt] + "\n";
             }
-            console.log("settings content");
+//            console.log("setting content");
             todoTxtFile.content = txt;
         }
 
@@ -76,9 +76,10 @@ ApplicationWindow
 
         function setDone(index, value) {
             //TODO datum setzen
+//            console.log(Qt.formatDate(new Date(),"yyyy-MM-dd"));
             if (index >= 0 && index < todoList.length) {
-                if (value && !getDone(index))  todoList[index][fullTxt] = "x " + todoList[index][fullTxt];
-                if (!value && getDone(index)) todoList[index][fullTxt] = todoList[index][fullTxt].substr(2);
+                if (value && !getDone(index))  todoList[index][fullTxt] = "x " + Qt.formatDate(new Date(),"yyyy-MM-dd") + " " + todoList[index][fullTxt];
+                if (!value && getDone(index)) todoList[index][fullTxt] = todoList[index][fullTxt].match(/(x\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/)[3]; //Datum muss auch weg!!
                 listToFile();
             } else throw "done: Index out of bounds."
         }
@@ -162,7 +163,7 @@ ApplicationWindow
                     contexts[cmatches[c].toUpperCase()].push(t);
 //                    console.log(cmatches[c].toUpperCase(), contexts[cmatches[c].toUpperCase()]);
                 }
-                console.log(t, pmatches, projects, cmatches);
+//                console.log(t, pmatches, projects, cmatches);
 
 
 
