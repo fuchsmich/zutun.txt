@@ -20,6 +20,10 @@ Page {
                 text: qsTr("Filter Projects")
                 onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
             }
+            MenuItem {
+                text: qsTr("Add new task")
+                onClicked: pageStack.push(taskEdit, {itemIndex: -1, text: ""});
+            }
         }
 
         header: PageHeader {
@@ -30,7 +34,7 @@ Page {
         delegate: ListItem {
             //TODO lange Texte überlappen
             id: listItem
-            contentHeight: Math.max(lbl.height,doneSw.height) + Theme.paddingLarge
+            contentHeight: Math.max(lbl.height,doneSw.height) + 2*Theme.paddingLarge
             ListView.onRemove: animateRemoval(listItem)
             width: page.width
             anchors.rightMargin: Theme.horizontalPageMargin
@@ -64,6 +68,14 @@ Page {
             }
             menu: ContextMenu {
                 MenuItem {
+                    text: "Priority Up"
+                    onClicked: tdt.raisePriority(index)
+                }
+                MenuItem {
+                    text: "Priority Down"
+                    onClicked: tdt.lowerPriority(index)
+                }
+                MenuItem {
                     text: "Remove"
                     onClicked: remove()
                 }
@@ -71,7 +83,7 @@ Page {
 
             onClicked: {
                 console.log(index);
-                pageStack.push(textDialog, {itemIndex: index, text: tdt.taskList[index][0]});
+                pageStack.push(taskEdit, {itemIndex: index, text: tdt.taskList[index][0]});
             }
         }
     }
@@ -80,38 +92,9 @@ Page {
             pageStack.pushAttached("ProjectFilter.qml", {});
         }
     }
-    Component {
-        id: textDialog
-        Dialog {
-            id: dialog
-            acceptDestination: page
-            acceptDestinationAction: PageStackAction.Pop
-            property int itemIndex
-            property string text
-            onItemIndexChanged: {
-                console.log(text);
-//                ta.text = tdt.taskList[dialog.itemIndex][0];
-            }
 
-            Column {
-                anchors.fill: parent
-                DialogHeader {
-                    title: "Edit Item " + itemIndex
-                }
-                TextArea {
-                    id: ta
-                    width: dialog.width
-                    text: dialog.text
-                }
-            }
-            onAccepted: {
-                tdt.setFullText(itemIndex, ta.text);
-                pageStack.pop();
-            }
-            onCanceled: {
-                pageStack.pop();
-            }
-        }
+    TaskEdit {
+        id: taskEdit
     }
 }
 

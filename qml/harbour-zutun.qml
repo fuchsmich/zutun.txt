@@ -11,10 +11,12 @@ import FileIO 1.0
 
 ApplicationWindow
 {
+    id: app
     initialPage: Component { FirstPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
+
 
     ConfigurationGroup {
         id: settings
@@ -39,6 +41,7 @@ ApplicationWindow
         property var contexts: [] //+
         property var projects: [] //@
         property var pfilter: []
+        property string lowestPrio: "(A) "
 
         function getProjectList() {
             var list = [];
@@ -48,13 +51,16 @@ ApplicationWindow
             return list;
         }
 
-        onTaskListChanged: listToFile();
+//        onTaskListChanged: {
+//            console.log("tlc");
+//            listToFile();
+//        }
 
 
         Item {
             /* private stuff */
             id: m
-            property bool noSyncToFile: false
+//            property bool noSyncToFile: false
         }
 
 
@@ -69,8 +75,12 @@ ApplicationWindow
         function setDone(index, value) {
 //            console.log(Qt.formatDate(new Date(),"yyyy-MM-dd"));
             if (index >= 0 && index < taskList.length) {
-                if (value && !getDone(index))  taskList[index][fullTxt] = "x " + Qt.formatDate(new Date(),"yyyy-MM-dd") + " " + taskList[index][fullTxt];
-                if (!value && getDone(index)) taskList[index][fullTxt] = taskList[index][fullTxt].match(/(x\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/)[3]; //Datum muss auch weg!!
+                if (value && !getDone(index))
+                    taskList[index][fullTxt] =
+                            "x " + Qt.formatDate(new Date(),"yyyy-MM-dd") + " " + taskList[index][fullTxt];
+                if (!value && getDone(index))
+                    taskList[index][fullTxt] =
+                            taskList[index][fullTxt].match(/(x\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/)[3]; //Datum muss auch weg!!
                 listToFile();
             } else throw "done: Index out of bounds."
         }
@@ -97,12 +107,27 @@ ApplicationWindow
             } else throw "done: Index out of bounds."
         }
 
-        function raisePriority(index) {
 
+        function raisePriority(index) {
+//            console.log(String.fromCharCode(taskList[index][priority].charCodeAt(1) - 1))
+            if (taskList[index][priority] === undefined)
+                taskList[index][fullTxt] = lowestPrio + taskList[index][fullTxt];
+            else if (taskList[index][priority][1] > alphabet[0])
+                taskList[index][fullTxt] =
+                        "(" + String.fromCharCode(taskList[index][priority].charCodeAt(1) - 1) + ") "
+                        + taskList[index][fullTxt];
+            listToFile();
         }
 
         function lowerPriority(index) {
-
+            if (taskList[index][priority] !== undefined && taskList[index][priority] < alphabet[0])
+                taskList[index][fullTxt] =
+                        "(" + String.fromCharCode(taskList[index][priority].charCodeAt(1) + 1) + ") "
+                        + taskList[index][fullTxt].substr(4);
+            else if (taskList[index][priority] !== undefined && taskList[index][priority] === alphabet[0])
+                taskList[index][fullTxt] =
+                        taskList[index][fullTxt].substr(4);
+            listToFile();
         }
 
         function setPriority(index, prio) {
@@ -127,20 +152,22 @@ ApplicationWindow
             } else throw "done: Index out of bounds."
         }
 
-        /*  */
+        /* set fulltext; index = -1 add Item */
         function setFullText(index, txt) {
             /*replace CR and LF; tasks always comprise a single line*/
             txt.replace(/\r/g," ");
             txt.replace(/\n/g," ");
 
-            taskList[index][fullTxt] = txt;
+            if (index === -1) taskList.push([txt]);
+            else taskList[index][fullTxt] = txt;
             listToFile();
         }
 
         /* sort list and write it to the txtFile*/
         function listToFile() {
+            console.log("taskList");
+//            if (m.noSyncToFile) return;
             taskList.sort();
-            if (m.noSyncToFile) return;
             var txt = "";
             for (var t in taskList) {
                 txt += taskList[t][fullTxt] + "\n";
@@ -195,9 +222,9 @@ ApplicationWindow
 
             }
             //            console.log("list", list);
-            m.noSyncToFile = true;
+//            m.noSyncToFile = true;
             taskList = list;
-            m.noSyncToFile = false;
+//            m.noSyncToFile = false;
         }
 
 

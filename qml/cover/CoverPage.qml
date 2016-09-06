@@ -42,13 +42,13 @@ CoverBackground {
         id: coverAction
 
         CoverAction {
-            iconSource: "image://theme/icon-cover-next"
+            iconSource: "image://theme/icon-cover-new"
+            onTriggered: {
+                pageStack.push("../pages/TaskEdit.qml", {index: -1, text: ""});
+                app.activate();
+            }
         }
-
-        CoverAction {
-            iconSource: "image://theme/icon-cover-pause"
-        }
-    }
+    }       
 }
 
 
