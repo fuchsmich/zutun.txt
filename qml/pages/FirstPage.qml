@@ -63,7 +63,10 @@ Page {
                 }
             }
 
-            onClicked: pageStack.push(textDialog, {itemIndex: model.index});
+            onClicked: {
+                console.log(index);
+                pageStack.push(textDialog, {itemIndex: index, text: tdt.todoList[index][0]});
+            }
         }
     }
     onStatusChanged: {
@@ -78,9 +81,10 @@ Page {
             acceptDestination: page
             acceptDestinationAction: PageStackAction.Pop
             property int itemIndex
+            property string text
             onItemIndexChanged: {
-                console.log(itemIndex);
-                ta.text = tdt.todoList[dialog.itemIndex][tdt.fullTxT];
+                console.log(text);
+//                ta.text = tdt.todoList[dialog.itemIndex][0];
             }
 
             Column {
@@ -91,18 +95,15 @@ Page {
                 TextArea {
                     id: ta
                     width: dialog.width
-//                    text: tdt.todoList[dialog.itemIndex][tdt.fullTxT]
+                    text: dialog.text
                 }
             }
             onAccepted: {
-                tdt.setFullText(index, ta.text);
+                tdt.setFullText(itemIndex, ta.text);
                 pageStack.pop();
             }
             onCanceled: {
                 pageStack.pop();
-            }
-            Component.onCompleted: {
-                console.log(itemIndex + tdt.todoList[dialog.itemIndex][tdt.fullTxT]);
             }
         }
     }
