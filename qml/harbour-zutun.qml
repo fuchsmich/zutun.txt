@@ -5,7 +5,6 @@ import org.nemomobile.configuration 1.0
 
 import FileIO 1.0
 
-//TODO edit
 //TODO set prio
 //TODO filters
 //TODO archive to done.txt
@@ -35,9 +34,8 @@ ApplicationWindow
         readonly property string alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
         property url source: StandardPaths.documents + '/todo.txt'
-//        property string todoTxt: ''
         property string error: ''
-        property var todoList: []
+        property var taskList: []
         property var contexts: [] //+
         property var projects: [] //@
         property var pfilter: []
@@ -50,8 +48,7 @@ ApplicationWindow
             return list;
         }
 
-//        onTodoTxtChanged: parseTodoTxt();
-        onTodoListChanged: listToFile();
+        onTaskListChanged: listToFile();
 
 
         Item {
@@ -63,40 +60,40 @@ ApplicationWindow
 
         /* get done state */
         function getDone(index) {
-            if (index >= 0 && index < todoList.length) {
-                return (typeof todoList[index][done] !== 'undefined' ? (todoList[index][done][0] === 'x') : false);
+            if (index >= 0 && index < taskList.length) {
+                return (typeof taskList[index][done] !== 'undefined' ? (taskList[index][done][0] === 'x') : false);
             } else throw "done: Index out of bounds."
         }
 
         /* add/remove done state and done date */
         function setDone(index, value) {
 //            console.log(Qt.formatDate(new Date(),"yyyy-MM-dd"));
-            if (index >= 0 && index < todoList.length) {
-                if (value && !getDone(index))  todoList[index][fullTxt] = "x " + Qt.formatDate(new Date(),"yyyy-MM-dd") + " " + todoList[index][fullTxt];
-                if (!value && getDone(index)) todoList[index][fullTxt] = todoList[index][fullTxt].match(/(x\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/)[3]; //Datum muss auch weg!!
+            if (index >= 0 && index < taskList.length) {
+                if (value && !getDone(index))  taskList[index][fullTxt] = "x " + Qt.formatDate(new Date(),"yyyy-MM-dd") + " " + taskList[index][fullTxt];
+                if (!value && getDone(index)) taskList[index][fullTxt] = taskList[index][fullTxt].match(/(x\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/)[3]; //Datum muss auch weg!!
                 listToFile();
             } else throw "done: Index out of bounds."
         }
 
         /* delete todo item */
         function removeItem(index) {
-            if (index >= 0 && index < todoList.length) {
+            if (index >= 0 && index < taskList.length) {
                 var l = [];
-                for (var t in todoList) {
+                for (var t in taskList) {
                     if (t != index) {
-                        l.push(todoList[t]);
+                        l.push(taskList[t]);
                         //                        console.log(typeof t, t, typeof index, index);
                     }
 
                 }
-                todoList = l;
+                taskList = l;
             } else throw "done: Index out of bounds."
         }
 
         /* get Priority */
         function getPriority(index) {
-            if (index >= 0 && index < todoList.length) {
-                return (typeof tdt.todoList[index][tdt.priority] !== 'undefined' ? tdt.todoList[index][tdt.priority] : "");
+            if (index >= 0 && index < taskList.length) {
+                return (typeof tdt.taskList[index][tdt.priority] !== 'undefined' ? tdt.taskList[index][tdt.priority] : "");
             } else throw "done: Index out of bounds."
         }
 
@@ -119,7 +116,7 @@ ApplicationWindow
 
         function getColor(index) {
 //            console.log(index, getPriority(index));
-            if (index >= 0 && index < todoList.length) {
+            if (index >= 0 && index < taskList.length) {
 //                console.log(index, getPriority(index), cIndex);
                 if (getPriority(index) === "") {
                     if (getDone(index)) return Theme.secondaryColor;
@@ -132,17 +129,21 @@ ApplicationWindow
 
         /*  */
         function setFullText(index, txt) {
-            todoList[index][fullTxt] = txt;
+            /*replace CR and LF; tasks always comprise a single line*/
+            txt.replace(/\r/g," ");
+            txt.replace(/\n/g," ");
+
+            taskList[index][fullTxt] = txt;
             listToFile();
         }
 
         /* sort list and write it to the txtFile*/
         function listToFile() {
-            todoList.sort();
+            taskList.sort();
             if (m.noSyncToFile) return;
             var txt = "";
-            for (var t in todoList) {
-                txt += todoList[t][fullTxt] + "\n";
+            for (var t in taskList) {
+                txt += taskList[t][fullTxt] + "\n";
             }
 //            console.log("setting content");
             todoTxtFile.content = txt;
@@ -152,42 +153,40 @@ ApplicationWindow
         /* parse plain Text*/
         function parseTodoTxt(todoTxt) {
             var list = [];
-            var todos = todoTxt.split("\n");
-            todos.sort();
+            var tasks = todoTxt.split("\n");
+            tasks.sort();
 
 
             //clean lines
-            for (var t in todos) {
-                var txt = todos[t].trim();
+            for (var t in tasks) {
+                var txt = tasks[t].trim();
                 if (txt.length !== 0) list.push(txt);
             }
-            todos = list;
+            tasks = list;
 
             //parse lines
             list = [];
-            for (t in todos) {
-                //                console.log(t, todos[t]);
-                var txt = todos[t];
+            for (t in tasks) {
+                //                console.log(t, tasks[t]);
+                var txt = tasks[t];
 
                 //alles auf einmal fullTxt, done, doneDate, priority, creationDate, subject
                 var matches = txt.match(/^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/);
                 list.push(matches);
 
-                var pmatches = matches[subject].match(/@\w+/g);
+                var pmatches = matches[subject].match(/\s@\w+\s/g);
                 for (var p in pmatches) {
-                    if (typeof projects[pmatches[p].toUpperCase()] == 'undefined') {
-                        projects[pmatches[p].toUpperCase()] = [];
-                    }
-                    projects[pmatches[p].toUpperCase()].push(t);
+                    var m = pmatches[p].toUpperCase().trim();
+                    if (typeof projects[m] == 'undefined') projects[m] = [];
+                    projects[m].push(t);
 //                    console.log(pmatches[p].toUpperCase(), projects[pmatches[p].toUpperCase()]);
                 }
 
-                var cmatches = matches[subject].match(/\+\w+/g);
+                var cmatches = matches[subject].match(/\s\+\w+\s/g);
                 for (var c in cmatches) {
-                    if (typeof contexts[cmatches[c].toUpperCase()] == 'undefined') {
-                        contexts[cmatches[c].toUpperCase()] = [];
-                    }
-                    contexts[cmatches[c].toUpperCase()].push(t);
+                    var m = cmatches[c].toUpperCase().trim();
+                    if (typeof contexts[m] == 'undefined') contexts[m] = [];
+                    contexts[m].push(t);
 //                    console.log(cmatches[c].toUpperCase(), contexts[cmatches[c].toUpperCase()]);
                 }
 //                console.log(t, pmatches, projects, cmatches);
@@ -197,7 +196,7 @@ ApplicationWindow
             }
             //            console.log("list", list);
             m.noSyncToFile = true;
-            todoList = list;
+            taskList = list;
             m.noSyncToFile = false;
         }
 

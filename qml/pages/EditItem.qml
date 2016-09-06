@@ -11,7 +11,7 @@ Dialog {
         anchors.fill: parent
         TextArea {
             id: ta
-            text: tdt.todoList[index][tdt.fullTxT]
+            text: tdt.taskList[index][tdt.fullTxT]
         }
     }
     onAccepted: {

@@ -16,6 +16,7 @@ Page {
         model: plist
         delegate: ListItem {
             Label {
+                x: Theme.horizontalPageMargin
                 text: lv.plist[model.index]
             }
             onClicked: {
