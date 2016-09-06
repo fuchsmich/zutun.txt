@@ -204,19 +204,19 @@ ApplicationWindow
                 var pmatches = matches[subject].match(/\s@\w+\s/g);
                 for (var p in pmatches) {
                     var m = pmatches[p].toUpperCase().trim();
-                    if (typeof projects[m] == 'undefined') projects[m] = [];
+                    console.log(pmatches[p].toUpperCase(), projects, contexts);
+                    if (typeof projects[m] === 'undefined') projects[m] = [];
                     projects[m].push(t);
-//                    console.log(pmatches[p].toUpperCase(), projects[pmatches[p].toUpperCase()]);
                 }
 
                 var cmatches = matches[subject].match(/\s\+\w+\s/g);
                 for (var c in cmatches) {
                     var m = cmatches[c].toUpperCase().trim();
-                    if (typeof contexts[m] == 'undefined') contexts[m] = [];
+                    if (typeof contexts[m] === 'undefined') contexts[m] = [];
                     contexts[m].push(t);
 //                    console.log(cmatches[c].toUpperCase(), contexts[cmatches[c].toUpperCase()]);
                 }
-//                console.log(t, pmatches, projects, cmatches);
+//                console.log(t, pmatches, proj, cmatches);
 
 
 
