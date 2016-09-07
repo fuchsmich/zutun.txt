@@ -21,8 +21,9 @@ Page {
                 text: lv.plist[index]
             }
             onClicked: {
-                tdt.pfilter = lbl.text;
-                pageStack.navigateBack()
+                if (index === 0) tdt.pfilter = "";
+                else tdt.pfilter = lbl.text;
+                pageStack.navigateBack();
             }
         }
     }

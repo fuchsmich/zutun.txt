@@ -2,6 +2,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 
+//TODO project/context einfügen
+
 Dialog {
     id: dialog
     //    acceptDestination: page
@@ -48,6 +50,7 @@ Dialog {
             }
         }
     }
+    //TODO sh. Hilfe für Dialog!!
     onAccepted: {
         ta.focus = false; //damit das Keyboard einklappt
         tdt.setFullText(itemIndex, ta.text);

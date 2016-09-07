@@ -5,14 +5,16 @@ import org.nemomobile.configuration 1.0
 
 import FileIO 1.0
 
+//TODO context filters
 //TODO set prio
-//TODO filters
 //TODO archive to done.txt
+//TODO hide completed Tasks
+
 
 ApplicationWindow
 {
     id: app
-    initialPage: Component { FirstPage { } }
+    initialPage: Component { TaskList { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
@@ -45,12 +47,20 @@ ApplicationWindow
         onLowestPrioChanged: console.log(lowestPrio)
 
         function getProjectList() {
-            var list = [];
+            var list = ["All"];
             for (var p in projects) {
                 list.push(p);
             }
             return list;
         }
+
+//        function getContextList() {
+//            var list;
+//            for (var c in contexts) {
+//                list.push(c);
+//            }
+//            return list;
+//        }
 
         //        onTaskListChanged: {
         //            console.log("tlc");
@@ -122,7 +132,6 @@ ApplicationWindow
             else return "(" + String.fromCharCode(p.charCodeAt(1) + 1) + ") ";
         }
 
-        //TODO !!crash beim erhöhen/erniedrigen... bzw. dann in listToFile
         function raisePriority(index) {
             if (taskList[index][priority] === undefined)
                 taskList[index][fullTxt] = (decPrioString(lowestPrio) + taskList[index][fullTxt]).trim();
@@ -193,6 +202,8 @@ ApplicationWindow
         }
 
         function visibleOnFilter(index) {
+            //TODO done filtern
+            //TODO context filtern
 //            console.log(typeof index, pfilter, projects, typeof projects[pfilter][0], projects[pfilter].indexOf(index.toString()) );
             if (pfilter === "") return true;
             return (projects[pfilter] !== undefined && projects[pfilter].indexOf(index.toString()) !== -1);

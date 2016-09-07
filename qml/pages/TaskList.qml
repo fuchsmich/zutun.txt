@@ -6,6 +6,7 @@ import Sailfish.Silica 1.0
 Page {
     id: page
 
+
     SilicaListView {
         id: lv
         VerticalScrollDecorator {}
@@ -18,16 +19,25 @@ Page {
             }
             MenuItem {
                 text: qsTr("Filter Contexts")
-                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("ContextFilter.qml"));
             }
             MenuItem {
                 text: qsTr("Select Project")
-                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
             }
             MenuItem {
                 text: qsTr("Add New Task")
                 onClicked: pageStack.push(taskEdit, {itemIndex: -1, text: ""});
             }
+        }
+
+        Component {
+            id: taskEdit
+            TaskEdit {  }
+        }
+        Component {
+            id: contextFiler
+            ContextFilter  {  }
         }
 
         PushUpMenu {
@@ -49,9 +59,9 @@ Page {
         delegate: ListItem {
             id: listItem
 
-            visible: tdt.visibleOnFilter(index) //TODO
+            visible: tdt.visibleOnFilter(index)
 
-            contentHeight: (Math.max(lbl.height,doneSw.height) + 2*Theme.paddingLarge)*visible
+            contentHeight: (Math.max(lbl.height /*,doneSw.height*/ ) + 2*Theme.paddingLarge)*visible
             width: page.width
             anchors.rightMargin: Theme.horizontalPageMargin
 
@@ -109,10 +119,6 @@ Page {
         if (status === PageStatus.Active && pageStack.depth === 1) {
             pageStack.pushAttached("ProjectFilter.qml", {});
         }
-    }
-
-    TaskEdit {
-        id: taskEdit
     }
 }
 
