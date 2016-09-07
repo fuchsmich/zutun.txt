@@ -22,11 +22,11 @@ public:
         emit contentChanged();
     }
 
-
+    //TODO !!check, ob datei/pfad existiert etc...
     QString readContent() {
         QString m_content = "";
         if (!m_path.isEmpty()) {
-//            qDebug() << "reading content";
+            qDebug() << "reading content...";
             QFile textfile(m_path.path());
 //            qDebug() << m_path.toString() << m_path.path();
             textfile.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -34,6 +34,7 @@ public:
             in.setCodec("UTF-8");
             m_content = in.readAll();
             textfile.close();
+            qDebug() << "reading content...finished";
         }
 //        qDebug() << m_content;
         return m_content;
@@ -41,13 +42,14 @@ public:
 
     void writeContent(const QString &data) {
         if (!m_path.isEmpty()) {
-//            qDebug() << "writing content";
+            qDebug() << "writing content...";
             QFile textfile(m_path.path());
             textfile.open(QIODevice::WriteOnly | QIODevice::Text);
             QTextStream out(&textfile);
             out.setCodec("UTF-8");
             out << data;
             textfile.close();
+            qDebug() << "writing content...finished";
         }
         emit contentChanged();
     }

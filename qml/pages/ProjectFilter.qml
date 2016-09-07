@@ -16,13 +16,13 @@ Page {
         model: plist
         delegate: ListItem {
             Label {
+                id: lbl
                 x: Theme.horizontalPageMargin
-                text: lv.plist[model.index]
+                text: lv.plist[index]
             }
             onClicked: {
-                console.log(model.index);
-                tdt.pfilter.push(lv.plist[model.index]);
-                pageStack.pop(undefined);
+                tdt.pfilter = lbl.text;
+                pageStack.navigateBack()
             }
         }
     }

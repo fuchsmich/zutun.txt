@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 
 Dialog {
     id: dialog
-    acceptDestination: page
+    //    acceptDestination: page
     acceptDestinationAction: PageStackAction.Pop
 
     property int itemIndex
@@ -12,18 +12,27 @@ Dialog {
 
     onItemIndexChanged: {
         console.log(text);
-//                ta.text = tdt.taskList[dialog.itemIndex][0];
+        //                ta.text = tdt.taskList[dialog.itemIndex][0];
     }
 
     Column {
         anchors.fill: parent
         DialogHeader {
-            title: "Edit Item " + itemIndex
+            title: "Edit Task"
         }
         TextArea {
             id: ta
             width: dialog.width
             text: dialog.text
+        }
+        Row {
+            x: Theme.horizontalPageMargin
+            IconButton {
+                icon.source: "image://theme/icon-l-date"
+                onClicked: {
+                    ta.text = tdt.today() + " " + ta.text
+                }
+            }
         }
     }
     onAccepted: {

@@ -17,7 +17,11 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
             MenuItem {
-                text: qsTr("Filter Projects")
+                text: qsTr("Filter Contexts")
+                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
+            }
+            MenuItem {
+                text: qsTr("Select Project")
                 onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
             }
             MenuItem {
@@ -26,13 +30,19 @@ Page {
             }
         }
 
+        PushUpMenu {
+            MenuItem {
+                text: qsTr("Archive Completed Tasks")
+                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
+            }
+        }
+
         header: PageHeader {
             title: qsTr("Aufgaben")
-            description: (tdt.pfilter.length === 0? "All" : tdt.pfilter.toString())
+            description: (tdt.pfilter === ""? "All Projects" : tdt.pfilter)
         }
         model: tdt.taskList
         delegate: ListItem {
-            //TODO lange Texte überlappen
             id: listItem
             contentHeight: Math.max(lbl.height,doneSw.height) + 2*Theme.paddingLarge
             ListView.onRemove: animateRemoval(listItem)
@@ -44,7 +54,6 @@ Page {
             }
 
             Row {
-                //TODO row in ein Item umwandeln? für bessere Positionierung
                 id: row
                 Switch {
                     id: doneSw
@@ -55,14 +64,16 @@ Page {
                     //                    Component.onCompleted: console.log(index, typeof tdt.taskList[index][tdt.done])
                     onClicked: tdt.setDone(index, checked);
                 }
+
                 Label {
                     id:lbl
                     anchors.top: doneSw.top
                     anchors.topMargin: Theme.paddingLarge + 3
                     width: page.width - doneSw.width - 2*Theme.horizontalPageMargin
-                    text: tdt.getPriority(index) + tdt.taskList[index][tdt.subject]
+                    text:'<font color="' + tdt.getColor(index) + '">' + tdt.getPriority(index)+ '</font>'
+                         + tdt.taskList[index][tdt.subject]
                     wrapMode: Text.Wrap
-                    color: tdt.getColor(index)
+//                    color: tdt.getColor(index)
                     font.strikeout: doneSw.checked
                 }
             }
