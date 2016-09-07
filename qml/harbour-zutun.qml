@@ -36,12 +36,13 @@ ApplicationWindow
         readonly property string alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
         property url source: StandardPaths.documents + '/todo.txt'
-        property string error: ''
         property var taskList: []
         property var contexts: [] //+
         property var projects: [] //@
         property string pfilter: ""
         property string lowestPrio: "(A) "
+
+        onLowestPrioChanged: console.log(lowestPrio)
 
         function getProjectList() {
             var list = [];
@@ -51,16 +52,16 @@ ApplicationWindow
             return list;
         }
 
-//        onTaskListChanged: {
-//            console.log("tlc");
-//            listToFile();
-//        }
+        //        onTaskListChanged: {
+        //            console.log("tlc");
+        //            listToFile();
+        //        }
 
 
         Item {
             /* private stuff */
             id: m
-//            property bool noSyncToFile: false
+            //            property bool noSyncToFile: false
         }
 
 
@@ -99,6 +100,7 @@ ApplicationWindow
 
                 }
                 taskList = l;
+                listToFile();
             } else throw "done: Index out of bounds."
         }
 
@@ -111,31 +113,42 @@ ApplicationWindow
 
         /* return increased/decreased Priority-string */
         function incPrioString(p) {
-            return "(" + String.fromCharCode(p.charCodeAt(1) - 1) + ") "
+            if (p[1] === alphabet[0]) return p;
+            else return "(" + String.fromCharCode(p.charCodeAt(1) - 1) + ") ";
         }
 
         function decPrioString(p) {
-            return "(" + String.fromCharCode(p.charCodeAt(1) + 1) + ") "
+            if (p[1] === alphabet[alphabet.length-1]) return p;
+            else return "(" + String.fromCharCode(p.charCodeAt(1) + 1) + ") ";
         }
 
         //TODO !!crash beim erhöhen/erniedrigen... bzw. dann in listToFile
         function raisePriority(index) {
-            console.log("raising")
             if (taskList[index][priority] === undefined)
                 taskList[index][fullTxt] = (decPrioString(lowestPrio) + taskList[index][fullTxt]).trim();
-            else if (taskList[index][priority][1] > alphabet[0]);
-                taskList[index][fullTxt] = (incPrioString(taskList[index][priority]) +
-                        + taskList[index][fullTxt].substr(4)).trim();
+
+            else if (taskList[index][priority][1] > alphabet[0])
+                taskList[index][fullTxt] = incPrioString(taskList[index][priority])
+                        + taskList[index][fullTxt].substr(4);
+
+            else return;
+
             listToFile();
         }
 
         function lowerPriority(index) {
-            if (taskList[index][priority] !== undefined && taskList[index][priority] < alphabet[0])
-                taskList[index][fullTxt] = (decPrioString(taskList[index][priority])
-                        + taskList[index][fullTxt].substr(4)).trim();
-            else if (taskList[index][priority] !== undefined && taskList[index][priority] === alphabet[0])
-                taskList[index][fullTxt] =
-                        (taskList[index][fullTxt].substr(4)).trim();
+
+            if (taskList[index][priority] !== undefined) {
+                if (taskList[index][priority][1] < alphabet[alphabet.length-1])
+                    taskList[index][fullTxt] = decPrioString(taskList[index][priority])
+                                                + taskList[index][fullTxt].substr(4);
+
+                else if (taskList[index][priority][1] === alphabet[alphabet.length-1])
+                    taskList[index][fullTxt] = taskList[index][fullTxt].substr(4).trim();
+            }
+
+            else return;
+
             listToFile();
         }
 
@@ -143,24 +156,25 @@ ApplicationWindow
 
         }
 
+
         /* get color due to Priority*/
         ColorPicker {
             id: cp
-            Component.onCompleted: console.log(colors.length)
         }
 
         function getColor(index) {
-//            console.log(index, getPriority(index));
+            //            console.log(index, getPriority(index));
             if (index >= 0 && index < taskList.length) {
-//                console.log(index, getPriority(index), cIndex);
+                //                console.log(index, getPriority(index), cIndex);
                 if (getPriority(index) === "") {
                     if (getDone(index)) return Theme.secondaryColor;
                     else return Theme.primaryColor;
                 }
-//                var cIndex = alphabet.search(getPriority(index)[1]);
+                //                var cIndex = alphabet.search(getPriority(index)[1]);
                 return cp.colors[alphabet.search(getPriority(index)[1]) % 15];
             } else throw "done: Index out of bounds."
         }
+
 
         /* set fulltext; index = -1 add Item */
         function setFullText(index, txt) {
@@ -178,16 +192,19 @@ ApplicationWindow
             }
         }
 
+        function visibleOnFilter(index) {
+//            console.log(typeof index, pfilter, projects, typeof projects[pfilter][0], projects[pfilter].indexOf(index.toString()) );
+            if (pfilter === "") return true;
+            return (projects[pfilter] !== undefined && projects[pfilter].indexOf(index.toString()) !== -1);
+        }
+
         /* sort list and write it to the txtFile*/
         function listToFile() {
-            console.log("taskList");
-//            if (m.noSyncToFile) return;
             taskList.sort();
             var txt = "";
             for (var t in taskList) {
                 txt += taskList[t][fullTxt] + "\n";
             }
-//            console.log("setting content");
             todoTxtFile.content = txt;
         }
 
@@ -236,19 +253,15 @@ ApplicationWindow
                     m = cmatches[c].toUpperCase().trim();
                     if (typeof contexts[m] === 'undefined') contexts[m] = [];
                     contexts[m].push(t);
-//                    console.log(cmatches[c].toUpperCase(), contexts[cmatches[c].toUpperCase()]);
+                    //                    console.log(cmatches[c].toUpperCase(), contexts[cmatches[c].toUpperCase()]);
                 }
-//                console.log(t, pmatches, proj, cmatches);
+                //                console.log(t, pmatches, proj, cmatches);
 
 
 
             }
-            //            console.log("list", list);
-//            m.noSyncToFile = true;
-            console.log(list);
             //TODO hier crashts
             taskList = list;
-//            m.noSyncToFile = false;
         }
 
 
@@ -257,10 +270,6 @@ ApplicationWindow
             path: StandardPaths.documents + '/todo.txt'
             onContentChanged: tdt.parseTodoTxt(content);
         }
-    }
-
-    Component.onCompleted: {
-        console.log(pageStack.currentPage)
     }
 }
 

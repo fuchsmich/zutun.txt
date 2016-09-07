@@ -25,12 +25,16 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
             }
             MenuItem {
-                text: qsTr("Add new task")
+                text: qsTr("Add New Task")
                 onClicked: pageStack.push(taskEdit, {itemIndex: -1, text: ""});
             }
         }
 
         PushUpMenu {
+            MenuItem {
+                text: qsTr("Hide Completed Tasks")
+                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
+            }
             MenuItem {
                 text: qsTr("Archive Completed Tasks")
                 onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
@@ -44,11 +48,14 @@ Page {
         model: tdt.taskList
         delegate: ListItem {
             id: listItem
-            contentHeight: Math.max(lbl.height,doneSw.height) + 2*Theme.paddingLarge
-            ListView.onRemove: animateRemoval(listItem)
+
+            visible: tdt.visibleOnFilter(index) //TODO
+
+            contentHeight: (Math.max(lbl.height,doneSw.height) + 2*Theme.paddingLarge)*visible
             width: page.width
             anchors.rightMargin: Theme.horizontalPageMargin
 
+            ListView.onRemove: animateRemoval(listItem)
             function remove() {
                 remorseAction("Deleting", function() { tdt.removeItem(index) })
             }
@@ -93,8 +100,8 @@ Page {
             }
 
             onClicked: {
-                console.log(index);
-                pageStack.push(taskEdit, {itemIndex: index, text: tdt.taskList[index][0]});
+//                console.log(index);
+                pageStack.push(taskEdit, {itemIndex: index, text: tdt.taskList[index][tdt.fullTxt]});
             }
         }
     }

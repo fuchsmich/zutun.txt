@@ -10,11 +10,6 @@ Dialog {
     property int itemIndex
     property string text
 
-    onItemIndexChanged: {
-        console.log(text);
-        //                ta.text = tdt.taskList[dialog.itemIndex][0];
-    }
-
     Column {
         anchors.fill: parent
         DialogHeader {
@@ -27,19 +22,39 @@ Dialog {
         }
         Row {
             x: Theme.horizontalPageMargin
+            spacing: Theme.paddingSmall
             IconButton {
                 icon.source: "image://theme/icon-l-date"
                 onClicked: {
-                    ta.text = tdt.today() + " " + ta.text
+                    ta.text = tdt.today() + " " + ta.text;
+                    ta.focus = true; //soll eigentl das keyboard wieder aktivieren, geht aber nicht immer.
+                }
+            }
+            Button {
+                height: parent.height
+                width: height
+                text: "@"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
+                }
+            }
+            Button {
+                height: parent.height
+                width: height
+                text: "+"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
                 }
             }
         }
     }
     onAccepted: {
+        ta.focus = false; //damit das Keyboard einklappt
         tdt.setFullText(itemIndex, ta.text);
-        pageStack.pop();
+        pageStack.navigateBack();
     }
     onCanceled: {
-        pageStack.pop();
+        ta.focus = false; //damit das Keyboard einklappt
+        pageStack.navigateBack();
     }
 }
