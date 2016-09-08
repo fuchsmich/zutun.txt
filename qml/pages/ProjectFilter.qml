@@ -23,7 +23,10 @@ Page {
             }
             MenuItem {
                 text: qsTr("Back To Tasklist")
-                onClicked: pageStack.replaceAbove(null, app.initialPage);
+                onClicked:{
+                    //pageStack.replaceAbove(null, app.initialPage);
+                    pageStack.pop(taskListPage);
+                }
             }
         }
 

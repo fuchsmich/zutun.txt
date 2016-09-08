@@ -14,7 +14,12 @@ import FileIO 1.0
 ApplicationWindow
 {
     id: app
-    initialPage: Component { TaskList { } }
+    initialPage: taskListPage
+
+    TaskList {
+        id: taskListPage
+    }
+
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
