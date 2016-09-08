@@ -9,21 +9,21 @@ Page {
 
     SilicaListView {
         id: lv
-        VerticalScrollDecorator {}
         anchors.fill: parent
 
+        VerticalScrollDecorator {}
         PullDownMenu {
             MenuItem {
                 text: qsTr("Settings")
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
+//            MenuItem {
+//                text: qsTr("Filter Contexts")
+//                onClicked: pageStack.push(Qt.resolvedUrl("ContextFilter.qml"));
+//            }
             MenuItem {
-                text: qsTr("Filter Contexts")
-                onClicked: pageStack.push(Qt.resolvedUrl("ContextFilter.qml"));
-            }
-            MenuItem {
-                text: qsTr("Select Project")
-                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
+                text: qsTr("Filters")
+                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml")); //pageStack.navigateForward();
             }
             MenuItem {
                 text: qsTr("Add New Task")
@@ -116,7 +116,9 @@ Page {
         }
     }
     onStatusChanged: {
-        if (status === PageStatus.Active && pageStack.depth === 1) {
+        if (status === PageStatus.Active /*&& pageStack.depth === 1*/) {
+            console.log("im active")
+            tdt.initialPage = pageStack.currentPage;
             pageStack.pushAttached("ProjectFilter.qml", {});
         }
     }

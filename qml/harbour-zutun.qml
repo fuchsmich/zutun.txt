@@ -28,6 +28,8 @@ ApplicationWindow
 
     Item {
         id: tdt
+        property var initialPage
+
         readonly property int fullTxt: 0
         readonly property int done: 1
         readonly property int doneDate: 2
@@ -54,13 +56,13 @@ ApplicationWindow
             return list;
         }
 
-//        function getContextList() {
+        function getContextList() {
 //            var list;
 //            for (var c in contexts) {
 //                list.push(c);
 //            }
 //            return list;
-//        }
+        }
 
         //        onTaskListChanged: {
         //            console.log("tlc");
