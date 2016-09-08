@@ -11,6 +11,9 @@ Dialog {
 
     property int itemIndex
     property string text
+    property string selectedPriority
+    onSelectedPriorityChanged: ta.text = selectedPriority + ta.text
+
 
     Column {
         anchors.fill: parent
@@ -30,6 +33,14 @@ Dialog {
                 onClicked: {
                     ta.text = tdt.today() + " " + ta.text;
                     ta.focus = true; //soll eigentl das keyboard wieder aktivieren, geht aber nicht immer.
+                }
+            }
+            Button {
+                height: parent.height
+                width: height
+                text: "(A)"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("TextSelect.qml", {state: "priorities"}))
                 }
             }
             Button {
