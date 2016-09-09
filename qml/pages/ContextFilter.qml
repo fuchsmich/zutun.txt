@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
+    property var list: tdt.getContextList();
 
     SilicaListView {
         id: lv
@@ -18,40 +19,41 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
             }
             MenuItem {
-                text: qsTr("Context Filters")
-                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
-            }
-            MenuItem {
                 text: qsTr("Project Filters")
                 onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
             }
             MenuItem {
                 text: qsTr("Back To Tasklist")
                 onClicked: {
-//                    pageStack.replaceAbove(null, app.initialPage);
-                    pageStack.pop(taskListPage);
+                    //                    pageStack.replaceAbove(null, app.initialPage);
+                    //                    pageStack.pop(taskListPage);
+                    pageStack.pop(pageStack.find(function(p){ return (p._depth === 0)}))
                 }
             }
         }
 
-        property var plist: tdt.getContextList();
-        model: plist
-        delegate: ListItem {
-            Label {
+        model: list
+        delegate: Item {
+            width: page.width
+            height: Math.max(btn.height, lbl.height) + Theme.paddingLarge
+            Button {
+                visible: index === 0
+                anchors.centerIn: parent
+                text: "clear filter"
+            }
+
+            TextSwitch {
+                visible: index !== 0
                 id: lbl
                 x: Theme.horizontalPageMargin
-                text: lv.plist[index]
-            }
-            onClicked: {
-                if (index === 0) tdt.pfilter = "";
-                else tdt.pfilter = lbl.text;
-                pageStack.navigateBack();
+                text: list[index]
             }
         }
     }
+
     onStatusChanged: {
-        if (status === PageStatus.Active /*&& pageStack.depth === 1 */) {
-            pageStack.pushAttached("ContextFilter.qml", {});
-        }
+//        if (status === PageStatus.Active /*&& pageStack.depth === 1 */) {
+//            pageStack.pushAttached("OtherFilters.qml", {});
+//        }
     }
 }

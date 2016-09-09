@@ -37,22 +37,34 @@ Page {
 
         property var plist: tdt.getProjectList();
         model: plist
-        delegate: ListItem {
-            Label {
-                id: lbl
-                x: Theme.horizontalPageMargin
-                text: lv.plist[index]
+        delegate: Item {
+            width: page.width
+            height: Math.max(btn.height, lbl.height) + Theme.paddingLarge
+            Button {
+                id: btn
+                visible: index === 0
+                anchors.centerIn: parent
+                text: "clear filter"
+                onClicked: if (index === 0) tdt.pfilter = "";
             }
-            onClicked: {
-                if (index === 0) tdt.pfilter = "";
-                else tdt.pfilter = lbl.text;
-                pageStack.navigateBack();
+            ListItem {
+                visible: index !== 0
+                Label {
+                    id: lbl
+                    x: Theme.horizontalPageMargin
+                    text: lv.plist[index]
+                }
+                onClicked: {
+                    if (index === 0) tdt.pfilter = "";
+                    else tdt.pfilter = lbl.text;
+                    pageStack.navigateBack();
+                }
             }
         }
     }
     onStatusChanged: {
         if (status === PageStatus.Active /*&& pageStack.depth === 1 */) {
-            pageStack.pushAttached("ContextFilter.qml", {});
+            pageStack.pushAttached("ContextFilter.qml", {list: tdt.getContextList()});
         }
     }
 }

@@ -62,11 +62,12 @@ ApplicationWindow
         }
 
         function getContextList() {
-//            var list;
-//            for (var c in contexts) {
-//                list.push(c);
-//            }
-//            return list;
+            var list = [];
+            for (var c in contexts) {
+                console.log(c);
+                list.push(c);
+            }
+            return list;
         }
 
         //        onTaskListChanged: {
@@ -229,6 +230,8 @@ ApplicationWindow
 
         /* parse plain Text*/
         function parseTodoTxt(todoTxt) {
+            projects = [];
+            contexts = [];
             var list = [];
             var tasks = todoTxt.split("\n");
             tasks.sort();
@@ -261,7 +264,7 @@ ApplicationWindow
                 var pmatches = matches[subject].match(/\s@\w+(\s|$)/g);
                 for (var p in pmatches) {
                     m = pmatches[p].toUpperCase().trim();
-                    console.log(pmatches[p].toUpperCase(), projects, contexts);
+//                    console.log(pmatches[p].toUpperCase(), projects, contexts);
                     if (typeof projects[m] === 'undefined') projects[m] = [];
                     projects[m].push(t);
                 }
@@ -269,9 +272,10 @@ ApplicationWindow
                 var cmatches = matches[subject].match(/\s\+\w+\s/g);
                 for (var c in cmatches) {
                     m = cmatches[c].toUpperCase().trim();
+//                    console.log(m);
                     if (typeof contexts[m] === 'undefined') contexts[m] = [];
                     contexts[m].push(t);
-                    //                    console.log(cmatches[c].toUpperCase(), contexts[cmatches[c].toUpperCase()]);
+                    console.log(m, contexts[m]);
                 }
                 //                console.log(t, pmatches, proj, cmatches);
 
@@ -279,6 +283,7 @@ ApplicationWindow
 
             }
             //TODO hier crashts
+            console.log(contexts)
             taskList = list;
         }
 
