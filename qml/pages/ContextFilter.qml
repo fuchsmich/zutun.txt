@@ -37,6 +37,7 @@ Page {
             width: page.width
             height: Math.max(btn.height, lbl.height) + Theme.paddingLarge
             Button {
+                id: btn
                 visible: index === 0
                 anchors.centerIn: parent
                 text: "clear filter"

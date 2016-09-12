@@ -5,10 +5,12 @@ import org.nemomobile.configuration 1.0
 
 import FileIO 1.0
 
-//TODO context filters
-//TODO set prio
+//TODO filter verbessern
+
 //TODO archive to done.txt
 //TODO hide completed Tasks
+//TODO fehler über notifiactions ausgeben
+
 
 
 ApplicationWindow
@@ -28,6 +30,7 @@ ApplicationWindow
     ConfigurationGroup {
         id: settings
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
+        property string doneTxtLocation: StandardPaths.documents + '/done.txt'
     }
 
 
@@ -282,7 +285,6 @@ ApplicationWindow
 
 
             }
-            //TODO hier crashts
             console.log(contexts)
             taskList = list;
         }

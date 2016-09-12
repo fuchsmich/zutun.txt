@@ -3,6 +3,8 @@ import Sailfish.Silica 1.0
 
 
 //TODO project/context einfügen
+//TODO prio: erkennen wo eingesetzt bzw ersetzt werden soll
+//TODO enter key entfernen
 
 Dialog {
     id: dialog
@@ -61,7 +63,7 @@ Dialog {
             }
         }
     }
-    //TODO sh. Hilfe für Dialog!!
+
     onAccepted: {
         ta.focus = false; //damit das Keyboard einklappt
         tdt.setFullText(itemIndex, ta.text);
