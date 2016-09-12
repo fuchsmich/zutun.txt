@@ -10,16 +10,45 @@ Page {
         PageHeader {
             title: qsTr("Settings")
         }
+        SectionHeader {
+            text: "Files"
+        }
 
+        Label {
+            x: Theme.horizontalPageMargin
+            text: "Location todo.txt"
+        }
         TextField {
-            x: Theme.paddingLarge
+            id: todoTxtPath
+            x: Theme.horizontalPageMargin
             text: settings.todoTxtLocation
         }
+        Label {
+            x: Theme.horizontalPageMargin
+            text: "Location done.txt"
+        }
+        TextField {
+            id: doneTxtPath
+            x: Theme.horizontalPageMargin
+            text: settings.doneTxtLocation
+        }
+//        Button {
+//            text: "Select File"
+//        }
+
 
         TextSwitch {
-            x: Theme.paddingLarge
+            id: autoSaveSwitch
+            x: Theme.horizontalPageMargin
             text: qsTr("Autosave")
+            checked: settings.autoSave
         }
+    }
+    Component.onDestruction: {
+        settings.todoTxtLocation = todoTxtPath.text;
+        settings.doneTxtLocation = doneTxtPath.text;
+        settings.autoSave = autoSaveSwitch.checked;
+        settings.sync();
     }
 }
 
