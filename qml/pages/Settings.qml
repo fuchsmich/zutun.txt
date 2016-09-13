@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-//TODO set/choose path, filebrowser??
+//TODO filepicker für dateiwahl
 
 Page {
     id: page

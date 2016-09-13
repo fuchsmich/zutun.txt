@@ -23,6 +23,7 @@ public:
     }
 
     //TODO !!check, ob datei/pfad existiert etc...
+    //TODO fehlermeldungen rückmelden
     QString readContent() {
         QString m_content = "";
         if (!m_path.isEmpty()) {

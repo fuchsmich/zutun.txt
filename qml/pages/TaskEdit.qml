@@ -2,10 +2,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 
-//TODO project/context einfügen
-//TODO enter key entfernen
-//TODO scrolling beim langem Text?
-
 
 Dialog {
     id: dialog
@@ -49,6 +45,9 @@ Dialog {
                 width: dialog.width
                 autoScrollEnabled: true
                 text: dialog.text
+                EnterKey.enabled: text.length > 0
+                EnterKey.iconSource: "images://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
             }
             Row {
                 x: Theme.horizontalPageMargin
@@ -64,7 +63,7 @@ Dialog {
                 IconButton {
                     icon.source: "image://theme/icon-l-date"
                     onClicked: {
-                        //                    ta.text = tdt.today() + " " + ta.text;
+                        //TODO manchmal wird der ganze Text durchs datum ersetzt
                         var matches = ta.text.match(/^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/);
                         var newstring = "";
                         for (var m in matches) {

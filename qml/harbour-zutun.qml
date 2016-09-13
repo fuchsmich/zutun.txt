@@ -5,10 +5,8 @@ import org.nemomobile.configuration 1.0
 
 import FileIO 1.0
 
-//TODO filter verbessern
-
 //TODO archive to done.txt
-//TODO hide completed Tasks
+//TODO hide completed Tasks -> filter
 //TODO fehler über notifiactions ausgeben
 
 
@@ -209,7 +207,7 @@ ApplicationWindow
 
             txt = txt.trim();
 
-            //TODO leeren Text besser behandeln...
+            //TODO leeren Text: bestehendes todo löschen, wenn text leer
             if (txt !== "") {
                 if (index === -1) taskList.push([txt]);
                 else taskList[index][fullTxt] = txt;
