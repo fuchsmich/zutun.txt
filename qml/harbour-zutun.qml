@@ -29,9 +29,13 @@ ApplicationWindow
 
     ConfigurationGroup {
         id: settings
+        path: "/apps/harbour-zutun/settings"
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
         property string doneTxtLocation: StandardPaths.documents + '/done.txt'
         property bool autoSave: true
+        Component.onCompleted: {
+            console.log("settings", path, todoTxtLocation, doneTxtLocation, autoSave)
+        }
     }
 
 

@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
+    state: "priorities"
 
     SilicaListView {
         id: lv
@@ -10,15 +11,15 @@ Page {
 
         VerticalScrollDecorator {}
         header: PageHeader {
-            title: "Priorities"
+            title: "State: " + state
         }
 
         property var arrayModel: prioritiesModel()
         model: arrayModel
 
         delegate: ListItem {
-            Label { id: lbl; text: prioritiesModel()[index] }
-            onClicked: setString(page.state)
+            Label { id: lbl; text: lv.arrayModel[index] }
+            onClicked: setString(lv.arrayModel[index])
         }
     }
 
@@ -31,8 +32,10 @@ Page {
         return l;
     }
 
-    function setString(state) {
-        pageStack.previousPage().selectedPriority = lbl.text;
+    function setString(txt) {
+        if (state === "priorities") pageStack.previousPage().selectedPriority = txt;
+        if (state === "projects") pageStack.previousPage().appendText = txt;
+        if (state === "contexts") pageStack.previousPage().appendText = txt;
         pageStack.pop();
     }
 
@@ -42,6 +45,20 @@ Page {
             PropertyChanges {
                 target: lv;
                 arrayModel: prioritiesModel();
+            }
+        },
+        State {
+            name: "projects"
+            PropertyChanges {
+                target: lv;
+                arrayModel: tdt.getProjectList();
+            }
+        },
+        State {
+            name: "contexts"
+            PropertyChanges {
+                target: lv;
+                arrayModel: tdt.getContextList();
             }
         }
     ]

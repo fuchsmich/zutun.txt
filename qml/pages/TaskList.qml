@@ -77,7 +77,7 @@ Page {
                     //                    anchors.verticalCenter: parent.verticalCenter
                     x: Theme.horizontalPageMargin
                     checked: tdt.getDone(index)
-                    iconSource: "icon-s-task?" + (checked ? "green" : "red")
+                    iconSource: "image://theme/icon-s-task?" + (checked ? "green" : "red")
                         //"image://theme/icon-s-certificates?" + (checked ? "green" : "red")
                     //                    Component.onCompleted: console.log(index, typeof tdt.taskList[index][tdt.done])
                     onClicked: tdt.setDone(index, checked);

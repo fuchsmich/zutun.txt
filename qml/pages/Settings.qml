@@ -45,6 +45,7 @@ Page {
         }
     }
     Component.onDestruction: {
+        // write back settings and save
         settings.todoTxtLocation = todoTxtPath.text;
         settings.doneTxtLocation = doneTxtPath.text;
         settings.autoSave = autoSaveSwitch.checked;
