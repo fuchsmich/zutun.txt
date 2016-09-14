@@ -55,6 +55,9 @@ ApplicationWindow
         property var contexts: [] //+
         property var projects: [] //@
         property string pfilter: ""
+        property string cfilter: []
+        onCfilterChanged: console.log(cfilter)
+
         property string lowestPrio: "(A) "
 
         onLowestPrioChanged: console.log(lowestPrio)
@@ -70,7 +73,6 @@ ApplicationWindow
         function getContextList() {
             var list = [];
             for (var c in contexts) {
-                console.log(c);
                 list.push(c);
             }
             return list;
@@ -215,12 +217,18 @@ ApplicationWindow
             }
         }
 
+        /* returns the visibility in tasklist due to filters */
         function visibleOnFilter(index) {
             //TODO done filtern
             //TODO context filtern
 //            console.log(typeof index, pfilter, projects, typeof projects[pfilter][0], projects[pfilter].indexOf(index.toString()) );
             if (pfilter === "") return true;
-            return (projects[pfilter] !== undefined && projects[pfilter].indexOf(index.toString()) !== -1);
+            if (projects[pfilter] !== undefined && projects[pfilter].indexOf(index.toString()) !== -1) {
+                for (var c in cfilter) {
+                    if ( contexts[filter[c]] !== undefined && contexts[filter[c]].indexOf(index.toString()) !== -1) return true;
+                }
+            }
+            return false;
         }
 
         /* sort list and write it to the txtFile*/

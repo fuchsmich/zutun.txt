@@ -23,7 +23,7 @@ Page {
 //            }
             MenuItem {
                 text: qsTr("Filters")
-                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml")); //pageStack.navigateForward();
+                onClicked: pageStack.push(Qt.resolvedUrl("Filters.qml"), {state: "projects"});
             }
             MenuItem {
                 text: qsTr("Add New Task")
@@ -120,7 +120,7 @@ Page {
         if (status === PageStatus.Active /*&& pageStack.depth === 1*/) {
             console.log("im active")
             tdt.initialPage = pageStack.currentPage;
-            pageStack.pushAttached("ProjectFilter.qml", {});
+            pageStack.pushAttached(Qt.resolvedUrl("Filters.qml"), {state: "projects"});
         }
     }
 }
