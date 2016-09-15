@@ -54,6 +54,26 @@ ApplicationWindow
         property var taskList: []
         property var contexts: [] //@
         property var projects: [] //+
+        property ListModel projectModel: ListModel {
+            property var array: tdt.projects
+            onArrayChanged: populate(array);
+            function populate(array) {
+                clear();
+                for (var a in array) {
+                    append({"txt": a, "tasksCount": array[a].length ,"tasks": array[a].toString(),"filterActive": false })
+                }
+            }
+        }
+        property ListModel contextModel: ListModel {
+            property var array: tdt.contexts
+            onArrayChanged: populate(array);
+            function populate(array) {
+                clear();
+                for (var a in array) {
+                    append({"txt": a, "tasks": array[a].toString(),"filterActive": false })
+                }
+            }
+        }
         property var pfilter: []
         property var cfilter: []
         onCfilterChanged: console.log(cfilter)
@@ -69,7 +89,7 @@ ApplicationWindow
 
 
         function filterText() {
-            var txt = (pfilter.toString() + (cfilter.toString() === "" ? "" : "," + cfilter.toString()));
+            var txt = (pfilter.toString() + (pfilter.toString() === "" || cfilter.toString() === "" ? "" : "," + cfilter.toString()));
             return ( txt === "" ? "All Projects" : txt );
         }
 

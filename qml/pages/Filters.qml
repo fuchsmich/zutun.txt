@@ -68,10 +68,10 @@ Page {
                     Label {
                         id: lbl
                         x: Theme.horizontalPageMargin
-                        text: lv.list[index]
+                        text: txt + " (" + tasksCount + ")"
                     }
                     onClicked: {
-                        tdt.pfilter = [lbl.text];
+                        filterActive = true;
                         pageStack.navigateBack();
                     }
                 }
@@ -82,9 +82,9 @@ Page {
             id: contextDelegate
             Item {
                 width: page.width
-                height: Math.max(btn.height, sw.height) + Theme.paddingLarge
+                height: Math.max(cbtn.height, sw.height) + Theme.paddingLarge
                 Button {
-                    id: btn
+                    id: cbtn
                     visible: index === 0
                     anchors.centerIn: parent
                     text: "clear filter"
@@ -98,12 +98,13 @@ Page {
                     visible: index !== 0
                     x: Theme.horizontalPageMargin
                     text: lv.list[index]
-
+//                    function getChecked() { return tdt.cfilter.indexOf(text) !== -1 }
+                    checked: tdt.cfilter.indexOf(text) !== -1
                     onClicked: {
                         if (checked) {
                             tdt.cfilter.push(text);
                             tdt.cfilter.sort();
-                            tdt.cfilterChanged();
+//                            tdt.cfilterChanged();
                         }
                         else  {
                             var cf = [];
@@ -112,9 +113,12 @@ Page {
                             }
                             tdt.cfilter = cf;
                         }
-
                     }
-                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
+                    Connections {
+                        target: cbtn
+                        onClicked: parent.checked = false;
+                    }
+//                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
                 }
             }
         }
@@ -134,7 +138,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 delegate: projectDelegate
-                list: ["All"].concat(tdt.getProjectList());
+                model: tdt.projectModel
                 title: "Projects"
             }
         }
