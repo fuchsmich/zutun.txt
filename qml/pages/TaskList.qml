@@ -27,33 +27,25 @@ Page {
             }
             MenuItem {
                 text: qsTr("Add New Task")
-                onClicked: pageStack.push(taskEdit, {itemIndex: -1, text: ""});
+                onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: -1, text: ""});
             }
         }
 
-        Component {
-            id: taskEdit
-            TaskEdit {  }
-        }
-        Component {
-            id: contextFiler
-            ContextFilter  {  }
-        }
 
         PushUpMenu {
             MenuItem {
-                text: qsTr("Hide Completed Tasks")
-                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
+                text: (tdt.filterDone ? "Show" : "Hide") + " Completed Tasks"
+                onClicked: tdt.filterDone = !tdt.filterDone
             }
-            MenuItem {
-                text: qsTr("Archive Completed Tasks")
-                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
-            }
+//            MenuItem {
+//                text: qsTr("Archive Completed Tasks")
+////                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
+//            }
         }
 
         header: PageHeader {
             title: qsTr("Aufgaben")
-            description: (tdt.pfilter === ""? "All Projects" : tdt.pfilter)
+            description: tdt.filterText()
         }
         model: tdt.taskList
         delegate: ListItem {
@@ -112,7 +104,7 @@ Page {
 
             onClicked: {
 //                console.log(index);
-                pageStack.push(taskEdit, {itemIndex: index, text: tdt.taskList[index][tdt.fullTxt]});
+                pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: index, text: tdt.taskList[index][tdt.fullTxt]});
             }
         }
     }

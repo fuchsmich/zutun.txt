@@ -23,32 +23,32 @@ Page {
             x: Theme.horizontalPageMargin
             text: settings.todoTxtLocation
         }
-        Label {
-            x: Theme.horizontalPageMargin
-            text: "Location done.txt"
-        }
-        TextField {
-            id: doneTxtPath
-            x: Theme.horizontalPageMargin
-            text: settings.doneTxtLocation
-        }
+//        Label {
+//            x: Theme.horizontalPageMargin
+//            text: "Location done.txt"
+//        }
+//        TextField {
+//            id: doneTxtPath
+//            x: Theme.horizontalPageMargin
+//            text: settings.doneTxtLocation
+//        }
 //        Button {
 //            text: "Select File"
 //        }
 
 
-        TextSwitch {
-            id: autoSaveSwitch
-            x: Theme.horizontalPageMargin
-            text: qsTr("Autosave")
-            checked: settings.autoSave
-        }
+//        TextSwitch {
+//            id: autoSaveSwitch
+//            x: Theme.horizontalPageMargin
+//            text: qsTr("Autosave")
+//            checked: settings.autoSave
+//        }
     }
     Component.onDestruction: {
         // write back settings and save
         settings.todoTxtLocation = todoTxtPath.text;
-        settings.doneTxtLocation = doneTxtPath.text;
-        settings.autoSave = autoSaveSwitch.checked;
+//        settings.doneTxtLocation = doneTxtPath.text;
+//        settings.autoSave = autoSaveSwitch.checked;
         settings.sync();
     }
 }

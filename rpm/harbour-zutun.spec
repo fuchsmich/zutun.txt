@@ -16,8 +16,8 @@ Summary:    ZuTun
 Version:    0.1
 Release:    1
 Group:      Qt/Qt
-License:    LICENSE
-URL:        http://example.org/
+License:    BSD
+URL:        http://fuxl.info/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-zutun.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
@@ -28,8 +28,7 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 
 %description
-Short description of my Sailfish OS Application
-
+A Sailfish GUI for todo.txt formatted tasklists| Short description of my Sailfish OS Application
 
 %prep
 %setup -q -n %{name}-%{version}

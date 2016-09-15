@@ -24,6 +24,7 @@ OTHER_FILES += qml/harbour-zutun.qml \
     translations/*.ts \
     harbour-zutun.desktop
 
+#TODO create icons
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
 # to disable building translations every time, comment out the
@@ -40,9 +41,9 @@ DISTFILES += \
     qml/pages/Settings.qml \
     qml/pages/TaskEdit.qml \
     qml/pages/TaskList.qml \
-    qml/pages/ContextFilter.qml \
     qml/pages/TextSelect.qml \
-    qml/pages/Filters.qml
+    qml/pages/Filters.qml \
+    qml/pages/OtherFilters.qml
 
 HEADERS += \
     src/fileio.hpp

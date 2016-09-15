@@ -18,7 +18,11 @@ Page {
         model: arrayModel
 
         delegate: ListItem {
-            Label { id: lbl; text: lv.arrayModel[index] }
+            Label {
+                id: lbl;
+                x: Theme.horizontalPageMargin
+                text: lv.arrayModel[index]
+            }
             onClicked: setString(lv.arrayModel[index])
         }
     }

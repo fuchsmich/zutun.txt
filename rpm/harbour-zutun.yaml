@@ -5,13 +5,13 @@ Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # http://gitorious.org/meego-developer-tools/spectacle/blobs/master/data/GROUPS
 Group: Qt/Qt
-URL: http://example.org/
-License: LICENSE
+URL: http://fuxl.info/
+License: BSD
 # This must be generated before uploading a package to a remote build service.
 # Usually this line does not need to be modified.
 Sources:
 - '%{name}-%{version}.tar.bz2'
-Description: |
+Description: A Sailfish GUI for todo.txt formatted tasklists|
   Short description of my Sailfish OS Application
 Configure: none
 # The qtc5 builder inserts macros to allow QtCreator to have fine

@@ -6,7 +6,6 @@ import org.nemomobile.configuration 1.0
 import FileIO 1.0
 
 //TODO archive to done.txt
-//TODO hide completed Tasks -> filter
 //TODO fehler über notifiactions ausgeben
 
 
@@ -26,6 +25,7 @@ ApplicationWindow
 
 
     ConfigurationGroup {
+        //TODO filter p+c+d speichern
         id: settings
         path: "/apps/harbour-zutun/settings"
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
@@ -52,18 +52,29 @@ ApplicationWindow
 
         property url source: StandardPaths.documents + '/todo.txt'
         property var taskList: []
-        property var contexts: [] //+
-        property var projects: [] //@
-        property string pfilter: ""
-        property string cfilter: []
+        property var contexts: [] //@
+        property var projects: [] //+
+        property var pfilter: []
+        property var cfilter: []
         onCfilterChanged: console.log(cfilter)
+        onPfilterChanged: console.log(cfilter)
+        property string filterString: filterText(pfilter, cfilter)
+        property bool filterDone: false
+        onFilterDoneChanged: console.log(filterDone)
 
         property string lowestPrio: "(A) "
 
         onLowestPrioChanged: console.log(lowestPrio)
 
+
+
+        function filterText() {
+            var txt = (pfilter.toString() + (cfilter.toString() === "" ? "" : "," + cfilter.toString()));
+            return ( txt === "" ? "All Projects" : txt );
+        }
+
         function getProjectList() {
-            var list = ["All"];
+            var list = [];
             for (var p in projects) {
                 list.push(p);
             }
@@ -77,19 +88,6 @@ ApplicationWindow
             }
             return list;
         }
-
-        //        onTaskListChanged: {
-        //            console.log("tlc");
-        //            listToFile();
-        //        }
-
-
-        Item {
-            /* private stuff */
-            id: m
-            //            property bool noSyncToFile: false
-        }
-
 
         /* get done state */
         function getDone(index) {
@@ -209,7 +207,7 @@ ApplicationWindow
 
             txt = txt.trim();
 
-            //TODO leeren Text: bestehendes todo löschen, wenn text leer
+            //TODO leerer Text: bestehendes todo löschen, wenn text leer
             if (txt !== "") {
                 if (index === -1) taskList.push([txt]);
                 else taskList[index][fullTxt] = txt;
@@ -219,16 +217,18 @@ ApplicationWindow
 
         /* returns the visibility in tasklist due to filters */
         function visibleOnFilter(index) {
-            //TODO done filtern
-            //TODO context filtern
-//            console.log(typeof index, pfilter, projects, typeof projects[pfilter][0], projects[pfilter].indexOf(index.toString()) );
-            if (pfilter === "") return true;
-            if (projects[pfilter] !== undefined && projects[pfilter].indexOf(index.toString()) !== -1) {
-                for (var c in cfilter) {
-                    if ( contexts[filter[c]] !== undefined && contexts[filter[c]].indexOf(index.toString()) !== -1) return true;
-                }
+            index = index.toString();
+            var dvis = !(filterDone && taskList[index][done] !== undefined);
+            var cvis = (cfilter.length == 0), pvis = (pfilter.length == 0);
+            for (var p in pfilter) {
+                pvis = pvis || (projects[pfilter[p]].indexOf(index) !== -1)
+                console.log(pvis, pfilter[p], projects[pfilter[p]], typeof index, projects[pfilter[p]].indexOf(index));
             }
-            return false;
+            for (var c in cfilter) {
+                cvis = cvis || (contexts[cfilter[c]].indexOf(index) !== -1)
+            }
+
+            return pvis && cvis && dvis;
         }
 
         /* sort list and write it to the txtFile*/
@@ -273,30 +273,33 @@ ApplicationWindow
                 lowestPrio = (matches[priority] > lowestPrio ? matches[priority] : lowestPrio);
 
 
-                /* collect projects and contexts */
+                /* collect projects (+) and contexts (@)*/
                 var m;
-                var pmatches = matches[subject].match(/\s@\w+(\s|$)/g);
+                var pmatches = matches[subject].match(/\s\+\w+(\s|$)/g);
                 for (var p in pmatches) {
                     m = pmatches[p].toUpperCase().trim();
-//                    console.log(pmatches[p].toUpperCase(), projects, contexts);
+//                    console.log(pmatches[p].toUpperCase(), projects);
                     if (typeof projects[m] === 'undefined') projects[m] = [];
                     projects[m].push(t);
+//                    console.log(m, projects[m]);
                 }
 
-                var cmatches = matches[subject].match(/\s\+\w+\s/g);
+                var cmatches = matches[subject].match(/\s@\w+(\s|$)/g);
                 for (var c in cmatches) {
                     m = cmatches[c].toUpperCase().trim();
 //                    console.log(m);
                     if (typeof contexts[m] === 'undefined') contexts[m] = [];
                     contexts[m].push(t);
-                    console.log(m, contexts[m]);
+//                    console.log(m, contexts[m]);
                 }
                 //                console.log(t, pmatches, proj, cmatches);
 
 
 
             }
-            console.log(contexts)
+//            console.log(contexts)
+            projects.sort();
+            contexts.sort();
             taskList = list;
         }
 

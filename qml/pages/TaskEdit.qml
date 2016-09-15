@@ -80,7 +80,7 @@ Dialog {
                 Button {
                     height: parent.height
                     width: height
-                    text: "@"
+                    text: "+"
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("TextSelect.qml"), {state: "projects"})
                     }
@@ -88,7 +88,7 @@ Dialog {
                 Button {
                     height: parent.height
                     width: height
-                    text: "+"
+                    text: "@"
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("TextSelect.qml"), {state: "contexts"})
                     }

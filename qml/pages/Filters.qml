@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+
+//TODO Anzahl der Items
 Page {
     id: page
     state: "projects"
@@ -37,13 +39,14 @@ Page {
             }
         }
 
+        property string title: "Projects"
         header: PageHeader {
             id: ph
-            title: qsTr("Projects")
-            description: pageStack.depth
+            title: lv.title
+//            description: pageStack.depth
         }
 
-        property var list: tdt.getProjectList();
+        property var list: ["All"].concat(tdt.getProjectList());
         model: list
 
         delegate: projectDelegate
@@ -68,8 +71,7 @@ Page {
                         text: lv.list[index]
                     }
                     onClicked: {
-                        if (index === 0) tdt.pfilter = "";
-                        else tdt.pfilter = lbl.text;
+                        tdt.pfilter = [lbl.text];
                         pageStack.navigateBack();
                     }
                 }
@@ -86,33 +88,43 @@ Page {
                     visible: index === 0
                     anchors.centerIn: parent
                     text: "clear filter"
-                    onClicked: if (index === 0) tdt.pfilter = "";
+                    onClicked: {
+                        if (index === 0) tdt.cfilter = [];
+                        tdt.cfilterChanged();
+                    }
                 }
                 TextSwitch {
-                    id: sw
+                id: sw
                     visible: index !== 0
                     x: Theme.horizontalPageMargin
                     text: lv.list[index]
-                    onCheckedChanged: {
-                        if (checked) tdt.cfilters.push(text);
+
+                    onClicked: {
+                        if (checked) {
+                            tdt.cfilter.push(text);
+                            tdt.cfilter.sort();
+                            tdt.cfilterChanged();
+                        }
                         else  {
                             var cf = [];
-                            for (var c in tdt.cfilters) {
-                                if (tdt.cfilters[c] !== text) cf.push(text);
+                            for (var c in tdt.cfilter) {
+                                if (tdt.cfilter[c] !== text) cf.push(tdt.cfilter[c]);
                             }
-                            tdt.cfilters = cf;
+                            tdt.cfilter = cf;
                         }
 
                     }
+                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
                 }
             }
         }
-
-
     }
     onStatusChanged: {
-        if (status === PageStatus.Active /*&& pageStack.depth === 1 */) {
+        if (state == "projects" && status === PageStatus.Active) {
             pageStack.pushAttached("Filters.qml", {state: "contexts"});
+        }
+        if (state == "contexts" && status === PageStatus.Active) {
+            pageStack.pushAttached("OtherFilters.qml");
         }
     }
 
@@ -122,9 +134,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 delegate: projectDelegate
-            }
-            PropertyChanges {
-                target: ph;
+                list: ["All"].concat(tdt.getProjectList());
                 title: "Projects"
             }
         }
@@ -133,9 +143,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 delegate: contextDelegate
-            }
-            PropertyChanges {
-                target: ph;
+                list: ["All"].concat(tdt.getContextList());
                 title: "Contexts"
             }
         }
