@@ -42,8 +42,9 @@ DISTFILES += \
     qml/pages/TaskEdit.qml \
     qml/pages/TaskList.qml \
     qml/pages/TextSelect.qml \
-    qml/pages/Filters.qml \
-    qml/pages/OtherFilters.qml
+    qml/pages/OtherFilters.qml \
+    qml/pages/FiltersPage.qml \
+    qml/pages/PCListModel.qml
 
 HEADERS += \
     src/fileio.hpp

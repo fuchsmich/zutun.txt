@@ -39,15 +39,15 @@ Page {
             }
         }
 
-        property string title: "Projects"
+        property string title: ""
         header: PageHeader {
             id: ph
             title: lv.title
 //            description: pageStack.depth
         }
 
-        property var list: ["All"].concat(tdt.getProjectList());
-        model: list
+//        property var list: tdt.projects
+        model: projectList
 
         delegate: projectDelegate
 
@@ -60,18 +60,19 @@ Page {
                     id: btn
                     visible: index === 0
                     anchors.centerIn: parent
-                    text: "clear filter"
-                    onClicked: if (index === 0) tdt.pfilter = "";
+                    text: "Clear Project Filter"
+                    onClicked: if (index === 0) projectList.resetFilter();//tdt.pfilter = "";
                 }
                 ListItem {
                     visible: index !== 0
                     Label {
                         id: lbl
                         x: Theme.horizontalPageMargin
-                        text: lv.list[index]
+                        text: model.item + " (" + model.noOfTasks + ")"  //lv.list[index]
                     }
                     onClicked: {
-                        tdt.pfilter = [lbl.text];
+//                        tdt.pfilter = [model.item];
+                        projectList.setProperty(index, "filter", true);
                         pageStack.navigateBack();
                     }
                 }
@@ -87,41 +88,28 @@ Page {
                     id: btn
                     visible: index === 0
                     anchors.centerIn: parent
-                    text: "clear filter"
-                    onClicked: {
-                        if (index === 0) tdt.cfilter = [];
-                        tdt.cfilterChanged();
-                    }
+                    text: "Clear Context Filter"
+                    onClicked: if (index === 0) contextList.resetFilter();
                 }
                 TextSwitch {
                 id: sw
                     visible: index !== 0
                     x: Theme.horizontalPageMargin
-                    text: lv.list[index]
-
+                    text: model.item + " (" + model.noOfTasks + ")"
+                    checked: model.filter
                     onClicked: {
-                        if (checked) {
-                            tdt.cfilter.push(text);
-                            tdt.cfilter.sort();
-                            tdt.cfilterChanged();
-                        }
-                        else  {
-                            var cf = [];
-                            for (var c in tdt.cfilter) {
-                                if (tdt.cfilter[c] !== text) cf.push(tdt.cfilter[c]);
-                            }
-                            tdt.cfilter = cf;
-                        }
+                        if (checked) contextList.setProperty(index, "filter", true);
+                        else contextList.setProperty(index, "filter", false);
 
                     }
-                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
+//                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
                 }
             }
         }
     }
     onStatusChanged: {
         if (state == "projects" && status === PageStatus.Active) {
-            pageStack.pushAttached("Filters.qml", {state: "contexts"});
+            pageStack.pushAttached("FiltersPage.qml", {state: "contexts"});
         }
         if (state == "contexts" && status === PageStatus.Active) {
             pageStack.pushAttached("OtherFilters.qml");
@@ -134,8 +122,9 @@ Page {
             PropertyChanges {
                 target: lv;
                 delegate: projectDelegate
-                list: ["All"].concat(tdt.getProjectList());
+                //list: tdt.projects //["All"].concat(tdt.getProjectList());
                 title: "Projects"
+                model: projectList
             }
         }
         , State {
@@ -143,8 +132,9 @@ Page {
             PropertyChanges {
                 target: lv;
                 delegate: contextDelegate
-                list: ["All"].concat(tdt.getContextList());
+//                list: ["All"].concat(tdt.getContextList());
                 title: "Contexts"
+                model: contextList
             }
         }
 
