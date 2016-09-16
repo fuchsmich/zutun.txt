@@ -34,8 +34,8 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                text: (tdt.filterDone ? "Show" : "Hide") + " Completed Tasks"
-                onClicked: tdt.filterDone = !tdt.filterDone
+                text: (filters.done ? "Show" : "Hide") + " Completed Tasks"
+                onClicked: filters.done = !filters.done
             }
 //            MenuItem {
 //                text: qsTr("Archive Completed Tasks")
@@ -44,14 +44,15 @@ Page {
         }
 
         header: PageHeader {
-            title: qsTr("Aufgaben")
-            description: tdt.filterText()
+            title: qsTr("Tasklist")
+            description: filters.string()
         }
-        model: tdt.taskList
+        property var list: tdt.taskList
+        model: list
         delegate: ListItem {
             id: listItem
 
-            visible: tdt.visibleOnFilter(index)
+            visible: filters.itemVisible(index)
 
             contentHeight: (Math.max(lbl.height /*,doneSw.height*/ ) + 2*Theme.paddingLarge)*visible
             width: page.width
@@ -70,8 +71,6 @@ Page {
                     x: Theme.horizontalPageMargin
                     checked: tdt.getDone(index)
                     iconSource: "image://theme/icon-s-task?" + (checked ? "green" : "red")
-                        //"image://theme/icon-s-certificates?" + (checked ? "green" : "red")
-                    //                    Component.onCompleted: console.log(index, typeof tdt.taskList[index][tdt.done])
                     onClicked: tdt.setDone(index, checked);
                 }
 

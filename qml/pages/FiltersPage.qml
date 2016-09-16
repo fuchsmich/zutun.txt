@@ -2,7 +2,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 
-//TODO Anzahl der Items
 Page {
     id: page
     state: "projects"
@@ -13,7 +12,6 @@ Page {
         VerticalScrollDecorator {}
         PullDownMenu {
             MenuItem {
-                visible: (page.state !== "others")
                 text: qsTr("Other Filters")
                 onClicked: //pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
                            page.state = "others"
@@ -21,21 +19,16 @@ Page {
             MenuItem {
                 visible: (page.state !== "contexts")
                 text: qsTr("Context Filters")
-                onClicked: //pageStack.push(Qt.resolvedUrl("ContextFilter.qml"));
-                           page.state = "contexts"
+                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"});
             }
             MenuItem {
                 visible: (page.state !== "projects")
                 text: qsTr("Project Filters")
-                onClicked: // pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
-                           page.state = "projects"
+                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
             }
             MenuItem {
                 text: qsTr("Back To Tasklist")
-                onClicked:{
-                    //pageStack.replaceAbove(null, app.initialPage);
-                    pageStack.pop(taskListPage);
-                }
+                onClicked: pageStack.pop(pageStack.find(function(p){ return (p._depth === 0)}));
             }
         }
 
@@ -61,7 +54,10 @@ Page {
                     visible: index === 0
                     anchors.centerIn: parent
                     text: "Clear Project Filter"
-                    onClicked: if (index === 0) projectList.resetFilter();//tdt.pfilter = "";
+                    onClicked: {
+                        if (index === 0) projectList.resetFilter();
+                        pageStack.navigateBack();
+                    }
                 }
                 ListItem {
                     visible: index !== 0

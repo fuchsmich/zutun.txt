@@ -22,7 +22,7 @@ ListModel {
                        "taskList": [{}]
                    });
             for (var t in array[a]) {
-                console.log(get(i).taskList.count);
+//                console.log(get(i).taskList.count);
                 get(i).taskList.append({"taskIndex": array[a][t]}); //TODO als nummern einfügen??
             }
             i++;
@@ -43,7 +43,7 @@ ListModel {
         }
     }
     onDataChanged: {
-        console.log("data changed") //funktioniert!!
+//        console.log("data changed") //funktioniert!!
         updateFilter();
     }
 }

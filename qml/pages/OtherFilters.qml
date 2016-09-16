@@ -36,8 +36,8 @@ Page {
             TextSwitch {
                 x: Theme.horizontalPageMargin
                 text: "Hide Completed Tasks"
-                checked: tdt.filterDone
-                onClicked: tdt.filterDone = checked
+                checked: filters.done
+                onClicked: filters.done = checked
             }
         }
     }
