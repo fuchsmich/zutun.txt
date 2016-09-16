@@ -2,7 +2,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 
-//TODO Anzahl der Items
 Page {
     id: page
     state: "projects"
@@ -13,7 +12,6 @@ Page {
         VerticalScrollDecorator {}
         PullDownMenu {
             MenuItem {
-                visible: (page.state !== "others")
                 text: qsTr("Other Filters")
                 onClicked: //pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
                            page.state = "others"
@@ -21,33 +19,28 @@ Page {
             MenuItem {
                 visible: (page.state !== "contexts")
                 text: qsTr("Context Filters")
-                onClicked: //pageStack.push(Qt.resolvedUrl("ContextFilter.qml"));
-                           page.state = "contexts"
+                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"});
             }
             MenuItem {
                 visible: (page.state !== "projects")
                 text: qsTr("Project Filters")
-                onClicked: // pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
-                           page.state = "projects"
+                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
             }
             MenuItem {
                 text: qsTr("Back To Tasklist")
-                onClicked:{
-                    //pageStack.replaceAbove(null, app.initialPage);
-                    pageStack.pop(taskListPage);
-                }
+                onClicked: pageStack.pop(pageStack.find(function(p){ return (p._depth === 0)}));
             }
         }
 
-        property string title: "Projects"
+        property string title: ""
         header: PageHeader {
             id: ph
             title: lv.title
 //            description: pageStack.depth
         }
 
-        property var list: ["All"].concat(tdt.getProjectList());
-        model: list
+//        property var list: tdt.projects
+        model: projectList
 
         delegate: projectDelegate
 
@@ -60,18 +53,22 @@ Page {
                     id: btn
                     visible: index === 0
                     anchors.centerIn: parent
-                    text: "clear filter"
-                    onClicked: if (index === 0) tdt.pfilter = "";
+                    text: "Clear Project Filter"
+                    onClicked: {
+                        if (index === 0) projectList.resetFilter();
+                        pageStack.navigateBack();
+                    }
                 }
                 ListItem {
                     visible: index !== 0
                     Label {
                         id: lbl
                         x: Theme.horizontalPageMargin
-                        text: txt + " (" + tasksCount + ")"
+                        text: model.item + " (" + model.noOfTasks + ")"  //lv.list[index]
                     }
                     onClicked: {
-                        filterActive = true;
+//                        tdt.pfilter = [model.item];
+                        projectList.setProperty(index, "filter", true);
                         pageStack.navigateBack();
                     }
                 }
@@ -87,36 +84,19 @@ Page {
                     id: cbtn
                     visible: index === 0
                     anchors.centerIn: parent
-                    text: "clear filter"
-                    onClicked: {
-                        if (index === 0) tdt.cfilter = [];
-                        tdt.cfilterChanged();
-                    }
+                    text: "Clear Context Filter"
+                    onClicked: if (index === 0) contextList.resetFilter();
                 }
                 TextSwitch {
                 id: sw
                     visible: index !== 0
                     x: Theme.horizontalPageMargin
-                    text: lv.list[index]
-//                    function getChecked() { return tdt.cfilter.indexOf(text) !== -1 }
-                    checked: tdt.cfilter.indexOf(text) !== -1
+                    text: model.item + " (" + model.noOfTasks + ")"
+                    checked: model.filter
                     onClicked: {
-                        if (checked) {
-                            tdt.cfilter.push(text);
-                            tdt.cfilter.sort();
-//                            tdt.cfilterChanged();
-                        }
-                        else  {
-                            var cf = [];
-                            for (var c in tdt.cfilter) {
-                                if (tdt.cfilter[c] !== text) cf.push(tdt.cfilter[c]);
-                            }
-                            tdt.cfilter = cf;
-                        }
-                    }
-                    Connections {
-                        target: cbtn
-                        onClicked: parent.checked = false;
+                        if (checked) contextList.setProperty(index, "filter", true);
+                        else contextList.setProperty(index, "filter", false);
+
                     }
 //                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
                 }
@@ -125,7 +105,7 @@ Page {
     }
     onStatusChanged: {
         if (state == "projects" && status === PageStatus.Active) {
-            pageStack.pushAttached("Filters.qml", {state: "contexts"});
+            pageStack.pushAttached("FiltersPage.qml", {state: "contexts"});
         }
         if (state == "contexts" && status === PageStatus.Active) {
             pageStack.pushAttached("OtherFilters.qml");
@@ -138,8 +118,8 @@ Page {
             PropertyChanges {
                 target: lv;
                 delegate: projectDelegate
-                model: tdt.projectModel
                 title: "Projects"
+                model: projectList
             }
         }
         , State {
@@ -147,8 +127,9 @@ Page {
             PropertyChanges {
                 target: lv;
                 delegate: contextDelegate
-                list: ["All"].concat(tdt.getContextList());
+//                list: ["All"].concat(tdt.getContextList());
                 title: "Contexts"
+                model: contextList
             }
         }
 

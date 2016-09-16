@@ -7,17 +7,14 @@ import FileIO 1.0
 
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
+//TODO eigene Filter Component
 
 
 
 ApplicationWindow
 {
     id: app
-    initialPage: taskListPage
-
-    TaskList {
-        id: taskListPage
-    }
+    initialPage: Component { TaskList{} }
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
@@ -31,8 +28,71 @@ ApplicationWindow
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
         property string doneTxtLocation: StandardPaths.documents + '/done.txt'
         property bool autoSave: true
-        Component.onCompleted: {
-            console.log("settings", path, todoTxtLocation, doneTxtLocation, autoSave)
+        //        Component.onCompleted: {
+        //            console.log("settings", path, todoTxtLocation, doneTxtLocation, autoSave)
+        //        }
+    }
+
+    PCListModel {
+        id: projectList
+        assArray: tdt.projects
+    }
+
+    PCListModel {
+        id: contextList
+        assArray: tdt.contexts
+    }
+
+//    ListModel {
+//        id: taskListModel
+
+//        property var assArray: tdt.taskList
+//        onAssArrayChanged: populate(assArray);
+
+//        function populate(array) {
+//            clear();
+//            for (var a in array) {
+//                append( { "itemIndex": a,
+//                           "fullTxt": array[a][tdt.fullTxt], "done": array[a][tdt.done],
+//                           "doneDate": array[a][tdt.doneDate], "priority": array[a][tdt.priority],
+//                           "creationDate": array[a][tdt.creationDate], "subject": array[a][tdt.subject]
+//                       });
+//            }
+//        }
+//    }
+
+    QtObject {
+        id: filters
+//        property string filterString: filterText()
+        property bool done: false
+
+        property var pfilter: projectList.filter
+        property var cfilter: contextList.filter
+
+        function string() {
+            var pf = projectList.filter.toString(), cf = contextList.filter.toString();
+
+            var txt = pf + (pf === "" || cf === "" ? "" : "," ) + cf;
+            if (txt === "" && done) return "Completed Tasks";
+            return ( txt === "" ? "All Tasks" : txt );
+        }
+
+        /* returns the visibility in tasklist due to filters */
+        function itemVisible(index) {
+            index = index.toString();
+            var dvis = !(done && tdt.taskList[index][tdt.done] !== undefined);
+            var cvis = (cfilter.length === 0), pvis = (pfilter.length === 0);
+            for (var p in pfilter) {
+                pvis = pvis || (tdt.projects[pfilter[p]].indexOf(index) !== -1)
+//                console.log(index, pvis, pfilter[p], projects[pfilter[p]], typeof index, projects[pfilter[p]].indexOf(index));
+            }
+            for (var c in cfilter) {
+                console.log(index, cvis, cfilter[c], contexts[cfilter[c]], typeof index, contexts[cfilter[c]].indexOf(index));
+                cvis = cvis || (tdt.contexts[cfilter[c]].indexOf(index) !== -1)
+            }
+
+//            console.log(pvis, cvis, dvis)
+            return pvis && cvis && dvis;
         }
     }
 
@@ -51,47 +111,15 @@ ApplicationWindow
         readonly property string alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
         property url source: StandardPaths.documents + '/todo.txt'
-        property var taskList: []
-        property var contexts: [] //@
-        property var projects: [] //+
-        property ListModel projectModel: ListModel {
-            property var array: tdt.projects
-            onArrayChanged: populate(array);
-            function populate(array) {
-                clear();
-                for (var a in array) {
-                    append({"txt": a, "tasksCount": array[a].length ,"tasks": array[a].toString(),"filterActive": false })
-                }
-            }
-        }
-        property ListModel contextModel: ListModel {
-            property var array: tdt.contexts
-            onArrayChanged: populate(array);
-            function populate(array) {
-                clear();
-                for (var a in array) {
-                    append({"txt": a, "tasks": array[a].toString(),"filterActive": false })
-                }
-            }
-        }
-        property var pfilter: []
-        property var cfilter: []
-        onCfilterChanged: console.log(cfilter)
-        onPfilterChanged: console.log(cfilter)
-        property string filterString: filterText(pfilter, cfilter)
-        property bool filterDone: false
-        onFilterDoneChanged: console.log(filterDone)
+        property var taskList: [] // 2d array with fullTxt, done, doneDate, priority, creationDate, subject
+        property var projects: [] //+ assoziertes Array
+        property var contexts: [] //@ assoziertes Array
+
 
         property string lowestPrio: "(A) "
 
         onLowestPrioChanged: console.log(lowestPrio)
 
-
-
-        function filterText() {
-            var txt = (pfilter.toString() + (pfilter.toString() === "" || cfilter.toString() === "" ? "" : "," + cfilter.toString()));
-            return ( txt === "" ? "All Projects" : txt );
-        }
 
         function getProjectList() {
             var list = [];
@@ -184,7 +212,7 @@ ApplicationWindow
             if (taskList[index][priority] !== undefined) {
                 if (taskList[index][priority][1] < alphabet[alphabet.length-1])
                     taskList[index][fullTxt] = decPrioString(taskList[index][priority])
-                                                + taskList[index][fullTxt].substr(4);
+                            + taskList[index][fullTxt].substr(4);
 
                 else if (taskList[index][priority][1] === alphabet[alphabet.length-1])
                     taskList[index][fullTxt] = taskList[index][fullTxt].substr(4).trim();
@@ -235,21 +263,6 @@ ApplicationWindow
             }
         }
 
-        /* returns the visibility in tasklist due to filters */
-        function visibleOnFilter(index) {
-            index = index.toString();
-            var dvis = !(filterDone && taskList[index][done] !== undefined);
-            var cvis = (cfilter.length == 0), pvis = (pfilter.length == 0);
-            for (var p in pfilter) {
-                pvis = pvis || (projects[pfilter[p]].indexOf(index) !== -1)
-                console.log(pvis, pfilter[p], projects[pfilter[p]], typeof index, projects[pfilter[p]].indexOf(index));
-            }
-            for (var c in cfilter) {
-                cvis = cvis || (contexts[cfilter[c]].indexOf(index) !== -1)
-            }
-
-            return pvis && cvis && dvis;
-        }
 
         /* sort list and write it to the txtFile*/
         function listToFile() {
@@ -272,8 +285,9 @@ ApplicationWindow
 
 
             //clean lines
+            var txt = "";
             for (var t in tasks) {
-                var txt = tasks[t].trim();
+                txt = tasks[t].trim();
                 if (txt.length !== 0) list.push(txt);
             }
             tasks = list;
@@ -282,7 +296,7 @@ ApplicationWindow
             list = [];
             for (t in tasks) {
                 //                console.log(t, tasks[t]);
-                var txt = tasks[t];
+                txt = tasks[t];
 
                 //alles auf einmal fullTxt, done, doneDate, priority, creationDate, subject
                 var matches = txt.match(/^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/);
@@ -298,28 +312,29 @@ ApplicationWindow
                 var pmatches = matches[subject].match(/\s\+\w+(\s|$)/g);
                 for (var p in pmatches) {
                     m = pmatches[p].toUpperCase().trim();
-//                    console.log(pmatches[p].toUpperCase(), projects);
+                    //                    console.log(pmatches[p].toUpperCase(), projects);
                     if (typeof projects[m] === 'undefined') projects[m] = [];
                     projects[m].push(t);
-//                    console.log(m, projects[m]);
+                    //                    console.log(m, projects[m]);
                 }
 
                 var cmatches = matches[subject].match(/\s@\w+(\s|$)/g);
                 for (var c in cmatches) {
                     m = cmatches[c].toUpperCase().trim();
-//                    console.log(m);
+                    //                    console.log(m);
                     if (typeof contexts[m] === 'undefined') contexts[m] = [];
                     contexts[m].push(t);
-//                    console.log(m, contexts[m]);
+                    //                    console.log(m, contexts[m]);
                 }
                 //                console.log(t, pmatches, proj, cmatches);
 
 
 
             }
-//            console.log(contexts)
-            projects.sort();
-            contexts.sort();
+            //            console.log(contexts)
+            //            projects.sort();
+            //            contexts.sort();
+            //TODO crash bei prio +/-!!!
             taskList = list;
         }
 
