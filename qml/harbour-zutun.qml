@@ -87,7 +87,7 @@ ApplicationWindow
 //                console.log(index, pvis, pfilter[p], projects[pfilter[p]], typeof index, projects[pfilter[p]].indexOf(index));
             }
             for (var c in cfilter) {
-                console.log(index, cvis, cfilter[c], contexts[cfilter[c]], typeof index, contexts[cfilter[c]].indexOf(index));
+//                console.log(index, cvis, cfilter[c], contexts[cfilter[c]], typeof index, contexts[cfilter[c]].indexOf(index));
                 cvis = cvis || (tdt.contexts[cfilter[c]].indexOf(index) !== -1)
             }
 
