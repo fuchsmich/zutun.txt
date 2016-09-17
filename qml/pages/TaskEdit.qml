@@ -62,6 +62,7 @@ Dialog {
                 }
                 IconButton {
                     icon.source: "image://theme/icon-l-date"
+
                     onClicked: {
                         //TODO manchmal wird der ganze Text durchs datum ersetzt
                         var matches = ta.text.match(/^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/);

@@ -95,6 +95,7 @@ ApplicationWindow
 
         property url source: StandardPaths.documents + '/todo.txt'
         property var taskList: [] // 2d array with fullTxt, done, doneDate, priority, creationDate, subject
+        property ListModel tasksModel: tasksModel
         property int count: 0
         property var projects: [] //+ assoziertes Array
         property var contexts: [] //@ assoziertes Array
@@ -105,46 +106,57 @@ ApplicationWindow
         onLowestPrioChanged: console.log(lowestPrio)
 
         ListModel {
-            id: taskListModel
+            id: tasksModel
 
             property var assArray: tdt.taskList
             onAssArrayChanged: populate(assArray);
 
             function populate(array) {
-                clear();
-                for (var a in array) {
-                    append( { "id": a,
-                               "fullTxt": array[a][tdt.fullTxt], "done": tdt.getDone(a),
-                               "doneDate": array[a][tdt.doneDate], "priority": tdt.getPriority(a),
-                               "creationDate": array[a][tdt.creationDate], "subject": array[a][tdt.subject]
+//                clear();
+                for (var a = 0; a < array.length; a++) {
+//                    append( { "id": a,
+//                               "fullTxt": array[a][tdt.fullTxt], "done": tdt.getDone(a),
+//                               "doneDate": array[a][tdt.doneDate], "priority": tdt.getPriority(a),
+//                               "creationDate": array[a][tdt.creationDate], "subject": array[a][tdt.subject]
+//                           });
+                    if (a < count) set(a, { "id": a, "fullTxt": array[a][tdt.fullTxt], "done": tdt.getDone(a),
+                               "displayText": '<font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font>'
+                                + tdt.taskList[a][tdt.subject]
                            });
+                    else append( { "id": a, "fullTxt": array[a][tdt.fullTxt], "done": tdt.getDone(a),
+                                    "displayText": '<font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font>'
+                                     + tdt.taskList[a][tdt.subject]
+                                });
                 }
-            }
+                console.log(a, count);
 
-            function sort() {
+                if (a < count) remove(a, (count - a) )
 
-            }
-
-            function syncToFile() {
+//                if (count > array.length) remove((count - array.length), )
 
             }
+
+//            function sort(index) {
+//                var a = [];
+//                for (var i =0; i < count; i++){
+//                    a.push([get(i).fullTxt, i]);
+//                }
+//                console.log(a);
+//                a.sort(function (a,b) {
+//                    if (b[0] > a[0]) return -1;
+//                    return 1;
+//                });
+//                console.log(a);
+//            }
+
+
+
+//            function syncToFile() {
+
+//            }
         }
 
-        function getProjectList() {
-            var list = [];
-            for (var p in projects) {
-                list.push(p);
-            }
-            return list;
-        }
 
-        function getContextList() {
-            var list = [];
-            for (var c in contexts) {
-                list.push(c);
-            }
-            return list;
-        }
 
         /* get done state */
         function getDone(index) {
@@ -157,7 +169,9 @@ ApplicationWindow
             return Qt.formatDate(new Date(),"yyyy-MM-dd");
         }
 
-        /* add/remove done state and done date */
+
+
+        /* set done state and done date */
         function setDone(index, value) {
             if (index >= 0 && index < taskList.length) {
                 if (value && !getDone(index))

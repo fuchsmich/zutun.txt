@@ -48,7 +48,7 @@ Page {
             description: filters.string()
         }
 //        property var list: tdt.taskList
-        model: tdt.count
+        model: tdt.tasksModel //tdt.count
         delegate: ListItem {
             id: listItem
 
@@ -69,9 +69,10 @@ Page {
                     id: doneSw
                     //                    anchors.verticalCenter: parent.verticalCenter
                     x: Theme.horizontalPageMargin
-                    checked: tdt.getDone(index)
-                    iconSource: "image://theme/icon-s-task?" + (checked ? "green" : "red")
-                    onClicked: tdt.setDone(index, checked);
+                    automaticCheck: false
+                    checked: model.done
+                    iconSource: "image://theme/icon-s-task?" + (model.done ? "green" : "red")
+                    onClicked: tdt.setDone(index, !model.done);
                 }
 
                 Label {
@@ -79,19 +80,22 @@ Page {
                     anchors.top: doneSw.top
                     anchors.topMargin: Theme.paddingLarge + 3
                     width: page.width - doneSw.width - 2*Theme.horizontalPageMargin
-                    text:'<font color="' + tdt.getColor(index) + '">' + tdt.getPriority(index)+ '</font>'
-                         + tdt.taskList[index][tdt.subject]
+                    text: model.displayText
+                        //'<font color="' + tdt.getColor(index) + '">' + tdt.getPriority(index)+ '</font>'
+                         //+ tdt.taskList[index][tdt.subject]
                     wrapMode: Text.Wrap
 //                    color: tdt.getColor(index)
-                    font.strikeout: doneSw.checked
+                    font.strikeout: model.done
                 }
             }
             menu: ContextMenu {
                 MenuItem {
+                    visible: !model.done
                     text: "Priority Up"
                     onClicked: tdt.raisePriority(index)
                 }
                 MenuItem {
+                    visible: !model.done
                     text: "Priority Down"
                     onClicked: tdt.lowerPriority(index)
                 }
@@ -103,7 +107,7 @@ Page {
 
             onClicked: {
 //                console.log(index);
-                pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: index, text: tdt.taskList[index][tdt.fullTxt]});
+                pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: index, text: model.fullTxt});
             }
         }
     }
