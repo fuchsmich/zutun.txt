@@ -47,8 +47,8 @@ Page {
             title: qsTr("Tasklist")
             description: filters.string()
         }
-        property var list: tdt.taskList
-        model: list
+//        property var list: tdt.taskList
+        model: tdt.count
         delegate: ListItem {
             id: listItem
 

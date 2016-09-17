@@ -14,14 +14,14 @@ Page {
             title: "State: " + state
         }
 
-        property var arrayModel: prioritiesModel()
-        model: arrayModel
+//        property var arrayModel: prioritiesModel()
+        model: prioritiesModel
 
         delegate: ListItem {
             Label {
                 id: lbl;
                 x: Theme.horizontalPageMargin
-                text: lv.arrayModel[index]
+                text: model.item
             }
             onClicked: setString(lv.arrayModel[index])
         }
@@ -36,6 +36,15 @@ Page {
         return l;
     }
 
+    ListModel {
+        id: prioritiesModel
+        Component.onCompleted: {
+            for (var a in tdt.alphabet) {
+                append({"item": "("+tdt.alphabet[a]+") "});
+            }
+        }
+    }
+
     function setString(txt) {
         if (state === "priorities") pageStack.previousPage().selectedPriority = txt;
         if (state === "projects") pageStack.previousPage().appendText = txt;
@@ -48,21 +57,21 @@ Page {
             name: "priorities"
             PropertyChanges {
                 target: lv;
-                arrayModel: prioritiesModel();
+                model: prioritiesModel;
             }
         },
         State {
             name: "projects"
             PropertyChanges {
                 target: lv;
-                arrayModel: tdt.getProjectList();
+                model: projectModel;
             }
         },
         State {
             name: "contexts"
             PropertyChanges {
                 target: lv;
-                arrayModel: tdt.getContextList();
+                model: contextModel;
             }
         }
     ]

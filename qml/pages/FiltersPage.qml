@@ -40,7 +40,7 @@ Page {
         }
 
 //        property var list: tdt.projects
-        model: projectList
+        model: projectModel
 
         delegate: projectDelegate
 
@@ -55,7 +55,7 @@ Page {
                     anchors.centerIn: parent
                     text: "Clear Project Filter"
                     onClicked: {
-                        if (index === 0) projectList.resetFilter();
+                        if (index === 0) projectModel.resetFilter();
                         pageStack.navigateBack();
                     }
                 }
@@ -68,7 +68,7 @@ Page {
                     }
                     onClicked: {
 //                        tdt.pfilter = [model.item];
-                        projectList.setProperty(index, "filter", true);
+                        projectModel.setProperty(index, "filter", true);
                         pageStack.navigateBack();
                     }
                 }
@@ -85,7 +85,7 @@ Page {
                     visible: index === 0
                     anchors.centerIn: parent
                     text: "Clear Context Filter"
-                    onClicked: if (index === 0) contextList.resetFilter();
+                    onClicked: if (index === 0) contextModel.resetFilter();
                 }
                 TextSwitch {
                 id: sw
@@ -94,8 +94,8 @@ Page {
                     text: model.item + " (" + model.noOfTasks + ")"
                     checked: model.filter
                     onClicked: {
-                        if (checked) contextList.setProperty(index, "filter", true);
-                        else contextList.setProperty(index, "filter", false);
+                        if (checked) contextModel.setProperty(index, "filter", true);
+                        else contextModel.setProperty(index, "filter", false);
 
                     }
 //                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
@@ -119,7 +119,7 @@ Page {
                 target: lv;
                 delegate: projectDelegate
                 title: "Projects"
-                model: projectList
+                model: projectModel
             }
         }
         , State {
@@ -129,7 +129,7 @@ Page {
                 delegate: contextDelegate
 //                list: ["All"].concat(tdt.getContextList());
                 title: "Contexts"
-                model: contextList
+                model: contextModel
             }
         }
 

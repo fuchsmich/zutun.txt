@@ -34,43 +34,25 @@ ApplicationWindow
     }
 
     PCListModel {
-        id: projectList
+        id: projectModel
         assArray: tdt.projects
     }
 
     PCListModel {
-        id: contextList
+        id: contextModel
         assArray: tdt.contexts
     }
-
-//    ListModel {
-//        id: taskListModel
-
-//        property var assArray: tdt.taskList
-//        onAssArrayChanged: populate(assArray);
-
-//        function populate(array) {
-//            clear();
-//            for (var a in array) {
-//                append( { "itemIndex": a,
-//                           "fullTxt": array[a][tdt.fullTxt], "done": array[a][tdt.done],
-//                           "doneDate": array[a][tdt.doneDate], "priority": array[a][tdt.priority],
-//                           "creationDate": array[a][tdt.creationDate], "subject": array[a][tdt.subject]
-//                       });
-//            }
-//        }
-//    }
 
     QtObject {
         id: filters
 //        property string filterString: filterText()
         property bool done: false
 
-        property var pfilter: projectList.filter
-        property var cfilter: contextList.filter
+        property var pfilter: projectModel.filter
+        property var cfilter: contextModel.filter
 
         function string() {
-            var pf = projectList.filter.toString(), cf = contextList.filter.toString();
+            var pf = projectModel.filter.toString(), cf = contextModel.filter.toString();
 
             var txt = pf + (pf === "" || cf === "" ? "" : "," ) + cf;
             if (txt === "" && done) return "Completed Tasks";
@@ -97,6 +79,7 @@ ApplicationWindow
     }
 
 
+
     Item {
         id: tdt
         property var initialPage
@@ -112,6 +95,7 @@ ApplicationWindow
 
         property url source: StandardPaths.documents + '/todo.txt'
         property var taskList: [] // 2d array with fullTxt, done, doneDate, priority, creationDate, subject
+        property int count: 0
         property var projects: [] //+ assoziertes Array
         property var contexts: [] //@ assoziertes Array
 
@@ -120,6 +104,31 @@ ApplicationWindow
 
         onLowestPrioChanged: console.log(lowestPrio)
 
+        ListModel {
+            id: taskListModel
+
+            property var assArray: tdt.taskList
+            onAssArrayChanged: populate(assArray);
+
+            function populate(array) {
+                clear();
+                for (var a in array) {
+                    append( { "id": a,
+                               "fullTxt": array[a][tdt.fullTxt], "done": tdt.getDone(a),
+                               "doneDate": array[a][tdt.doneDate], "priority": tdt.getPriority(a),
+                               "creationDate": array[a][tdt.creationDate], "subject": array[a][tdt.subject]
+                           });
+                }
+            }
+
+            function sort() {
+
+            }
+
+            function syncToFile() {
+
+            }
+        }
 
         function getProjectList() {
             var list = [];
@@ -284,13 +293,15 @@ ApplicationWindow
             tasks.sort();
 
 
-            //clean lines
+            //clean lines, remove empty lines
             var txt = "";
             for (var t in tasks) {
                 txt = tasks[t].trim();
                 if (txt.length !== 0) list.push(txt);
             }
             tasks = list;
+
+            count = tasks.length;
 
             //parse lines
             list = [];

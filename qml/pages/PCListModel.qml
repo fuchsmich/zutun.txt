@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 ListModel {
-//    id: projectList
+//    id: projectModel
     id: lm
     property var assArray
     property var filter: []
