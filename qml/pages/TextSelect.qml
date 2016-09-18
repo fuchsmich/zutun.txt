@@ -11,10 +11,10 @@ Page {
 
         VerticalScrollDecorator {}
         header: PageHeader {
-            title: "State: " + state
+            title: state
         }
 
-//        property var arrayModel: prioritiesModel()
+        //        property var arrayModel: prioritiesModel()
         model: prioritiesModel
 
         delegate: ListItem {
@@ -23,7 +23,7 @@ Page {
                 x: Theme.horizontalPageMargin
                 text: model.item
             }
-            onClicked: setString(lv.arrayModel[index])
+            onClicked: setString(lbl.text)
         }
     }
 

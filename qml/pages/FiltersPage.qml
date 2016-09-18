@@ -46,13 +46,13 @@ Page {
 
         Component {
             id: projectDelegate
-            Item {
+            Column {
                 width: page.width
-                height: Math.max(btn.height, lbl.height) + Theme.paddingLarge
+//                height: Math.max(btn.height, lbl.height) + Theme.paddingLarge
                 Button {
                     id: btn
                     visible: index === 0
-                    anchors.centerIn: parent
+                    anchors.horizontalCenter: parent.horizontalCenter
                     text: "Clear Project Filter"
                     onClicked: {
                         if (index === 0) projectModel.resetFilter();
@@ -60,7 +60,7 @@ Page {
                     }
                 }
                 ListItem {
-                    visible: index !== 0
+//                    visible: index !== 0
                     Label {
                         id: lbl
                         x: Theme.horizontalPageMargin
@@ -77,19 +77,19 @@ Page {
 
         Component {
             id: contextDelegate
-            Item {
+            Column {
                 width: page.width
-                height: Math.max(cbtn.height, sw.height) + Theme.paddingLarge
+//                height: Math.max(cbtn.height, sw.height) + Theme.paddingLarge
                 Button {
                     id: cbtn
                     visible: index === 0
-                    anchors.centerIn: parent
+                    anchors.horizontalCenter: parent.horizontalCenter
                     text: "Clear Context Filter"
                     onClicked: if (index === 0) contextModel.resetFilter();
                 }
                 TextSwitch {
                 id: sw
-                    visible: index !== 0
+//                    visible: index !== 0
                     x: Theme.horizontalPageMargin
                     text: model.item + " (" + model.noOfTasks + ")"
                     checked: model.filter

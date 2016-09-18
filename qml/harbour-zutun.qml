@@ -300,9 +300,9 @@ ApplicationWindow
 
         /* parse plain Text*/
         function parseTodoTxt(todoTxt) {
-            projects = [];
-            contexts = [];
-            var list = [];
+            var tlist = [];
+            var plist = [];
+            var clist = [];
             var tasks = todoTxt.split("\n");
             tasks.sort();
 
@@ -311,21 +311,21 @@ ApplicationWindow
             var txt = "";
             for (var t in tasks) {
                 txt = tasks[t].trim();
-                if (txt.length !== 0) list.push(txt);
+                if (txt.length !== 0) tlist.push(txt);
             }
-            tasks = list;
+            tasks = tlist;
 
             count = tasks.length;
 
             //parse lines
-            list = [];
+            tlist = [];
             for (t in tasks) {
                 //                console.log(t, tasks[t]);
                 txt = tasks[t];
 
                 //alles auf einmal fullTxt, done, doneDate, priority, creationDate, subject
                 var matches = txt.match(/^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/);
-                list.push(matches);
+                tlist.push(matches);
 
 
                 /* find lowest prio*/
@@ -337,30 +337,26 @@ ApplicationWindow
                 var pmatches = matches[subject].match(/\s\+\w+(\s|$)/g);
                 for (var p in pmatches) {
                     m = pmatches[p].toUpperCase().trim();
-                    //                    console.log(pmatches[p].toUpperCase(), projects);
-                    if (typeof projects[m] === 'undefined') projects[m] = [];
-                    projects[m].push(t);
-                    //                    console.log(m, projects[m]);
+                    if (typeof plist[m] === 'undefined') plist[m] = [];
+                    plist[m].push(t);
+//                    console.log(m, plist[m]);
                 }
 
                 var cmatches = matches[subject].match(/\s@\w+(\s|$)/g);
                 for (var c in cmatches) {
                     m = cmatches[c].toUpperCase().trim();
-                    //                    console.log(m);
-                    if (typeof contexts[m] === 'undefined') contexts[m] = [];
-                    contexts[m].push(t);
-                    //                    console.log(m, contexts[m]);
+                    if (typeof clist[m] === 'undefined') clist[m] = [];
+                    clist[m].push(t);
+//                    console.log(m, clist[m]);
                 }
-                //                console.log(t, pmatches, proj, cmatches);
 
 
 
             }
-            //            console.log(contexts)
-            //            projects.sort();
-            //            contexts.sort();
-            //TODO crash bei prio +/-!!!
-            taskList = list;
+
+            projects = plist;
+            contexts = clist;
+            taskList = tlist;
         }
 
 

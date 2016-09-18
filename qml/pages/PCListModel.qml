@@ -8,24 +8,24 @@ ListModel {
     onAssArrayChanged: populate(assArray, filter);
 
     function populate(array, farray) {
-//        console.log("popo", assArray, typeof farray === "undefined")
-        if (typeof farray === undefined) farray = [];
+//        console.log("popo", assArray, array.length)
         clear();
-        append( {"item": "clearBtn", "noOfTasks": 0, "tasks": "", "filter": false, "taskList":[{}]});
-        var i = 1;
-        for (var a in array) {
+
+//        var i = 1;
+        for ( var a in array) {
+//            console.log(a);
 
             append( {"item": a, "noOfTasks": array[a].length,
-                       "tasks": array[a].toString(),
-                       "filter": (typeof farray === "undefined" ?
-                                      false : farray.indexOf(a) !== -1),
-                       "taskList": [{}]
+                       "filter": (typeof farray === "undefined" ? false : farray.indexOf(a) !== -1)
+//                       ,
+//                       "tasks": array[a].toString(),
+//                       "taskList": [{}]
                    });
-            for (var t in array[a]) {
-//                console.log(get(i).taskList.count);
-                get(i).taskList.append({"taskIndex": array[a][t]}); //TODO als nummern einfügen??
-            }
-            i++;
+//            for (var t in array[a]) {
+////                console.log(get(i).taskList.count);
+//                get(a).taskList.append({"taskIndex": array[a][t]}); //TODO als nummern einfügen??
+//            }
+//            i++;
         }
     }
 

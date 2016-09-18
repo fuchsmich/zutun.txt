@@ -14,7 +14,8 @@ TARGET = harbour-zutun
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-zutun.cpp
+SOURCES += \
+    src/main.cpp
 
 OTHER_FILES += qml/harbour-zutun.qml \
     qml/cover/CoverPage.qml \
