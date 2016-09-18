@@ -45,7 +45,8 @@ DISTFILES += \
     qml/pages/TextSelect.qml \
     qml/pages/OtherFilters.qml \
     qml/pages/FiltersPage.qml \
-    qml/pages/PCListModel.qml
+    qml/pages/PCListModel.qml \
+    qml/cover/zutun.png
 
 HEADERS += \
     src/fileio.hpp

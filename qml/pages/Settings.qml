@@ -22,6 +22,7 @@ Page {
             id: todoTxtPath
             x: Theme.horizontalPageMargin
             text: settings.todoTxtLocation
+            width: parent.width - 2*Theme.horizontalPageMargin
         }
 //        Label {
 //            x: Theme.horizontalPageMargin

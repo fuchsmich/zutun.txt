@@ -32,10 +32,18 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
-    Label {
-        id: label
-        anchors.centerIn: parent
-        text: qsTr("TodoTxt")
+//    Label {
+//        id: label
+//        anchors.centerIn: parent
+//        text: qsTr("ZuTun.txt")
+//    }
+//    Image {
+
+//    }
+
+    CoverPlaceholder {
+        text: "ZuTun.txt"
+        icon.source: "zutun.png"
     }
 
     CoverActionList {
