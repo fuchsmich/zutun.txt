@@ -34,8 +34,8 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                text: (filters.done ? "Show" : "Hide") + " Completed Tasks"
-                onClicked: filters.done = !filters.done
+                text: (tdt.filters.hideCompletedTasks ? "Show" : "Hide") + " Completed Tasks"
+                onClicked: tdt.filters.hideCompletedTasks = !tdt.filters.hideCompletedTasks
             }
 //            MenuItem {
 //                text: qsTr("Archive Completed Tasks")
@@ -45,14 +45,14 @@ Page {
 
         header: PageHeader {
             title: qsTr("Tasklist")
-            description: filters.string()
+            description: tdt.filters.string()
         }
 //        property var list: tdt.taskList
         model: tdt.tasksModel //tdt.count
         delegate: ListItem {
             id: listItem
 
-            visible: filters.itemVisible(index)
+            visible: tdt.filters.itemVisible(index)
 
             contentHeight: (Math.max(lbl.height /*,doneSw.height*/ ) + 2*Theme.paddingLarge)*visible
             width: page.width
@@ -114,7 +114,7 @@ Page {
     onStatusChanged: {
         if (status === PageStatus.Active /*&& pageStack.depth === 1*/) {
 //            console.log("im active")
-            tdt.initialPage = pageStack.currentPage;
+//            tdt.initialPage = pageStack.currentPage;
             pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
         }
     }

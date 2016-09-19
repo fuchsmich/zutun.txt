@@ -1,7 +1,6 @@
 import QtQuick 2.0
 
 ListModel {
-//    id: projectModel
     id: lm
     property var assArray
     property var filter: []
@@ -23,7 +22,7 @@ ListModel {
                    });
 //            for (var t in array[a]) {
 ////                console.log(get(i).taskList.count);
-//                get(a).taskList.append({"taskIndex": array[a][t]}); //TODO als nummern einfügen??
+//                get(a).taskList.append({"taskIndex": array[a][t]});
 //            }
 //            i++;
         }
@@ -41,9 +40,10 @@ ListModel {
         for (var i =0; i < count; i++ ){
             setProperty(i, "filter", false);
         }
+        updateFilter();
     }
+
     onDataChanged: {
-//        console.log("data changed") //funktioniert!!
         updateFilter();
     }
 }

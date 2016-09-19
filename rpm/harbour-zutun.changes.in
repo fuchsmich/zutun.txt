@@ -7,6 +7,11 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* 2016 Michael Fuchs <michfu@gmx.at> 0.2-1
+- slight changes to icon
+- settings text field width corrected
+- cover: icon added
+- save filter settings
 
 * Thu Sep 15 2016 Michael Fuchs <michfu@gmx.at> 0.1-1
 - initial release

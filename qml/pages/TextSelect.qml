@@ -64,14 +64,14 @@ Page {
             name: "projects"
             PropertyChanges {
                 target: lv;
-                model: projectModel;
+                model: tdt.projectModel;
             }
         },
         State {
             name: "contexts"
             PropertyChanges {
                 target: lv;
-                model: contextModel;
+                model: tdt.contextModel;
             }
         }
     ]
