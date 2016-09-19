@@ -1,8 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "pages"
 import org.nemomobile.configuration 1.0
-import "js"
+import "pages"
+//import "js"
 import "tdt"
 
 //TODO archive to done.txt

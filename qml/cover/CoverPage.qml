@@ -5,10 +5,10 @@ CoverBackground {
 
     Image {
         //TODO nochmal aus SVG erstellen -> git sh. ownnotes
-        source: "zutun.png"
-        width: parent.width
-        height: width
-        opacity: 0.4
+        source: "coversmall.png"
+        anchors.centerIn: parent
+        opacity: 0.2
+        scale: 1.0
 
     }
 
@@ -36,7 +36,8 @@ CoverBackground {
                 app.activate();
             }
         }
-    }       
+    }
+    Component.onCompleted: console.log(width, height)
 }
 
 
