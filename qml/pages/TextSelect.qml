@@ -31,7 +31,7 @@ Page {
         var l = [];
         for (var a = "A"; a <= "Z";
              a = String.fromCharCode(a.charCodeAt(0) + 1)) {
-            l.push("("+a+") ");
+            l.push("(" + a + ") ");
         }
         return l;
     }
@@ -40,7 +40,7 @@ Page {
         id: prioritiesModel
         Component.onCompleted: {
             for (var a in tdt.alphabet) {
-                append({"item": "("+tdt.alphabet[a]+") "});
+                append({"item": "(" + tdt.alphabet[a] + ") "});
             }
         }
     }

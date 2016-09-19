@@ -15,7 +15,8 @@ ListModel {
 //            console.log(a);
 
             append( {"item": a, "noOfTasks": array[a].length,
-                       "filter": (typeof farray === "undefined" ? false : farray.indexOf(a) !== -1)
+                       "filter": (typeof farray === "undefined" ?
+                                      false : farray.indexOf(a) !== -1)
 //                       ,
 //                       "tasks": array[a].toString(),
 //                       "taskList": [{}]
