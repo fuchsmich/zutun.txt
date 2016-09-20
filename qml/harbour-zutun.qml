@@ -2,13 +2,12 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import org.nemomobile.configuration 1.0
 import "pages"
-//import "js"
 import "tdt"
+
+//TODO reload file from time to time. when? app is activated, im cover mode auch sonst + manuell??
 
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
-//TODO reload file from time to time. when? app is activated, im cover mode auch sonst
-//TODO parser in ei
 
 
 ApplicationWindow

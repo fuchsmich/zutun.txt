@@ -19,7 +19,6 @@ SOURCES += \
 
 OTHER_FILES += qml/harbour-zutun.qml \
     qml/cover/CoverPage.qml \
-    rpm/harbour-zutun.changes.in \
     rpm/harbour-zutun.spec \
     rpm/harbour-zutun.yaml \
     translations/*.ts \
@@ -48,7 +47,8 @@ DISTFILES += \
     qml/cover/zutun.png \
     qml/tdt/TodoTxt.qml \
     qml/tdt/PCListModel.qml \
-    qml/tdt/todotxt.js
+    qml/tdt/todotxt.js \
+    rpm/harbour-zutun.changes
 
 HEADERS += \
     src/fileio.hpp
