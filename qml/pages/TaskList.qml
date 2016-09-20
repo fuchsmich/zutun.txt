@@ -22,6 +22,10 @@ Page {
 //                onClicked: pageStack.push(Qt.resolvedUrl("ContextFilter.qml"));
 //            }
             MenuItem {
+                text: qsTr("Reload todo.txt")
+                onClicked: tdt.reloadTodoTxt();
+            }
+            MenuItem {
                 text: qsTr("Filters")
                 onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
             }

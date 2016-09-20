@@ -253,6 +253,10 @@ Item {
     }
 
 
+    function reloadTodoTxt() {
+        todoTxtFile.contentChanged();
+    }
+
     FileIO {
         id: todoTxtFile
         path: settings.todoTxtLocation
