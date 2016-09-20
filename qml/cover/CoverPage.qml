@@ -37,7 +37,7 @@ CoverBackground {
             }
         }
     }
-    Component.onCompleted: console.log(width, height)
+//    Component.onCompleted: console.log(width, height)
 }
 
 

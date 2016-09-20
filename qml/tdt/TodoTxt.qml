@@ -54,7 +54,7 @@ Item {
                        });
                 //restliche anhängen
                 else append( { "id": a, "fullTxt": array[a][tdt.fullTxt], "done": tdt.getDone(a),
-                                "displayText": '<font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font>'
+                                "displayText": '<b><font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font></b>'
                                  + tdt.taskList[a][tdt.subject]
                             });
             }
@@ -68,13 +68,13 @@ Item {
     PCListModel {
         id: _projectModel
         assArray: tdt.projects
-        filter: filterSettings.projectFilter
+//        filter: filterSettings.projectFilter
     }
 
     PCListModel {
         id: _contextModel
         assArray: tdt.contexts
-        filter: filterSettings.contextFilter
+//        filter: filterSettings.contextFilter
     }
 
     /* get done state */

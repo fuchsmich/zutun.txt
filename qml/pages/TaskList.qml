@@ -81,10 +81,7 @@ Page {
                     anchors.topMargin: Theme.paddingLarge + 3
                     width: page.width - doneSw.width - 2*Theme.horizontalPageMargin
                     text: model.displayText
-                        //'<font color="' + tdt.getColor(index) + '">' + tdt.getPriority(index)+ '</font>'
-                         //+ tdt.taskList[index][tdt.subject]
                     wrapMode: Text.Wrap
-//                    color: tdt.getColor(index)
                     font.strikeout: model.done
                 }
             }

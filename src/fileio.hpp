@@ -14,7 +14,8 @@ class FileIO : public QObject
     Q_PROPERTY(QString content READ readContent WRITE writeContent NOTIFY contentChanged)
 
 public:
-    explicit FileIO(QObject *parent = 0){}
+    explicit FileIO(QObject *parent = 0)
+        :QObject(parent)    {}
     QUrl path() { return m_path; }
     void setPath(const QUrl &path) {
         m_path = path;

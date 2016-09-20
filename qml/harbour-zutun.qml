@@ -46,6 +46,12 @@ ApplicationWindow
         todoTxtLocation: settings.todoTxtLocation
     }
 
+    Component.onCompleted: {
+//        console.log("filters: ", filterSettings.projectFilter, filterSettings.contextFilter );
+        tdt.projectModel.loadFilter(filterSettings.projectFilter);
+        tdt.contextModel.loadFilter(filterSettings.contextFilter);
+    }
+
 
     Component.onDestruction: {
         //save filters in settings

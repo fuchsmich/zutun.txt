@@ -29,6 +29,14 @@ ListModel {
         }
     }
 
+    function loadFilter(filterArray) {
+        for (var f = 0; f < filterArray.length; f++) {
+            for (var i =0; i < count; i++ ){
+                if (get(i).item === filterArray[f]) setProperty(i, "filter", true);
+            }
+        }
+    }
+
     function updateFilter() {
         var f = [];
         for (var i =0; i < count; i++ ){
@@ -41,7 +49,7 @@ ListModel {
         for (var i =0; i < count; i++ ){
             setProperty(i, "filter", false);
         }
-        updateFilter();
+//        updateFilter();
     }
 
     onDataChanged: {
