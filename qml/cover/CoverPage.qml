@@ -4,7 +4,6 @@ import Sailfish.Silica 1.0
 CoverBackground {
 
     Image {
-        //TODO nochmal aus SVG erstellen -> git sh. ownnotes
         source: "coversmall.png"
         anchors.centerIn: parent
         opacity: 0.2
@@ -37,7 +36,12 @@ CoverBackground {
             }
         }
     }
-//    Component.onCompleted: console.log(width, height)
+
+    onStatusChanged: {
+        if (status === Cover.Active ) {
+            tdt.reloadTodoTxt();
+        }
+    }
 }
 
 

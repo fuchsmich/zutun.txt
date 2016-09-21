@@ -116,6 +116,7 @@ Page {
         if (status === PageStatus.Active /*&& pageStack.depth === 1*/) {
 //            console.log("im active")
 //            tdt.initialPage = pageStack.currentPage;
+            tdt.reloadTodoTxt();
             pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
         }
     }

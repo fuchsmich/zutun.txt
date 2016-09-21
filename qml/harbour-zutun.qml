@@ -4,8 +4,7 @@ import org.nemomobile.configuration 1.0
 import "pages"
 import "tdt"
 
-//TODO reload file from time to time. when? app is activated, im cover mode auch sonst + manuell??
-
+//TODO screenshots auf openrepos!!
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
 
@@ -58,6 +57,7 @@ ApplicationWindow
         filterSettings.projectFilter = tdt.filters.pfilter
         filterSettings.contextFilter = tdt.filters.cfilter
     }
+
 }
 
 
