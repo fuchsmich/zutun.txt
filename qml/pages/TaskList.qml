@@ -87,6 +87,7 @@ Page {
                     text: model.displayText
                     wrapMode: Text.Wrap
                     font.strikeout: model.done
+                    font.pixelSize: settings.fontSizeTaskList
                 }
             }
             menu: ContextMenu {

@@ -25,6 +25,28 @@ Page {
             text: settings.todoTxtLocation
             width: parent.width - 2*Theme.horizontalPageMargin
         }
+        Label {
+            x: Theme.horizontalPageMargin
+            width: parent.width
+            text: "Please enter the path manually. Some kind of filepicker or automcompletion will follow in upcoming releases."
+            font.pixelSize: Theme.fontSizeTiny
+            color: Theme.highlightColor
+            wrapMode: Text.WordWrap
+        }
+        Slider {
+            id: fontSizeSlider
+            x: Theme.horizontalPageMargin
+            width: parent.width
+            minimumValue: Theme.fontSizeTiny
+            maximumValue: Theme.fontSizeHuge
+            value: settings.fontSizeTaskList
+            valueText: value
+            stepSize: 1
+            label: "Fontsize in Tasklist"
+        }
+
+        //TODO reset button to Theme.fonSizeMedium
+
 //        Label {
 //            x: Theme.horizontalPageMargin
 //            text: "Location done.txt"
@@ -50,7 +72,7 @@ Page {
         // write back settings and save
         settings.todoTxtLocation = todoTxtPath.text;
 //        settings.doneTxtLocation = doneTxtPath.text;
-//        settings.autoSave = autoSaveSwitch.checked;
+        settings.fontSizeTaskList = fontSizeSlider.sliderValue;
         settings.sync();
     }
 }
