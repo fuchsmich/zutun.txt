@@ -4,7 +4,6 @@ import org.nemomobile.configuration 1.0
 import "pages"
 import "tdt"
 
-//TODO screenshots auf openrepos!!
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
 
@@ -20,7 +19,6 @@ ApplicationWindow
 
 
     ConfigurationGroup {
-        //TODO font size for tasklist
         id: settings
         path: "/apps/harbour-zutun/settings"
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
