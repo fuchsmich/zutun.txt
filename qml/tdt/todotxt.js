@@ -36,6 +36,12 @@ function parseTodoTxt(todoTxt) {
         var m;
 
         // /\s(\+|@)\S+/g ...sollte alle @ und + finden...
+        matches = txt.match(/\s(\+|@)\S+/g);
+        for (var match in matches) {
+
+        }
+
+
         var pmatches = txt.match(/\s\+\w+(\s|$)/g);
         for (var p in pmatches) {
             m = pmatches[p].toUpperCase().trim();
