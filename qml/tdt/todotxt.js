@@ -34,6 +34,8 @@ function parseTodoTxt(todoTxt) {
 
         /* collect projects (+) and contexts (@)*/
         var m;
+
+        // /\s(\+|@)\S+/g ...sollte alle @ und + finden...
         var pmatches = txt.match(/\s\+\w+(\s|$)/g);
         for (var p in pmatches) {
             m = pmatches[p].toUpperCase().trim();

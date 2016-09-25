@@ -28,16 +28,6 @@ Item {
     property var contexts: [] //@ assoziertes Array
 
 
-//    property string lowestPrio: "(A) "
-
-    /* find lowest prio*/
-    function lowestPrio() {
-        var lp = "(A) ";
-        for (var t in taskList) {
-            lp = (taskList[t][priority] > lp ? taskList[t][priority] : lp);
-        }
-        return lp;
-    }
 
     ListModel {
         id: _tasksModel
@@ -68,13 +58,11 @@ Item {
     PCListModel {
         id: _projectModel
         assArray: tdt.projects
-//        filter: filterSettings.projectFilter
     }
 
     PCListModel {
         id: _contextModel
         assArray: tdt.contexts
-//        filter: filterSettings.contextFilter
     }
 
     /* get done state */
@@ -123,6 +111,15 @@ Item {
         if (index >= 0 && index < taskList.length) {
             return (typeof tdt.taskList[index][tdt.priority] !== 'undefined' ? tdt.taskList[index][tdt.priority] : "");
         } else throw "done: Index out of bounds."
+    }
+
+    /* find lowest prio*/
+    function lowestPrio() {
+        var lp = "(A) ";
+        for (var t in taskList) {
+            lp = (taskList[t][priority] > lp ? taskList[t][priority] : lp);
+        }
+        return lp;
     }
 
     /* return increased/decreased Priority-string */

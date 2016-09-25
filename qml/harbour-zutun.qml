@@ -4,6 +4,7 @@ import org.nemomobile.configuration 1.0
 import "pages"
 import "tdt"
 
+//TODO nur verfügbare filter anziegen
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
 

@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 
 ListModel {
     id: lm
@@ -15,8 +15,9 @@ ListModel {
 //            console.log(a);
 
             append( {"item": a, "noOfTasks": array[a].length,
-                       "filter": (typeof farray === "undefined" ?
-                                      false : farray.indexOf(a) !== -1)
+                       "filterActive": (typeof farray === "undefined" ?
+                                      false : farray.indexOf(a) !== -1),
+                       "filterAvailable" : true //
 //                       ,
 //                       "tasks": array[a].toString(),
 //                       "taskList": [{}]
@@ -32,7 +33,7 @@ ListModel {
     function loadFilter(filterArray) {
         for (var f = 0; f < filterArray.length; f++) {
             for (var i =0; i < count; i++ ){
-                if (get(i).item === filterArray[f]) setProperty(i, "filter", true);
+                if (get(i).item === filterArray[f]) setProperty(i, "filterActive", true);
             }
         }
     }
@@ -40,14 +41,14 @@ ListModel {
     function updateFilter() {
         var f = [];
         for (var i =0; i < count; i++ ){
-            if (get(i).filter) f.push(get(i).item);
+            if (get(i).filterActive) f.push(get(i).item);
         }
         filter = f;
     }
 
     function resetFilter() {
         for (var i =0; i < count; i++ ){
-            setProperty(i, "filter", false);
+            setProperty(i, "filterActive", false);
         }
 //        updateFilter();
     }
