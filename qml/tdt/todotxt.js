@@ -11,7 +11,7 @@ function parseTodoTxt(todoTxt) {
 
     //clean lines, remove empty lines
     var txt = "";
-    for (var t in tasks) {
+    for (var t = 0; t < tasks.length; t++) {
         txt = tasks[t].trim();
         if (txt.length !== 0) tlist.push(txt);
     }
@@ -19,7 +19,7 @@ function parseTodoTxt(todoTxt) {
     tlist = [];
 
     //parse lines
-    for (t in tasks) {
+    for (t = 0; t < tasks.length; t++) {
         //                console.log(t, tasks[t]);
         txt = tasks[t];
 
@@ -28,9 +28,13 @@ function parseTodoTxt(todoTxt) {
         tlist.push(matches);
 
 
-//        /* find lowest prio*/
-//        lowestPrio = (matches[priority] > lowestPrio ? matches[priority] : lowestPrio);
 
+        var proConArray = [];
+        matches = txt.match(/\s(\+|@)\S+/g);
+        for (var m in matches) {
+            if (typeof plist[m] === 'undefined') plist[m] = [];
+            proConArray.push(t, matches);
+        }
 
         /* collect projects (+) and contexts (@)*/
         var m;
