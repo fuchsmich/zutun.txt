@@ -26,6 +26,7 @@ Item {
     property var taskList: [] // 2d array with fullTxt, done, doneDate, priority, creationDate, subject
     property var projects: [] //+ assoziertes Array
     property var contexts: [] //@ assoziertes Array
+    property var proConArray: []
 
 
 
@@ -219,8 +220,6 @@ Item {
 //        property string filterString: filterText()
         property bool hideCompletedTasks: filterSettings.hideCompletedTasks
 
-        property var pfilter: tdt.projectModel.filter
-        property var cfilter: tdt.contextModel.filter
 
         function string() {
             var pf = tdt.projectModel.filter.toString(), cf = tdt.contextModel.filter.toString();
@@ -232,6 +231,8 @@ Item {
 
         /* returns the visibility in tasklist due to filters */
         function itemVisible(index) {
+            var pfilter = tdt.projectModel.filter
+            var cfilter = tdt.contextModel.filter
             index = index.toString();
             var dvis = !(hideCompletedTasks && tdt.taskList[index][tdt.done] !== undefined);
             var cvis = (cfilter.length === 0), pvis = (pfilter.length === 0);
@@ -262,6 +263,7 @@ Item {
             taskList = lists.taskList;
             projects = lists.projects;
             contexts = lists.contexts;
+            tdt.proConArray = lists.proConArray;
         }
 
     }

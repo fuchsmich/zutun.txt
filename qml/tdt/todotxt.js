@@ -5,6 +5,7 @@ function parseTodoTxt(todoTxt) {
     var tlist = [];
     var plist = [];
     var clist = [];
+    var proConArray = [];
     var tasks = todoTxt.split("\n");
     tasks.sort();
 
@@ -29,34 +30,27 @@ function parseTodoTxt(todoTxt) {
 
 
 
-        var proConArray = [];
-        matches = txt.match(/\s(\+|@)\S+/g);
-        for (var m in matches) {
-            if (typeof plist[m] === 'undefined') plist[m] = [];
-            proConArray.push(t, matches);
-        }
-
         /* collect projects (+) and contexts (@)*/
-//        var m;
-
-        var pmatches = txt.match(/\s\+\w+(\s|$)/g);
-        for (var p in pmatches) {
-            m = pmatches[p].toUpperCase().trim();
-            if (typeof plist[m] === 'undefined') plist[m] = [];
-            plist[m].push(t);
-//                    console.log(m, plist[m]);
+        matches = txt.match(/\s(\+|@)\S+/g);
+        for (var i in matches) {
+            matches[i] = matches[i].toUpperCase().trim();
         }
-
-        var cmatches = txt.match(/\s@\w+(\s|$)/g);
-        for (var c in cmatches) {
-            m = cmatches[c].toUpperCase().trim();
-            if (typeof clist[m] === 'undefined') clist[m] = [];
-            clist[m].push(t);
-//                    console.log(m, clist[m]);
+        console.log(t, matches);
+        var m = "";
+        for (var i in matches) {
+            m = matches[i];
+            if (typeof proConArray[m] === 'undefined') proConArray[m] = [];
+            proConArray[m].push(t, matches);
+            console.log(m, proConArray[m])
+            if (m.charAt(0) === "+") {
+                if (typeof plist[m] === 'undefined') plist[m] = [];
+                plist[m].push(t);
+            }
+            if (m.charAt(0) === "@") {
+                if (typeof clist[m] === 'undefined') clist[m] = [];
+                clist[m].push(t);
+            }
         }
-
-
-
     }
 
     //results
