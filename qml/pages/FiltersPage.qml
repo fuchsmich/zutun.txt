@@ -60,7 +60,7 @@ Page {
                     }
                 }
                 ListItem {
-//                    visible: index !== 0
+                    visible: model.filterAvailable
                     Label {
                         id: lbl
                         x: Theme.horizontalPageMargin
@@ -92,7 +92,8 @@ Page {
 //                    visible: index !== 0
                     x: Theme.horizontalPageMargin
                     text: model.item + " (" + model.noOfTasks + ")"
-                    checked: model.filter
+                    checked: model.filterActive
+                    visible: model.filterAvailable
                     onClicked: {
                         if (checked) tdt.contextModel.setProperty(index, "filter", true);
                         else tdt.contextModel.setProperty(index, "filter", false);
@@ -118,7 +119,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 delegate: projectDelegate
-                title: "Projects"
+                title: "Filter Projects"
                 model: tdt.projectModel
             }
         }
@@ -128,7 +129,7 @@ Page {
                 target: lv;
                 delegate: contextDelegate
 //                list: ["All"].concat(tdt.getContextList());
-                title: "Contexts"
+                title: "Filter Contexts"
                 model: tdt.contextModel
             }
         }
