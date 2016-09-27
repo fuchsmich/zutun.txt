@@ -4,29 +4,19 @@ ListModel {
     id: lm
     property var assArray
     property var filter: []
-    onAssArrayChanged: populate(assArray, filter);
+    property string firstChar: ""
+    onAssArrayChanged: populate();
 
-    function populate(array, farray) {
-//        console.log("popo", assArray, array.length)
+    function populate() {
         clear();
-
-//        var i = 1;
-        for ( var a in array) {
-//            console.log(a);
-
-            append( {"item": a, "noOfTasks": array[a].length,
-                       "filterActive": (typeof farray === "undefined" ?
-                                      false : farray.indexOf(a) !== -1),
-                       "filterAvailable" : true //
-//                       ,
-//                       "tasks": array[a].toString(),
-//                       "taskList": [{}]
-                   });
-//            for (var t in array[a]) {
-////                console.log(get(i).taskList.count);
-//                get(a).taskList.append({"taskIndex": array[a][t]});
-//            }
-//            i++;
+        for ( var a in assArray) {
+            if (a.charAt(0) == firstChar) {
+                append( {"item": a, "noOfTasks": assArray[a].length,
+                           "filterActive": (typeof filter === "undefined" ?
+                                                false : filter.indexOf(a) !== -1),
+                           "filterAvailable" : true //soll Filter in Filterliste geziegt werden?
+                       });
+            }
         }
     }
 
@@ -50,7 +40,6 @@ ListModel {
         for (var i =0; i < count; i++ ){
             setProperty(i, "filterActive", false);
         }
-//        updateFilter();
     }
 
     onDataChanged: {

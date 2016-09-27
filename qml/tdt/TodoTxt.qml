@@ -56,15 +56,6 @@ Item {
         }
     }
 
-    PCListModel {
-        id: _projectModel
-        assArray: tdt.projects
-    }
-
-    PCListModel {
-        id: _contextModel
-        assArray: tdt.contexts
-    }
 
     /* get done state */
     function getDone(index) {
@@ -215,7 +206,20 @@ Item {
         todoTxtFile.content = txt;
     }
 
+    PCListModel {
+        id: _projectModel
+        assArray: proConArray
+        firstChar: "+"
+    }
+
+    PCListModel {
+        id: _contextModel
+        assArray: proConArray
+        firstChar: "@"
+    }
+
     QtObject {
+
         id: _filters
 //        property string filterString: filterText()
         property bool hideCompletedTasks: filterSettings.hideCompletedTasks
