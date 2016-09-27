@@ -37,14 +37,7 @@ function parseTodoTxt(todoTxt) {
         }
 
         /* collect projects (+) and contexts (@)*/
-        var m;
-
-        // /\s(\+|@)\S+/g ...sollte alle @ und + finden...
-        matches = txt.match(/\s(\+|@)\S+/g);
-        for (var match in matches) {
-
-        }
-
+//        var m;
 
         var pmatches = txt.match(/\s\+\w+(\s|$)/g);
         for (var p in pmatches) {
@@ -70,7 +63,8 @@ function parseTodoTxt(todoTxt) {
     return {
         projects: plist,
         contexts: clist,
-        taskList: tlist
+        taskList: tlist,
+        proConArray: proConArray
     }
 }
 
