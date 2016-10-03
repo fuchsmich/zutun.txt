@@ -68,7 +68,7 @@ Page {
                     }
                     onClicked: {
 //                        tdt.pfilter = [model.item];
-                        tdt.projectModel.setProperty(index, "filter", true);
+                        tdt.projectModel.setFilter(index, true);
                         pageStack.navigateBack();
                     }
                 }
@@ -95,8 +95,8 @@ Page {
                     checked: model.filterActive
                     visible: model.filterAvailable
                     onClicked: {
-                        if (checked) tdt.contextModel.setProperty(index, "filter", true);
-                        else tdt.contextModel.setProperty(index, "filter", false);
+                        if (checked) tdt.contextModel.setFilter(index, true);
+                        else tdt.contextModel.setFilter(index, false);
 
                     }
 //                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)

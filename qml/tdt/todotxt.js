@@ -40,7 +40,8 @@ function parseTodoTxt(todoTxt) {
         for (var i in matches) {
             m = matches[i];
             if (typeof proConArray[m] === 'undefined') proConArray[m] = [];
-            proConArray[m].push(t, matches);
+            proConArray[m].push(t);
+            proConArray[m] = proConArray[m].concat(matches);
             console.log(m, proConArray[m])
             if (m.charAt(0) === "+") {
                 if (typeof plist[m] === 'undefined') plist[m] = [];

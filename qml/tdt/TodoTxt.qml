@@ -6,12 +6,6 @@ import "todotxt.js" as JS
 Item {
     id: tdt
 
-    readonly property int fullTxt: 0
-    readonly property int done: 1
-    readonly property int doneDate: 2
-    readonly property int priority: 3
-    readonly property int creationDate: 4
-    readonly property int subject: 5
 
     readonly property string alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -23,30 +17,41 @@ Item {
     property QtObject filters: _filters
 
 
-    property var taskList: [] // 2d array with fullTxt, done, doneDate, priority, creationDate, subject
-    property var projects: [] //+ assoziertes Array
-    property var contexts: [] //@ assoziertes Array
-    property var proConArray: []
+
+    QtObject {
+        id: _m
+        readonly property int fullTxt: 0
+        readonly property int done: 1
+        readonly property int doneDate: 2
+        readonly property int priority: 3
+        readonly property int creationDate: 4
+        readonly property int subject: 5
+
+        property var taskList: [] // 2d array with fullTxt, done, doneDate, priority, creationDate, subject
+        property var projects: [] //+ assoziertes Array
+        property var contexts: [] //@ assoziertes Array
+        property var proConArray: []
+    }
 
 
 
     ListModel {
         id: _tasksModel
 
-        property var assArray: tdt.taskList
+        property var assArray: _m.taskList
         onAssArrayChanged: populate(assArray);
 
         function populate(array) {
             for (var a = 0; a < array.length; a++) {
                 //bestehende ersetzen
-                if (a < count) set(a, { "id": a, "fullTxt": array[a][tdt.fullTxt], "done": tdt.getDone(a),
+                if (a < count) set(a, { "id": a, "fullTxt": array[a][_m.fullTxt], "done": tdt.getDone(a),
                            "displayText": '<font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font>'
-                            + tdt.taskList[a][tdt.subject]
+                            + _m.taskList[a][_m.subject]
                        });
                 //restliche anhängen
-                else append( { "id": a, "fullTxt": array[a][tdt.fullTxt], "done": tdt.getDone(a),
+                else append( { "id": a, "fullTxt": array[a][_m.fullTxt], "done": tdt.getDone(a),
                                 "displayText": '<b><font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font></b>'
-                                 + tdt.taskList[a][tdt.subject]
+                                 + _m.taskList[a][_m.subject]
                             });
             }
 
@@ -59,8 +64,8 @@ Item {
 
     /* get done state */
     function getDone(index) {
-        if (index >= 0 && index < taskList.length) {
-            return (typeof taskList[index][done] !== 'undefined' ? (taskList[index][done][0] === 'x') : false);
+        if (index >= 0 && index < _m.taskList.length) {
+            return (typeof _m.taskList[index][_m.done] !== 'undefined' ? (_m.taskList[index][_m.done][0] === 'x') : false);
         } else throw "done: Index out of bounds."
     }
 
@@ -72,44 +77,44 @@ Item {
 
     /* set done state and done date */
     function setDone(index, value) {
-        if (index >= 0 && index < taskList.length) {
+        if (index >= 0 && index < _m.taskList.length) {
             if (value && !getDone(index))
-                taskList[index][fullTxt] =
-                        "x " + today() + " " + taskList[index][fullTxt];
+                _m.taskList[index][_m.fullTxt] =
+                        "x " + today() + " " + _m.taskList[index][_m.fullTxt];
             if (!value && getDone(index))
-                taskList[index][fullTxt] =
-                        taskList[index][fullTxt].match(/(x\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/)[3]; //Datum muss auch weg!!
+                _m.taskList[index][_m.fullTxt] =
+                        _m.taskList[index][_m.fullTxt].match(/(x\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/)[3]; //Datum muss auch weg!!
             listToFile();
         } else throw "done: Index out of bounds."
     }
 
     /* delete todo item */
     function removeItem(index) {
-        if (index >= 0 && index < taskList.length) {
+        if (index >= 0 && index < _m.taskList.length) {
             var l = [];
-            for (var t in taskList) {
+            for (var t in _m.taskList) {
                 if (t != index) {
-                    l.push(taskList[t]);
+                    l.push(_m.taskList[t]);
                 }
 
             }
-            taskList = l;
+            _m.taskList = l;
             listToFile();
         } else throw "done: Index out of bounds."
     }
 
     /* get Priority */
     function getPriority(index) {
-        if (index >= 0 && index < taskList.length) {
-            return (typeof tdt.taskList[index][tdt.priority] !== 'undefined' ? tdt.taskList[index][tdt.priority] : "");
+        if (index >= 0 && index < _m.taskList.length) {
+            return (typeof _m.taskList[index][_m.priority] !== 'undefined' ? _m.taskList[index][_m.priority] : "");
         } else throw "done: Index out of bounds."
     }
 
     /* find lowest prio*/
     function lowestPrio() {
         var lp = "(A) ";
-        for (var t in taskList) {
-            lp = (taskList[t][priority] > lp ? taskList[t][priority] : lp);
+        for (var t in _m.taskList) {
+            lp = (_m.taskList[t][_m.priority] > lp ? _m.taskList[t][_m.priority] : lp);
         }
         return lp;
     }
@@ -126,12 +131,12 @@ Item {
     }
 
     function raisePriority(index) {
-        if (taskList[index][priority] === undefined)
-            taskList[index][fullTxt] = (decPrioString(lowestPrio()) + taskList[index][fullTxt]).trim();
+        if (_m.taskList[index][_m.priority] === undefined)
+            _m.taskList[index][_m.fullTxt] = (decPrioString(lowestPrio()) + _m.taskList[index][_m.fullTxt]).trim();
 
-        else if (taskList[index][priority][1] > alphabet[0])
-            taskList[index][fullTxt] = incPrioString(taskList[index][priority])
-                    + taskList[index][fullTxt].substr(4);
+        else if (_m.taskList[index][_m.priority][1] > alphabet[0])
+            _m.taskList[index][_m.fullTxt] = incPrioString(_m.taskList[index][_m.priority])
+                    + _m.taskList[index][_m.fullTxt].substr(4);
 
         else return;
 
@@ -140,13 +145,13 @@ Item {
 
     function lowerPriority(index) {
 
-        if (taskList[index][priority] !== undefined) {
-            if (taskList[index][priority][1] < alphabet[alphabet.length-1])
-                taskList[index][fullTxt] = decPrioString(taskList[index][priority])
-                        + taskList[index][fullTxt].substr(4);
+        if (_m.taskList[index][_m.priority] !== undefined) {
+            if (_m.taskList[index][_m.priority][1] < alphabet[alphabet.length-1])
+                _m.taskList[index][_m.fullTxt] = decPrioString(_m.taskList[index][_m.priority])
+                        + _m.taskList[index][_m.fullTxt].substr(4);
 
-            else if (taskList[index][priority][1] === alphabet[alphabet.length-1])
-                taskList[index][fullTxt] = taskList[index][fullTxt].substr(4).trim();
+            else if (_m.taskList[index][_m.priority][1] === alphabet[alphabet.length-1])
+                _m.taskList[index][_m.fullTxt] = _m.taskList[index][_m.fullTxt].substr(4).trim();
         }
 
         else return;
@@ -166,7 +171,7 @@ Item {
     /* get color due to Priority*/
     function getColor(index) {
         //            console.log(index, getPriority(index));
-        if (index >= 0 && index < taskList.length) {
+        if (index >= 0 && index < _m.taskList.length) {
             //                console.log(index, getPriority(index), cIndex);
             if (getPriority(index) === "") {
                 if (getDone(index)) return Theme.secondaryColor;
@@ -188,8 +193,8 @@ Item {
         txt = txt.trim();
 
         if (txt !== "") {
-            if (index === -1) taskList.push([txt]);
-            else taskList[index][fullTxt] = txt;
+            if (index === -1) _m.taskList.push([txt]);
+            else _m.taskList[index][_m.fullTxt] = txt;
             listToFile();
         }
     }
@@ -197,10 +202,10 @@ Item {
 
     /* sort list and write it to the txtFile*/
     function listToFile() {
-        taskList.sort();
+        _m.taskList.sort();
         var txt = "";
-        for (var t in taskList) {
-            txt += taskList[t][fullTxt] + "\n";
+        for (var t in _m.taskList) {
+            txt += _m.taskList[t][_m.fullTxt] + "\n";
         }
         //this writes to the file:
         todoTxtFile.content = txt;
@@ -208,13 +213,13 @@ Item {
 
     PCListModel {
         id: _projectModel
-        assArray: proConArray
+        proConArray: _m.proConArray
         firstChar: "+"
     }
 
     PCListModel {
         id: _contextModel
-        assArray: proConArray
+        proConArray: _m.proConArray
         firstChar: "@"
     }
 
@@ -223,12 +228,14 @@ Item {
         id: _filters
 //        property string filterString: filterText()
         property bool hideCompletedTasks: filterSettings.hideCompletedTasks
+        property var filters: projectModel.filter.concat(contextModel.filter)
 
 
         function string() {
-            var pf = tdt.projectModel.filter.toString(), cf = tdt.contextModel.filter.toString();
+//            var pf = tdt.projectModel.filter.toString(), cf = tdt.contextModel.filter.toString();
 
-            var txt = pf + (pf === "" || cf === "" ? "" : "," ) + cf;
+//            var txt = pf + (pf === "" || cf === "" ? "" : "," ) + cf;
+            var txt = filters.join(", ");
             if (txt === "" && hideCompletedTasks) return "Hiding Completed Tasks";
             return ( txt === "" ? "All Tasks" : txt );
         }
@@ -237,16 +244,20 @@ Item {
         function itemVisible(index) {
             var pfilter = tdt.projectModel.filter
             var cfilter = tdt.contextModel.filter
-            index = index.toString();
-            var dvis = !(hideCompletedTasks && tdt.taskList[index][tdt.done] !== undefined);
+            var pc = _m
+
+//            index = index.toString();
+            /* filter completed?*/
+            var dvis = !(hideCompletedTasks && _m.taskList[index][_m.done] !== undefined);
+
             var cvis = (cfilter.length === 0), pvis = (pfilter.length === 0);
             for (var p in pfilter) {
-                pvis = pvis || (tdt.projects[pfilter[p]].indexOf(index) !== -1)
+                pvis = pvis || (_m.projects[pfilter[p]].indexOf(index) !== -1)
 //                console.log(index, pvis, pfilter[p], projects[pfilter[p]], typeof index, projects[pfilter[p]].indexOf(index));
             }
             for (var c in cfilter) {
 //                console.log(index, cvis, cfilter[c], contexts[cfilter[c]], typeof index, contexts[cfilter[c]].indexOf(index));
-                cvis = cvis || (tdt.contexts[cfilter[c]].indexOf(index) !== -1)
+                cvis = cvis || (_m.contexts[cfilter[c]].indexOf(index) !== -1)
             }
 
 //            console.log(pvis, cvis, dvis)
@@ -264,10 +275,10 @@ Item {
         path: settings.todoTxtLocation
         onContentChanged:{
             var lists = JS.parseTodoTxt(content);
-            taskList = lists.taskList;
-            projects = lists.projects;
-            contexts = lists.contexts;
-            tdt.proConArray = lists.proConArray;
+            _m.taskList = lists.taskList;
+            _m.projects = lists.projects;
+            _m.contexts = lists.contexts;
+            _m.proConArray = lists.proConArray;
         }
 
     }
