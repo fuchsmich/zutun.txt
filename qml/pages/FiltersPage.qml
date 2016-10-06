@@ -65,14 +65,14 @@ Page {
                     Label {
                         id: lbl
                         x: Theme.horizontalPageMargin
-                        text: model.item + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
+                        text: model.name + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
                     }
                     onClicked: {
-                        if (!highlighted) {
+//                        if (!highlighted) {
 //                            tdt.projectModel.resetFilter();
                             tdt.projectModel.setFilter(index, true);
-                        }
-                        else tdt.projectModel.resetFilter();
+//                        }
+//                        else tdt.projectModel.resetFilter();
 
                         //                        pageStack.navigateBack();
                     }
@@ -95,7 +95,7 @@ Page {
                 TextSwitch {
                     id: sw
                     x: Theme.horizontalPageMargin
-                    text: model.item + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
+                    text: model.name + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
                     checked: model.filterActive
                     //                    visible: model.filterAvailable
                     onClicked: {

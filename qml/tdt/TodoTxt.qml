@@ -222,26 +222,26 @@ Item {
 //            id: _projectModel
             proConArray: _m.proConArray
             firstChar: "+"
-            onFilterChanged: contextModel.updateModel()
+//            onFilterChanged: contextModel.updateModel()
         }
 
         property ListModel contextModel:         PCListModel {
 //            id: _contextModel
             proConArray: _m.proConArray
             firstChar: "@"
-            onFilterChanged: projectModel.updateModel();
+//            onFilterChanged: projectModel.updateModel();
         }
 
 
         function loadFilters(p, c) {
             for (var f = 0; f < p.length; f++) {
                 for (var i =0; i < projectModel.count; i++ ){
-                    if (projectModel.get(i).item === filterArray[f]) projectModel.setProperty(i, "filterActive", true);
+                    if (projectModel.get(i).name === filterArray[f]) projectModel.setProperty(i, "filterActive", true);
                 }
             }
             for (var f = 0; f < c.length; f++) {
                 for (var i =0; i < contextModel.count; i++ ){
-                    if (contextModel.get(i).item === filterArray[f]) contextModel.setProperty(i, "filterActive", true);
+                    if (contextModel.get(i).name === filterArray[f]) contextModel.setProperty(i, "filterActive", true);
                 }
             }
         }
@@ -258,8 +258,8 @@ Item {
         /* returns the visibility in tasklist due to filters */
         function itemVisible(index) {
             //TODO
-            var pfilter = tdt.projectModel.filter
-            var cfilter = tdt.contextModel.filter
+            var pfilter = projectModel.filter
+            var cfilter = contextModel.filter
 //            var pc = _m
 
 //            index = index.toString();
@@ -268,12 +268,11 @@ Item {
 
             var cvis = (cfilter.length === 0), pvis = (pfilter.length === 0);
             for (var p in pfilter) {
-                pvis = pvis || (_m.projects[pfilter[p]].indexOf(index) !== -1)
-//                console.log(index, pvis, pfilter[p], projects[pfilter[p]], typeof index, projects[pfilter[p]].indexOf(index));
+                console.log(index, pvis, pfilter, _m.proConArray ) //, projects[pfilter[p]].indexOf(index));
+                pvis = pvis || (_m.proConArray[pfilter[p]].indexOf(index) !== -1)
             }
             for (var c in cfilter) {
-//                console.log(index, cvis, cfilter[c], contexts[cfilter[c]], typeof index, contexts[cfilter[c]].indexOf(index));
-                cvis = cvis || (_m.contexts[cfilter[c]].indexOf(index) !== -1)
+                cvis = cvis || (_m.proConArray[cfilter[c]].indexOf(index) !== -1)
             }
 
 //            console.log(index, pvis, cvis, dvis)
@@ -291,6 +290,7 @@ Item {
         path: settings.todoTxtLocation
         onContentChanged:{
             var lists = JS.parseTodoTxt(content);
+            console.log(lists.proConArray)
             _m.taskList = lists.taskList;
             _m.projects = lists.projects;
             _m.contexts = lists.contexts;

@@ -2,12 +2,12 @@
 
 ListModel {
     id: lm
-    property var proConArray
+    property var proConArray: []
     property var filter: []
     property string firstChar: ""
     property bool syncArrayAndModel: true
     onProConArrayChanged:{
-        updateModel();
+        populateModel();
     }
     onFilterChanged: {
         updateModel();
@@ -16,19 +16,18 @@ ListModel {
         updateFilter();
     }
 
-    function updateModel() {
+    function populateModel() {
         if (syncArrayAndModel){
             syncArrayAndModel = false;
             //TODO doch in populate und update der filter bezogenen dinge unterscheiden
             clear();
             for ( var a in proConArray) {
                 if (a.charAt(0) === firstChar) {
-                    append( {"item": a,
+                    append( {"name": a,
                                "noOfTasks": noOfTasks(a, false),
                                "noOfVisibleTasks": noOfTasks(a, true),
                                "filterActive": (typeof filter === "undefined" ?
                                                     false : filter.indexOf(a) !== -1)
-                               //, "filterAvailable" : true //soll Filter in Filterliste geziegt werden?
                            });
                 }
             }
@@ -36,13 +35,32 @@ ListModel {
         syncArrayAndModel = true;
     }
 
+    function updateModel() {
+        if (syncArrayAndModel){
+            syncArrayAndModel = false;
+            for (var i =0; i < count; i++ ){
+                var a = get(i).name;
+                console.log(a, proConArray)
+                set(i, {"name": a,
+                           "noOfTasks": noOfTasks(a, false),
+                           "noOfVisibleTasks": noOfTasks(a, true),
+                           "filterActive": (typeof filter === "undefined" ?
+                                                false : filter.indexOf(a) !== -1)
+                       });
+            }
+        }
+        syncArrayAndModel = true;
+    }
+
     function updateFilter() {
+        console.log("updating filter")
         if (syncArrayAndModel){
             syncArrayAndModel = false;
             var f = [];
             for (var i =0; i < count; i++ ){
                 if (get(i).filterActive) f.push(get(i).item);
             }
+            console.log(f);
             filter = f;
         }
         syncArrayAndModel = true;
@@ -64,7 +82,7 @@ ListModel {
     //    function loadFilter(filterArray) {
     //        for (var f = 0; f < filterArray.length; f++) {
     //            for (var i =0; i < count; i++ ){
-    //                if (get(i).item === filterArray[f]) setProperty(i, "filterActive", true);
+    //                if (get(i).name === filterArray[f]) setProperty(i, "filterActive", true);
     //            }
     //        }
     //    }
@@ -72,7 +90,7 @@ ListModel {
     function setFilter(index, value) {
         console.log(index);
         setProperty(index, "filterActive", value);
-        updateFilter();
+        updateModel();
     }
 
 
@@ -80,7 +98,7 @@ ListModel {
         for (var i =0; i < count; i++ ){
             setProperty(i, "filterActive", false);
         }
-        updateFilter();
+        updateModel();
     }
 
     //    onDataChanged: {
