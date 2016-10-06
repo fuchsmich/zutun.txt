@@ -35,14 +35,14 @@ function parseTodoTxt(todoTxt) {
         for (var i in matches) {
             matches[i] = matches[i].toUpperCase().trim();
         }
-        console.log(t, matches);
+//        console.log(t, matches);
         var m = "";
         for (var i in matches) {
             m = matches[i];
             if (typeof proConArray[m] === 'undefined') proConArray[m] = [];
             proConArray[m].push(t);
             proConArray[m] = proConArray[m].concat(matches);
-            console.log(m, proConArray[m])
+//            console.log(m, proConArray[m])
             if (m.charAt(0) === "+") {
                 if (typeof plist[m] === 'undefined') plist[m] = [];
                 plist[m].push(t);

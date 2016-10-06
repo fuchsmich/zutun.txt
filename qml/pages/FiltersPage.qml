@@ -36,10 +36,10 @@ Page {
         header: PageHeader {
             id: ph
             title: lv.title
-//            description: pageStack.depth
+            //            description: pageStack.depth
         }
 
-//        property var list: tdt.projects
+        //        property var list: tdt.projects
         model: tdt.projectModel
 
         delegate: projectDelegate
@@ -48,7 +48,7 @@ Page {
             id: projectDelegate
             Column {
                 width: page.width
-//                height: Math.max(btn.height, lbl.height) + Theme.paddingLarge
+                //                height: Math.max(btn.height, lbl.height) + Theme.paddingLarge
                 Button {
                     id: btn
                     visible: index === 0
@@ -60,16 +60,21 @@ Page {
                     }
                 }
                 ListItem {
-                    visible: model.filterAvailable
+                    //                    visible: model.filterAvailable
+                    highlighted: model.filterActive
                     Label {
                         id: lbl
                         x: Theme.horizontalPageMargin
-                        text: model.item + " (" + model.noOfTasks + ")"  //lv.list[index]
+                        text: model.item + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
                     }
                     onClicked: {
-//                        tdt.pfilter = [model.item];
-                        tdt.projectModel.setFilter(index, true);
-                        pageStack.navigateBack();
+                        if (!highlighted) {
+//                            tdt.projectModel.resetFilter();
+                            tdt.projectModel.setFilter(index, true);
+                        }
+                        else tdt.projectModel.resetFilter();
+
+                        //                        pageStack.navigateBack();
                     }
                 }
             }
@@ -79,7 +84,7 @@ Page {
             id: contextDelegate
             Column {
                 width: page.width
-//                height: Math.max(cbtn.height, sw.height) + Theme.paddingLarge
+                //                height: Math.max(cbtn.height, sw.height) + Theme.paddingLarge
                 Button {
                     id: cbtn
                     visible: index === 0
@@ -88,18 +93,17 @@ Page {
                     onClicked: if (index === 0) tdt.contextModel.resetFilter();
                 }
                 TextSwitch {
-                id: sw
-//                    visible: index !== 0
+                    id: sw
                     x: Theme.horizontalPageMargin
-                    text: model.item + " (" + model.noOfTasks + ")"
+                    text: model.item + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
                     checked: model.filterActive
-                    visible: model.filterAvailable
+                    //                    visible: model.filterAvailable
                     onClicked: {
                         if (checked) tdt.contextModel.setFilter(index, true);
                         else tdt.contextModel.setFilter(index, false);
 
                     }
-//                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
+                    //                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
                 }
             }
         }
@@ -128,7 +132,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 delegate: contextDelegate
-//                list: ["All"].concat(tdt.getContextList());
+                //                list: ["All"].concat(tdt.getContextList());
                 title: "Filter Contexts"
                 model: tdt.contextModel
             }

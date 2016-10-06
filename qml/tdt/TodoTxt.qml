@@ -12,9 +12,9 @@ Item {
     property string todoTxtLocation
 
     property ListModel tasksModel: _tasksModel
-    property ListModel projectModel: _projectModel
-    property ListModel contextModel: _contextModel
     property QtObject filters: _filters
+    property ListModel projectModel: _filters.projectModel
+    property ListModel contextModel: _filters.contextModel
 
 
 
@@ -211,17 +211,6 @@ Item {
         todoTxtFile.content = txt;
     }
 
-    PCListModel {
-        id: _projectModel
-        proConArray: _m.proConArray
-        firstChar: "+"
-    }
-
-    PCListModel {
-        id: _contextModel
-        proConArray: _m.proConArray
-        firstChar: "@"
-    }
 
     QtObject {
 
@@ -229,7 +218,33 @@ Item {
 //        property string filterString: filterText()
         property bool hideCompletedTasks: filterSettings.hideCompletedTasks
         property var filters: projectModel.filter.concat(contextModel.filter)
+        property ListModel projectModel:  PCListModel {
+//            id: _projectModel
+            proConArray: _m.proConArray
+            firstChar: "+"
+            onFilterChanged: contextModel.updateModel()
+        }
 
+        property ListModel contextModel:         PCListModel {
+//            id: _contextModel
+            proConArray: _m.proConArray
+            firstChar: "@"
+            onFilterChanged: projectModel.updateModel();
+        }
+
+
+        function loadFilters(p, c) {
+            for (var f = 0; f < p.length; f++) {
+                for (var i =0; i < projectModel.count; i++ ){
+                    if (projectModel.get(i).item === filterArray[f]) projectModel.setProperty(i, "filterActive", true);
+                }
+            }
+            for (var f = 0; f < c.length; f++) {
+                for (var i =0; i < contextModel.count; i++ ){
+                    if (contextModel.get(i).item === filterArray[f]) contextModel.setProperty(i, "filterActive", true);
+                }
+            }
+        }
 
         function string() {
 //            var pf = tdt.projectModel.filter.toString(), cf = tdt.contextModel.filter.toString();
@@ -242,9 +257,10 @@ Item {
 
         /* returns the visibility in tasklist due to filters */
         function itemVisible(index) {
+            //TODO
             var pfilter = tdt.projectModel.filter
             var cfilter = tdt.contextModel.filter
-            var pc = _m
+//            var pc = _m
 
 //            index = index.toString();
             /* filter completed?*/
@@ -260,7 +276,7 @@ Item {
                 cvis = cvis || (_m.contexts[cfilter[c]].indexOf(index) !== -1)
             }
 
-//            console.log(pvis, cvis, dvis)
+//            console.log(index, pvis, cvis, dvis)
             return pvis && cvis && dvis;
         }
     }
