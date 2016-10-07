@@ -21,7 +21,7 @@ Page {
             Label {
                 id: lbl;
                 x: Theme.horizontalPageMargin
-                text: model.item
+                text: model.name
             }
             onClicked: setString(lbl.text)
         }

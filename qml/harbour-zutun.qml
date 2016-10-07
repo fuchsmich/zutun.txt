@@ -46,16 +46,16 @@ ApplicationWindow
 
     Component.onCompleted: {
 //        console.log("filters: ", filterSettings.projectFilter, filterSettings.contextFilter );
-        tdt.filters.loadFilters(filterSettings.projectFilter, filterSettings.contextFilter);
-//        tdt.contextModel.loadFilter(filterSettings.contextFilter);
+        tdt.contextModel.setFilterArray(filterSettings.contextFilter);
+        tdt.projectModel.setFilterArray(filterSettings.projectFilter);
     }
 
 
     Component.onDestruction: {
         //save filters in settings
         filterSettings.hideCompletedTasks = tdt.filters.hideCompletedTasks
-        filterSettings.projectFilter = tdt.filters.projectModel.pfilter
-        filterSettings.contextFilter = tdt.filters.projectModel.cfilter
+        filterSettings.projectFilter = tdt.filters.projectModel.filter
+        filterSettings.contextFilter = tdt.filters.contextModel.filter
     }
 
 }

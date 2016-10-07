@@ -12,9 +12,9 @@ Item {
     property string todoTxtLocation
 
     property ListModel tasksModel: _tasksModel
+    property alias projectModel: _filters.projectModel
+    property alias contextModel: _filters.contextModel
     property QtObject filters: _filters
-    property ListModel projectModel: _filters.projectModel
-    property ListModel contextModel: _filters.contextModel
 
 
 
@@ -28,9 +28,7 @@ Item {
         readonly property int subject: 5
 
         property var taskList: [] // 2d array with fullTxt, done, doneDate, priority, creationDate, subject
-        property var projects: [] //+ assoziertes Array
-        property var contexts: [] //@ assoziertes Array
-        property var proConArray: []
+        property var proConArray: [] //contains relations of task, projects and contexts
     }
 
 
@@ -212,24 +210,28 @@ Item {
     }
 
 
+    /******************************/
+    /* Filter Object */
     QtObject {
-
         id: _filters
 //        property string filterString: filterText()
         property bool hideCompletedTasks: filterSettings.hideCompletedTasks
         property var filters: projectModel.filter.concat(contextModel.filter)
+        onHideCompletedTasksChanged: {
+            contextModel.recalcNoOfTasks()
+            projectModel.recalcNoOfTasks()
+        }
+
         property ListModel projectModel:  PCListModel {
-//            id: _projectModel
             proConArray: _m.proConArray
             firstChar: "+"
-//            onFilterChanged: contextModel.updateModel()
+            onFilterModelChanged: contextModel.recalcNoOfTasks()
         }
 
         property ListModel contextModel:         PCListModel {
-//            id: _contextModel
             proConArray: _m.proConArray
             firstChar: "@"
-//            onFilterChanged: projectModel.updateModel();
+            onFilterModelChanged: projectModel.recalcNoOfTasks()
         }
 
 
@@ -251,15 +253,15 @@ Item {
 
 //            var txt = pf + (pf === "" || cf === "" ? "" : "," ) + cf;
             var txt = filters.join(", ");
-            if (txt === "" && hideCompletedTasks) return "Hiding Completed Tasks";
-            return ( txt === "" ? "All Tasks" : txt );
+            if (txt === "" && hideCompletedTasks) return qsTr("All But Completed Tasks");
+            return ( txt === "" ? qsTr("All Tasks") : txt );
         }
 
         /* returns the visibility in tasklist due to filters */
         function itemVisible(index) {
             //TODO
-            var pfilter = projectModel.filter
-            var cfilter = contextModel.filter
+            var pfilter = projectModel.filter //getFilterArray();
+            var cfilter = contextModel.filter //getFilterArray();
 //            var pc = _m
 
 //            index = index.toString();
@@ -268,7 +270,7 @@ Item {
 
             var cvis = (cfilter.length === 0), pvis = (pfilter.length === 0);
             for (var p in pfilter) {
-                console.log(index, pvis, pfilter, _m.proConArray ) //, projects[pfilter[p]].indexOf(index));
+                console.log(index, pfilter[p], pvis,  _m.proConArray ) //, projects[pfilter[p]].indexOf(index));
                 pvis = pvis || (_m.proConArray[pfilter[p]].indexOf(index) !== -1)
             }
             for (var c in cfilter) {
@@ -290,10 +292,10 @@ Item {
         path: settings.todoTxtLocation
         onContentChanged:{
             var lists = JS.parseTodoTxt(content);
-            console.log(lists.proConArray)
+//            console.log(lists.proConArray)
             _m.taskList = lists.taskList;
-            _m.projects = lists.projects;
-            _m.contexts = lists.contexts;
+//            _m.projects = lists.projects;
+//            _m.contexts = lists.contexts;
             _m.proConArray = lists.proConArray;
         }
 

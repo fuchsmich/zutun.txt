@@ -62,19 +62,11 @@ Page {
                 ListItem {
                     //                    visible: model.filterAvailable
                     highlighted: model.filterActive
+                    onClicked: tdt.projectModel.setSingleFilter(index, !model.filterActive);
                     Label {
                         id: lbl
                         x: Theme.horizontalPageMargin
                         text: model.name + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
-                    }
-                    onClicked: {
-//                        if (!highlighted) {
-//                            tdt.projectModel.resetFilter();
-                            tdt.projectModel.setFilter(index, true);
-//                        }
-//                        else tdt.projectModel.resetFilter();
-
-                        //                        pageStack.navigateBack();
                     }
                 }
             }
