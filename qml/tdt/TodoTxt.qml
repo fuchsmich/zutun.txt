@@ -270,7 +270,7 @@ Item {
 
             var cvis = (cfilter.length === 0), pvis = (pfilter.length === 0);
             for (var p in pfilter) {
-                console.log(index, pfilter[p], pvis,  _m.proConArray ) //, projects[pfilter[p]].indexOf(index));
+//                console.log(index, pfilter[p], pvis,  _m.proConArray ) //, projects[pfilter[p]].indexOf(index));
                 pvis = pvis || (_m.proConArray[pfilter[p]].indexOf(index) !== -1)
             }
             for (var c in cfilter) {

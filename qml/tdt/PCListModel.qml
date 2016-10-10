@@ -15,7 +15,7 @@ ListModel {
 
     /* populate Model from proConArray */
     function populateModel() {
-        console.log("populating");
+//        console.log("populating");
         clear();
         for ( var a in proConArray) {
             if (a.charAt(0) === firstChar) {
@@ -48,7 +48,7 @@ ListModel {
             for (var i =0; i < count; i++ ){
                 if (get(i).filterActive) f.push(get(i).name);
             }
-            console.log(f);
+//            console.log(f);
             return f;
     }
 

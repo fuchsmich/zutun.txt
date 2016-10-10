@@ -36,7 +36,7 @@ Page {
         header: PageHeader {
             id: ph
             title: lv.title
-            //            description: pageStack.depth
+            description: tdt.filters.string()
         }
 
         //        property var list: tdt.projects
