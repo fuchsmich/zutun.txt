@@ -15,13 +15,14 @@ Page {
             text: "Files"
         }
 
-        Label {
-            x: Theme.horizontalPageMargin
-            text: "Location todo.txt"
-        }
+        //        Label {
+        //            x: Theme.horizontalPageMargin
+        //            text: "Location todo.txt"
+        //        }
         TextField {
             id: todoTxtPath
-            x: Theme.horizontalPageMargin
+            //x: Theme.horizontalPageMargin
+            label: "Path to todo.txt"
             text: settings.todoTxtLocation
             width: parent.width - 2*Theme.horizontalPageMargin
         }
@@ -33,45 +34,57 @@ Page {
             color: Theme.highlightColor
             wrapMode: Text.WordWrap
         }
-        Slider {
-            id: fontSizeSlider
-            x: Theme.horizontalPageMargin
+        SectionHeader {
+            text: "Task List"
+        }
+        Row {
             width: parent.width
-            minimumValue: Theme.fontSizeTiny
-            maximumValue: Theme.fontSizeHuge
-            value: settings.fontSizeTaskList
-            valueText: value
-            stepSize: 1
-            label: "Fontsize in Tasklist"
+            Slider {
+                id: fontSizeSlider
+                //x: Theme.horizontalPageMargin
+                width: parent.width - x - resetBtn.width
+                minimumValue: Theme.fontSizeTiny
+                maximumValue: Theme.fontSizeHuge
+                value: settings.fontSizeTaskList
+                valueText: value
+                stepSize: 1
+                label: "Fontsize in Tasklist"
+            }
+            IconButton {
+                anchors.verticalCenter: fontSizeSlider.verticalCenter
+                id: resetBtn
+                icon.source: "image://theme/icon-m-reset"
+                onClicked: fontSizeSlider.value = Theme.fontSizeMedium
+            }
         }
 
         //TODO reset button to Theme.fonSizeMedium
 
-//        Label {
-//            x: Theme.horizontalPageMargin
-//            text: "Location done.txt"
-//        }
-//        TextField {
-//            id: doneTxtPath
-//            x: Theme.horizontalPageMargin
-//            text: settings.doneTxtLocation
-//        }
-//        Button {
-//            text: "Select File"
-//        }
+        //        Label {
+        //            x: Theme.horizontalPageMargin
+        //            text: "Location done.txt"
+        //        }
+        //        TextField {
+        //            id: doneTxtPath
+        //            x: Theme.horizontalPageMargin
+        //            text: settings.doneTxtLocation
+        //        }
+        //        Button {
+        //            text: "Select File"
+        //        }
 
 
-//        TextSwitch {
-//            id: autoSaveSwitch
-//            x: Theme.horizontalPageMargin
-//            text: qsTr("Autosave")
-//            checked: settings.autoSave
-//        }
+        //        TextSwitch {
+        //            id: autoSaveSwitch
+        //            x: Theme.horizontalPageMargin
+        //            text: qsTr("Autosave")
+        //            checked: settings.autoSave
+        //        }
     }
     Component.onDestruction: {
         // write back settings and save
         settings.todoTxtLocation = todoTxtPath.text;
-//        settings.doneTxtLocation = doneTxtPath.text;
+        //        settings.doneTxtLocation = doneTxtPath.text;
         settings.fontSizeTaskList = fontSizeSlider.sliderValue;
         settings.sync();
     }

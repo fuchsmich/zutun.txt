@@ -10,6 +10,7 @@
 * Sun Oct  9 2016 Michael Fuchs <michfu@gmx.at> 0.3-1
 - filters: show number of visible items/total items
 - bug in coveraction overwriting first item
+- setting/resetting font size in tasklist
 
 * Tue Sep 20 2016 Michael Fuchs <michfu@gmx.at> 0.2-1
 - slight changes to icon
