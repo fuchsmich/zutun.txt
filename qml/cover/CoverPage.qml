@@ -31,7 +31,7 @@ CoverBackground {
         CoverAction {
             iconSource: "image://theme/icon-cover-new"
             onTriggered: {
-                pageStack.push("../pages/TaskEdit.qml", {index: -1, text: ""});
+                pageStack.push("../pages/TaskEdit.qml", {itemIndex: -1, text: ""});
                 app.activate();
             }
         }

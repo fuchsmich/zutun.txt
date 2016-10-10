@@ -8,7 +8,7 @@ Dialog {
     //    acceptDestination: page
     acceptDestinationAction: PageStackAction.Pop
 
-    property int itemIndex
+    property int itemIndex: -1
     property string text
     property string selectedPriority
     onSelectedPriorityChanged: {
