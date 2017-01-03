@@ -1,5 +1,7 @@
 .pragma library
 
+var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 /* parse plain Text*/
 function parseTodoTxt(todoTxt) {
     var tlist = [];

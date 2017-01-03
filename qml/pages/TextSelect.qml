@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../tdt/todotxt.js" as JS
+
 
 Page {
     id: page
@@ -39,8 +41,8 @@ Page {
     ListModel {
         id: prioritiesModel
         Component.onCompleted: {
-            for (var a in tdt.alphabet) {
-                append({"item": "(" + tdt.alphabet[a] + ") "});
+            for (var a in JS.alphabet) {
+                append({"name": "(" + JS.alphabet[a] + ") "});
             }
         }
     }

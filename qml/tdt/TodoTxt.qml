@@ -119,12 +119,12 @@ Item {
 
     /* return increased/decreased Priority-string */
     function incPrioString(p) {
-        if (p[1] === alphabet[0]) return p;
+        if (p[1] === JS.alphabet[0]) return p;
         else return "(" + String.fromCharCode(p.charCodeAt(1) - 1) + ") ";
     }
 
     function decPrioString(p) {
-        if (p[1] === alphabet[alphabet.length-1]) return p;
+        if (p[1] === JS.alphabet[JS.alphabet.length-1]) return p;
         else return "(" + String.fromCharCode(p.charCodeAt(1) + 1) + ") ";
     }
 
@@ -132,7 +132,7 @@ Item {
         if (_m.taskList[index][_m.priority] === undefined)
             _m.taskList[index][_m.fullTxt] = (decPrioString(lowestPrio()) + _m.taskList[index][_m.fullTxt]).trim();
 
-        else if (_m.taskList[index][_m.priority][1] > alphabet[0])
+        else if (_m.taskList[index][_m.priority][1] > JS.alphabet[0])
             _m.taskList[index][_m.fullTxt] = incPrioString(_m.taskList[index][_m.priority])
                     + _m.taskList[index][_m.fullTxt].substr(4);
 
@@ -144,11 +144,11 @@ Item {
     function lowerPriority(index) {
 
         if (_m.taskList[index][_m.priority] !== undefined) {
-            if (_m.taskList[index][_m.priority][1] < alphabet[alphabet.length-1])
+            if (_m.taskList[index][_m.priority][1] < JS.alphabet[JS.alphabet.length-1])
                 _m.taskList[index][_m.fullTxt] = decPrioString(_m.taskList[index][_m.priority])
                         + _m.taskList[index][_m.fullTxt].substr(4);
 
-            else if (_m.taskList[index][_m.priority][1] === alphabet[alphabet.length-1])
+            else if (_m.taskList[index][_m.priority][1] === JS.alphabet[JS.alphabet.length-1])
                 _m.taskList[index][_m.fullTxt] = _m.taskList[index][_m.fullTxt].substr(4).trim();
         }
 
@@ -175,9 +175,9 @@ Item {
                 if (getDone(index)) return Theme.secondaryColor;
                 else return Theme.primaryColor;
             }
-            //                var cIndex = alphabet.search(getPriority(index)[1]);
+            //                var cIndex = JS.alphabet.search(getPriority(index)[1]);
 //                var cp = new ColorPicker();
-            return cp.colors[alphabet.search(getPriority(index)[1]) % 15];
+            return cp.colors[JS.alphabet.search(getPriority(index)[1]) % 15];
         } else throw "done: Index out of bounds."
     }
 
