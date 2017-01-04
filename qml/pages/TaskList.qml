@@ -10,6 +10,7 @@ Page {
     SilicaListView {
         id: lv
         anchors.fill: parent
+        spacing: Theme.paddingMedium
 
         VerticalScrollDecorator {}
         PullDownMenu {
@@ -58,7 +59,7 @@ Page {
 
             visible: tdt.filters.itemVisible(index)
 
-            contentHeight: (Math.max(lbl.height /*,doneSw.height*/ ) + 2*Theme.paddingLarge)*visible
+            contentHeight: (row.height + lv.spacing)*visible //(Math.max(lbl.height /*,doneSw.height*/ ) + 2*Theme.paddingLarge)*visible
             width: page.width
             anchors.rightMargin: Theme.horizontalPageMargin
 
@@ -69,20 +70,21 @@ Page {
 
             Row {
                 id: row
+                height: lbl.height
                 Switch {
                     id: doneSw
-                    //                    anchors.verticalCenter: parent.verticalCenter
                     x: Theme.horizontalPageMargin
+                    anchors.top: lbl.top
+//                    anchors.topMargin: -height/3.8 //-Theme.paddingLarge
+                    height: lbl.height
                     automaticCheck: false
                     checked: model.done
-                    iconSource: "image://theme/icon-s-task?" + (model.done ? "green" : "red")
+//                    iconSource: "image://theme/icon-s-task?" + (model.done ? "green" : "red")
                     onClicked: tdt.setDone(index, !model.done);
                 }
 
                 Label {
                     id:lbl
-                    anchors.top: doneSw.top
-                    anchors.topMargin: Theme.paddingLarge + 3
                     width: page.width - doneSw.width - 2*Theme.horizontalPageMargin
                     text: model.displayText
                     wrapMode: Text.Wrap

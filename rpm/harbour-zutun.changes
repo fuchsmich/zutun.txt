@@ -7,6 +7,9 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Tue Jan 03 2017 Michael Fuchs <michfu@gmx.at> 0.5-1
+- reduced space between items
+
 * Mon Oct 24 2016 Michael Fuchs <michfu@gmx.at> 0.4-1
 - Insert priority bug
 
