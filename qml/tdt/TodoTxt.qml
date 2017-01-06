@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQml.Models 2.1
+
 import FileIO 1.0
 import "todotxt.js" as JS
 
@@ -12,6 +14,7 @@ Item {
     property string todoTxtLocation
 
     property ListModel tasksModel: _tasksModel
+//    property DelegateModel tasksDelegateModel: _tasksDelegateModel
     property alias projectModel: _filters.projectModel
     property alias contextModel: _filters.contextModel
     property QtObject filters: _filters
@@ -31,6 +34,14 @@ Item {
         property var proConArray: [] //contains relations of task, projects and contexts
     }
 
+//    DelegateModel {
+//        id: _tasksDelegateModel
+//        model: _tasksModel
+//        delegate:
+//            Label { text: displayText}
+//        }
+//    }
+
 
 
     ListModel {
@@ -43,13 +54,13 @@ Item {
             for (var a = 0; a < array.length; a++) {
                 //bestehende ersetzen
                 if (a < count) set(a, { "id": a, "fullTxt": array[a][_m.fullTxt], "done": tdt.getDone(a),
-                           "displayText": '<font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font>'
-                            + _m.taskList[a][_m.subject]
-                       });
+                                       "displayText": '<font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font>'
+                                                      + _m.taskList[a][_m.subject]
+                                   });
                 //restliche anhängen
                 else append( { "id": a, "fullTxt": array[a][_m.fullTxt], "done": tdt.getDone(a),
                                 "displayText": '<b><font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font></b>'
-                                 + _m.taskList[a][_m.subject]
+                                               + _m.taskList[a][_m.subject]
                             });
             }
 
@@ -176,7 +187,7 @@ Item {
                 else return Theme.primaryColor;
             }
             //                var cIndex = JS.alphabet.search(getPriority(index)[1]);
-//                var cp = new ColorPicker();
+            //                var cp = new ColorPicker();
             return cp.colors[JS.alphabet.search(getPriority(index)[1]) % 15];
         } else throw "done: Index out of bounds."
     }
@@ -214,7 +225,7 @@ Item {
     /* Filter Object */
     QtObject {
         id: _filters
-//        property string filterString: filterText()
+        //        property string filterString: filterText()
         property bool hideCompletedTasks: filterSettings.hideCompletedTasks
         property var filters: projectModel.filter.concat(contextModel.filter)
         onHideCompletedTasksChanged: {
@@ -249,9 +260,9 @@ Item {
         }
 
         function string() {
-//            var pf = tdt.projectModel.filter.toString(), cf = tdt.contextModel.filter.toString();
+            //            var pf = tdt.projectModel.filter.toString(), cf = tdt.contextModel.filter.toString();
 
-//            var txt = pf + (pf === "" || cf === "" ? "" : "," ) + cf;
+            //            var txt = pf + (pf === "" || cf === "" ? "" : "," ) + cf;
             var txt = filters.join(", ");
             if (txt === "" && hideCompletedTasks) return qsTr("All But Completed Tasks");
             return ( txt === "" ? qsTr("All Tasks") : txt );
@@ -262,22 +273,22 @@ Item {
             //TODO
             var pfilter = projectModel.filter //getFilterArray();
             var cfilter = contextModel.filter //getFilterArray();
-//            var pc = _m
+            //            var pc = _m
 
-//            index = index.toString();
+            //            index = index.toString();
             /* filter completed?*/
             var dvis = !(hideCompletedTasks && _m.taskList[index][_m.done] !== undefined);
 
             var cvis = (cfilter.length === 0), pvis = (pfilter.length === 0);
             for (var p in pfilter) {
-//                console.log(index, pfilter[p], pvis,  _m.proConArray ) //, projects[pfilter[p]].indexOf(index));
+                //                console.log(index, pfilter[p], pvis,  _m.proConArray ) //, projects[pfilter[p]].indexOf(index));
                 pvis = pvis || (_m.proConArray[pfilter[p]].indexOf(index) !== -1)
             }
             for (var c in cfilter) {
                 cvis = cvis || (_m.proConArray[cfilter[c]].indexOf(index) !== -1)
             }
 
-//            console.log(index, pvis, cvis, dvis)
+            //            console.log(index, pvis, cvis, dvis)
             return pvis && cvis && dvis;
         }
     }
@@ -292,10 +303,10 @@ Item {
         path: settings.todoTxtLocation
         onContentChanged:{
             var lists = JS.parseTodoTxt(content);
-//            console.log(lists.proConArray)
+            //            console.log(lists.proConArray)
             _m.taskList = lists.taskList;
-//            _m.projects = lists.projects;
-//            _m.contexts = lists.contexts;
+            //            _m.projects = lists.projects;
+            //            _m.contexts = lists.contexts;
             _m.proConArray = lists.proConArray;
         }
 
