@@ -71,10 +71,11 @@ Page {
             Row {
                 id: row
                 height: lbl.height
+                x: Theme.horizontalPageMargin
+                anchors.verticalCenter: parent.verticalCenter
                 Switch {
                     id: doneSw
-                    x: Theme.horizontalPageMargin
-                    anchors.top: lbl.top
+//                    anchors.top: lbl.top
 //                    anchors.topMargin: -height/3.8 //-Theme.paddingLarge
                     height: lbl.height
                     automaticCheck: false
