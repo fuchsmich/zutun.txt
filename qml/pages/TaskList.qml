@@ -57,27 +57,33 @@ Page {
             description: tdt.filters.string()
         }
         //        property var list: tdt.taskList
-        model: tasksDelegateModel //tdt.tasksModel //tdt.count
+        model: ttm //tasksDelegateModel //tdt.tasksModel //tdt.count
 
         DelegateModel {
             id: tasksDelegateModel
+            property var filters: [
+                function (item) { return !item.model.done }
+            ]
+
             property var lessThan: [
-                function(left, right) { return left.fullTxt < right.fullTxt },
+                function(left, right) { return left.fullTxt < right.fullTxt }, //natural
                 function(left, right) { return left.fullTxt > right.fullTxt }
             ]
 
+            property int filterSet: 0
             property int sortOrder: 0
             onSortOrderChanged: {
-                console.log(sortOrder)
+                resorting = true
                 items.setGroups(0, items.count, "unsorted")
+                resorting = false
             }
 
-            function insertPosition(lessThan, item) {
+            function insertPosition(lessThanFunc, item) {
                 var lower = 0
                 var upper = items.count
                 while (lower < upper) {
                     var middle = Math.floor(lower + (upper - lower) / 2)
-                    var result = lessThan(item.model, items.get(middle).model);
+                    var result = lessThanFunc(item.model, items.get(middle).model);
                     if (result) {
                         upper = middle
                     } else {
@@ -87,66 +93,85 @@ Page {
                 return lower
             }
 
-            function sort(lessThan) {
-                while (unsortedItems.count > 0) {
-                    var item = unsortedItems.get(0)
-                    var index = insertPosition(lessThan, item)
+            function sort(lessThanFunc) {
+                while (visibleItems.count > 0) {
+                    var item = visibleItems.get(0)
+//                    if (item.itemVisible) {
+                        var index = insertPosition(lessThanFunc, item)
+                    console.log(visibleItems.count, items.count, index, item.groups);
 
-                    console.log(unsortedItems.count, items.count, index);
-                    item.groups = "items"
-                    items.move(item.itemsIndex, index)
+                        item.groups = "items"
+                        items.move(item.itemsIndex, index)
+//                    }
+//                    else item.groups = "hidden"
+                }
+            }
+
+            function filter(filterFunc) {
+                console.log("filtering")
+                for (var i = 0; i < unsortedItems.count; i++ ) {
+                    console.log("filtering")
+                    var item = unsortedItems.get(i)
+                    if (filterFunc(item)) item.groups = "visible"
                 }
             }
 
             model: tdt.tasksModel
             items.includeByDefault: false
-            groups: DelegateModelGroup {
+            groups:[ DelegateModelGroup {
                 id: unsortedItems
                 name: "unsorted"
 
                 includeByDefault: true
                 onChanged: {
-                    console.log("changed", count)
-                                if (tasksDelegateModel.sortOrder == tasksDelegateModel.lessThan.length)
-                                    setGroups(0, count, "items")
-                                else
-                                    tasksDelegateModel.sort(tasksDelegateModel.lessThan[tasksDelegateModel.sortOrder])
-                            }
-            }
+                    console.log("filtering")
+                    tasksDelegateModel.filter(tasksDelegateModel.filters[tasksDelegateModel.filterSet])
+                }
+                }, DelegateModelGroup {
+                    id: visibleItems
+                    name: "visible"
+                    onChanged: {
+                        console.log("sorting")
+                        if (tasksDelegateModel.sortOrder == tasksDelegateModel.lessThan.length)
+                            setGroups(0, count, "items")
+                        else
+                            tasksDelegateModel.sort(tasksDelegateModel.lessThan[tasksDelegateModel.sortOrder])
+                }
+                } ]
 
             delegate: ListItem {
                 id: listItem
-
-                visible: tdt.filters.itemVisible(index)
-
-                contentHeight: (row.height + lv.spacing)*visible //(Math.max(lbl.height /*,doneSw.height*/ ) + 2*Theme.paddingLarge)*visible
                 width: page.width
-                anchors.rightMargin: Theme.horizontalPageMargin
 
-                ListView.onRemove: animateRemoval(listItem)
+//                visible: tdt.filters.itemVisible(index)
+
+                contentHeight: (row.height + lv.spacing)//*visible //(Math.max(lbl.height /*,doneSw.height*/ ) + 2*Theme.paddingLarge)*visible
+//                anchors.rightMargin: Theme.horizontalPageMargin
+
+//TODO: Animation zum Entfernen kollidiert mit sortieren
+                //                ListView.onRemove: if (!tasksDelegateModel.resorting) animateRemoval(listItem)
+//                ListView.onRemove:
+//                    RemoveAnimation{ target:listItem }
+
                 function remove() {
                     remorseAction("Deleting", function() { tdt.removeItem(index) })
                 }
 
                 Row {
                     id: row
-                    height: lbl.height
                     x: Theme.horizontalPageMargin
                     anchors.verticalCenter: parent.verticalCenter
                     Switch {
                         id: doneSw
-                        //                    anchors.top: lbl.top
-                        //                    anchors.topMargin: -height/3.8 //-Theme.paddingLarge
                         height: lbl.height
                         automaticCheck: false
                         checked: model.done
-                        //                    iconSource: "image://theme/icon-s-task?" + (model.done ? "green" : "red")
-                        onClicked: tdt.setDone(index, !model.done);
+                        onClicked: ttm.model.setDone(index, !model.done);
                     }
 
                     Label {
                         id:lbl
-                        width: page.width - doneSw.width - 2*Theme.horizontalPageMargin
+                        width: listItem.width - doneSw.width - 2*Theme.horizontalPageMargin
                         text: model.displayText
                         wrapMode: Text.Wrap
                         font.strikeout: model.done
@@ -154,6 +179,7 @@ Page {
                     }
                 }
                 menu: ContextMenu {
+                    Label { text: index }
                     MenuItem {
                         visible: !model.done
                         text: "Priority Up"
@@ -181,7 +207,8 @@ Page {
         if (status === PageStatus.Active /*&& pageStack.depth === 1*/) {
             //            console.log("im active")
             //            tdt.initialPage = pageStack.currentPage;
-            tdt.reloadTodoTxt();
+//            tdt.reloadTodoTxt();
+            ttm.reloadTodoTxt();
             pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
         }
     }

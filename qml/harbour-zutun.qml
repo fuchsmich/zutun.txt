@@ -44,6 +44,13 @@ ApplicationWindow
         todoTxtLocation: settings.todoTxtLocation
     }
 
+    TodoTxtModel {
+        id: ttm
+
+    }
+
+
+
     Component.onCompleted: {
 //        console.log("filters: ", filterSettings.projectFilter, filterSettings.contextFilter );
         tdt.contextModel.setFilterArray(filterSettings.contextFilter);

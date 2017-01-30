@@ -295,20 +295,21 @@ Item {
 
 
     function reloadTodoTxt() {
-        todoTxtFile.contentChanged();
+//        todoTxtFile.contentChanged();
     }
 
-    FileIO {
-        id: todoTxtFile
-        path: settings.todoTxtLocation
-        onContentChanged:{
-            var lists = JS.parseTodoTxt(content);
-            //            console.log(lists.proConArray)
-            _m.taskList = lists.taskList;
-            //            _m.projects = lists.projects;
-            //            _m.contexts = lists.contexts;
-            _m.proConArray = lists.proConArray;
-        }
+//    FileIO {
+//        id: todoTxtFile
+//        path: settings.todoTxtLocation
+//        onContentChanged:{
+//            console.log()
+////            var lists = JS.parseTodoTxt(content);
+//            //            console.log(lists.proConArray)
+////            _m.taskList = lists.taskList;
+//            //            _m.projects = lists.projects;
+//            //            _m.contexts = lists.contexts;
+////            _m.proConArray = lists.proConArray;
+//        }
 
-    }
+//    }
 }
