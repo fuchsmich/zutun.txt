@@ -8,6 +8,8 @@ Page {
 
     SilicaListView {
         id: lv
+        property string btnTxt: "Clear Project Filter"
+
         anchors.fill: parent
         VerticalScrollDecorator {}
         PullDownMenu {
@@ -36,11 +38,11 @@ Page {
         header: PageHeader {
             id: ph
             title: lv.title
-            description: tdt.filters.string()
+            //            description: ttm1.filters.string()
         }
 
         //        property var list: tdt.projects
-        model: tdt.projectModel
+        //        model: ttm1.projectModel
 
         delegate: projectDelegate
 
@@ -48,25 +50,25 @@ Page {
             id: projectDelegate
             Column {
                 width: page.width
-                //                height: Math.max(btn.height, lbl.height) + Theme.paddingLarge
                 Button {
                     id: btn
-                    visible: index === 0
+                    visible: model.index === 0
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Clear Project Filter"
+                    text: lv.btnTxt
                     onClicked: {
-                        if (index === 0) tdt.projectModel.resetFilter();
-                        pageStack.navigateBack();
+                        ttm1.filters.clearFilter(page.state);
+//                        pageStack.navigateBack();
                     }
                 }
                 ListItem {
-                    //                    visible: model.filterAvailable
-                    highlighted: model.filterActive
-                    onClicked: tdt.projectModel.setSingleFilter(index, !model.filterActive);
+                    enabled: model.visibleItemCount > 0
+                    highlighted: model.active
+                    onClicked: ttm1.filters.setByName(model.name, !model.active);
                     Label {
                         id: lbl
+                        anchors.verticalCenter: parent.verticalCenter
                         x: Theme.horizontalPageMargin
-                        text: model.name + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
+                        text: model.name + " (" + model.visibleItemCount + "/" + model.itemCount + ")"
                     }
                 }
             }
@@ -114,19 +116,21 @@ Page {
             name: "projects"
             PropertyChanges {
                 target: lv;
-                delegate: projectDelegate
+//                delegate: projectDelegate
                 title: "Filter Projects"
-                model: tdt.projectModel
+                model: ttm1.filters.projectsModel
+                btnTxt: "Clear Project Filters"
             }
         }
         , State {
             name: "contexts"
             PropertyChanges {
                 target: lv;
-                delegate: contextDelegate
+//                delegate: contextDelegate
                 //                list: ["All"].concat(tdt.getContextList());
                 title: "Filter Contexts"
-                model: tdt.contextModel
+                model: ttm1.filters.contextsModel
+                btnTxt: "Clear Context Filters"
             }
         }
 

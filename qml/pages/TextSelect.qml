@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+
 import "../tdt/todotxt.js" as JS
 
 
@@ -17,7 +18,7 @@ Page {
         }
 
         //        property var arrayModel: prioritiesModel()
-        model: prioritiesModel
+//        model: prioritiesModel
 
         delegate: ListItem {
             Label {
@@ -29,14 +30,14 @@ Page {
         }
     }
 
-    function prioritiesModel() {
-        var l = [];
-        for (var a = "A"; a <= "Z";
-             a = String.fromCharCode(a.charCodeAt(0) + 1)) {
-            l.push("(" + a + ") ");
-        }
-        return l;
-    }
+//    function prioritiesModel() {
+//        var l = [];
+//        for (var a = "A"; a <= "Z";
+//             a = String.fromCharCode(a.charCodeAt(0) + 1)) {
+//            l.push("(" + a + ") ");
+//        }
+//        return l;
+//    }
 
     ListModel {
         id: prioritiesModel
@@ -48,9 +49,11 @@ Page {
     }
 
     function setString(txt) {
-        if (state === "priorities") pageStack.previousPage().selectedPriority = txt;
-        if (state === "projects") pageStack.previousPage().appendText = txt;
-        if (state === "contexts") pageStack.previousPage().appendText = txt;
+        switch (state) {
+        case "priorities": pageStack.previousPage().selectedPriority = txt.charAt(1); break
+        case "projects": pageStack.previousPage().appendText = txt; break
+        case "contexts": pageStack.previousPage().appendText = txt; break
+        }
         pageStack.pop();
     }
 
@@ -66,14 +69,14 @@ Page {
             name: "projects"
             PropertyChanges {
                 target: lv;
-                model: tdt.projectModel;
+                model: ttm1.filters.projectsModel
             }
         },
         State {
             name: "contexts"
             PropertyChanges {
                 target: lv;
-                model: tdt.contextModel;
+                model: ttm1.filters.contextsModel
             }
         }
     ]

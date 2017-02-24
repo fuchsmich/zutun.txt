@@ -26,26 +26,28 @@ ApplicationWindow
         property string doneTxtLocation: StandardPaths.documents + '/done.txt'
         property bool autoSave: true
         property int fontSizeTaskList: Theme.fontSizeMedium
-        //        Component.onCompleted: {
-        //            console.log("settings", path, todoTxtLocation, doneTxtLocation, autoSave)
-        //        }
         ConfigurationGroup {
             id: filterSettings
             path: "filters"
-            property bool hideCompletedTasks: false
-            property var projectFilter: []
-            property var contextFilter: []
+            property bool hideDone: true
+            property var projects: []
+            property var contexts: []
         }
     }
 
 
-    TodoTxt {
-        id: tdt
-        todoTxtLocation: settings.todoTxtLocation
-    }
+//    TodoTxt {
+//        id: tdt
+//        todoTxtLocation: settings.todoTxtLocation
+//    }
 
-    TodoTxtModel {
-        id: ttm
+//    TodoTxtModel {
+//        id: ttm
+
+//    }
+
+    TodoTxtModel1 {
+        id: ttm1
 
     }
 
@@ -53,16 +55,16 @@ ApplicationWindow
 
     Component.onCompleted: {
 //        console.log("filters: ", filterSettings.projectFilter, filterSettings.contextFilter );
-        tdt.contextModel.setFilterArray(filterSettings.contextFilter);
-        tdt.projectModel.setFilterArray(filterSettings.projectFilter);
+//        tdt.contextModel.setFilterArray(filterSettings.contextFilter);
+//        tdt.projectModel.setFilterArray(filterSettings.projectFilter);
     }
 
 
     Component.onDestruction: {
         //save filters in settings
-        filterSettings.hideCompletedTasks = tdt.filters.hideCompletedTasks
-        filterSettings.projectFilter = tdt.filters.projectModel.filter
-        filterSettings.contextFilter = tdt.filters.contextModel.filter
+//        filterSettings.hideCompletedTasks = tdt.filters.hideCompletedTasks
+//        filterSettings.projectFilter = tdt.filters.projectModel.filter
+//        filterSettings.contextFilter = tdt.filters.contextModel.filter
     }
 
 }

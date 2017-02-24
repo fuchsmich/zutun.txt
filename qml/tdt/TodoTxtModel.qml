@@ -5,18 +5,20 @@ import QtQml.Models 2.1
 import FileIO 1.0
 import "todotxt.js" as JS
 
+//TODO alles (done, date, etc. ausm fulltext lesen)??
+
 DelegateModel {
     id: dm
     property FileIO file: FileIO {
-//        id: file
+        //        id: file
         path: settings.todoTxtLocation
         onContentChanged:{
             var lists = JS.parseTodoTxt(content);
             taskModel.taskList = lists.taskList;
-//            console.log(taskModel.taskList)
+            //            console.log(taskModel.taskList)
             //            projects = lists.projects;
             //            contexts = lists.contexts;
-//            proConArray = lists.proConArray;
+            //            proConArray = lists.proConArray;
         }
     }
 
@@ -25,7 +27,7 @@ DelegateModel {
     model: ListModel {
         id: taskModel
         property var taskList: []
-//        aus ColorPicker.qml:
+        //        aus ColorPicker.qml:
         property var colors: ["#e60003", "#e6007c", "#e700cc", "#9d00e7",
             "#7b00e6", "#5d00e5", "#0077e7", "#01a9e7",
             "#00cce7", "#00e696", "#00e600", "#99e600",
@@ -46,7 +48,7 @@ DelegateModel {
         function populate(array) {
             for (var a = 0; a < array.length; a++) {
                 var displayText = (array[a][task.priority] !== undefined ? '<font color="' + prioColor(array[a][task.priority]) + '">'
-                        + array[a][task.priority]+ '</font>' : "")
+                                                                           + array[a][task.priority]+ '</font>' : "")
                         + array[a][task.subject]
                 console.log(array[a][task.priority], displayText)
 
@@ -63,6 +65,18 @@ DelegateModel {
             if (a < count) remove(a, (count - a) )
 
         }
+
+        function getAttribute(index, attribute) {
+            var txt = get(index).fullTxt;
+            var patterns = [
+//                        var matches = txt.match(/^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/);
+
+                        { attribute: 'done', pattern: /^(x\s).*/},
+                        { attribute: 'doneDate', pattern: /^(x\s).*/}
+                    ];
+        }
+
+
 
         /* get done state */
         function getDone(index) {
@@ -110,10 +124,6 @@ DelegateModel {
     }
 
 
-    property var filters: [
-        function (item) { return !item.model.done }
-    ]
-
     property var lessThan: [
         function(left, right) {  //like in textfile
             if (asc) return left.fullTxt < right.fullTxt
@@ -121,13 +131,13 @@ DelegateModel {
         function(left, right) { return left.fullTxt > right.fullTxt }
     ]
 
-    property int filterSet: 1
     property int sortOrder: 0
     property bool asc: true
     onSortOrderChanged: {
-        resorting = true
+        //        resorting = true
         items.setGroups(0, items.count, "unsorted")
-        resorting = false
+        invisible.setGroups(0, invisible.count, "unsorted")
+        //        resorting = false
     }
 
     function insertPosition(lessThanFunc, item) {
@@ -146,42 +156,71 @@ DelegateModel {
     }
 
     function sort(lessThanFunc) {
-        while (visibleItems.count > 0) {
-            var item = visibleItems.get(0)
-//                    if (item.itemVisible) {
-                var index = insertPosition(lessThanFunc, item)
-            console.log(visibleItems.count, items.count, index, item.groups);
+        while (visible.count > 0) {
+            var item = visible.get(0)
+            //                    if (item.itemVisible) {
+            var index = insertPosition(lessThanFunc, item)
+            console.log(visible.count, items.count, index, item.groups);
 
-                item.groups = "items"
-                items.move(item.itemsIndex, index)
-//                    }
-//                    else item.groups = "hidden"
+            item.groups = "items"
+            items.move(item.itemsIndex, index)
+            //                    }
+            //                    else item.groups = "hidden"
         }
+    }
+
+
+    /***** Filter Stuff ***/
+
+    property var filters: [
+        function (item) { return !item.model.done }
+    ]
+
+    property int filterSet: (filterSettings.hideCompletedTasks ? 0 : 1)
+    onFilterSetChanged:  {
+        items.setGroups(0, items.count, "unsorted")
+        invisible.setGroups(0, invisible.count, "unsorted")
+    }
+
+    //    property bool hideCompleted: filterSettings.hideCompletedTasks
+    //    onHideCompletedChanged:
+
+    Connections {
+        target: filterSettings
+        onHideCompletedChanged: items.setGroups(0, items.count, "unsorted")
     }
 
     function filter(filterFunc) {
-        console.log("filtering")
-        for (var i = 0; i < unsortedItems.count; i++ ) {
-            console.log("filtering")
-            var item = unsortedItems.get(i)
+        console.log("filtering", unsorted.count)
+        while (unsorted.count >0 ) {
+            console.log(unsorted.count)//, item.model.done)
+            var item = unsorted.get(0)
             if (filterFunc(item)) item.groups = "visible"
+            else item.groups = "invisible"
         }
     }
-
+    /**** End Filters ***/
 
     items.includeByDefault: false
     groups:[ DelegateModelGroup {
-        id: unsortedItems
-        name: "unsorted"
+            id: unsorted
+            name: "unsorted"
 
-        includeByDefault: true
-        onChanged: {
-            console.log("filtering")
-            if (filterSet < filters.length) dm.filter(dm.filters[dm.filterSet])
-            else setGroups(0, count, "visible")
+            includeByDefault: true
+            onChanged: {
+                console.log("filtering")
+                if (filterSet < filters.length) dm.filter(dm.filters[dm.filterSet])
+                else setGroups(0, count, "visible")
+            }
         }
-        }, DelegateModelGroup {
-            id: visibleItems
+        ,
+        DelegateModelGroup {
+            id: invisible
+            name: "invisible"
+        }
+        ,
+        DelegateModelGroup {
+            id: visible
             name: "visible"
             onChanged: {
                 console.log("sorting")
@@ -189,7 +228,7 @@ DelegateModel {
                     setGroups(0, count, "items")
                 else
                     dm.sort(dm.lessThan[dm.sortOrder])
-        }
+            }
         } ]
 
     delegate: ListItem {
@@ -200,7 +239,7 @@ DelegateModel {
 
         Row {
             id: row
-//            x: Theme.horizontalPageMargin
+            //            x: Theme.horizontalPageMargin
             anchors.verticalCenter: parent.verticalCenter
             Switch {
                 id: doneSw

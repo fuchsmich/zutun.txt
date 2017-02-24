@@ -1,6 +1,86 @@
 .pragma library
 
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+// fullTxt, done, doneDate, priority, creationDate, subject
+var baseFeatures = {
+    pattern: /^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/ ,
+    fullTxt: 0,
+    done: 1,
+    doneDate: 2,
+    priority: 3,
+    creationDate: 4,
+    subject: 5,
+
+    parseLine: function(line) {
+        var matches = line.match(baseFeatures.pattern)
+        return {
+            fullTxt: matches[baseFeatures.fullTxt],
+            done: matches[baseFeatures.done] !== undefined,
+            doneDate: (matches[baseFeatures.doneDate] !== undefined ?
+                           matches[2] : ""),
+            priority: (matches[baseFeatures.priority] !== undefined ?
+                           matches[baseFeatures.priority].charAt(1) : ""),
+            creationDate: (matches[baseFeatures.creationDate] !== undefined ?
+                               matches[baseFeatures.creationDate] : ""),
+            subject: matches[baseFeatures.subject]
+        }
+    },
+
+    modifyLine: function(line, feature, value) {
+        //TODO validierung von value???
+        var properties = line.match(baseFeatures.pattern)
+        switch (feature) {
+        case baseFeatures.done :
+            if (value) {
+                properties[baseFeatures.done] = "x "
+                properties[baseFeatures.doneDate] = today() + " "
+            } else {
+                properties[baseFeatures.done] = undefined
+                properties[baseFeatures.doneDate] = undefined
+            }
+            break
+        case baseFeatures.priority :
+            if (!value) properties[baseFeatures.priority] = undefined
+            else properties[baseFeatures.priority] = "(" + value + ") "
+            break
+        }
+        properties[baseFeatures.fullTxt] = undefined
+        return properties.join("")
+    }
+}
+
+var projects = {
+    pattern: /\s\+\S+/g ,
+    list: function(tasks) {
+        return getProCon(tasks, projects.pattern)
+    }
+}
+
+var contexts = {
+    pattern: /\s\@\S+/g ,
+    list: function(tasks) {
+        return getProCon(tasks, contexts.pattern)
+    }
+}
+
+function getProCon(tasks, pattern) {
+    var task = ""
+    var list = []
+
+    for (var t = 0; t < tasks.length; t++) {
+        task = tasks[t];
+
+        var matches = task.match(pattern);
+
+        var match = "";
+        for (var i in matches) {
+            match = matches[i].trim();
+                if (typeof list[match] === 'undefined') list[match] = [];
+                if (list[match].indexOf(t) === -1) list[match].push(t);
+        }
+    }
+    return list
+}
 
 /* parse plain Text*/
 function parseTodoTxt(todoTxt) {
@@ -62,7 +142,12 @@ function parseTodoTxt(todoTxt) {
         projects: plist,
         contexts: clist,
         taskList: tlist,
+        tasks: tasks,
         proConArray: proConArray
     }
+}
+
+function today() {
+    return Qt.formatDate(new Date(),"yyyy-MM-dd");
 }
 

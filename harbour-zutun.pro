@@ -49,7 +49,8 @@ DISTFILES += \
     qml/tdt/PCListModel.qml \
     qml/tdt/todotxt.js \
     rpm/harbour-zutun.changes \
-    qml/tdt/TodoTxtModel.qml
+    qml/tdt/TodoTxtModel.qml \
+    qml/tdt/TodoTxtModel1.qml
 
 HEADERS += \
     src/fileio.hpp

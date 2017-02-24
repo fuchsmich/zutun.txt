@@ -15,12 +15,12 @@ CoverBackground {
         anchors.fill: parent
         anchors.margins: Theme.paddingMedium
         Repeater {
-            model: tdt.tasksModel
+            model: ttm1.tasks
             Label {
                 text: model.displayText
-                width: parent.width
+//                width: parent.width
                 truncationMode: TruncationMode.Elide
-                visible: !(model.done || !tdt.filters.itemVisible(index))
+//                visible: model.done
             }
         }
     }
@@ -39,7 +39,7 @@ CoverBackground {
 
     onStatusChanged: {
         if (status === Cover.Active ) {
-            tdt.reloadTodoTxt();
+//            tdt.reloadTodoTxt();
         }
     }
 }

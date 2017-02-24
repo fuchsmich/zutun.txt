@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../tdt/todotxt.js" as JS
+
 
 
 Dialog {
@@ -11,18 +13,8 @@ Dialog {
     property int itemIndex: -1
     property string text
     property string selectedPriority
-    onSelectedPriorityChanged: {
-        var matches = ta.text.match(/^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/);
-        var newstring = "";
-        for (var m in matches) {
-            if ( m == 3) newstring += selectedPriority;
-            else if ( m > 0 && matches[m] !== undefined ) {
-                newstring += matches[m];
-            }
-            //            console.log(m, newstring, selectedPriority)
-        }
-        ta.text = newstring;
-    }
+    onSelectedPriorityChanged:
+        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority)
 
     property string appendText
     onAppendTextChanged: {
@@ -58,6 +50,16 @@ Dialog {
                     text: "(A)"
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("TextSelect.qml"), {state: "priorities"})
+                    }
+                }
+                Button {
+                    height: parent.height
+                    width: height
+                    onClicked: ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, false)
+                    Label {
+                        anchors.centerIn: parent
+                        text: "(A)"
+                        font.strikeout: true
                     }
                 }
                 IconButton {
@@ -109,7 +111,7 @@ Dialog {
 
     onAccepted: {
         ta.focus = false; //damit das Keyboard einklappt
-        tdt.setFullText(itemIndex, ta.text);
+        ttm1.tasks.setFullTxt(itemIndex, ta.text);
         pageStack.navigateBack();
     }
     onCanceled: {
