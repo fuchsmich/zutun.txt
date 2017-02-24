@@ -45,20 +45,14 @@ Page {
             MenuItem {
                 text: (filterSettings.hideDone ? "Show" : "Hide") + " Completed Tasks"
                 onClicked: filterSettings.hideDone = !filterSettings.hideDone
-                //tdt.filters.hideCompletedTasks = !tdt.filters.hideCompletedTasks
             }
-            //            MenuItem {
-            //                text: qsTr("Archive Completed Tasks")
-            ////                onClicked: pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"))
-            //            }
         }
 
         header: PageHeader {
             title: qsTr("Tasklist")
             description: ttm1.filters.text
         }
-        //        property var list: tdt.taskList
-        model: ttm1.tasks  //ttm //tasksDelegateModel //tdt.tasksModel //tdt.count
+        model: ttm1.tasks
 
         delegate: ListItem {
                 id: listItem
@@ -111,8 +105,6 @@ Page {
     }
     onStatusChanged: {
         if (status === PageStatus.Active /*&& pageStack.depth === 1*/) {
-            //            console.log("im active")
-            //            tdt.initialPage = pageStack.currentPage;
 //            tdt.reloadTodoTxt();
 //            ttm.reloadTodoTxt();
 

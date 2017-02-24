@@ -45,12 +45,9 @@ DISTFILES += \
     qml/pages/OtherFilters.qml \
     qml/pages/FiltersPage.qml \
     qml/cover/zutun.png \
-    qml/tdt/TodoTxt.qml \
-    qml/tdt/PCListModel.qml \
     qml/tdt/todotxt.js \
     rpm/harbour-zutun.changes \
-    qml/tdt/TodoTxtModel.qml \
-    qml/tdt/TodoTxtModel1.qml
+    qml/tdt/TodoTxt.qml
 
 HEADERS += \
     src/fileio.hpp

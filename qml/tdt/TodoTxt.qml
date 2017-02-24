@@ -1,315 +1,213 @@
 import QtQuick 2.0
-import Sailfish.Silica 1.0
-import QtQml.Models 2.1
 
 import FileIO 1.0
 import "todotxt.js" as JS
 
-Item {
-    id: tdt
+//TODO sortieren
+//TODO due:
 
-
-    readonly property string alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-    property string todoTxtLocation
-
-    property ListModel tasksModel: _tasksModel
-//    property DelegateModel tasksDelegateModel: _tasksDelegateModel
-    property alias projectModel: _filters.projectModel
-    property alias contextModel: _filters.contextModel
-    property QtObject filters: _filters
-
-
-
-    QtObject {
-        id: _m
-        readonly property int fullTxt: 0
-        readonly property int done: 1
-        readonly property int doneDate: 2
-        readonly property int priority: 3
-        readonly property int creationDate: 4
-        readonly property int subject: 5
-
-        property var taskList: [] // 2d array with fullTxt, done, doneDate, priority, creationDate, subject
-        property var proConArray: [] //contains relations of task, projects and contexts
-    }
-
-//    DelegateModel {
-//        id: _tasksDelegateModel
-//        model: _tasksModel
-//        delegate:
-//            Label { text: displayText}
-//        }
-//    }
-
-
-
-    ListModel {
-        id: _tasksModel
-
-        property var assArray: _m.taskList
-        onAssArrayChanged: populate(assArray);
-
-        function populate(array) {
-            for (var a = 0; a < array.length; a++) {
-                //bestehende ersetzen
-                if (a < count) set(a, { "id": a, "fullTxt": array[a][_m.fullTxt], "done": tdt.getDone(a),
-                                       "displayText": '<font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font>'
-                                                      + _m.taskList[a][_m.subject]
-                                   });
-                //restliche anhängen
-                else append( { "id": a, "fullTxt": array[a][_m.fullTxt], "done": tdt.getDone(a),
-                                "displayText": '<b><font color="' + tdt.getColor(a) + '">' + tdt.getPriority(a)+ '</font></b>'
-                                               + _m.taskList[a][_m.subject]
-                            });
-            }
-
-            //Überzählige löschen
-            if (a < count) remove(a, (count - a) )
+QtObject {
+    property FileIO file: FileIO {
+        //        id: file
+        path: settings.todoTxtLocation
+        onContentChanged:{
+            var lists = JS.parseTodoTxt(content);
+            tasksArray = lists.tasks;
 
         }
     }
 
-
-    /* get done state */
-    function getDone(index) {
-        if (index >= 0 && index < _m.taskList.length) {
-            return (typeof _m.taskList[index][_m.done] !== 'undefined' ? (_m.taskList[index][_m.done][0] === 'x') : false);
-        } else throw "done: Index out of bounds."
+    property var tasksArray: []
+    onTasksArrayChanged: {
+        readArray()
     }
 
-    function today() {
-        return Qt.formatDate(new Date(),"yyyy-MM-dd");
-    }
-
-
-
-    /* set done state and done date */
-    function setDone(index, value) {
-        if (index >= 0 && index < _m.taskList.length) {
-            if (value && !getDone(index))
-                _m.taskList[index][_m.fullTxt] =
-                        "x " + today() + " " + _m.taskList[index][_m.fullTxt];
-            if (!value && getDone(index))
-                _m.taskList[index][_m.fullTxt] =
-                        _m.taskList[index][_m.fullTxt].match(/(x\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/)[3]; //Datum muss auch weg!!
-            listToFile();
-        } else throw "done: Index out of bounds."
-    }
-
-    /* delete todo item */
-    function removeItem(index) {
-        if (index >= 0 && index < _m.taskList.length) {
-            var l = [];
-            for (var t in _m.taskList) {
-                if (t != index) {
-                    l.push(_m.taskList[t]);
-                }
-
-            }
-            _m.taskList = l;
-            listToFile();
-        } else throw "done: Index out of bounds."
-    }
-
-    /* get Priority */
-    function getPriority(index) {
-        if (index >= 0 && index < _m.taskList.length) {
-            return (typeof _m.taskList[index][_m.priority] !== 'undefined' ? _m.taskList[index][_m.priority] : "");
-        } else throw "done: Index out of bounds."
-    }
-
-    /* find lowest prio*/
-    function lowestPrio() {
-        var lp = "(A) ";
-        for (var t in _m.taskList) {
-            lp = (_m.taskList[t][_m.priority] > lp ? _m.taskList[t][_m.priority] : lp);
-        }
-        return lp;
-    }
-
-    /* return increased/decreased Priority-string */
-    function incPrioString(p) {
-        if (p[1] === JS.alphabet[0]) return p;
-        else return "(" + String.fromCharCode(p.charCodeAt(1) - 1) + ") ";
-    }
-
-    function decPrioString(p) {
-        if (p[1] === JS.alphabet[JS.alphabet.length-1]) return p;
-        else return "(" + String.fromCharCode(p.charCodeAt(1) + 1) + ") ";
-    }
-
-    function raisePriority(index) {
-        if (_m.taskList[index][_m.priority] === undefined)
-            _m.taskList[index][_m.fullTxt] = (decPrioString(lowestPrio()) + _m.taskList[index][_m.fullTxt]).trim();
-
-        else if (_m.taskList[index][_m.priority][1] > JS.alphabet[0])
-            _m.taskList[index][_m.fullTxt] = incPrioString(_m.taskList[index][_m.priority])
-                    + _m.taskList[index][_m.fullTxt].substr(4);
-
-        else return;
-
-        listToFile();
-    }
-
-    function lowerPriority(index) {
-
-        if (_m.taskList[index][_m.priority] !== undefined) {
-            if (_m.taskList[index][_m.priority][1] < JS.alphabet[JS.alphabet.length-1])
-                _m.taskList[index][_m.fullTxt] = decPrioString(_m.taskList[index][_m.priority])
-                        + _m.taskList[index][_m.fullTxt].substr(4);
-
-            else if (_m.taskList[index][_m.priority][1] === JS.alphabet[JS.alphabet.length-1])
-                _m.taskList[index][_m.fullTxt] = _m.taskList[index][_m.fullTxt].substr(4).trim();
-        }
-
-        else return;
-
-        listToFile();
-    }
-
-    function setPriority(index, prio) {
-
+    signal readArray()
+    onReadArray: {
+        tasks.populate(tasksArray);
+        filters.fetchModels();
     }
 
 
-    ColorPicker {
-        id: cp
-    }
-
-    /* get color due to Priority*/
-    function getColor(index) {
-        //            console.log(index, getPriority(index));
-        if (index >= 0 && index < _m.taskList.length) {
-            //                console.log(index, getPriority(index), cIndex);
-            if (getPriority(index) === "") {
-                if (getDone(index)) return Theme.secondaryColor;
-                else return Theme.primaryColor;
-            }
-            //                var cIndex = JS.alphabet.search(getPriority(index)[1]);
-            //                var cp = new ColorPicker();
-            return cp.colors[JS.alphabet.search(getPriority(index)[1]) % 15];
-        } else throw "done: Index out of bounds."
-    }
-
-
-    /* set fulltext; index = -1 add Item */
-    function setFullText(index, txt) {
-        /*replace CR and LF; tasks always comprise a single line*/
-        txt.replace(/\r/g," ");
-        txt.replace(/\n/g," ");
-
-        txt = txt.trim();
-
-        if (txt !== "") {
-            if (index === -1) _m.taskList.push([txt]);
-            else _m.taskList[index][_m.fullTxt] = txt;
-            listToFile();
-        }
-    }
-
-
-    /* sort list and write it to the txtFile*/
-    function listToFile() {
-        _m.taskList.sort();
+    signal listToFile(var newArray)
+    onListToFile: {
+        newArray.sort();
         var txt = "";
-        for (var t in _m.taskList) {
-            txt += _m.taskList[t][_m.fullTxt] + "\n";
+        for (var t in newArray) {
+            txt += newArray[t] + "\n";
         }
         //this writes to the file:
-        todoTxtFile.content = txt;
+        file.content = txt;
     }
 
+    property QtObject filters: QtObject {
+        property bool hideDone: filterSettings.hideDone
+        property var projects: filterSettings.projects
+        property var contexts: filterSettings.contexts
+        property string text: (hideDone? "Hide Done, ": "") + projects.concat(contexts).join(", ")
 
-    /******************************/
-    /* Filter Object */
-    QtObject {
-        id: _filters
-        //        property string filterString: filterText()
-        property bool hideCompletedTasks: filterSettings.hideCompletedTasks
-        property var filters: projectModel.filter.concat(contextModel.filter)
-        onHideCompletedTasksChanged: {
-            contextModel.recalcNoOfTasks()
-            projectModel.recalcNoOfTasks()
+        onProjectsChanged: readArray()
+        onContextsChanged: readArray()
+        onHideDoneChanged: readArray()
+
+        signal fetchModels()
+        onFetchModels: {
+            populate(projectsModel, JS.projects.list(tasksArray))
+            populate(contextsModel, JS.contexts.list(tasksArray))
         }
 
-        property ListModel projectModel:  PCListModel {
-            proConArray: _m.proConArray
-            firstChar: "+"
-            onFilterModelChanged: contextModel.recalcNoOfTasks()
+        function clearFilter(filterName) {
+            switch(filterName) {
+            case "projects": filterSettings.projects = []; break
+            case "contexts": filterSettings.contexts = []; break
+            }
         }
 
-        property ListModel contextModel:         PCListModel {
-            proConArray: _m.proConArray
-            firstChar: "@"
-            onFilterModelChanged: projectModel.recalcNoOfTasks()
+        function visibleItem(item) {
+//            console.log(item.subject, projects, contexts)
+            if ((hideDone && item.done)) return false
+
+            for (var p in projects) {
+//                console.log(item.subject,projects[p],item.subject.indexOf(projects[p]))
+                if (item.subject.indexOf(projects[p]) === -1) return false
+            }
+
+            for (var c in contexts) {
+                if (!item.subject.indexOf(contexts[c]) === -1) return false
+            }
+
+            return true
+        }
+
+        function setByName(name, active) {
+            var list = []
+            switch (name.charAt(0)) {
+            case "+": list = projects; break
+            case "@": list = contexts; break
+            default: return
+            }
+            if (active) list.push(name)
+            else list.splice(list.indexOf(name), 1)
+            list.sort()
+            switch (name.charAt(0)) {
+            case "+": filterSettings.projects = list; break
+            case "@": filterSettings.contexts = list; break
+            default: return
+            }
+        }
+
+        function populate(model, array) {
+            model.clear()
+            var sortedArray, tmpArray = []
+            var itemCount, active, name, visibleItemCount
+            for ( var a in array) {
+                tmpArray.push(a)
+            }
+            sortedArray = tmpArray.sort()
+            for (var i in sortedArray) {
+                name = sortedArray[i]
+                itemCount = array[name].length
+                visibleItemCount = 0
+                for (var j =0;  j < array[name].length; j++){
+                    var taskItem = JS.baseFeatures.parseLine(tasksArray[array[name][j]])
+                    if (visibleItem(taskItem)) visibleItemCount++
+                }
+                active = ((filters.projects !== undefined && filters.projects.indexOf(name) !== -1) ||
+                              (filters.contexts !== undefined && filters.contexts.indexOf(name) !== -1))
+                model.append( {"name": name, "active": active, "itemCount": itemCount, "visibleItemCount": visibleItemCount});
+            }
+        }
+
+        property ListModel projectsModel: ListModel {}
+
+
+        property ListModel contextsModel: ListModel {}
+    }
+
+    property ListModel tasks: ListModel {
+
+        //alles auf einmal 0:fullTxt, 1:done, 2:doneDate, 3:priority, 4:creationDate, 5:subject
+        property var basicPattern: JS.baseFeatures.pattern
+        property string lowestPrio: "A"
+
+        /* überschreiben der Funktion setProperty: */
+        function setProperty(index, prop, value) {
+            var newArr = tasksArray
+            var lineNum = get(index).lineNum
+
+            var feature = -1;
+            switch (prop) {
+            case "done" : feature = JS.baseFeatures.done; break
+            case "priority" : feature = JS.baseFeatures.priority; break
+            default: break
+            }
+
+            newArr[lineNum] = JS.baseFeatures.modifyLine(tasksArray[lineNum], feature, value)
+            listToFile(newArr)
+        }
+
+        function setFullTxt(index, fullTxt) {
+            var newArr = tasksArray
+
+
+            if (index === -1) newArr.push(fullTxt)
+            else  newArr[get(index).lineNum] = fullTxt
+
+            listToFile(newArr)
         }
 
 
-        function loadFilters(p, c) {
-            for (var f = 0; f < p.length; f++) {
-                for (var i =0; i < projectModel.count; i++ ){
-                    if (projectModel.get(i).name === filterArray[f]) projectModel.setProperty(i, "filterActive", true);
+        /*raise/lower priority*/
+        function alterPriority(index, raise) {
+            var newPrio = get(index).priority
+            console.log(newPrio, raise)
+            if (raise) {
+                if (newPrio === "") newPrio = String.fromCharCode(lowestPrio.charCodeAt(0) + 1)
+                else if (newPrio > "A") newPrio = String.fromCharCode(newPrio.charCodeAt(0) - 1)
+            } else  {
+                if (newPrio !== "") {
+                    if (newPrio < "Z") newPrio = String.fromCharCode(newPrio.charCodeAt(0) + 1)
+                    else newPrio = ""
                 }
             }
-            for (var f = 0; f < c.length; f++) {
-                for (var i =0; i < contextModel.count; i++ ){
-                    if (contextModel.get(i).name === filterArray[f]) contextModel.setProperty(i, "filterActive", true);
+//            console.log(newPrio)
+            setProperty(index, "priority", newPrio)
+        }
+
+        function removeItem(index) {
+            var newArr = tasksArray
+            newArr.splice(get(index).lineNum, 1)
+            listToFile(newArr);
+        }
+
+        function prioColor(prio) {
+            //        aus ColorPicker.qml:
+            var colors = ["#e60003", "#e6007c", "#e700cc", "#9d00e7",
+                          "#7b00e6", "#5d00e5", "#0077e7", "#01a9e7",
+                          "#00cce7", "#00e696", "#00e600", "#99e600",
+                          "#e3e601", "#e5bc00", "#e78601"]
+
+            return colors[JS.alphabet.search(prio) % colors.length];
+        }
+
+        function populate(array) {
+            clear();
+            for (var a = 0; a < array.length; a++) {
+                var item = JS.baseFeatures.parseLine(array[a])
+
+                lowestPrio = (!item.done && item.priority !== "" && item.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
+                              ? item.priority : lowestPrio)
+
+                if (filters.visibleItem(item)) {
+                    var displayText = (item.priority !== "" ?
+                                           '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
+                            + item.subject
+
+                    var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done, "priority": item.priority,"displayText": displayText}
+                    append(json)
                 }
             }
         }
 
-        function string() {
-            //            var pf = tdt.projectModel.filter.toString(), cf = tdt.contextModel.filter.toString();
-
-            //            var txt = pf + (pf === "" || cf === "" ? "" : "," ) + cf;
-            var txt = filters.join(", ");
-            if (txt === "" && hideCompletedTasks) return qsTr("All But Completed Tasks");
-            return ( txt === "" ? qsTr("All Tasks") : txt );
-        }
-
-        /* returns the visibility in tasklist due to filters */
-        function itemVisible(index) {
-            //TODO
-            var pfilter = projectModel.filter //getFilterArray();
-            var cfilter = contextModel.filter //getFilterArray();
-            //            var pc = _m
-
-            //            index = index.toString();
-            /* filter completed?*/
-            var dvis = !(hideCompletedTasks && _m.taskList[index][_m.done] !== undefined);
-
-            var cvis = (cfilter.length === 0), pvis = (pfilter.length === 0);
-            for (var p in pfilter) {
-                //                console.log(index, pfilter[p], pvis,  _m.proConArray ) //, projects[pfilter[p]].indexOf(index));
-                pvis = pvis || (_m.proConArray[pfilter[p]].indexOf(index) !== -1)
-            }
-            for (var c in cfilter) {
-                cvis = cvis || (_m.proConArray[cfilter[c]].indexOf(index) !== -1)
-            }
-
-            //            console.log(index, pvis, cvis, dvis)
-            return pvis && cvis && dvis;
-        }
     }
-
-
-    function reloadTodoTxt() {
-//        todoTxtFile.contentChanged();
-    }
-
-//    FileIO {
-//        id: todoTxtFile
-//        path: settings.todoTxtLocation
-//        onContentChanged:{
-//            console.log()
-////            var lists = JS.parseTodoTxt(content);
-//            //            console.log(lists.proConArray)
-////            _m.taskList = lists.taskList;
-//            //            _m.projects = lists.projects;
-//            //            _m.contexts = lists.contexts;
-////            _m.proConArray = lists.proConArray;
-//        }
-
-//    }
 }

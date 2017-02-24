@@ -31,17 +31,21 @@ var baseFeatures = {
         var properties = line.match(baseFeatures.pattern)
         switch (feature) {
         case baseFeatures.done :
-            if (value) {
-                properties[baseFeatures.done] = "x "
-                properties[baseFeatures.doneDate] = today() + " "
-            } else {
-                properties[baseFeatures.done] = undefined
+            if (value === false) {
+                properties[feature] = undefined
                 properties[baseFeatures.doneDate] = undefined
+            } else {
+                properties[feature] = "x "
+                properties[baseFeatures.doneDate] = today() + " "
             }
             break
         case baseFeatures.priority :
-            if (!value) properties[baseFeatures.priority] = undefined
-            else properties[baseFeatures.priority] = "(" + value + ") "
+            if (value === false) properties[feature] = undefined
+            else properties[feature] = "(" + value + ") "
+            break
+        case baseFeatures.creationDate:
+            if (value === false) properties[feature] = undefined
+            else properties[feature] = value + " "
             break
         }
         properties[baseFeatures.fullTxt] = undefined

@@ -36,37 +36,9 @@ ApplicationWindow
     }
 
 
-//    TodoTxt {
-//        id: tdt
-//        todoTxtLocation: settings.todoTxtLocation
-//    }
-
-//    TodoTxtModel {
-//        id: ttm
-
-//    }
-
-    TodoTxtModel1 {
+    TodoTxt {
         id: ttm1
-
     }
-
-
-
-    Component.onCompleted: {
-//        console.log("filters: ", filterSettings.projectFilter, filterSettings.contextFilter );
-//        tdt.contextModel.setFilterArray(filterSettings.contextFilter);
-//        tdt.projectModel.setFilterArray(filterSettings.projectFilter);
-    }
-
-
-    Component.onDestruction: {
-        //save filters in settings
-//        filterSettings.hideCompletedTasks = tdt.filters.hideCompletedTasks
-//        filterSettings.projectFilter = tdt.filters.projectModel.filter
-//        filterSettings.contextFilter = tdt.filters.contextModel.filter
-    }
-
 }
 
 

@@ -66,17 +66,7 @@ Dialog {
                     icon.source: "image://theme/icon-l-date"
 
                     onClicked: {
-                        //TODO manchmal wird der ganze Text durchs datum ersetzt
-                        var matches = ta.text.match(/^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/);
-                        var newstring = "";
-                        for (var m in matches) {
-                            if ( m == 4) newstring += tdt.today() + " ";
-                            else if ( m > 0 && matches[m] !== undefined ) {
-                                newstring += matches[m];
-                            }
-                            //            console.log(m, newstring, selectedPriority)
-                        }
-                        ta.text = newstring;
+                        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.creationDate, JS.today())
                         ta.focus = true; //soll eigentl das keyboard wieder aktivieren, geht aber nicht immer.
                     }
                 }

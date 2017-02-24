@@ -17,9 +17,6 @@ Page {
             title: state
         }
 
-        //        property var arrayModel: prioritiesModel()
-//        model: prioritiesModel
-
         delegate: ListItem {
             Label {
                 id: lbl;
@@ -29,15 +26,6 @@ Page {
             onClicked: setString(lbl.text)
         }
     }
-
-//    function prioritiesModel() {
-//        var l = [];
-//        for (var a = "A"; a <= "Z";
-//             a = String.fromCharCode(a.charCodeAt(0) + 1)) {
-//            l.push("(" + a + ") ");
-//        }
-//        return l;
-//    }
 
     ListModel {
         id: prioritiesModel
