@@ -34,10 +34,10 @@ Page {
                 text: qsTr("Add New Task")
                 onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: -1, text: ""});
             }
-//            MenuItem {
-//                text: qsTr("Sort: ") + ttm.sortOrder //(ttm.sortOrder ==  0 ? "asc" : "desc")
-//                onClicked: ttm.sortOrder = (ttm.sortOrder ==  0 ? 1 : 0)
-//            }
+            MenuItem {
+                text: qsTr("Sort: ") + ttm1.tasks.sortOrder //(ttm.sortOrder ==  0 ? "asc" : "desc")
+                onClicked: ttm1.tasks.sortOrder = (ttm1.tasks.sortOrder ===  0 ? 1 : 0)
+            }
         }
 
 

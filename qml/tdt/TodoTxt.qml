@@ -64,11 +64,11 @@ QtObject {
         }
 
         function visibleItem(item) {
-//            console.log(item.subject, projects, contexts)
+            //            console.log(item.subject, projects, contexts)
             if ((hideDone && item.done)) return false
 
             for (var p in projects) {
-//                console.log(item.subject,projects[p],item.subject.indexOf(projects[p]))
+                //                console.log(item.subject,projects[p],item.subject.indexOf(projects[p]))
                 if (item.subject.indexOf(projects[p]) === -1) return false
             }
 
@@ -113,7 +113,7 @@ QtObject {
                     if (visibleItem(taskItem)) visibleItemCount++
                 }
                 active = ((filters.projects !== undefined && filters.projects.indexOf(name) !== -1) ||
-                              (filters.contexts !== undefined && filters.contexts.indexOf(name) !== -1))
+                          (filters.contexts !== undefined && filters.contexts.indexOf(name) !== -1))
                 model.append( {"name": name, "active": active, "itemCount": itemCount, "visibleItemCount": visibleItemCount});
             }
         }
@@ -126,8 +126,8 @@ QtObject {
 
     property ListModel tasks: ListModel {
 
-        //alles auf einmal 0:fullTxt, 1:done, 2:doneDate, 3:priority, 4:creationDate, 5:subject
-        property var basicPattern: JS.baseFeatures.pattern
+        //alles auf einmal 0:fullTxt, 1:done, 2:completionDate, 3:priority, 4:creationDate, 5:subject
+//        property var basicPattern: JS.baseFeatures.pattern
         property string lowestPrio: "A"
 
         /* überschreiben der Funktion setProperty: */
@@ -170,7 +170,7 @@ QtObject {
                     else newPrio = ""
                 }
             }
-//            console.log(newPrio)
+            //            console.log(newPrio)
             setProperty(index, "priority", newPrio)
         }
 
@@ -190,6 +190,32 @@ QtObject {
             return colors[JS.alphabet.search(prio) % colors.length];
         }
 
+        property int sortOrder: 0
+        onSortOrderChanged: populate(tasksArray)
+
+        property var lessThan: [
+            function(left, right) { return left.fullTxt < right.fullTxt },
+            function(left, right) {
+                console.log(left.creationDate, right.creationDate)
+                return (left.creationDate === right.creationDate ? left.fullTxt < right.fullTxt : left.creationDate < right.creationDate )}
+        ]
+
+        function insertPosition(lessThanFunc, item) {
+            var lower = 0
+            var upper = count
+            while (lower < upper) {
+                var middle = Math.floor(lower + (upper - lower) / 2)
+                var result =
+                        lessThanFunc(item, JS.baseFeatures.parseLine(tasksArray[get(middle).lineNum]));
+                if (result) {
+                    upper = middle
+                } else {
+                    lower = middle + 1
+                }
+            }
+            return lower
+        }
+
         function populate(array) {
             clear();
             for (var a = 0; a < array.length; a++) {
@@ -201,10 +227,12 @@ QtObject {
                 if (filters.visibleItem(item)) {
                     var displayText = (item.priority !== "" ?
                                            '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
-                            + item.subject
+                            + item.subject + '<br/>' +item.creationDate
 
                     var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done, "priority": item.priority,"displayText": displayText}
-                    append(json)
+
+                    var index = insertPosition(lessThan[sortOrder], item)
+                    insert(index, json)
                 }
             }
         }

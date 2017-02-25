@@ -1,42 +1,59 @@
 .pragma library
 
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-// fullTxt, done, doneDate, priority, creationDate, subject
+// fullTxt, complete, priority, (completionDate or creationDate), creationDate, subject
 var baseFeatures = {
-    pattern: /^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/ ,
+    pattern: /^(x\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/ ,
     fullTxt: 0,
     done: 1,
-    doneDate: 2,
-    priority: 3,
+    priority: 2,
+    completionDate: 3,
     creationDate: 4,
     subject: 5,
 
-    parseLine: function(line) {
+    getMatches: function(line) {
         var matches = line.match(baseFeatures.pattern)
+        if (matches[baseFeatures.creationDate] === undefined)
+            //swap creationDate, baseFeatures
+            matches[baseFeatures.creationDate] = matches.splice(baseFeatures.completionDate, 1, matches[baseFeatures.creationDate])[0]
+        return matches
+    },
+
+    parseLine: function(line) {
+        var matches = baseFeatures.getMatches(line)
+        console.log(matches)
         return {
             fullTxt: matches[baseFeatures.fullTxt],
             done: matches[baseFeatures.done] !== undefined,
-            doneDate: (matches[baseFeatures.doneDate] !== undefined ?
-                           matches[2] : ""),
             priority: (matches[baseFeatures.priority] !== undefined ?
                            matches[baseFeatures.priority].charAt(1) : ""),
-            creationDate: (matches[baseFeatures.creationDate] !== undefined ?
-                               matches[baseFeatures.creationDate] : ""),
-            subject: matches[baseFeatures.subject]
+            //wenn creationDate auch gesetzt, im Feld completionDate
+            completionDate: (matches[baseFeatures.completionDate] !== undefined ? matches[baseFeatures.completionDate] : "").trim(),
+//                (matches[baseFeatures.creationDate] !== undefined ?
+//                (matches[baseFeatures.completionDate] !== undefined ? matches[baseFeatures.completionDate] : "") :
+//                                 "").trim(),
+            //wenn creationDate leer, im Feld completionDate enthalten
+            creationDate: (matches[baseFeatures.creationDate] !== undefined ? matches[baseFeatures.creationDate]: "").trim(),
+//                (matches[baseFeatures.creationDate] === undefined ?
+//                               (matches[baseFeatures.completionDate] !== undefined ? matches[baseFeatures.completionDate]: "") :
+//                               matches[baseFeatures.creationDate]).trim(),
+            subject: matches[baseFeatures.subject].trim()
         }
     },
 
     modifyLine: function(line, feature, value) {
         //TODO validierung von value???
-        var properties = line.match(baseFeatures.pattern)
+        var properties = baseFeatures.getMatches(line)
+        console.log(properties)
         switch (feature) {
         case baseFeatures.done :
             if (value === false) {
                 properties[feature] = undefined
-                properties[baseFeatures.doneDate] = undefined
+                properties[baseFeatures.completionDate] = undefined
             } else {
                 properties[feature] = "x "
-                properties[baseFeatures.doneDate] = today() + " "
+                //nur setzen, wenn creationDate auch gesetzt
+                properties[baseFeatures.completionDate] = (properties[baseFeatures.creationDate] !== undefined ? today() + " " : undefined)
             }
             break
         case baseFeatures.priority :
@@ -49,6 +66,7 @@ var baseFeatures = {
             break
         }
         properties[baseFeatures.fullTxt] = undefined
+        console.log(properties)
         return properties.join("")
     }
 }
@@ -110,7 +128,7 @@ function parseTodoTxt(todoTxt) {
         //                console.log(t, tasks[t]);
         txt = tasks[t];
 
-        //alles auf einmal fullTxt, done, doneDate, priority, creationDate, subject
+        //alles auf einmal fullTxt, done, completionDate, priority, creationDate, subject
         var matches = txt.match(/^(x\s)?(\d{4}-\d{2}-\d{2}\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/);
         tlist.push(matches);
 
