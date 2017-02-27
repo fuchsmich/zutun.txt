@@ -51,7 +51,7 @@ Page {
             Column {
                 width: page.width
                 Button {
-                    id: btn
+//                    id: btn
                     visible: model.index === 0
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: lv.btnTxt
@@ -65,7 +65,8 @@ Page {
                     highlighted: model.active
                     onClicked: ttm1.filters.setByName(model.name, !model.active);
                     Label {
-                        id: lbl
+//                        id: lbl
+                        color: (model.visibleItemCount > 0? Theme.primaryColor : Theme.secondaryColor)
                         anchors.verticalCenter: parent.verticalCenter
                         x: Theme.horizontalPageMargin
                         text: model.name + " (" + model.visibleItemCount + "/" + model.itemCount + ")"
@@ -74,33 +75,33 @@ Page {
             }
         }
 
-        Component {
-            id: contextDelegate
-            Column {
-                width: page.width
-                //                height: Math.max(cbtn.height, sw.height) + Theme.paddingLarge
-                Button {
-                    id: cbtn
-                    visible: index === 0
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Clear Context Filter"
-                    onClicked: if (index === 0) tdt.contextModel.resetFilter();
-                }
-                TextSwitch {
-                    id: sw
-                    x: Theme.horizontalPageMargin
-                    text: model.name + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
-                    checked: model.filterActive
-                    //                    visible: model.filterAvailable
-                    onClicked: {
-                        if (checked) tdt.contextModel.setFilter(index, true);
-                        else tdt.contextModel.setFilter(index, false);
+//        Component {
+//            id: contextDelegate
+//            Column {
+//                width: page.width
+//                //                height: Math.max(cbtn.height, sw.height) + Theme.paddingLarge
+//                Button {
+//                    id: cbtn
+//                    visible: index === 0
+//                    anchors.horizontalCenter: parent.horizontalCenter
+//                    text: "Clear Context Filter"
+//                    onClicked: if (index === 0) tdt.contextModel.resetFilter();
+//                }
+//                TextSwitch {
+//                    id: sw
+//                    x: Theme.horizontalPageMargin
+//                    text: model.name + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
+//                    checked: model.filterActive
+//                    //                    visible: model.filterAvailable
+//                    onClicked: {
+//                        if (checked) tdt.contextModel.setFilter(index, true);
+//                        else tdt.contextModel.setFilter(index, false);
+//                    }
 
-                    }
-                    //                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
-                }
-            }
-        }
+//                    //                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
+//                }
+//            }
+//        }
     }
     onStatusChanged: {
         if (state == "projects" && status === PageStatus.Active) {
@@ -117,9 +118,9 @@ Page {
             PropertyChanges {
                 target: lv;
 //                delegate: projectDelegate
-                title: "Filter Projects"
+                title: qsTr("Filter Projects")
                 model: ttm1.filters.projectsModel
-                btnTxt: "Clear Project Filters"
+                btnTxt: qsTr("Clear Project Filters")
             }
         }
         , State {
@@ -128,9 +129,9 @@ Page {
                 target: lv;
 //                delegate: contextDelegate
                 //                list: ["All"].concat(tdt.getContextList());
-                title: "Filter Contexts"
+                title: qsTr("Filter Contexts")
                 model: ttm1.filters.contextsModel
-                btnTxt: "Clear Context Filters"
+                btnTxt: qsTr("Clear Context Filters")
             }
         }
 

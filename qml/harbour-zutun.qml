@@ -7,6 +7,7 @@ import "tdt"
 //TODO nur verfügbare filter anziegen
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
+//TODO Translation
 
 
 ApplicationWindow
@@ -32,6 +33,12 @@ ApplicationWindow
             property bool hideDone: true
             property var projects: []
             property var contexts: []
+        }
+        ConfigurationGroup {
+            id: sortSettings
+            path: "sorting"
+            property bool asc: true
+            property int order: 0
         }
     }
 

@@ -22,21 +22,21 @@ Page {
             //                text: qsTr("Filter Contexts")
             //                onClicked: pageStack.push(Qt.resolvedUrl("ContextFilter.qml"));
             //            }
-            MenuItem {
-                text: qsTr("Reload todo.txt")
-//                onClicked: tdt.reloadTodoTxt();
-            }
-            MenuItem {
-                text: qsTr("Filters")
-                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
-            }
+//            MenuItem {
+//                text: qsTr("Reload todo.txt")
+////                onClicked: tdt.reloadTodoTxt();
+//            }
+//            MenuItem {
+//                text: qsTr("Filters")
+//                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
+//            }
             MenuItem {
                 text: qsTr("Add New Task")
                 onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: -1, text: ""});
             }
             MenuItem {
-                text: qsTr("Sort: ") + ttm1.tasks.sortOrder //(ttm.sortOrder ==  0 ? "asc" : "desc")
-                onClicked: ttm1.tasks.sortOrder = (ttm1.tasks.sortOrder ===  0 ? 1 : 0)
+                text: qsTr("Sorting") + "..." // + ttm1.tasks.sortOrder //(ttm.sortOrder ==  0 ? "asc" : "desc")
+                onClicked: pageStack.push(Qt.resolvedUrl("Sorting.qml")) //ttm1.tasks.sortOrder = (ttm1.tasks.sortOrder ===  0 ? 1 : 0)
             }
         }
 
@@ -84,6 +84,7 @@ Page {
                     }
                 }
                 menu: ContextMenu {
+                    DetailItem { visible: model.creationDate !== ""; label: qsTr("Creation Date"); value: model.creationDate }
                     MenuItem {
                         visible: !(model.done || model.priority === "A")
                         text: "Priority Up"

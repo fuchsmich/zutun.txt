@@ -47,7 +47,12 @@ DISTFILES += \
     qml/cover/zutun.png \
     qml/tdt/todotxt.js \
     rpm/harbour-zutun.changes \
-    qml/tdt/TodoTxt.qml
+    qml/tdt/TodoTxt.qml \
+    qml/pages/Sorting.qml \
+    qml/external/FolderDelegate.qml \
+    qml/external/FileBrowser.qml \
+    qml/pages/AcceptFileDialog.qml \
+    qml/pages/About.qml
 
 HEADERS += \
     src/fileio.hpp

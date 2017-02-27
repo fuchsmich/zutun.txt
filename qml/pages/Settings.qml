@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+//import "../external"
 //TODO filepicker für dateiwahl
 
 Page {
@@ -21,18 +22,25 @@ Page {
         TextField {
             id: todoTxtPath
             //x: Theme.horizontalPageMargin
-            label: "Path to todo.txt"
+            label: qsTr("Path to todo.txt")
             text: settings.todoTxtLocation
             width: parent.width - 2*Theme.horizontalPageMargin
         }
-        Label {
-            x: Theme.horizontalPageMargin
-            width: parent.width
-            text: "Please enter the path manually. Some kind of filepicker or automcompletion will follow in upcoming releases."
-            font.pixelSize: Theme.fontSizeTiny
-            color: Theme.highlightColor
-            wrapMode: Text.WordWrap
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Choose File")
+            onClicked: pageStack.push(Qt.resolvedUrl("../external/FileBrowser.qml")); //, {state: "projects"});
+            width: Theme.buttonWidthLarge
         }
+
+//        Label {
+//            x: Theme.horizontalPageMargin
+//            width: parent.width
+//            text: "Please enter the path manually. Some kind of filepicker or automcompletion will follow in upcoming releases."
+//            font.pixelSize: Theme.fontSizeTiny
+//            color: Theme.highlightColor
+//            wrapMode: Text.WordWrap
+//        }
         SectionHeader {
             text: "Task List"
         }
@@ -47,7 +55,7 @@ Page {
                 value: settings.fontSizeTaskList
                 valueText: value
                 stepSize: 1
-                label: "Fontsize in Tasklist"
+                label: qsTr("Fontsize in Tasklist")
             }
             IconButton {
                 anchors.verticalCenter: fontSizeSlider.verticalCenter
@@ -56,8 +64,6 @@ Page {
                 onClicked: fontSizeSlider.value = Theme.fontSizeMedium
             }
         }
-
-        //TODO reset button to Theme.fonSizeMedium
 
         //        Label {
         //            x: Theme.horizontalPageMargin

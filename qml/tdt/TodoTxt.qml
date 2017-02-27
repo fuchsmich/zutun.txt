@@ -44,7 +44,7 @@ QtObject {
         property bool hideDone: filterSettings.hideDone
         property var projects: filterSettings.projects
         property var contexts: filterSettings.contexts
-        property string text: (hideDone? "Hide Done, ": "") + projects.concat(contexts).join(", ")
+        property string text: [hideDone? qsTr("Hide Complete"): undefined].concat(projects.concat(contexts)).join(", ")
 
         onProjectsChanged: readArray()
         onContextsChanged: readArray()
@@ -73,7 +73,7 @@ QtObject {
             }
 
             for (var c in contexts) {
-                if (!item.subject.indexOf(contexts[c]) === -1) return false
+                if (item.subject.indexOf(contexts[c]) === -1) return false
             }
 
             return true
@@ -124,6 +124,29 @@ QtObject {
         property ListModel contextsModel: ListModel {}
     }
 
+    property QtObject sorting: QtObject {
+        property bool asc: sortSettings.asc
+        onAscChanged: tasks.populate(tasksArray)
+        property int order: sortSettings.order
+        onOrderChanged: tasks.populate(tasksArray)
+
+        function lessThanFunc() {
+            return list[order][1]
+        }
+
+        property var list: [
+            ["natural", function(left, right) {
+                return left.fullTxt < right.fullTxt
+            }],
+            ["Creation Date", function(left, right) {
+                return (left.creationDate === right.creationDate ? left.fullTxt < right.fullTxt : left.creationDate < right.creationDate )
+            }],
+            ["Subject", function(left, right) {
+                return (left.subject === right.subject ? left.fullTxt < right.fullTxt : left.subject < right.subject )
+            }]
+        ]
+    }
+
     property ListModel tasks: ListModel {
 
         //alles auf einmal 0:fullTxt, 1:done, 2:completionDate, 3:priority, 4:creationDate, 5:subject
@@ -160,7 +183,7 @@ QtObject {
         /*raise/lower priority*/
         function alterPriority(index, raise) {
             var newPrio = get(index).priority
-            console.log(newPrio, raise)
+//            console.log(newPrio, raise)
             if (raise) {
                 if (newPrio === "") newPrio = String.fromCharCode(lowestPrio.charCodeAt(0) + 1)
                 else if (newPrio > "A") newPrio = String.fromCharCode(newPrio.charCodeAt(0) - 1)
@@ -190,16 +213,6 @@ QtObject {
             return colors[JS.alphabet.search(prio) % colors.length];
         }
 
-        property int sortOrder: 0
-        onSortOrderChanged: populate(tasksArray)
-
-        property var lessThan: [
-            function(left, right) { return left.fullTxt < right.fullTxt },
-            function(left, right) {
-                console.log(left.creationDate, right.creationDate)
-                return (left.creationDate === right.creationDate ? left.fullTxt < right.fullTxt : left.creationDate < right.creationDate )}
-        ]
-
         function insertPosition(lessThanFunc, item) {
             var lower = 0
             var upper = count
@@ -227,11 +240,14 @@ QtObject {
                 if (filters.visibleItem(item)) {
                     var displayText = (item.priority !== "" ?
                                            '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
-                            + item.subject + '<br/>' +item.creationDate
+                            + item.subject //+ '<br/>' +item.creationDate
 
-                    var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done, "priority": item.priority,"displayText": displayText}
+                    var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done,
+                        "priority": item.priority, "displayText": displayText,
+                        "creationDate": item.creationDate
+                    }
 
-                    var index = insertPosition(lessThan[sortOrder], item)
+                    var index = insertPosition(sorting.lessThanFunc(), item)
                     insert(index, json)
                 }
             }

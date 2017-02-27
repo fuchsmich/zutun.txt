@@ -13,12 +13,13 @@ CoverBackground {
 
     Column {
         anchors.fill: parent
-        anchors.margins: Theme.paddingMedium
+//        anchors.margins: Theme.paddingMedium
         Repeater {
             model: ttm1.tasks
             Label {
+                x: Theme.paddingMedium
                 text: model.displayText
-//                width: parent.width
+                width: parent.width - 2*x
                 truncationMode: TruncationMode.Elide
 //                visible: model.done
             }

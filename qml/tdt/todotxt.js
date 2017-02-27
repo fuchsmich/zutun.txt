@@ -20,72 +20,72 @@ var baseFeatures = {
     },
 
     parseLine: function(line) {
-        var matches = baseFeatures.getMatches(line)
-        console.log(matches)
+        var fields = baseFeatures.getMatches(line)
+//        console.log(fields)
         return {
-            fullTxt: matches[baseFeatures.fullTxt],
-            done: matches[baseFeatures.done] !== undefined,
-            priority: (matches[baseFeatures.priority] !== undefined ?
-                           matches[baseFeatures.priority].charAt(1) : ""),
+            fullTxt: fields[baseFeatures.fullTxt],
+            done: fields[baseFeatures.done] !== undefined,
+            priority: (fields[baseFeatures.priority] !== undefined ?
+                           fields[baseFeatures.priority].charAt(1) : ""),
             //wenn creationDate auch gesetzt, im Feld completionDate
-            completionDate: (matches[baseFeatures.completionDate] !== undefined ? matches[baseFeatures.completionDate] : "").trim(),
-//                (matches[baseFeatures.creationDate] !== undefined ?
-//                (matches[baseFeatures.completionDate] !== undefined ? matches[baseFeatures.completionDate] : "") :
+            completionDate: (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate] : "").trim(),
+//                (fields[baseFeatures.creationDate] !== undefined ?
+//                (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate] : "") :
 //                                 "").trim(),
             //wenn creationDate leer, im Feld completionDate enthalten
-            creationDate: (matches[baseFeatures.creationDate] !== undefined ? matches[baseFeatures.creationDate]: "").trim(),
-//                (matches[baseFeatures.creationDate] === undefined ?
-//                               (matches[baseFeatures.completionDate] !== undefined ? matches[baseFeatures.completionDate]: "") :
-//                               matches[baseFeatures.creationDate]).trim(),
-            subject: matches[baseFeatures.subject].trim()
+            creationDate: (fields[baseFeatures.creationDate] !== undefined ? fields[baseFeatures.creationDate]: "").trim(),
+//                (fields[baseFeatures.creationDate] === undefined ?
+//                               (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate]: "") :
+//                               fields[baseFeatures.creationDate]).trim(),
+            subject: fields[baseFeatures.subject].trim()
         }
     },
 
     modifyLine: function(line, feature, value) {
         //TODO validierung von value???
-        var properties = baseFeatures.getMatches(line)
-        console.log(properties)
+        var fields = baseFeatures.getMatches(line)
+        console.log(fields)
         switch (feature) {
         case baseFeatures.done :
             if (value === false) {
-                properties[feature] = undefined
-                properties[baseFeatures.completionDate] = undefined
+                fields[feature] = undefined
+                fields[baseFeatures.completionDate] = undefined
             } else {
-                properties[feature] = "x "
+                fields[feature] = "x "
                 //nur setzen, wenn creationDate auch gesetzt
-                properties[baseFeatures.completionDate] = (properties[baseFeatures.creationDate] !== undefined ? today() + " " : undefined)
+                fields[baseFeatures.completionDate] = (fields[baseFeatures.creationDate] !== undefined ? today() + " " : undefined)
             }
             break
         case baseFeatures.priority :
-            if (value === false) properties[feature] = undefined
-            else properties[feature] = "(" + value + ") "
+            if (value === false) fields[feature] = undefined
+            else fields[feature] = "(" + value + ") "
             break
         case baseFeatures.creationDate:
-            if (value === false) properties[feature] = undefined
-            else properties[feature] = value + " "
+            if (value === false) fields[feature] = undefined
+            else fields[feature] = value + " "
             break
         }
-        properties[baseFeatures.fullTxt] = undefined
-        console.log(properties)
-        return properties.join("")
+        fields[baseFeatures.fullTxt] = undefined
+        console.log(fields)
+        return fields.join("")
     }
 }
 
 var projects = {
     pattern: /\s\+\S+/g ,
     list: function(tasks) {
-        return getProCon(tasks, projects.pattern)
+        return getPrjCtxtList(tasks, projects.pattern)
     }
 }
 
 var contexts = {
     pattern: /\s\@\S+/g ,
     list: function(tasks) {
-        return getProCon(tasks, contexts.pattern)
+        return getPrjCtxtList(tasks, contexts.pattern)
     }
 }
 
-function getProCon(tasks, pattern) {
+function getPrjCtxtList(tasks, pattern) {
     var task = ""
     var list = []
 
