@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
-
+id: cb
     Image {
         source: "coversmall.png"
         anchors.centerIn: parent
@@ -19,7 +19,7 @@ CoverBackground {
             Label {
                 x: Theme.paddingMedium
                 text: model.displayText
-                width: parent.width - 2*x
+                width: cb.width - 2*x
                 truncationMode: TruncationMode.Elide
 //                visible: model.done
             }

@@ -11,9 +11,7 @@ QtObject {
         //        id: file
         path: settings.todoTxtLocation
         onContentChanged:{
-            var lists = JS.parseTodoTxt(content);
-            tasksArray = lists.tasks;
-
+            tasksArray = JS.splitLines(content)
         }
     }
 
@@ -129,20 +127,27 @@ QtObject {
         onAscChanged: tasks.populate(tasksArray)
         property int order: sortSettings.order
         onOrderChanged: tasks.populate(tasksArray)
+        property string text: list[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc"))
 
         function lessThanFunc() {
             return list[order][1]
         }
 
+//        function compare(left, right) {
+//            console.log(asc)
+//            if (asc) return left < right
+//            else return left > right
+//        }
+
         property var list: [
             ["natural", function(left, right) {
-                return left.fullTxt < right.fullTxt
+                return !((left.fullTxt < right.fullTxt) ^ asc)
             }],
             ["Creation Date", function(left, right) {
-                return (left.creationDate === right.creationDate ? left.fullTxt < right.fullTxt : left.creationDate < right.creationDate )
+                return (left.creationDate === right.creationDate ? left.fullTxt < right.fullTxt : !((left.creationDate < right.creationDate) ^ asc) )
             }],
             ["Subject", function(left, right) {
-                return (left.subject === right.subject ? left.fullTxt < right.fullTxt : left.subject < right.subject )
+                return (left.subject === right.subject ? left.fullTxt < right.fullTxt : !((left.subject < right.subject)^ asc ))
             }]
         ]
     }
@@ -171,7 +176,6 @@ QtObject {
 
         function setFullTxt(index, fullTxt) {
             var newArr = tasksArray
-
 
             if (index === -1) newArr.push(fullTxt)
             else  newArr[get(index).lineNum] = fullTxt

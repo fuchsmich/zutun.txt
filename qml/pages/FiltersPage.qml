@@ -13,11 +13,11 @@ Page {
         anchors.fill: parent
         VerticalScrollDecorator {}
         PullDownMenu {
-            MenuItem {
-                text: qsTr("Other Filters")
-                onClicked: //pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
-                           page.state = "others"
-            }
+//            MenuItem {
+//                text: qsTr("Other Filters")
+//                onClicked: //pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
+//                           page.state = "others"
+//            }
             MenuItem {
                 visible: (page.state !== "contexts")
                 text: qsTr("Context Filters")
@@ -35,73 +35,43 @@ Page {
         }
 
         property string title: ""
-        header: PageHeader {
-            id: ph
-            title: lv.title
-            //            description: ttm1.filters.string()
-        }
+        header: Item {
+            width: page.width
+            height: pgh.height + cbtn.height
 
-        //        property var list: tdt.projects
-        //        model: ttm1.projectModel
-
-        delegate: projectDelegate
-
-        Component {
-            id: projectDelegate
-            Column {
-                width: page.width
-                Button {
-//                    id: btn
-                    visible: model.index === 0
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: lv.btnTxt
-                    onClicked: {
-                        ttm1.filters.clearFilter(page.state);
-//                        pageStack.navigateBack();
-                    }
+            PageHeader {
+                id: pgh
+                title: lv.title
+                //            description: ttm1.filters.string()
+            }
+            Button {
+                id: cbtn
+                width: Theme.buttonWidthLarge
+                anchors {
+                    top: pgh.bottom
+                    topMargin: -Theme.paddingMedium
+                    horizontalCenter: parent.horizontalCenter
                 }
-                ListItem {
-                    enabled: model.visibleItemCount > 0
-                    highlighted: model.active
-                    onClicked: ttm1.filters.setByName(model.name, !model.active);
-                    Label {
-//                        id: lbl
-                        color: (model.visibleItemCount > 0? Theme.primaryColor : Theme.secondaryColor)
-                        anchors.verticalCenter: parent.verticalCenter
-                        x: Theme.horizontalPageMargin
-                        text: model.name + " (" + model.visibleItemCount + "/" + model.itemCount + ")"
-                    }
+                text: lv.btnTxt
+                onClicked: {
+                    ttm1.filters.clearFilter(page.state);
+                    //                        pageStack.navigateBack();
                 }
             }
         }
 
-//        Component {
-//            id: contextDelegate
-//            Column {
-//                width: page.width
-//                //                height: Math.max(cbtn.height, sw.height) + Theme.paddingLarge
-//                Button {
-//                    id: cbtn
-//                    visible: index === 0
-//                    anchors.horizontalCenter: parent.horizontalCenter
-//                    text: "Clear Context Filter"
-//                    onClicked: if (index === 0) tdt.contextModel.resetFilter();
-//                }
-//                TextSwitch {
-//                    id: sw
-//                    x: Theme.horizontalPageMargin
-//                    text: model.name + " (" + model.noOfVisibleTasks + "/" + model.noOfTasks + ")"
-//                    checked: model.filterActive
-//                    //                    visible: model.filterAvailable
-//                    onClicked: {
-//                        if (checked) tdt.contextModel.setFilter(index, true);
-//                        else tdt.contextModel.setFilter(index, false);
-//                    }
-
-//                    //                    Component.onCompleted: checked  = (tdt.cfilter.indexOf(text) !== -1)
-//                }
-//            }
-//        }
+        delegate: ListItem {
+            enabled: model.visibleItemCount > 0
+            highlighted: model.active
+            onClicked: ttm1.filters.setByName(model.name, !model.active);
+            Label {
+                //                        id: lbl
+                color: (model.visibleItemCount > 0? Theme.primaryColor : Theme.secondaryColor)
+                anchors.verticalCenter: parent.verticalCenter
+                x: Theme.horizontalPageMargin
+                text: model.name + " (" + model.visibleItemCount + "/" + model.itemCount + ")"
+            }
+        }
     }
     onStatusChanged: {
         if (state == "projects" && status === PageStatus.Active) {
@@ -117,7 +87,7 @@ Page {
             name: "projects"
             PropertyChanges {
                 target: lv;
-//                delegate: projectDelegate
+                //                delegate: projectDelegate
                 title: qsTr("Filter Projects")
                 model: ttm1.filters.projectsModel
                 btnTxt: qsTr("Clear Project Filters")
@@ -127,7 +97,7 @@ Page {
             name: "contexts"
             PropertyChanges {
                 target: lv;
-//                delegate: contextDelegate
+                //                delegate: contextDelegate
                 //                list: ["All"].concat(tdt.getContextList());
                 title: qsTr("Filter Contexts")
                 model: ttm1.filters.contextsModel
