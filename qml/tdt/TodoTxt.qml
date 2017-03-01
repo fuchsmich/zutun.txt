@@ -3,12 +3,10 @@ import QtQuick 2.0
 import FileIO 1.0
 import "todotxt.js" as JS
 
-//TODO sortieren
 //TODO due:
 
 QtObject {
     property FileIO file: FileIO {
-        //        id: file
         path: settings.todoTxtLocation
         onContentChanged:{
             tasksArray = JS.splitLines(content)
@@ -19,6 +17,9 @@ QtObject {
     onTasksArrayChanged: {
         readArray()
     }
+
+    signal reloadFile()
+    onReloadFile: file.contentChanged()
 
     signal readArray()
     onReadArray: {

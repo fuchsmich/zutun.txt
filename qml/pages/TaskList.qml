@@ -19,21 +19,13 @@ Page {
                 text: qsTr("Settings")
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
-            //            MenuItem {
-            //                text: qsTr("Filter Contexts")
-            //                onClicked: pageStack.push(Qt.resolvedUrl("ContextFilter.qml"));
-            //            }
-            //            MenuItem {
-            //                text: qsTr("Filters")
-            //                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
-            //            }
             MenuItem {
                 text: qsTr("Add New Task")
                 onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: -1, text: ""});
             }
             MenuItem {
                 text: qsTr("Sorting")
-                onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml")) //ttm1.tasks.sortOrder = (ttm1.tasks.sortOrder ===  0 ? 1 : 0)
+                onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
             }
         }
 
@@ -151,11 +143,9 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active /*&& pageStack.depth === 1*/) {
-            //            tdt.reloadTodoTxt();
-            //            ttm.reloadTodoTxt();
-
+            ttm1.reloadFile()
             /* attach project filter page: */
-            pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
+            pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
         }
     }
 }

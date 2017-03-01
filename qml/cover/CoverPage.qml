@@ -40,7 +40,7 @@ id: cb
 
     onStatusChanged: {
         if (status === Cover.Active ) {
-//            tdt.reloadTodoTxt();
+            ttm1.reloadFile();
         }
     }
 }

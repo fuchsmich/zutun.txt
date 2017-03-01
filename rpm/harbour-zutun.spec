@@ -13,11 +13,11 @@ Name:       harbour-zutun
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    todo.txt GUI
-Version:    0.5
+Version:    1.0
 Release:    1
 Group:      Qt/Qt
 License:    BSD
-URL:        http://fuxl.info/
+URL:        https://github.com/fuchsmich/zutun.txt
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-zutun.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
@@ -28,7 +28,7 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 
 %description
-A Sailfish GUI for todo.txt formatted tasklists| Short description of my Sailfish OS Application
+A Sailfish GUI for todo.txt formatted tasklists
 
 %prep
 %setup -q -n %{name}-%{version}

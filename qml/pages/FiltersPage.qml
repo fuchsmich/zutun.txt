@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+//TODO Spacing überprüfen
 
 Page {
     id: page
@@ -9,6 +10,7 @@ Page {
     SilicaListView {
         id: lv
         property string btnTxt: "Clear Project Filter"
+//        spacing: Theme.paddingLarge
 
         anchors.fill: parent
         VerticalScrollDecorator {}
