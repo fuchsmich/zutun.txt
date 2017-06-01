@@ -1,4 +1,4 @@
-//TODO grouping function(index, field) {
+//TODO grouping function firstGroupItem(index, field) { if (get(index).field !== get(index-1)) return true; else return false }
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0

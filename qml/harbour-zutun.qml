@@ -6,7 +6,7 @@ import "tdt"
 
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
-//TODO Translation
+//TODO Translation (Transifex??)
 //TODO Search field??
 
 ApplicationWindow
