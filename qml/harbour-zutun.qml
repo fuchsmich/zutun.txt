@@ -12,7 +12,8 @@ import "tdt"
 ApplicationWindow
 {
     id: app
-    initialPage: Component { TaskList{} }
+    initialPage: Component { FiltersPage { state: "contexts"} }
+        //Component { TaskList{} }
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All

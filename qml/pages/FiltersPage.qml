@@ -74,11 +74,18 @@ Page {
         }
     }
     onStatusChanged: {
-        if (state == "projects" && status === PageStatus.Active) {
-            pageStack.pushAttached("FiltersPage.qml", {state: "contexts"});
-        }
-        if (state == "contexts" && status === PageStatus.Active) {
-            pageStack.pushAttached("OtherFilters.qml");
+        if (status === PageStatus.Active) {
+            if (state == "contexts") {
+                if ( pageStack.depth === 1) {
+                    console.log(pageStack.nextPage())
+                    if (!pageStack.nextPage()) pageStack.push(Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate)
+//                    pageStack.pushAttached(Qt.resolvedUrl("TaskList.qml"), {});
+                } else {
+                    pageStack.pushAttached("OtherFilters.qml");
+                }
+
+            }
+            if (state == "projects") pageStack.pushAttached("FiltersPage.qml", {state: "contexts"});
         }
     }
 
