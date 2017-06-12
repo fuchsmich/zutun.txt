@@ -12,7 +12,7 @@ import "tdt"
 ApplicationWindow
 {
     id: app
-    initialPage: Component { FiltersPage { state: "contexts"} }
+    initialPage: Component { FiltersPage { state: "contexts"; skip: true} }
         //Component { TaskList{} }
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")

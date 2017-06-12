@@ -4,6 +4,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
+    property bool skip: false
     state: "projects"
 
     SilicaListView {
@@ -77,9 +78,11 @@ Page {
         if (status === PageStatus.Active) {
             if (state == "contexts") {
                 if ( pageStack.depth === 1) {
-                    console.log(pageStack.nextPage())
-                    if (!pageStack.nextPage()) pageStack.push(Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate)
-//                    pageStack.pushAttached(Qt.resolvedUrl("TaskList.qml"), {});
+                    pageStack.pushAttached(Qt.resolvedUrl("TaskList.qml"), {});
+                    if (skip) {
+                        pageStack.navigateForward(PageStackAction.Immediate)
+                        skip = false
+                    }
                 } else {
                     pageStack.pushAttached("OtherFilters.qml");
                 }
