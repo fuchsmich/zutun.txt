@@ -66,8 +66,18 @@ Page {
                 text: "Filter: " + ttm1.filters.text
             }
         }
-        model: ttm1.tasks
 
+        footer: Item {
+            width: page.width
+            height: lv.spacing*2
+        }
+
+        ViewPlaceholder {
+            enabled: lv.count === 0
+            text: "No Tasks"
+        }
+
+        model: ttm1.tasks
         delegate:
             ListItem {
 
@@ -149,17 +159,17 @@ Page {
                 if (settings.projectFilterLeft) {
                     pageStack.replace(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects", skip: true}, PageStackAction.Immediate);
                 } else {
-                    console.log("attaching", "projects")
+//                    console.log("attaching", "projects")
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
                 }
             } else {
                 if (!settings.projectFilterLeft){
-                    console.log("replacing")
+//                    console.log("replacing")
                     pageStack.replaceAbove(null, Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate);
 //                    console.log("attaching", "projects")
 //                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
                 } else {
-                    console.log("attaching", "contexts")
+//                    console.log("attaching", "contexts")
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"})
                 }
             }
