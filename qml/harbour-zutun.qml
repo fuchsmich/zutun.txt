@@ -8,12 +8,12 @@ import "tdt"
 //TODO fehler über notifiactions ausgeben
 //TODO Translation (Transifex??)
 //TODO Search field??
+//TODO File IO in Python?
 
 ApplicationWindow
 {
     id: app
-    initialPage: //Component { FiltersPage { state: "projects"; skip: true} }
-        Component { TaskList{} }
+    initialPage: Component { TaskList{} }
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All

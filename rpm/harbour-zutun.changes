@@ -7,6 +7,10 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Tue Jun 13 2017 Michael Fuchs <michfu@gmx.at> 1.1-1
+- option for project filter left of tasklist
+- pulldownmenu: first position for add task
+
 * Wed Mar 01 2017 Michael Fuchs <michfu@gmx.at> 1.0-2
 - automatic reload of file, when app or cover catches focus
 - spacing in filters

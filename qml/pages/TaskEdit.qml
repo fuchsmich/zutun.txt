@@ -3,7 +3,7 @@ import Sailfish.Silica 1.0
 
 import "../tdt/todotxt.js" as JS
 
-
+//TODO cursor position (after insert etc.)
 
 Dialog {
     id: dialog

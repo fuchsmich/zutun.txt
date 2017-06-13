@@ -75,30 +75,14 @@ Page {
                 }
             }
             TextSwitch {
-                text: "Attach project filter to the left"
-                description: "Restart the app to take effect."
+                text: "Attach project filter to the left of tasklist."
+                //description: "Restart the app to take effect."
                 checked: settings.projectFilterLeft
                 onClicked: settings.projectFilterLeft = checked
             }
-
-            //        Label {
-            //            x: Theme.horizontalPageMargin
-            //            text: "Location done.txt"
-            //        }
-            //        TextField {
-            //            id: doneTxtPath
-            //            x: Theme.horizontalPageMargin
-            //            text: settings.doneTxtLocation
-            //        }
-            //        Button {
-            //            text: "Select File"
-            //        }
-
         }
         Component.onDestruction: {
             // write back settings and save
-//            settings.todoTxtLocation = todoTxtPath.text;
-            //        settings.doneTxtLocation = doneTxtPath.text;
             settings.fontSizeTaskList = fontSizeSlider.sliderValue;
             settings.sync();
         }
