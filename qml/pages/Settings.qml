@@ -74,6 +74,12 @@ Page {
                     onClicked: fontSizeSlider.value = Theme.fontSizeMedium
                 }
             }
+            TextSwitch {
+                text: "Attach project filter to the left"
+                description: "Restart the app to take effect."
+                checked: settings.projectFilterLeft
+                onClicked: settings.projectFilterLeft = checked
+            }
 
             //        Label {
             //            x: Theme.horizontalPageMargin

@@ -20,12 +20,12 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
             MenuItem {
-                text: qsTr("Add New Task")
-                onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: -1, text: ""});
-            }
-            MenuItem {
                 text: qsTr("Sorting")
                 onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
+            }
+            MenuItem {
+                text: qsTr("Add New Task")
+                onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: -1, text: ""});
             }
         }
 
@@ -142,10 +142,27 @@ Page {
 
 
     onStatusChanged: {
-        if (status === PageStatus.Active /*&& pageStack.depth === 1*/) {
+        if (status === PageStatus.Active) {
             ttm1.reloadFile()
-            /* attach project filter page: */
-            pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
+            /* attach filter page: */
+            if ( pageStack.depth === 1) {
+                if (settings.projectFilterLeft) {
+                    pageStack.replace(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects", skip: true}, PageStackAction.Immediate);
+                } else {
+                    console.log("attaching", "projects")
+                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
+                }
+            } else {
+                if (!settings.projectFilterLeft){
+                    console.log("replacing")
+                    pageStack.replaceAbove(null, Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate);
+//                    console.log("attaching", "projects")
+//                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
+                } else {
+                    console.log("attaching", "contexts")
+                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"})
+                }
+            }
         }
     }
 }

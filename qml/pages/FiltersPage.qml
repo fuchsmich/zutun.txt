@@ -13,29 +13,30 @@ Page {
 
         anchors.fill: parent
         VerticalScrollDecorator {}
-        PullDownMenu {
+//        PullDownMenu {
 //            MenuItem {
 //                text: qsTr("Other Filters")
 //                onClicked: //pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
 //                           page.state = "others"
 //            }
-            MenuItem {
-                visible: (page.state !== "contexts")
-                text: qsTr("Context Filters")
-                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"});
-            }
-            MenuItem {
-                visible: (page.state !== "projects")
-                text: qsTr("Project Filters")
-                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
-            }
-            MenuItem {
-                text: qsTr("Back To Tasklist")
-                onClicked: pageStack.pop(pageStack.find(function(p){ return (p._depth === 0)}));
-            }
-        }
+//            visible: pageStack.depth > 1
+//            MenuItem {
+//                visible: (page.state !== "contexts")
+//                text: qsTr("Context Filters")
+//                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"});
+//            }
+//            MenuItem {
+//                visible: (page.state !== "projects")
+//                text: qsTr("Project Filters")
+//                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
+//            }
+//            MenuItem {
+//                text: qsTr("Back To Tasklist")
+//                onClicked: pageStack.pop(pageStack.find(function(p){ return (p._depth === 0)}));
+//            }
+//        }
 
-        property string title: ""
+        property string title: "Projects"
         header: Item {
             width: page.width
             height: pgh.height + cbtn.height
@@ -76,19 +77,20 @@ Page {
     }
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            if (state == "contexts") {
-                if ( pageStack.depth === 1) {
+            if ( pageStack.depth === 1) {
+                if (settings.projectFilterLeft) {
                     pageStack.pushAttached(Qt.resolvedUrl("TaskList.qml"), {});
                     if (skip) {
                         pageStack.navigateForward(PageStackAction.Immediate)
                         skip = false
                     }
                 } else {
-                    pageStack.pushAttached("OtherFilters.qml");
+                    pageStack.replace(Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate);
                 }
-
+            } else {
+                if (state == "contexts") { pageStack.pushAttached("OtherFilters.qml");}
+                if (state == "projects") pageStack.pushAttached("FiltersPage.qml", {state: "contexts"});
             }
-            if (state == "projects") pageStack.pushAttached("FiltersPage.qml", {state: "contexts"});
         }
     }
 

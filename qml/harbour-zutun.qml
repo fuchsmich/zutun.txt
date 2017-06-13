@@ -12,8 +12,8 @@ import "tdt"
 ApplicationWindow
 {
     id: app
-    initialPage: Component { FiltersPage { state: "contexts"; skip: true} }
-        //Component { TaskList{} }
+    initialPage: //Component { FiltersPage { state: "projects"; skip: true} }
+        Component { TaskList{} }
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
@@ -27,6 +27,7 @@ ApplicationWindow
         property string doneTxtLocation: StandardPaths.documents + '/done.txt'
         property bool autoSave: true
         property int fontSizeTaskList: Theme.fontSizeMedium
+        property bool projectFilterLeft: false
         ConfigurationGroup {
             id: filterSettings
             path: "filters"
