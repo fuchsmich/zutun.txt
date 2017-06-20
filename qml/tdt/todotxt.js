@@ -72,14 +72,14 @@ var baseFeatures = {
 }
 
 var projects = {
-    pattern: /\s\+\S+/g ,
+    pattern: /(^|\s)\+\S+/g ,
     list: function(tasks) {
         return getPrjCtxtList(tasks, projects.pattern)
     }
 }
 
 var contexts = {
-    pattern: /\s\@\S+/g ,
+    pattern: /(^|\s)\@\S+/g ,
     list: function(tasks) {
         return getPrjCtxtList(tasks, contexts.pattern)
     }

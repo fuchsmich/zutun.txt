@@ -7,6 +7,9 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Tue Jun 20 2017 Michael Fuchs <michfu@gmx.at> 1.2-1
+- colored projects and contexts in tasklist
+
 * Tue Jun 13 2017 Michael Fuchs <michfu@gmx.at> 1.1-1
 - option for project filter left of tasklist
 - pulldownmenu: first position for add task
@@ -20,7 +23,6 @@
 - filepicker
 - sorting
 - a lot of code rewrite
-
 
 * Tue Jan 03 2017 Michael Fuchs <michfu@gmx.at> 0.5-1
 - reduced space between items

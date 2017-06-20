@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import Sailfish.Silica 1.0
+
 import FileIO 1.0
 import "todotxt.js" as JS
 
@@ -243,9 +245,20 @@ QtObject {
                               ? item.priority : lowestPrio)
 
                 if (filters.visibleItem(item)) {
+//                    console.log(item.subject.replace(JS.projects.pattern,
+//                                                     function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'}))
+                    var formattedPSubject = item.subject.replace(
+                                JS.projects.pattern,
+                                function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'})
+//                    console.log(formattedPSubject)
+                    var formattedSubject = formattedPSubject.replace(
+                                JS.contexts.pattern,
+                                function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'})
+//                    console.log(formattedSubject)
+
                     var displayText = (item.priority !== "" ?
                                            '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
-                            + item.subject //+ '<br/>' +item.creationDate
+                            + formattedSubject //item.subject //+ '<br/>' +item.creationDate
 
                     var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done,
                         "priority": item.priority, "displayText": displayText,
