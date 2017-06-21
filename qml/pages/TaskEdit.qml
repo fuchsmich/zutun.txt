@@ -13,12 +13,17 @@ Dialog {
     property int itemIndex: -1
     property string text
     property string selectedPriority
-    onSelectedPriorityChanged:
+    onSelectedPriorityChanged: {
         ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority)
+        ta.forceActiveFocus()
+        ta.cursorPosition = ta.text.length
+    }
 
     property string appendText
     onAppendTextChanged: {
-        ta.text += " " + appendText;
+        ta.text += " " + appendText + " ";
+        ta.forceActiveFocus()
+        ta.cursorPosition = ta.text.length
     }
 
 
@@ -55,7 +60,12 @@ Dialog {
                 Button {
                     height: parent.height
                     width: height
-                    onClicked: ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, false)
+                    onClicked: {
+                        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, false)
+                        console.log(ta.activeFocus)
+                        if (!ta.activeFocus) ta.forceActiveFocus()
+                        console.log(ta.activeFocus)
+                    }
                     Label {
                         anchors.centerIn: parent
                         text: "(A)"
@@ -67,7 +77,7 @@ Dialog {
 
                     onClicked: {
                         ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.creationDate, JS.today())
-                        ta.focus = true; //soll eigentl das keyboard wieder aktivieren, geht aber nicht immer.
+                        ta.forceActiveFocus()
                     }
                 }
                 Button {
@@ -101,11 +111,13 @@ Dialog {
 
     onAccepted: {
         ta.focus = false; //damit das Keyboard einklappt
+        console.log("accepted", itemIndex, ta.text)
         ttm1.tasks.setFullTxt(itemIndex, ta.text);
-        pageStack.navigateBack();
+//        pageStack.navigateBack();
     }
-    onCanceled: {
+    onRejected: {
         ta.focus = false; //damit das Keyboard einklappt
-        pageStack.navigateBack();
+        console.log("canceled", itemIndex, ta.text)
+//        pageStack.navigateBack();
     }
 }

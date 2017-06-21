@@ -179,7 +179,7 @@ QtObject {
 
         function setFullTxt(index, fullTxt) {
             var newArr = tasksArray
-
+            console.log("setting ft", index, fullTxt)
             if (index === -1) newArr.push(fullTxt)
             else  newArr[get(index).lineNum] = fullTxt
 
