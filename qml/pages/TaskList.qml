@@ -157,20 +157,20 @@ Page {
             /* attach filter page: */
             if ( pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {
-                    console.log("replacing tl")
+//                    console.log("replacing tl")
                     pageStack.replace(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects", skip: true}, PageStackAction.Immediate);
                 } else {
-                    console.log("attaching", "projects")
+//                    console.log("attaching", "projects")
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
                 }
             } else {
                 if (!settings.projectFilterLeft){
-                    console.log("replacing after settings change (?)")
+//                    console.log("replacing after settings change (?)")
                     pageStack.replaceAbove(null, Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate);
 //                    console.log("attaching", "projects")
 //                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
                 } else {
-                    console.log("attaching", "contexts")
+//                    console.log("attaching", "contexts")
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"})
                 }
             }

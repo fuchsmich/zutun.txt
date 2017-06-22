@@ -3,29 +3,31 @@ import Sailfish.Silica 1.0
 
 import "../tdt/todotxt.js" as JS
 
-//TODO cursor position (after insert etc.)
-
 Dialog {
     id: dialog
-    //    acceptDestination: page
-    acceptDestinationAction: PageStackAction.Pop
 
     property int itemIndex: -1
-    property string text
+    property alias text: ta.text
+
     property string selectedPriority
     onSelectedPriorityChanged: {
+        var cp = ta.cursorPosition;
+        var tl = ta.text.length;
         ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority)
         ta.forceActiveFocus()
-        ta.cursorPosition = ta.text.length
+        ta.cursorPosition = cp + (ta.text.length - tl)
     }
 
     property string appendText
     onAppendTextChanged: {
-        ta.text += " " + appendText + " ";
+        var cp = ta.cursorPosition
+        ta.text += " " + appendText + " "
         ta.forceActiveFocus()
-        ta.cursorPosition = ta.text.length
+        ta.cursorPosition = cp
     }
 
+    acceptDestinationAction: PageStackAction.Pop
+    canAccept: text.length > 0
 
     SilicaFlickable {
         anchors.fill: parent
@@ -41,12 +43,20 @@ Dialog {
                 id: ta
                 width: dialog.width
                 autoScrollEnabled: true
-                text: dialog.text
-                EnterKey.enabled: text.length > 0
-                EnterKey.iconSource: "images://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.enabled: false //text.length > 0
+                EnterKey.iconSource: "image://theme/icon-m-enter-accept"
+                EnterKey.onClicked: dialog.accept()
+
+                focus: true
+                property Timer focusTimer: Timer {
+                    interval: 200
+                    repeat: false
+                    onTriggered: {
+                        ta.forceActiveFocus();
+                    }
+                }
             }
-            Row {
+            Row { //turn into GridLayout for more Icons?
                 x: Theme.horizontalPageMargin
                 spacing: Theme.paddingSmall
                 Button {
@@ -60,24 +70,28 @@ Dialog {
                 Button {
                     height: parent.height
                     width: height
-                    onClicked: {
-                        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, false)
-                        console.log(ta.activeFocus)
-                        if (!ta.activeFocus) ta.forceActiveFocus()
-                        console.log(ta.activeFocus)
-                    }
                     Label {
                         anchors.centerIn: parent
                         text: "(A)"
                         font.strikeout: true
+                    }
+                    onClicked: {
+                        var cp = ta.cursorPosition;
+                        var tl = ta.text.length
+                        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, false)
+                        ta.focusTimer.start()
+                        ta.cursorPosition = cp + (ta.text.length - tl)
                     }
                 }
                 IconButton {
                     icon.source: "image://theme/icon-l-date"
 
                     onClicked: {
+                        var cp = ta.cursorPosition;
+                        var tl = ta.text.length
                         ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.creationDate, JS.today())
-                        ta.forceActiveFocus()
+                        ta.focusTimer.start()
+                        ta.cursorPosition = cp + (ta.text.length - tl)
                     }
                 }
                 Button {
@@ -96,28 +110,24 @@ Dialog {
                         pageStack.push(Qt.resolvedUrl("TextSelect.qml"), {state: "contexts"})
                     }
                 }
+// TODO                Button {
+//                    height: parent.height
+//                    width: height
+//                    text: "due:"
+//                    onClicked: {
+//                open calendar
+//                    }
+//                }
             }
         }
 
     }
-    Component {
-        id: ts
-        TextSelect {
 
-        }
+    Component.onCompleted: {
+        ta.cursorPosition = ta.text.length
     }
-
-    Component.onCompleted: ta.focus = true;
 
     onAccepted: {
-        ta.focus = false; //damit das Keyboard einklappt
-        console.log("accepted", itemIndex, ta.text)
         ttm1.tasks.setFullTxt(itemIndex, ta.text);
-//        pageStack.navigateBack();
-    }
-    onRejected: {
-        ta.focus = false; //damit das Keyboard einklappt
-        console.log("canceled", itemIndex, ta.text)
-//        pageStack.navigateBack();
     }
 }
