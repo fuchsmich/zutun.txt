@@ -2,35 +2,142 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>CoverPage</name>
+    <name>About</name>
     <message>
-        <source>My Cover</source>
+        <source>About Zutun.txt</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>FirstPage</name>
+    <name>FileBrowser</name>
     <message>
-        <source>Aufgaben</source>
+        <source>Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alle</source>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show Page 2</source>
+        <source>Press and hold for choosing a folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parent directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Location</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>SecondPage</name>
+    <name>FiltersPage</name>
     <message>
-        <source>Nested Page</source>
+        <source>Filter Projects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Item</source>
+        <source>Clear Project Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter Contexts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Context Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OtherFilters</name>
+    <message>
+        <source>Context Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back To Tasklist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings</name>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to todo.txt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fontsize in Tasklist</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SortPage</name>
+    <message>
+        <source>Sort Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle Order (</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskList</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add New Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodoTxt</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>desc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

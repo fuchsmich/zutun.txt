@@ -43,9 +43,6 @@ Dialog {
                 id: ta
                 width: dialog.width
                 autoScrollEnabled: true
-                EnterKey.enabled: false //text.length > 0
-                EnterKey.iconSource: "image://theme/icon-m-enter-accept"
-                EnterKey.onClicked: dialog.accept()
 
                 focus: true
                 property Timer focusTimer: Timer {
@@ -55,6 +52,10 @@ Dialog {
                         ta.forceActiveFocus();
                     }
                 }
+                text: dialog.text
+                EnterKey.enabled: text.length > 0
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
             }
             Row { //turn into GridLayout for more Icons?
                 x: Theme.horizontalPageMargin
