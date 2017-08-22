@@ -29,7 +29,6 @@ QtObject {
         filters.fetchModels();
     }
 
-
     signal listToFile(var newArray)
     onListToFile: {
         newArray.sort();
@@ -46,6 +45,9 @@ QtObject {
         property var projects: filterSettings.projects
         property var contexts: filterSettings.contexts
         property string text: [hideDone? qsTr("Hide Complete"): undefined].concat(projects.concat(contexts)).join(", ")
+
+        property ListModel projectsModel: ListModel {}
+        property ListModel contextsModel: ListModel {}
 
         onProjectsChanged: readArray()
         onContextsChanged: readArray()
@@ -98,20 +100,20 @@ QtObject {
         }
 
         function populate(model, array) {
-            model.clear()
-            var sortedArray, tmpArray = []
-            var itemCount, active, name, visibleItemCount
+            model.clear();
+            var sortedArray, tmpArray = [];
+            var itemCount, active, name, visibleItemCount;
             for ( var a in array) {
-                tmpArray.push(a)
+                tmpArray.push(a);
             }
-            sortedArray = tmpArray.sort()
+            sortedArray = tmpArray.sort();
             for (var i in sortedArray) {
-                name = sortedArray[i]
-                itemCount = array[name].length
-                visibleItemCount = 0
+                name = sortedArray[i];
+                itemCount = array[name].length;
+                visibleItemCount = 0;
                 for (var j =0;  j < array[name].length; j++){
-                    var taskItem = JS.baseFeatures.parseLine(tasksArray[array[name][j]])
-                    if (visibleItem(taskItem)) visibleItemCount++
+                    var taskItem = JS.baseFeatures.parseLine(tasksArray[array[name][j]]);
+                    if (visibleItem(taskItem)) visibleItemCount++;
                 }
                 active = ((filters.projects !== undefined && filters.projects.indexOf(name) !== -1) ||
                           (filters.contexts !== undefined && filters.contexts.indexOf(name) !== -1))
@@ -119,38 +121,60 @@ QtObject {
             }
         }
 
-        property ListModel projectsModel: ListModel {}
-
-
-        property ListModel contextsModel: ListModel {}
     }
+
 
     property QtObject sorting: QtObject {
         property bool asc: sortSettings.asc
         onAscChanged: tasks.populate(tasksArray)
+
         property int order: sortSettings.order
         onOrderChanged: tasks.populate(tasksArray)
-        property string text: list[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc"))
 
+        property int grouping: sortSettings.grouping
+        onGroupingChanged: tasks.populate(tasksArray)
+
+        property string text: functionList[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc"))
+
+
+        //returns a function, which compares two items
         function lessThanFunc() {
-            return list[order][1]
+            return functionList[order][1]
         }
 
-//        function compare(left, right) {
-//            console.log(asc)
-//            if (asc) return left < right
-//            else return left > right
-//        }
-
-        property var list: [
+        //list of functions for sorting; *left* and *right* are the items to compare
+        property var functionList: [
             ["natural", function(left, right) {
-                return !((left.fullTxt < right.fullTxt) ^ asc)
+                console.log(grouping,order)
+                return (groupFuncList[grouping][1](left, right) ?
+                            true :
+                            !((left.fullTxt < right.fullTxt) ^ asc)
+                            );
             }],
             ["Creation Date", function(left, right) {
-                return (left.creationDate === right.creationDate ? left.fullTxt < right.fullTxt : !((left.creationDate < right.creationDate) ^ asc) )
+                return (left.creationDate === right.creationDate ?
+                            left.fullTxt < right.fullTxt :
+                            !((left.creationDate < right.creationDate) ^ asc)
+                        );
             }],
             ["Subject", function(left, right) {
-                return (left.subject === right.subject ? left.fullTxt < right.fullTxt : !((left.subject < right.subject)^ asc ))
+                return (left.subject === right.subject ?
+                            left.fullTxt < right.fullTxt :
+                            !((left.subject < right.subject)^ asc )
+                        );
+            }]
+        ]
+
+        property var groupFuncList: [
+            ["None", function(left, right) {
+                return false;
+            }]
+            ,["projects", function(left, right) {
+                console.log(left.section, right.section)
+                return (left.section < right.section) //^asc
+            }]
+            ,["context", function(left, right) {
+                return (left.section < right.section) //^asc
             }]
         ]
     }
@@ -220,13 +244,14 @@ QtObject {
             return colors[JS.alphabet.search(prio) % colors.length];
         }
 
+        //returns position where to insert *item* decieded by *lessThanFunc*
         function insertPosition(lessThanFunc, item) {
             var lower = 0
             var upper = count
             while (lower < upper) {
                 var middle = Math.floor(lower + (upper - lower) / 2)
                 var result =
-                        lessThanFunc(item, JS.baseFeatures.parseLine(tasksArray[get(middle).lineNum]));
+                        lessThanFunc(item, get(middle)) //JS.baseFeatures.parseLine(tasksArray[get(middle).lineNum]));
                 if (result) {
                     upper = middle
                 } else {
@@ -239,35 +264,49 @@ QtObject {
         function populate(array) {
             clear();
             for (var a = 0; a < array.length; a++) {
-                var item = JS.baseFeatures.parseLine(array[a])
-
-                lowestPrio = (!item.done && item.priority !== "" && item.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
-                              ? item.priority : lowestPrio)
-
-                if (filters.visibleItem(item)) {
-//                    console.log(item.subject.replace(JS.projects.pattern,
-//                                                     function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'}))
-                    var formattedPSubject = item.subject.replace(
-                                JS.projects.pattern,
-                                function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'})
-//                    console.log(formattedPSubject)
-                    var formattedSubject = formattedPSubject.replace(
-                                JS.contexts.pattern,
-                                function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'})
-//                    console.log(formattedSubject)
-
-                    var displayText = (item.priority !== "" ?
-                                           '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
-                            + formattedSubject //item.subject //+ '<br/>' +item.creationDate
-
-                    var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done,
-                        "priority": item.priority, "displayText": displayText,
-                        "creationDate": item.creationDate
-                    }
-
-                    var index = insertPosition(sorting.lessThanFunc(), item)
-                    insert(index, json)
+                var groups = [];
+                switch (sorting.grouping) {
+                case 0 :
+                    groups['nogrouping'] = [];
+                    break;
+                case 1:
+                    groups = JS.projects.list([array[a]]);
+                    break;
+                case 2:
+                    groups = JS.contexts.list([array[a]]);
+                    break;
                 }
+                for (var g in groups) {
+                    console.log(g, groups[g].length);
+                    var item = JS.baseFeatures.parseLine(array[a])
+
+                    lowestPrio = (!item.done && item.priority !== "" && item.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
+                                  ? item.priority : lowestPrio)
+
+                    if (filters.visibleItem(item)) {
+                        var formattedPSubject = item.subject.replace(
+                                    JS.projects.pattern,
+                                    function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'})
+                        var formattedSubject = formattedPSubject.replace(
+                                    JS.contexts.pattern,
+                                    function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'})
+                        var displayText = (item.priority !== "" ?
+                                               '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
+                                + formattedSubject //item.subject //+ '<br/>' +item.creationDate
+
+                        var section = (g === "nogrouping" ? undefined : g);
+//                        console.log(section);
+
+                        var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done,
+                            "priority": item.priority, "displayText": displayText,
+                            "creationDate": item.creationDate, "section": section
+                        }
+
+                        var index = insertPosition(sorting.lessThanFunc(), json) //item)
+                        insert(index, json)
+                    }
+                }
+
             }
         }
 

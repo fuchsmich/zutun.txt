@@ -21,7 +21,7 @@ var baseFeatures = {
 
     parseLine: function(line) {
         var fields = baseFeatures.getMatches(line)
-//        console.log(fields)
+        //        console.log(fields)
         return {
             fullTxt: fields[baseFeatures.fullTxt],
             done: fields[baseFeatures.done] !== undefined,
@@ -29,14 +29,14 @@ var baseFeatures = {
                            fields[baseFeatures.priority].charAt(1) : ""),
             //wenn creationDate auch gesetzt, im Feld completionDate
             completionDate: (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate] : "").trim(),
-//                (fields[baseFeatures.creationDate] !== undefined ?
-//                (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate] : "") :
-//                                 "").trim(),
+            //                (fields[baseFeatures.creationDate] !== undefined ?
+            //                (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate] : "") :
+            //                                 "").trim(),
             //wenn creationDate leer, im Feld completionDate enthalten
             creationDate: (fields[baseFeatures.creationDate] !== undefined ? fields[baseFeatures.creationDate]: "").trim(),
-//                (fields[baseFeatures.creationDate] === undefined ?
-//                               (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate]: "") :
-//                               fields[baseFeatures.creationDate]).trim(),
+            //                (fields[baseFeatures.creationDate] === undefined ?
+            //                               (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate]: "") :
+            //                               fields[baseFeatures.creationDate]).trim(),
             subject: fields[baseFeatures.subject].trim()
         }
     },
@@ -44,7 +44,7 @@ var baseFeatures = {
     modifyLine: function(line, feature, value) {
         //TODO validierung von value???
         var fields = baseFeatures.getMatches(line)
-//        console.log(fields)
+        //        console.log(fields)
         switch (feature) {
         case baseFeatures.done :
             if (value === false) {
@@ -66,7 +66,7 @@ var baseFeatures = {
             break
         }
         fields[baseFeatures.fullTxt] = undefined
-//        console.log(fields)
+        //        console.log(fields)
         return fields.join("")
     }
 }
@@ -81,7 +81,7 @@ var projects = {
 var contexts = {
     pattern: /(^|\s)\@\S+/g ,
     list: function(tasks) {
-        return getPrjCtxtList(tasks, contexts.pattern)
+        return getPrjCtxtList(tasks, contexts.pattern);
     }
 }
 
@@ -91,17 +91,20 @@ function getPrjCtxtList(tasks, pattern) {
 
     for (var t = 0; t < tasks.length; t++) {
         task = tasks[t];
-
         var matches = task.match(pattern);
+//        console.log(matches)
 
         var match = "";
         for (var i in matches) {
             match = matches[i].trim();
-                if (typeof list[match] === 'undefined') list[match] = [];
-                if (list[match].indexOf(t) === -1) list[match].push(t);
+//            console.log(match)
+            if (typeof list[match] === 'undefined') list[match] = [];
+            if (list[match].indexOf(t) === -1) list[match].push(t);
         }
     }
-    return list
+//   console.log(list, list.length)
+    list.sort();
+    return list;
 }
 
 

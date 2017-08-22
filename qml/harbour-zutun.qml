@@ -40,6 +40,8 @@ ApplicationWindow
             path: "sorting"
             property bool asc: true
             property int order: 0
+            property int grouping: 0
+            Component.onCompleted: grouping = 1
         }
     }
 

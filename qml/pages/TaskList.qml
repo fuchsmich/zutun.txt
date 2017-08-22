@@ -72,6 +72,14 @@ Page {
             height: lv.spacing*2
         }
 
+        section {
+            property: "section"
+            criteria: ViewSection.FullString
+            delegate: SectionHeader {
+                text: section
+            }
+        }
+
         ViewPlaceholder {
             enabled: lv.count === 0
             text: "No Tasks"

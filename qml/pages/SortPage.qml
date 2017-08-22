@@ -48,7 +48,7 @@ Page {
             //            }
         }
 
-        property var list: ttm1.sorting.list
+        property var list: ttm1.sorting.functionList
         model: list.length
 
         delegate: ListItem {
