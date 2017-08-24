@@ -20,7 +20,7 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
             MenuItem {
-                text: qsTr("Sorting")
+                text: qsTr("Grouping & Sorting")
                 onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
             }
             MenuItem {
@@ -32,13 +32,9 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                text: (filterSettings.hideDone ? "Show" : "Hide") + " Completed Tasks"
+                text: (filterSettings.hideDone ? qsTr("Show") : qsTr("Hide")) + qsTr(" Completed Tasks")
                 onClicked: filterSettings.hideDone = !filterSettings.hideDone
             }
-            //            MenuItem {
-            //                text: qsTr("Reload todo.txt")
-            ////                onClicked: tdt.reloadTodoTxt();
-            //            }
         }
 
         header: Item {
@@ -47,7 +43,7 @@ Page {
             PageHeader {
                 id: pgh
                 title: qsTr("Tasklist")
-                description: "Sorted by " + ttm1.sorting.text
+                description: ttm1.sorting.groupText + ttm1.sorting.sortText
             }
             Label { /*from PageHeaderDescription.qml */
                 id: flbl
@@ -63,7 +59,7 @@ Page {
                 opacity: 0.6
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
-                text: "Filter: " + ttm1.filters.text
+                text: qsTr("Filter") + ": " + ttm1.filters.text
             }
         }
 
@@ -82,7 +78,7 @@ Page {
 
         ViewPlaceholder {
             enabled: lv.count === 0
-            text: "No Tasks"
+            text: qsTr("No Tasks")
         }
 
         model: ttm1.tasks
@@ -141,16 +137,16 @@ Page {
                 //                    DetailItem { visible: model.creationDate !== ""; label: qsTr("Creation Date"); value: model.creationDate }
                 MenuItem {
                     visible: !(model.done || model.priority === "A")
-                    text: "Priority Up"
+                    text: qsTr("Priority Up")
                     onClicked: ttm1.tasks.alterPriority(index, true)
                 }
                 MenuItem {
                     visible: !(model.done || model.priority === "")
-                    text: "Priority Down"
+                    text: qsTr("Priority Down")
                     onClicked: ttm1.tasks.alterPriority(index, false)
                 }
                 MenuItem {
-                    text: "Remove"
+                    text: qsTr("Remove")
                     onClicked: remove()
                 }
             }
@@ -168,17 +164,12 @@ Page {
 //                    console.log("replacing tl")
                     pageStack.replace(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects", skip: true}, PageStackAction.Immediate);
                 } else {
-//                    console.log("attaching", "projects")
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
                 }
             } else {
                 if (!settings.projectFilterLeft){
-//                    console.log("replacing after settings change (?)")
                     pageStack.replaceAbove(null, Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate);
-//                    console.log("attaching", "projects")
-//                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
                 } else {
-//                    console.log("attaching", "contexts")
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"})
                 }
             }

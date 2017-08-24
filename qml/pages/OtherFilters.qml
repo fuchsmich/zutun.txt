@@ -38,16 +38,10 @@ Page {
 
             TextSwitch {
                 x: Theme.horizontalPageMargin
-                text: "Hide Completed Tasks"
+                text: qsTr("Hide Completed Tasks")
                 checked: filterSettings.hideDone
                 onClicked: filterSettings.hideDone = checked
             }
         }
-    }
-
-    onStatusChanged: {
-        //        if (status === PageStatus.Active /*&& pageStack.depth === 1 */) {
-        //            pageStack.pushAttached("OtherFilters.qml", {});
-        //        }
     }
 }

@@ -68,6 +68,10 @@
         <source>Other Filters</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hide Completed Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Settings</name>
@@ -91,19 +95,31 @@
         <source>Fontsize in Tasklist</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SortPage</name>
-    <message>
-        <source>Sort Order</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Toggle Order (</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorting and Grouping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouping</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -114,15 +130,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorting</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Add New Task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tasklist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouping &amp; Sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Completed Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -142,6 +190,34 @@
     </message>
     <message>
         <source>natural</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorted by %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

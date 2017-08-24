@@ -22,13 +22,13 @@ Page {
 
         Column {
             id: col
-            spacing: Theme.paddingLarge
+            spacing: Theme.paddingMedium
             width: parent.width
             PageHeader {
                 title: qsTr("Settings")
             }
             SectionHeader {
-                text: "Files"
+                text: qsTr("Files")
             }
             TextField {
                 id: todoTxtPath
