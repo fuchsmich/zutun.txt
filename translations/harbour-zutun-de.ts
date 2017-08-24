@@ -140,5 +140,9 @@
         <source>desc</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

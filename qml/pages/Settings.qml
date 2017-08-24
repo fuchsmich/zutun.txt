@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 //TODO Setting for automatically add creation date
+//TODO Sailfish.Filebrowser??
 
 Page {
     id: page

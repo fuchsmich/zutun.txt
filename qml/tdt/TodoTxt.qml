@@ -6,6 +6,7 @@ import FileIO 1.0
 import "todotxt.js" as JS
 
 //TODO due:
+//TODO sort string: include grouping
 
 QtObject {
     property FileIO file: FileIO {
@@ -139,50 +140,66 @@ QtObject {
 
         //returns a function, which compares two items
         function lessThanFunc() {
-            return functionList[order][1]
+            //            return functionList[order][1]
+            return groupFunctionList[grouping][1]
         }
 
         //list of functions for sorting; *left* and *right* are the items to compare
         property var functionList: [
-            ["natural", function(left, right) {
-                console.log(grouping,order)
-                return (groupFuncList[grouping][1](left, right) ?
-                            true :
-                            !((left.fullTxt < right.fullTxt) ^ asc)
-                            );
-            }],
-            ["Creation Date", function(left, right) {
-                return (left.creationDate === right.creationDate ?
-                            left.fullTxt < right.fullTxt :
-                            !((left.creationDate < right.creationDate) ^ asc)
+            [qsTr("natural"), function(left, right) {
+                return (left.fullTxt === right.fullTxt ?
+                            false :
+                            (left.fullTxt < right.fullTxt) ^ !asc
                         );
             }],
-            ["Subject", function(left, right) {
+            [qsTr("Creation Date"), function(left, right) {
+                return (left.creationDate === right.creationDate ?
+                            functionList[0][1](left, right) :
+                            (left.creationDate < right.creationDate) ^ !asc
+                        );
+            }],
+            [qsTr("Subject"), function(left, right) {
                 return (left.subject === right.subject ?
-                            left.fullTxt < right.fullTxt :
-                            !((left.subject < right.subject)^ asc )
+                            functionList[0][1](left, right) :
+                            (left.subject < right.subject)^ !asc
                         );
             }]
         ]
 
-        property var groupFuncList: [
-            ["None", function(left, right) {
-                return false;
-            }]
-            ,["projects", function(left, right) {
-                console.log(left.section, right.section)
-                return (left.section < right.section) //^asc
-            }]
-            ,["context", function(left, right) {
-                return (left.section < right.section) //^asc
-            }]
+        property var groupFunctionList: [
+            [qsTr("None"),
+             function(left, right) {
+                 return functionList[order][1](left, right);
+             },
+             function(line) {
+                 return [];
+             }
+            ]
+            ,[qsTr("Projects"),
+              function(left, right) {
+                  console.log(typeof left.section, right.section)
+                  return (left.section === right.section ?
+                               functionList[order][1](left, right) :
+                              (left.section < right.section) ^ !asc
+                          );
+              },
+              function(line) {
+                  return JS.projects.list([line]);
+              }]
+            ,[qsTr("Contexts"),
+              function(left, right) {
+                  return groupFunctionList[1][1](left,right);
+              },
+              function(line) {
+                  return JS.contexts.list([line]);
+              }]
         ]
     }
 
     property ListModel tasks: ListModel {
 
         //alles auf einmal 0:fullTxt, 1:done, 2:completionDate, 3:priority, 4:creationDate, 5:subject
-//        property var basicPattern: JS.baseFeatures.pattern
+        //        property var basicPattern: JS.baseFeatures.pattern
         property string lowestPrio: "A"
 
         /* überschreiben der Funktion setProperty: */
@@ -214,7 +231,7 @@ QtObject {
         /*raise/lower priority*/
         function alterPriority(index, raise) {
             var newPrio = get(index).priority
-//            console.log(newPrio, raise)
+            //            console.log(newPrio, raise)
             if (raise) {
                 if (newPrio === "") newPrio = String.fromCharCode(lowestPrio.charCodeAt(0) + 1)
                 else if (newPrio > "A") newPrio = String.fromCharCode(newPrio.charCodeAt(0) - 1)
@@ -264,42 +281,43 @@ QtObject {
         function populate(array) {
             clear();
             for (var a = 0; a < array.length; a++) {
-                var groups = [];
-                switch (sorting.grouping) {
-                case 0 :
-                    groups['nogrouping'] = [];
-                    break;
-                case 1:
-                    groups = JS.projects.list([array[a]]);
-                    break;
-                case 2:
-                    groups = JS.contexts.list([array[a]]);
-                    break;
+                var line = array[a];
+                var groups = sorting.groupFunctionList[sorting.grouping][2](line)
+//                switch (
+//                case 1:
+//                    groups = ;
+//                    break;
+//                case 2:
+//                    groups = JS.contexts.list([array[a]]);
+//                    break;
+//                }
+                if (Object.keys(groups).length === 0) {
+//                    groups = [];
+                    groups[""] = [];
                 }
                 for (var g in groups) {
-                    console.log(g, groups[g].length);
-                    var item = JS.baseFeatures.parseLine(array[a])
+//                    console.log(g, groups[g].length);
+                    var item = JS.baseFeatures.parseLine(array[a]);
 
                     lowestPrio = (!item.done && item.priority !== "" && item.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
-                                  ? item.priority : lowestPrio)
+                                  ? item.priority : lowestPrio);
 
                     if (filters.visibleItem(item)) {
                         var formattedPSubject = item.subject.replace(
                                     JS.projects.pattern,
-                                    function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'})
+                                    function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'});
                         var formattedSubject = formattedPSubject.replace(
                                     JS.contexts.pattern,
-                                    function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'})
+                                    function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'});
                         var displayText = (item.priority !== "" ?
                                                '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
                                 + formattedSubject //item.subject //+ '<br/>' +item.creationDate
 
-                        var section = (g === "nogrouping" ? undefined : g);
-//                        console.log(section);
+//                        var section = (g === "nogroup" ? "" : g);
 
                         var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done,
                             "priority": item.priority, "displayText": displayText,
-                            "creationDate": item.creationDate, "section": section
+                            "creationDate": item.creationDate, "section": g //section
                         }
 
                         var index = insertPosition(sorting.lessThanFunc(), json) //item)
