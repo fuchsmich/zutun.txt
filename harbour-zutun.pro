@@ -51,7 +51,8 @@ DISTFILES += \
     qml/external/FileBrowser.qml \
     qml/pages/AcceptFileDialog.qml \
     qml/pages/About.qml \
-    qml/pages/SortPage.qml
+    qml/pages/SortPage.qml \
+    qml/external/FileBrowser2.qml
 
 HEADERS += \
     src/fileio.hpp

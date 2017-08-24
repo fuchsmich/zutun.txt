@@ -40,7 +40,7 @@ Page {
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Choose File")
-                onClicked: pageStack.push(Qt.resolvedUrl("../external/FileBrowser.qml")); //, {state: "projects"});
+                onClicked: pageStack.push(Qt.resolvedUrl("../external/FileBrowser2.qml")); //, {state: "projects"});
                 width: Theme.buttonWidthLarge
             }
 
