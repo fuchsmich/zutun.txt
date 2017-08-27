@@ -18,19 +18,6 @@ Page {
 
     backNavigation: !FileEngine.busy
 
-    function openConfirmDialog(fp) {
-        if (page.status !== PageStatus.Active) {
-
-            console.log("not readxy");
-            return;
-        }
-        var dialog = pageStack.push(confirmDialog, {filePath: fp});
-
-//        dialog.accepted.connect(function() {
-//            settings.todoTxtLocation = fp
-//        })
-    }
-
     Component {
         id: confirmDialog
         Dialog {
