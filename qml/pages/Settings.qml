@@ -6,6 +6,8 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
+    property string name: "settings"
+
     SilicaFlickable {
         anchors.fill: parent
         contentWidth: parent.width
@@ -40,7 +42,7 @@ Page {
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Choose File")
-                onClicked: pageStack.push(Qt.resolvedUrl("../external/FileBrowser2.qml"), {path: "/home/nemo/"}); //, {state: "projects"});
+                onClicked: pageStack.push(Qt.resolvedUrl("../external/FileBrowser.qml"), {path: "/home/nemo/"}); //, {state: "projects"});
                 width: Theme.buttonWidthLarge
             }
 

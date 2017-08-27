@@ -23,22 +23,6 @@
 <context>
     <name>FileBrowser</name>
     <message>
-        <source>Home</source>
-        <translation type="unfinished">Heimverzeichnis</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished">Löschen</translation>
-    </message>
-    <message>
-        <source>Press and hold for choosing a folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parent directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>File Location</source>
         <translation type="unfinished"></translation>
     </message>
