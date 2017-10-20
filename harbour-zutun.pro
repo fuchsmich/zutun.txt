@@ -48,8 +48,7 @@ DISTFILES += \
     rpm/harbour-zutun.changes \
     qml/tdt/TodoTxt.qml \
     qml/pages/About.qml \
-    qml/pages/SortPage.qml \
-    qml/external/FileBrowser.qml
+    qml/pages/SortPage.qml
 
 HEADERS += \
     src/fileio.hpp

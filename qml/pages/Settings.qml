@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-
+import Sailfish.Pickers 1.0
 //TODO Setting for automatically add creation date
 //TODO Sailfish.Filebrowser??
 
@@ -42,8 +42,19 @@ Page {
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Choose File")
-                onClicked: pageStack.push(Qt.resolvedUrl("../external/FileBrowser.qml"), {path: "/home/nemo/"}); //, {state: "projects"});
+//                onClicked: pageStack.push(Qt.resolvedUrl("../external/FileBrowser.qml"), {path: "/home/nemo/"}); //, {state: "projects"});
+                onClicked: pageStack.push(filePickerPage)//, {path: "/home/nemo/"}); //, {state: "projects"});
                 width: Theme.buttonWidthLarge
+            }
+
+            Component {
+                id: filePickerPage
+                FilePickerPage {
+                    nameFilters: [ '*.txt']
+                    onSelectedContentPropertiesChanged: {
+                        page.selectedFile = selectedContentProperties.filePath
+                    }
+                }
             }
 
             SectionHeader {
