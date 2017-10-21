@@ -7,6 +7,10 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Thu Jun 22 2017 Michael Fuchs <michfu@gmx.at> 1.4-1
+- native FilePicker
+- cursorposition
+
 * Thu Jun 22 2017 Michael Fuchs <michfu@gmx.at> 1.3-1
 - FIX doubeled tasks after edit
 - better focus handling and cursor positioning in edit

@@ -2,28 +2,9 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name></name>
-    <message id="filemanager-la-file_details">
-        <source>%1, %2</source>
-        <extracomment>Shows size and modification date, e.g. &quot;15.5MB, 02/03/2016&quot;</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="filemanager-la-no_files">
-        <source>No files</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>About</name>
     <message>
         <source>About Zutun.txt</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>FileBrowser</name>
-    <message>
-        <source>File Location</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
