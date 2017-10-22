@@ -41,8 +41,7 @@ Page {
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Choose File")
-//                onClicked: pageStack.push(Qt.resolvedUrl("../external/FileBrowser.qml"), {path: "/home/nemo/"}); //, {state: "projects"});
-                onClicked: pageStack.push(filePickerPage)//, {path: "/home/nemo/"}); //, {state: "projects"});
+                onClicked: pageStack.push(filePickerPage)
                 width: Theme.buttonWidthLarge
             }
 
@@ -51,7 +50,7 @@ Page {
                 FilePickerPage {
                     nameFilters: [ '*.txt']
                     onSelectedContentPropertiesChanged: {
-                        page.selectedFile = selectedContentProperties.filePath
+                        settings.todoTxtLocation = selectedContentProperties.filePath
                     }
                 }
             }

@@ -10,35 +10,19 @@ Dialog {
     property alias text: ta.text
 
     property string selectedPriority
-<<<<<<< HEAD
-    onSelectedPriorityChanged: {
-        var cp = ta.cursorPosition;
-        var tl = ta.text.length;
-        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority)
-        ta.forceActiveFocus()
-        ta.cursorPosition = cp + (ta.text.length - tl)
-=======
     onSelectedPriorityChanged:{
         var cp = ta.cursorPosition;
         var l = ta.text.length;
         ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority);
         ta.cursorPosition = cp + (ta.text.length - l);
->>>>>>> cursorpos
     }
 
     property string appendText
     onAppendTextChanged: {
-<<<<<<< HEAD
-        var cp = ta.cursorPosition
-        ta.text += " " + appendText + " "
-        ta.forceActiveFocus()
-        ta.cursorPosition = cp
-=======
         var cp = ta.cursorPosition;
         var l = ta.text.length;
         ta.text = ta.text.trim() + " " + appendText;
         ta.cursorPosition = cp + (ta.text.length - l);
->>>>>>> cursorpos
     }
 
     acceptDestinationAction: PageStackAction.Pop
