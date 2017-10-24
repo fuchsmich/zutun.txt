@@ -76,6 +76,10 @@
         <source>Files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Attach project filter to the left of tasklist.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SortPage</name>
@@ -97,6 +101,13 @@
     </message>
     <message>
         <source>Grouping</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEdit</name>
+    <message>
+        <source>Edit Task</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

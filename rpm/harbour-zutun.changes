@@ -5,6 +5,10 @@
 # Add newest entries to the top of the list.
 # Separate entries from eachother with a blank line.
 
+* Tue Oct 24 2017 Michael Fuchs <michfu@gmx.at> 1.4.1-1
+- added Readme
+- swedish and german translation
+
 * Sun Oct 22 2017 Michael Fuchs <michfu@gmx.at> 1.4-1
 - native FilePicker
 - cursorposition

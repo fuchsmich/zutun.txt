@@ -105,6 +105,13 @@
     </message>
 </context>
 <context>
+    <name>TaskEdit</name>
+    <message>
+        <source>Edit Task</source>
+        <translation>Redigera uppgift</translation>
+    </message>
+</context>
+<context>
     <name>TaskList</name>
     <message>
         <source>Settings</source>
@@ -153,13 +160,6 @@
     <message>
         <source>Remove</source>
         <translation>Ta bort</translation>
-    </message>
-</context>
-<context>
-    <name>TaskEdit</name>
-    <message>
-        <source>Edit Task</source>
-        <translation>Redigera uppgift</translation>
     </message>
 </context>
 <context>

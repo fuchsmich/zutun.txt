@@ -5,197 +5,208 @@
     <name>About</name>
     <message>
         <source>About Zutun.txt</source>
-        <translation type="unfinished">Über Zutun.txt</translation>
+        <translation>Über Zutun.txt</translation>
     </message>
 </context>
 <context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Projektfilter</translation>
     </message>
     <message>
         <source>Clear Project Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Projektfilter löschen</translation>
     </message>
     <message>
         <source>Filter Contexts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontextfilter</translation>
     </message>
     <message>
         <source>Clear Context Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontextfilter löschen</translation>
     </message>
 </context>
 <context>
     <name>OtherFilters</name>
     <message>
         <source>Context Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontextfilter</translation>
     </message>
     <message>
         <source>Project Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Projektfilter</translation>
     </message>
     <message>
         <source>Back To Tasklist</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück zur Aufgabenliste</translation>
     </message>
     <message>
         <source>Other Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere Filter</translation>
     </message>
     <message>
         <source>Hide Completed Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge fertige Aufgaben</translation>
     </message>
 </context>
 <context>
     <name>Settings</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Path to todo.txt</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad zu todo.txt</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei wählen</translation>
     </message>
     <message>
         <source>Fontsize in Tasklist</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftgröße in Aufgabenliste</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateien</translation>
+    </message>
+    <message>
+        <source>Attach project filter to the left of tasklist.</source>
+        <translation>Projektfilter links der Aufgabenliste plazieren.</translation>
     </message>
 </context>
 <context>
     <name>SortPage</name>
     <message>
         <source>Toggle Order (</source>
-        <translation type="unfinished"></translation>
+        <translation>Reihenfolge umschalten (</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <source>Sorting and Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortieren und Gruppieren</translation>
     </message>
     <message>
         <source>Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortieren</translation>
     </message>
     <message>
         <source>Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppieren</translation>
+    </message>
+</context>
+<context>
+    <name>TaskEdit</name>
+    <message>
+        <source>Edit Task</source>
+        <translation>Aufgabe editieren</translation>
     </message>
 </context>
 <context>
     <name>TaskList</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Add New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe erstellen</translation>
     </message>
     <message>
         <source>Tasklist</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabenliste</translation>
     </message>
     <message>
         <source>Grouping &amp; Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppieren &amp; Sortieren</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge</translation>
     </message>
     <message>
         <source> Completed Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation> fertige Aufgaben</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>No Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Aufgaben</translation>
     </message>
     <message>
         <source>Priority Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorität rauf</translation>
     </message>
     <message>
         <source>Priority Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorität runter</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
     <name>TodoTxt</name>
     <message>
         <source>Hide Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge fertige</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation type="unfinished"></translation>
+        <translation>aufsteigend</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation type="unfinished"></translation>
+        <translation>absteigend</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation>natürlich</translation>
     </message>
     <message>
         <source>Creation Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelldatum</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Betreff</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Projekte</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontext</translation>
     </message>
     <message>
         <source>Sorted by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortiert nach %1</translation>
     </message>
     <message>
         <source>Grouped by %1, </source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppiert nach %1, </translation>
     </message>
 </context>
 </TS>
