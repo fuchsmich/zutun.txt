@@ -87,7 +87,7 @@ Page {
                 }
             }
             TextSwitch {
-                text: "Attach project filter to the left of tasklist."
+                text: qsTr("Attach project filter to the left of tasklist.")
                 //description: "Restart the app to take effect."
                 checked: settings.projectFilterLeft
                 onClicked: settings.projectFilterLeft = checked
