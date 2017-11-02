@@ -7,6 +7,14 @@
         <source>About Zutun.txt</source>
         <translation type="unfinished">Über Zutun.txt</translation>
     </message>
+    <message>
+        <source>Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Packages</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FiltersPage</name>
@@ -88,15 +96,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorting and Grouping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sorting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Grouping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEdit</name>
+    <message>
+        <source>Add New Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -112,10 +131,6 @@
     </message>
     <message>
         <source>Tasklist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Grouping &amp; Sorting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -149,6 +164,10 @@
     <message>
         <source>Remove</source>
         <translation type="unfinished">Löschen</translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

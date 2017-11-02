@@ -10,10 +10,11 @@ Page {
     SilicaListView {
         id: lv
         property string btnTxt: "Clear Project Filter"
+        property string title: "Projects"
 
         anchors.fill: parent
         VerticalScrollDecorator {}
-//        PullDownMenu {
+        PullDownMenu {
 //            MenuItem {
 //                text: qsTr("Other Filters")
 //                onClicked: //pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
@@ -34,33 +35,39 @@ Page {
 //                text: qsTr("Back To Tasklist")
 //                onClicked: pageStack.pop(pageStack.find(function(p){ return (p._depth === 0)}));
 //            }
-//        }
-
-        property string title: "Projects"
-        header: Item {
-            width: page.width
-            height: pgh.height + cbtn.height
-
-            PageHeader {
-                id: pgh
-                title: lv.title
-                //            description: ttm1.filters.string()
-            }
-            Button {
-                id: cbtn
-                width: Theme.buttonWidthLarge
-                anchors {
-                    top: pgh.bottom
-                    topMargin: -Theme.paddingMedium
-                    horizontalCenter: parent.horizontalCenter
-                }
+            MenuItem {
                 text: lv.btnTxt
-                onClicked: {
-                    ttm1.filters.clearFilter(page.state);
-                    //                        pageStack.navigateBack();
-                }
+                onClicked: { ttm1.filters.clearFilter(page.state); }
             }
         }
+
+        header: PageHeader {
+            title: lv.title
+        }
+//        header: Item {
+//            width: page.width
+//            height: pgh.height + cbtn.height
+
+//            PageHeader {
+//                id: pgh
+//                title: lv.title
+//                //            description: ttm1.filters.string()
+//            }
+//            Button {
+//                id: cbtn
+//                width: Theme.buttonWidthLarge
+//                anchors {
+//                    top: pgh.bottom
+//                    topMargin: -Theme.paddingMedium
+//                    horizontalCenter: parent.horizontalCenter
+//                }
+//                text: lv.btnTxt
+//                onClicked: {
+//                    ttm1.filters.clearFilter(page.state);
+//                    //                        pageStack.navigateBack();
+//                }
+//            }
+//        }
 
         delegate: ListItem {
             enabled: model.visibleItemCount > 0

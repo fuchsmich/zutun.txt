@@ -18,17 +18,27 @@ Page {
             PageHeader {
                 title: qsTr("About Zutun.txt")
             }
+            SectionHeader {
+                text: "Author" }
             Label {
-                anchors.horizontalCenter: col.horizontalCenter
-                text: "Michael Fuchs" }
-            Label {
-                anchors.horizontalCenter: col.horizontalCenter
-                text: 'michfu@gmx.at'
-//                text: '<a href="mailto:michfu@gmx.at>michfu@gmx.at</a>'
-//                textFormat: Text.RichText
+                x: Theme.horizontalPageMargin
+                text: 'Michael Fuchs <a href=\'mailto:michfu@gmx.at\'>michfu@gmx.at</a>'
+                textFormat: Text.RichText
             }
-            Label { text: "https://github.com/fuchsmich/zutun.txt/" }
-            Label { text: "https://openrepos.net/content/fooxl/zutuntxt" }
+            SectionHeader {
+                text: qsTr("Source")
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                text: "<a href=\'https://github.com/fuchsmich/zutun.txt/\'>github.com</a>"
+            }
+            SectionHeader {
+                text: qsTr("Packages")
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                text: "<a href=\'https://openrepos.net/content/fooxl/zutuntxt\'>openrepos.net</a>"
+            }
         }
     }
 }

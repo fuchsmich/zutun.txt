@@ -31,7 +31,7 @@ Page {
             width: parent.width
             PageHeader {
                 id: pgh
-                title: qsTr("Sorting and Grouping")
+                title: qsTr("Sorting & Grouping")
             }
             Button {
                 id: cbtn

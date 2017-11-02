@@ -6,7 +6,6 @@ import "tdt"
 
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
-//TODO Translation (Transifex??)
 //TODO Search field??
 //TODO File IO in Python?
 

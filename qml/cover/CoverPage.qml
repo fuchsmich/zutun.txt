@@ -13,7 +13,6 @@ id: cb
 
     Column {
         anchors.fill: parent
-//        anchors.margins: Theme.paddingMedium
         Repeater {
             model: ttm1.tasks
             Label {
@@ -21,7 +20,6 @@ id: cb
                 text: model.displayText
                 width: cb.width - 2*x
                 truncationMode: TruncationMode.Elide
-//                visible: model.done
             }
         }
     }

@@ -20,7 +20,7 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
             MenuItem {
-                text: qsTr("Grouping & Sorting")
+                text: qsTr("Sorting & Grouping")
                 onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
             }
             MenuItem {
