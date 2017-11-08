@@ -92,6 +92,8 @@ QtObject {
             if (active) list.push(name);
             else list.splice(list.indexOf(name), 1);
             list.sort();
+            console.log(typeof list, typeof list[0]);
+            //TODO filters are not stored (anymore?)
             switch (name.charAt(0)) {
             case "+": filterSettings.projects = list; break;
             case "@": filterSettings.contexts = list; break;
