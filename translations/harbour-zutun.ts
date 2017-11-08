@@ -124,13 +124,6 @@
     </message>
 </context>
 <context>
-    <name>TaskEdit</name>
-    <message>
-        <source>Edit Task</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TaskList</name>
     <message>
         <source>Settings</source>

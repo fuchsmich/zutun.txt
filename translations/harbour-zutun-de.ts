@@ -116,7 +116,7 @@
     <name>TaskEdit</name>
     <message>
         <source>Add New Task</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aufgabe erstellen</translation>
     </message>
     <message>
         <source>Edit Task</source>

@@ -31,6 +31,7 @@ ApplicationWindow
             id: filterSettings
             path: "filters"
             property bool hideDone: true
+            //TODO filters are not stored (anymore?)
             property var projects: []
             property var contexts: []
         }

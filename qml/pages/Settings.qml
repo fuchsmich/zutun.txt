@@ -47,6 +47,7 @@ Page {
 
             Component {
                 id: filePickerPage
+                //TODO how to create new file?
                 FilePickerPage {
                     nameFilters: [ '*.txt']
                     onSelectedContentPropertiesChanged: {

@@ -7,6 +7,14 @@
         <source>About Zutun.txt</source>
         <translation>Om Zutun.txt</translation>
     </message>
+    <message>
+        <source>Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Packages</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FiltersPage</name>
@@ -92,10 +100,6 @@
         <translation>Återställ</translation>
     </message>
     <message>
-        <source>Sorting and Grouping</source>
-        <translation>Sortering och gruppering</translation>
-    </message>
-    <message>
         <source>Sorting</source>
         <translation>Sortering</translation>
     </message>
@@ -103,12 +107,20 @@
         <source>Grouping</source>
         <translation>Gruppering</translation>
     </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TaskEdit</name>
     <message>
         <source>Edit Task</source>
         <translation>Redigera uppgift</translation>
+    </message>
+    <message>
+        <source>Add New Task</source>
+        <translation type="unfinished">Lägg till ny uppgift</translation>
     </message>
 </context>
 <context>
@@ -124,10 +136,6 @@
     <message>
         <source>Tasklist</source>
         <translation>Uppgiftslista</translation>
-    </message>
-    <message>
-        <source>Grouping &amp; Sorting</source>
-        <translation>Gruppering &amp; sortering</translation>
     </message>
     <message>
         <source>Show</source>
@@ -160,6 +168,10 @@
     <message>
         <source>Remove</source>
         <translation>Ta bort</translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
