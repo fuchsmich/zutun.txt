@@ -42,8 +42,8 @@ QtObject {
 
     property QtObject filters: QtObject {
         property bool hideDone: filterSettings.hideDone
-        property var projects: filterSettings.projects
-        property var contexts: filterSettings.contexts
+        property var projects: filterSettings.projects.value
+        property var contexts: filterSettings.contexts.value
         property string text: [hideDone? qsTr("Hide Complete"): undefined].concat(projects.concat(contexts)).join(", ")
 
         property ListModel projectsModel: ListModel {}
@@ -61,8 +61,8 @@ QtObject {
 
         function clearFilter(filterName) {
             switch(filterName) {
-            case "projects": filterSettings.projects = []; break;
-            case "contexts": filterSettings.contexts = []; break;
+            case "projects": filterSettings.projects.value = []; break;
+            case "contexts": filterSettings.contexts.value = []; break;
             }
         }
 
@@ -82,21 +82,22 @@ QtObject {
             return true;
         }
 
-        function setByName(name, active) {
+        /* set filter; name... filterstring; onOff... turn it on (true) or off (false)*/
+        function setByName(name, onOff) {
             var list = [];
             switch (name.charAt(0)) {
             case "+": list = projects; break;
             case "@": list = contexts; break;
             default: return;
             }
-            if (active) list.push(name);
+            if (onOff) list.push(name);
             else list.splice(list.indexOf(name), 1);
+            console.log(typeof filterSettings.projects, typeof list[0]);
             list.sort();
-            console.log(typeof list, typeof list[0]);
-            //TODO filters are not stored (anymore?)
+//            //TODO filters are not stored (anymore?)
             switch (name.charAt(0)) {
-            case "+": filterSettings.projects = list; break;
-            case "@": filterSettings.contexts = list; break;
+            case "+": filterSettings.projects.value = list; break;
+            case "@": filterSettings.contexts.value = list; break;
             default: return;
             }
         }

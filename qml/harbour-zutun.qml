@@ -32,9 +32,19 @@ ApplicationWindow
             path: "filters"
             property bool hideDone: true
             //TODO filters are not stored (anymore?)
-            property var projects: []
-            property var contexts: []
+            property ConfigurationValue projects: ConfigurationValue {
+                key: "/apps/harbour-zutun/settings/filters/projects"
+                defaultValue: []
+            }
+            property ConfigurationValue contexts: ConfigurationValue {
+                key: "/apps/harbour-zutun/settings/filters/contexts"
+                defaultValue: []
+            }
+
+//            property var contexts: []
+            onProjectsChanged: console.log(projects.toString())
         }
+
         ConfigurationGroup {
             id: sortSettings
             path: "sorting"
