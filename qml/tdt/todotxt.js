@@ -14,7 +14,7 @@ var baseFeatures = {
     getMatches: function(line) {
         var matches = line.match(baseFeatures.pattern)
         if (matches[baseFeatures.creationDate] === undefined)
-            //swap creationDate, baseFeatures
+            //swap creationDate, completionDate
             matches[baseFeatures.creationDate] = matches.splice(baseFeatures.completionDate, 1, matches[baseFeatures.creationDate])[0]
         return matches
     },
@@ -74,35 +74,66 @@ var baseFeatures = {
 var projects = {
     pattern: /(^|\s)\+\S+/g ,
     list: function(tasks) {
-        return getPrjCtxtList(tasks, projects.pattern)
+        return getMatchesList(tasks, projects.pattern)
     }
 }
 
 var contexts = {
     pattern: /(^|\s)\@\S+/g ,
     list: function(tasks) {
-        return getPrjCtxtList(tasks, contexts.pattern);
+        return getMatchesList(tasks, contexts.pattern);
     }
 }
 
-function getPrjCtxtList(tasks, pattern) {
+var due = {
+    datePattern: /^\d{4}-\d{2}-\d{2}$/,
+    pattern: /(^|\s)due:\d{4}-\d{2}-\d{2}(\s|$)/,
+    subjectPattern: /(^|.*\s)due:(\d{4}-\d{2}-\d{2})(\s.*|$)/,
+    set: function(task, date) {
+        console.log(typeof date, date);
+        var dueStr = "due:";
+        if (typeof date === "string" && due.datePattern.test(date)) {
+            dueStr += date.trim();
+        } else if (date instanceof Date) {
+            dueStr += Qt.formatDate(date, 'yyyy-MM-dd');
+        }
+        console.log(dueStr);
+        if (due.pattern.test(dueStr))  {
+            if (due.pattern.test(task))
+                return task.replace(due.pattern, " " + dueStr + " ");
+            else
+                return task + " " + dueStr.trim();
+        }
+    },
+    get: function(subject) {
+        var dueDate = "";
+        if (due.subjectPattern.test(subject)) {
+            var matches = subject.match(due.subjectPattern);
+            dueDate = matches[2];
+            subject = matches[1].trim() + " " + matches[3].trim();
+        }
+        return [dueDate, subject];
+    }
+}
+
+function getMatchesList(tasks, pattern) {
     var task = ""
     var list = []
 
     for (var t = 0; t < tasks.length; t++) {
         task = tasks[t];
         var matches = task.match(pattern);
-//        console.log(matches)
+        //        console.log(matches)
 
         var match = "";
         for (var i in matches) {
             match = matches[i].trim();
-//            console.log(match)
+            //            console.log(match)
             if (typeof list[match] === 'undefined') list[match] = [];
             if (list[match].indexOf(t) === -1) list[match].push(t);
         }
     }
-//   console.log(list, list.length)
+    //   console.log(list, list.length)
     list.sort();
     return list;
 }

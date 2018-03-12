@@ -12,17 +12,29 @@
 # The name of your application
 TARGET = harbour-zutun
 
-CONFIG += sailfishapp
+CONFIG += sailfishapp_qml
 
-SOURCES += \
-    src/main.cpp
-
-OTHER_FILES += qml/harbour-zutun.qml \
+DISTFILES += qml/harbour-zutun.qml \
     qml/cover/CoverPage.qml \
     rpm/harbour-zutun.spec \
     rpm/harbour-zutun.yaml \
     translations/*.ts \
-    harbour-zutun.desktop
+    harbour-zutun.desktop \
+    qml/pages/Settings.qml \
+    qml/pages/TaskEdit.qml \
+    qml/pages/TaskList.qml \
+    qml/pages/TextSelect.qml \
+    qml/pages/OtherFilters.qml \
+    qml/pages/FiltersPage.qml \
+    qml/cover/zutun.png \
+    qml/tdt/todotxt.js \
+    rpm/harbour-zutun.changes \
+    qml/tdt/TodoTxt.qml \
+    qml/pages/About.qml \
+    qml/pages/SortPage.qml \
+    qml/tdt/FileIO.qml \
+    qml/python/fileio.py \
+    qml/tdt/Notification.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
@@ -37,21 +49,8 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-zutun-de.ts \
     translations/harbour-zutun-es.ts \
     translations/harbour-zutun-ru.ts \
+    translations/harbour-zutun-nl.ts \
     translations/harbour-zutun-sv.ts
-
-DISTFILES += \
-    qml/pages/Settings.qml \
-    qml/pages/TaskEdit.qml \
-    qml/pages/TaskList.qml \
-    qml/pages/TextSelect.qml \
-    qml/pages/OtherFilters.qml \
-    qml/pages/FiltersPage.qml \
-    qml/cover/zutun.png \
-    qml/tdt/todotxt.js \
-    rpm/harbour-zutun.changes \
-    qml/tdt/TodoTxt.qml \
-    qml/pages/About.qml \
-    qml/pages/SortPage.qml
 
 HEADERS += \
     src/fileio.hpp

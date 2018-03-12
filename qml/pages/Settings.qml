@@ -49,6 +49,7 @@ Page {
                 id: filePickerPage
                 //TODO how to create new file?
                 FilePickerPage {
+                    title: "todo.txt Location"
                     nameFilters: [ '*.txt']
                     onSelectedContentPropertiesChanged: {
                         settings.todoTxtLocation = selectedContentProperties.filePath

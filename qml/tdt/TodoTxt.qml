@@ -2,10 +2,7 @@ import QtQuick 2.0
 
 import Sailfish.Silica 1.0
 
-import FileIO 1.0
 import "todotxt.js" as JS
-
-//TODO due:
 
 QtObject {
     property FileIO file: FileIO {
@@ -20,8 +17,9 @@ QtObject {
         readArray();
     }
 
-    signal reloadFile()
-    onReloadFile: file.contentChanged();
+    function reloadFile() {
+        file.read();
+    }
 
     signal readArray()
     onReadArray: {
@@ -92,9 +90,8 @@ QtObject {
             }
             if (onOff) list.push(name);
             else list.splice(list.indexOf(name), 1);
-            console.log(typeof filterSettings.projects, typeof list[0]);
+            //console.log(typeof filterSettings.projects, typeof list[0]);
             list.sort();
-//            //TODO filters are not stored (anymore?)
             switch (name.charAt(0)) {
             case "+": filterSettings.projects.value = list; break;
             case "@": filterSettings.contexts.value = list; break;
@@ -160,6 +157,12 @@ QtObject {
                             (left.creationDate < right.creationDate) ^ !asc
                         );
             }],
+            [qsTr("Due Date"), function(left, right) {
+                return (left.due === right.due ?
+                            functionList[0][1](left, right) :
+                            (left.due < right.due) ^ !asc
+                        );
+            }],
             [qsTr("Subject"), function(left, right) {
                 return (left.subject === right.subject ?
                             functionList[0][1](left, right) :
@@ -179,7 +182,7 @@ QtObject {
             ]
             ,[qsTr("Projects"),
               function(left, right) {
-//                  console.log(typeof left.section, right.section)
+                  //console.log(typeof left.section, right.section)
                   return (left.section === right.section ?
                                functionList[order][1](left, right) :
                               (left.section < right.section) ^ !asc
@@ -198,6 +201,21 @@ QtObject {
         ]
     }
 
+
+    property var notifications: {
+        "idList": [],
+        "removeAll": function() {
+            for (var i = 0; i < notifications.idList.length; i++) {
+                var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"));
+
+                var notification = notificationComp.createObject(app);
+                notification.replacesId =  notifications.idList[i];
+                notification.close();
+                notification.publish();
+            }
+            notifications.idList = [];
+        }
+    }
     property ListModel tasks: ListModel {
 
         //alles auf einmal 0:fullTxt, 1:done, 2:completionDate, 3:priority, 4:creationDate, 5:subject
@@ -280,6 +298,7 @@ QtObject {
 
         function populate(array) {
             clear();
+            notifications.removeAll();
             for (var a = 0; a < array.length; a++) {
                 var line = array[a];
                 var groups = sorting.groupFunctionList[sorting.grouping][2](line)
@@ -287,7 +306,11 @@ QtObject {
                     groups[""] = [];
                 }
                 for (var g in groups) {
-                    var item = JS.baseFeatures.parseLine(array[a]);
+                    var item = JS.baseFeatures.parseLine(line);
+                    var dueRes = JS.due.get(item.subject)
+                    item["due"] = dueRes[0];
+                    item.subject = dueRes[1];
+                    //console.log(item.due, item.subject);
 
                     lowestPrio = (!item.done && item.priority !== "" && item.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
                                   ? item.priority : lowestPrio);
@@ -305,16 +328,30 @@ QtObject {
 
                         var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done,
                             "priority": item.priority, "displayText": displayText,
-                            "creationDate": item.creationDate, "section": g //section
+                            "creationDate": item.creationDate, "due": item.due,
+                            "section": g //section
                         };
 
                         var index = insertPosition(sorting.lessThanFunc(), json); //item)
                         insert(index, json);
+                        if (item.due !== "") {
+                            var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"));
+
+                            var notification = notificationComp.createObject(app);
+                            notification.timestamp = Date.fromLocaleString(Qt.locale(), item.due, "yyyy-MM-dd");
+                            notification.body = item.subject;
+                            notification.summary = item.due;
+                            notification.publish();
+                            notifications.idList.push(notification.replacesId)
+                            //console.log(notification.replacesId, notifications.idList);
+                        }
                     }
                 }
 
             }
         }
-
+    }
+    Component.onDestruction: {
+        notifications.removeAll();
     }
 }

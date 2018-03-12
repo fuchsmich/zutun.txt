@@ -2,7 +2,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtQml.Models 2.1
+//import QtQml.Models 2.1
 
 Page {
     id: page
@@ -121,15 +121,32 @@ Page {
                     spacing: Theme.paddingSmall
                     anchors.right: parent.right
                     anchors.rightMargin: Theme.horizontalPageMargin
-                    Label { visible: model.creationDate !== "";
-                        text: "Creation"; font.pixelSize: Theme.fontSizeExtraSmall
-                        //                                font.bold: true;
+                    Label {
+                        visible: model.creationDate !== "";
+                        text: qsTr("created:");
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        //font.bold: true;
                         color: Theme.highlightColor
                     }
                     Label {
-                        //                                anchors.leftMargin: Theme.paddingSmall
+                        //anchors.leftMargin: Theme.paddingSmall
                         visible: model.creationDate !== "";
-                        text: model.creationDate; font.pixelSize: Theme.fontSizeExtraSmall}
+                        text: model.creationDate;
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                    }
+                    Label {
+                        visible: model.due !== "";
+                        text: qsTr("due:");
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        //font.bold: true;
+                        color: Theme.highlightColor
+                    }
+                    Label {
+                        //anchors.leftMargin: Theme.paddingSmall
+                        visible: model.due !== "";
+                        text: model.due;
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                    }
                 }
             }
 

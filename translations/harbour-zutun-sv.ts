@@ -173,6 +173,14 @@
         <source>Sorting &amp; Grouping</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>created:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>due:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodoTxt</name>
@@ -219,6 +227,10 @@
     <message>
         <source>Grouped by %1, </source>
         <translation>Grupperat %1, </translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

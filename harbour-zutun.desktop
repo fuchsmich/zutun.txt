@@ -2,7 +2,7 @@
 Type=Application
 X-Nemo-Application-Type=silica-qt5
 Icon=harbour-zutun
-Exec=harbour-zutun
+Exec=sailfish-qml harbour-zutun
 Name=ZuTun.txt
 # translation example:
 # your app name in German locale (de)

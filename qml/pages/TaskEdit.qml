@@ -1,11 +1,13 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import Sailfish.Silica 1.0
+//import QtQuick.Layouts 1.0
 
 import "../tdt/todotxt.js" as JS
 
 Dialog {
     id: dialog
 
+    //-1 for adding new task
     property int itemIndex: -1
     property alias text: ta.text
 
@@ -21,7 +23,7 @@ Dialog {
     onAppendTextChanged: {
         var cp = ta.cursorPosition;
         var l = ta.text.length;
-        ta.text = ta.text.trim() + " " + appendText;
+        ta.text = (ta.text.trim() + " " + appendText).trim() + " ";
         ta.cursorPosition = cp + (ta.text.length - l);
     }
 
@@ -40,7 +42,7 @@ Dialog {
             }
             TextArea {
                 id: ta
-                width: dialog.width
+                width: parent.width
                 autoScrollEnabled: true
 
                 focus: true
@@ -57,11 +59,16 @@ Dialog {
                 EnterKey.onClicked: focus = false
                 Component.onCompleted: cursorPosition = ta.text.length
             }
-            Row { //turn into GridLayout for more Icons?
+            Grid { //turn into GridLayout for more Icons?
                 x: Theme.horizontalPageMargin
                 spacing: Theme.paddingSmall
+                width: parent.width
+                horizontalItemAlignment: Grid.AlignHCenter
+                verticalItemAlignment: Grid.AlignVCenter
+                columns: Math.floor(width/btn.width)
                 Button {
-                    height: parent.height
+                    id: btn
+//                    height: Theme.iconSizeExtraLarge
                     width: height
                     text: "(A)"
                     onClicked: {
@@ -69,7 +76,7 @@ Dialog {
                     }
                 }
                 Button {
-                    height: parent.height
+//                    height: Theme.iconSizeLarge
                     width: height
                     Label {
                         anchors.centerIn: parent
@@ -96,7 +103,7 @@ Dialog {
                     }
                 }
                 Button {
-                    height: parent.height
+//                    height: Theme.iconSizeLarge
                     width: height
                     text: "+"
                     onClicked: {
@@ -104,21 +111,36 @@ Dialog {
                     }
                 }
                 Button {
-                    height: parent.height
+//                    height: Theme.iconSizeLarge
                     width: height
                     text: "@"
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("TextSelect.qml"), {state: "contexts"})
                     }
                 }
-// TODO                Button {
-//                    height: parent.height
-//                    width: height
-//                    text: "due:"
-//                    onClicked: {
-//                open calendar
-//                    }
-//                }
+                Button {
+//                    height: Theme.iconSizeLarge
+                    width: height
+                    text: "due:"
+                    onClicked: {
+                        var datePicker = pageStack.push(datePickerComp)
+                        datePicker.accepted.connect(function() {
+                            console.log(Qt.formatDate(datePicker.date, 'yyyy-MM-dd'));
+                            ta.text = JS.due.set(ta.text, datePicker.date);
+//                            ta.text = JS.due.set(ta.text, Qt.formatDate(datePicker.date, 'yyyy-MM-dd'));
+                        })
+                    }
+                    Component {
+                        id: datePickerComp
+                        DatePickerDialog {
+//                            date: JS.today()
+                        }
+                    }
+                }
+            }
+            Loader {
+                id: bottomLoader
+                width: parent.width
             }
         }
 

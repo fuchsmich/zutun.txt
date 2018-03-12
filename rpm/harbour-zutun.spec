@@ -13,16 +13,18 @@ Name:       harbour-zutun
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    todo.txt GUI
-Version:    1.4.2
+Version:    1.5
 Release:    1
-Group:      Qt/Qt
+Group:      Applications/Productivity
 License:    BSD
+BuildArch:  noarch
 URL:        https://github.com/fuchsmich/zutun.txt
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-zutun.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
+Requires:   pyotherside-qml-plugin-python3-qt5
 Requires:   sailfish-components-pickers-qt5
-BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
+BuildRequires:  pkgconfig(sailfishapp) >= 1.0.3
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
@@ -63,7 +65,7 @@ desktop-file-install --delete-original       \
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}
+%defattr(0644,root,root,-)
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png

@@ -1,153 +1,143 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl" version="2.1">
 <context>
     <name>About</name>
     <message>
         <source>About Zutun.txt</source>
-        <translation>Über Zutun.txt</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Over Zutun.txt</translation>
     </message>
 </context>
 <context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>
-        <translation>Projektfilter</translation>
+        <translation>Projecten filteren</translation>
     </message>
     <message>
         <source>Clear Project Filters</source>
-        <translation>Projektfilter löschen</translation>
+        <translation>Projectfilters wissen</translation>
     </message>
     <message>
         <source>Filter Contexts</source>
-        <translation>Kontextfilter</translation>
+        <translation>Contexten filteren</translation>
     </message>
     <message>
         <source>Clear Context Filters</source>
-        <translation>Kontextfilter löschen</translation>
+        <translation>Contextfilters wissen</translation>
     </message>
 </context>
 <context>
     <name>OtherFilters</name>
     <message>
         <source>Context Filters</source>
-        <translation>Kontextfilter</translation>
+        <translation>Contextfilters</translation>
     </message>
     <message>
         <source>Project Filters</source>
-        <translation>Projektfilter</translation>
+        <translation>Projectfilters</translation>
     </message>
     <message>
         <source>Back To Tasklist</source>
-        <translation>Zurück zur Aufgabenliste</translation>
+        <translation>Terug naar takenlijst</translation>
     </message>
     <message>
         <source>Other Filters</source>
-        <translation>Andere Filter</translation>
+        <translation>Andere filters</translation>
     </message>
     <message>
         <source>Hide Completed Tasks</source>
-        <translation>Verberge fertige Aufgaben</translation>
+        <translation>Voltooide taken verbergen</translation>
     </message>
 </context>
 <context>
     <name>Settings</name>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>Over</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Path to todo.txt</source>
-        <translation>Pfad zu todo.txt</translation>
+        <translation>Pad naar todo.txt</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation>Datei wählen</translation>
+        <translation>Kies bestand</translation>
     </message>
     <message>
         <source>Fontsize in Tasklist</source>
-        <translation>Schriftgröße in Aufgabenliste</translation>
+        <translation>Lettergrootte in takenlijst</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation>Dateien</translation>
+        <translation>Bestanden</translation>
     </message>
     <message>
         <source>Attach project filter to the left of tasklist.</source>
-        <translation>Projektfilter links der Aufgabenliste plazieren.</translation>
+        <translation>Voeg projectfilter links aan de takenlijst toe.</translation>
     </message>
 </context>
 <context>
     <name>SortPage</name>
     <message>
         <source>Toggle Order (</source>
-        <translation>Reihenfolge umschalten (</translation>
+        <translation>Volgorde veranderen (</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation>Zurücksetzen</translation>
+        <translation>Opnieuw instellen</translation>
+    </message>
+    <message>
+        <source>Sorting and Grouping</source>
+        <translation>Sorteren en groeperen</translation>
     </message>
     <message>
         <source>Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteren</translation>
     </message>
     <message>
         <source>Grouping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Groeperen</translation>
     </message>
 </context>
 <context>
     <name>TaskEdit</name>
     <message>
-        <source>Add New Task</source>
-        <translation type="unfinished">Aufgabe erstellen</translation>
-    </message>
-    <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Taak bewerken</translation>
     </message>
 </context>
 <context>
     <name>TaskList</name>
     <message>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Add New Task</source>
-        <translation>Aufgabe erstellen</translation>
+        <translation>Nieuwe taak toevoegen</translation>
     </message>
     <message>
         <source>Tasklist</source>
-        <translation>Aufgabenliste</translation>
+        <translation>Takenlijst</translation>
+    </message>
+    <message>
+        <source>Grouping &amp; Sorting</source>
+        <translation>Groeperen &amp; sorteren</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation>Zeige</translation>
+        <translation>Tonen</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Verberge</translation>
+        <translation>Verbergen</translation>
     </message>
     <message>
         <source> Completed Tasks</source>
-        <translation> fertige Aufgaben</translation>
+        <translation>Voltooide taken</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -155,82 +145,66 @@
     </message>
     <message>
         <source>No Tasks</source>
-        <translation>Keine Aufgaben</translation>
+        <translation>Geen taken</translation>
     </message>
     <message>
         <source>Priority Up</source>
-        <translation>Priorität rauf</translation>
+        <translation>Prioriteit omhoog</translation>
     </message>
     <message>
         <source>Priority Down</source>
-        <translation>Priorität runter</translation>
+        <translation>Prioriteit omlaag</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Löschen</translation>
-    </message>
-    <message>
-        <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>created:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>due:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 <context>
     <name>TodoTxt</name>
     <message>
         <source>Hide Complete</source>
-        <translation>Verberge fertige</translation>
+        <translation>Voltooid verbergen</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation>aufsteigend</translation>
+        <translation>oplopend</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation>absteigend</translation>
+        <translation>aflopend</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>natürlich</translation>
+        <translation>natuurlijk</translation>
     </message>
     <message>
         <source>Creation Date</source>
-        <translation>Erstelldatum</translation>
+        <translation>Datum van aanmaken</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation>Betreff</translation>
+        <translation>Onderwerp</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Keine</translation>
+        <translation>Geen</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation>Projekte</translation>
+        <translation>Projecten</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation>Kontext</translation>
+        <translation>Contexten</translation>
     </message>
     <message>
         <source>Sorted by %1</source>
-        <translation>Sortiert nach %1</translation>
+        <translation>Gesorteerd op %1</translation>
     </message>
     <message>
         <source>Grouped by %1, </source>
-        <translation>Gruppiert nach %1, </translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Gegroepeerd op %1,</translation>
     </message>
 </context>
 </TS>
