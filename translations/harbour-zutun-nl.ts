@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="nl">
 <context>
     <name>About</name>
     <message>
-        <location filename="../qml/pages/About.qml" line="19"/>
         <source>About Zutun.txt</source>
-        <translation type="unfinished"></translation>
+        <translation>Over Zutun.txt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="29"/>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="36"/>
         <source>Packages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22,266 +19,217 @@
 <context>
     <name>FiltersPage</name>
     <message>
-        <location filename="../qml/pages/FiltersPage.qml" line="110"/>
         <source>Filter Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Projecten filteren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FiltersPage.qml" line="112"/>
         <source>Clear Project Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Projectfilters wissen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FiltersPage.qml" line="121"/>
         <source>Filter Contexts</source>
-        <translation type="unfinished"></translation>
+        <translation>Contexten filteren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FiltersPage.qml" line="123"/>
         <source>Clear Context Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Contextfilters wissen</translation>
     </message>
 </context>
 <context>
     <name>OtherFilters</name>
     <message>
-        <location filename="../qml/pages/OtherFilters.qml" line="14"/>
         <source>Context Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Contextfilters</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OtherFilters.qml" line="18"/>
         <source>Project Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Projectfilters</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OtherFilters.qml" line="22"/>
         <source>Back To Tasklist</source>
-        <translation type="unfinished"></translation>
+        <translation>Terug naar takenlijst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OtherFilters.qml" line="36"/>
         <source>Other Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere filters</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OtherFilters.qml" line="41"/>
         <source>Hide Completed Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Voltooide taken verbergen</translation>
     </message>
 </context>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="19"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Over</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="29"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="32"/>
-        <source>Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="37"/>
         <source>Path to todo.txt</source>
-        <translation type="unfinished"></translation>
+        <translation>Pad naar todo.txt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="43"/>
         <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies bestand</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="67"/>
         <source>Fontsize in Tasklist</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettergrootte in takenlijst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="92"/>
+        <source>Files</source>
+        <translation>Bestanden</translation>
+    </message>
+    <message>
         <source>Attach project filter to the left of tasklist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg projectfilter links aan de takenlijst toe.</translation>
     </message>
 </context>
 <context>
     <name>SortPage</name>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="18"/>
-        <source>Reset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SortPage.qml" line="34"/>
-        <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SortPage.qml" line="44"/>
         <source>Toggle Order (</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgorde veranderen (</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="49"/>
+        <source>Reset</source>
+        <translation>Opnieuw instellen</translation>
+    </message>
+    <message>
         <source>Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SortPage.qml" line="69"/>
         <source>Grouping</source>
+        <translation>Groeperen</translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TaskEdit</name>
     <message>
-        <location filename="../qml/pages/TaskEdit.qml" line="41"/>
-        <source>Add New Task</source>
-        <translation type="unfinished"></translation>
+        <source>Edit Task</source>
+        <translation>Taak bewerken</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskEdit.qml" line="41"/>
-        <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <source>Add New Task</source>
+        <translation type="unfinished">Nieuwe taak toevoegen</translation>
     </message>
 </context>
 <context>
     <name>TaskList</name>
     <message>
-        <location filename="../qml/pages/TaskList.qml" line="19"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskList.qml" line="23"/>
+        <source>Add New Task</source>
+        <translation>Nieuwe taak toevoegen</translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <translation>Takenlijst</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation>Tonen</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation>Verbergen</translation>
+    </message>
+    <message>
+        <source> Completed Tasks</source>
+        <translation>Voltooide taken</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation>Filter</translation>
+    </message>
+    <message>
+        <source>No Tasks</source>
+        <translation>Geen taken</translation>
+    </message>
+    <message>
+        <source>Priority Up</source>
+        <translation>Prioriteit omhoog</translation>
+    </message>
+    <message>
+        <source>Priority Down</source>
+        <translation>Prioriteit omlaag</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Verwijderen</translation>
+    </message>
+    <message>
         <source>Sorting &amp; Grouping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskList.qml" line="27"/>
-        <source>Add New Task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="35"/>
-        <source>Show</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="35"/>
-        <source>Hide</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="35"/>
-        <source> Completed Tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="45"/>
-        <source>Tasklist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="62"/>
-        <source>Filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="81"/>
-        <source>No Tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="126"/>
         <source>created:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TaskList.qml" line="139"/>
         <source>due:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="157"/>
-        <source>Priority Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="162"/>
-        <source>Priority Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/TaskList.qml" line="166"/>
-        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TodoTxt</name>
     <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="45"/>
         <source>Hide Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Voltooid verbergen</translation>
     </message>
     <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="137"/>
-        <source>Sorted by %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="137"/>
         <source>asc</source>
-        <translation type="unfinished"></translation>
+        <translation>oplopend</translation>
     </message>
     <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="137"/>
         <source>desc</source>
-        <translation type="unfinished"></translation>
+        <translation>aflopend</translation>
     </message>
     <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="138"/>
-        <source>Grouped by %1, </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="148"/>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation>natuurlijk</translation>
     </message>
     <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="154"/>
         <source>Creation Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum van aanmaken</translation>
     </message>
     <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="160"/>
-        <source>Due Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="166"/>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderwerp</translation>
     </message>
     <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="175"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="183"/>
         <source>Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Projecten</translation>
     </message>
     <message>
-        <location filename="../qml/tdt/TodoTxt.qml" line="194"/>
         <source>Contexts</source>
+        <translation>Contexten</translation>
+    </message>
+    <message>
+        <source>Sorted by %1</source>
+        <translation>Gesorteerd op %1</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation>Gegroepeerd op %1,</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
