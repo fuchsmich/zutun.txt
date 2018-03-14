@@ -1,6 +1,6 @@
 Name: harbour-zutun
 Summary: todo.txt GUI
-Version: 1.5
+Version: 1.5.1
 Release: 1
 Group: Applications/Productivity
 URL: https://github.com/fuchsmich/zutun.txt
@@ -18,8 +18,12 @@ PkgConfigBR:
   - Qt5Qml
   - Qt5Quick
 
+PkgBR:
+  - qt5-qttools-linguist
+
 Requires:
   - sailfishsilica-qt5 >= 0.10.9
+  - libsailfishapp-launcher
   - pyotherside-qml-plugin-python3-qt5
   - sailfish-components-pickers-qt5
 

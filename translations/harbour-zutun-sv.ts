@@ -109,18 +109,18 @@
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortering &amp; Gruppering</translation>
     </message>
 </context>
 <context>
     <name>TaskEdit</name>
     <message>
-        <source>Edit Task</source>
-        <translation>Redigera uppgift</translation>
-    </message>
-    <message>
         <source>Add New Task</source>
         <translation type="unfinished">Lägg till ny uppgift</translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation>Redigera uppgift</translation>
     </message>
 </context>
 <context>
@@ -171,7 +171,7 @@
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortering &amp; Gruppering</translation>
     </message>
     <message>
         <source>created:</source>

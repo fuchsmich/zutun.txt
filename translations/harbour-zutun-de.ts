@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="de">
 <context>
     <name>About</name>
     <message>
@@ -9,11 +9,11 @@
     </message>
     <message>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Quelle</translation>
     </message>
     <message>
         <source>Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakete</translation>
     </message>
 </context>
 <context>
@@ -101,26 +101,26 @@
     </message>
     <message>
         <source>Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortieren</translation>
     </message>
     <message>
         <source>Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppieren</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortieren &amp; Gruppieren</translation>
     </message>
 </context>
 <context>
     <name>TaskEdit</name>
     <message>
         <source>Add New Task</source>
-        <translation type="unfinished">Aufgabe erstellen</translation>
+        <translation>Aufgabe hinzufügen</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe editieren</translation>
     </message>
 </context>
 <context>
@@ -171,15 +171,15 @@
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortieren &amp; Gruppieren</translation>
     </message>
     <message>
         <source>created:</source>
-        <translation type="unfinished"></translation>
+        <translation>erstellt:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation type="unfinished"></translation>
+        <translation>bis:</translation>
     </message>
 </context>
 <context>
@@ -230,7 +230,7 @@
     </message>
     <message>
         <source>Due Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Enddatum</translation>
     </message>
 </context>
 </TS>

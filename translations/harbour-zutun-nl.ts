@@ -9,11 +9,11 @@
     </message>
     <message>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Broncode</translation>
     </message>
     <message>
         <source>Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakketten</translation>
     </message>
 </context>
 <context>
@@ -109,18 +109,18 @@
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteren &amp; groeperen</translation>
     </message>
 </context>
 <context>
     <name>TaskEdit</name>
     <message>
-        <source>Edit Task</source>
-        <translation>Taak bewerken</translation>
+        <source>Add New Task</source>
+        <translation>Nieuwe taak toevoegen</translation>
     </message>
     <message>
-        <source>Add New Task</source>
-        <translation type="unfinished">Nieuwe taak toevoegen</translation>
+        <source>Edit Task</source>
+        <translation>Taak bewerken</translation>
     </message>
 </context>
 <context>
@@ -171,15 +171,15 @@
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteren &amp; groeperen</translation>
     </message>
     <message>
         <source>created:</source>
-        <translation type="unfinished"></translation>
+        <translation>aangemaakt:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation type="unfinished"></translation>
+        <translation>verwacht:</translation>
     </message>
 </context>
 <context>
@@ -230,7 +230,7 @@
     </message>
     <message>
         <source>Due Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Einddatum</translation>
     </message>
 </context>
 </TS>

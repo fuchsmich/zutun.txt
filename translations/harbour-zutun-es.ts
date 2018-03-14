@@ -175,11 +175,11 @@
     </message>
     <message>
         <source>created:</source>
-        <translation type="unfinished"></translation>
+        <translation>creado:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation type="unfinished"></translation>
+        <translation>plazo:</translation>
     </message>
 </context>
 <context>
@@ -230,7 +230,7 @@
     </message>
     <message>
         <source>Due Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha límite</translation>
     </message>
 </context>
 </TS>
