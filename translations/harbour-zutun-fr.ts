@@ -1,234 +1,234 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
 <context>
     <name>About</name>
     <message>
         <source>About Zutun.txt</source>
-        <translation>Om Zutun.txt</translation>
+        <translation>À propos de Zutun.txt</translation>
     </message>
     <message>
         <source>Source</source>
-        <translation>Källa</translation>
+        <translation>Source</translation>
     </message>
     <message>
         <source>Packages</source>
-        <translation>Paket</translation>
+        <translation>Paquets de logiciels</translation>
     </message>
 </context>
 <context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>
-        <translation>Filtrera projekt</translation>
+        <translation>Filtre de projets</translation>
     </message>
     <message>
         <source>Clear Project Filters</source>
-        <translation>Rensa projektfilter</translation>
+        <translation>Effacer filtre de projets</translation>
     </message>
     <message>
         <source>Filter Contexts</source>
-        <translation>Filtrera sammanhang</translation>
+        <translation>Filtre de contextes</translation>
     </message>
     <message>
         <source>Clear Context Filters</source>
-        <translation>Rensa sammanhangsfilter</translation>
+        <translation>Effacer filtre de contextes</translation>
     </message>
 </context>
 <context>
     <name>OtherFilters</name>
     <message>
         <source>Context Filters</source>
-        <translation>Sammanhangsfilter</translation>
+        <translation>Filtre de contextes</translation>
     </message>
     <message>
         <source>Project Filters</source>
-        <translation>Projektfilter</translation>
+        <translation>Filtre de projets</translation>
     </message>
     <message>
         <source>Back To Tasklist</source>
-        <translation>Tillbaka till uppgiftslistan</translation>
+        <translation>Retour à la liste de tâches</translation>
     </message>
     <message>
         <source>Other Filters</source>
-        <translation>Andra filter</translation>
+        <translation>Autres filtres</translation>
     </message>
     <message>
         <source>Hide Completed Tasks</source>
-        <translation>Dölj slutförda uppgifter</translation>
+        <translation>Cacher tâches accomplies</translation>
     </message>
 </context>
 <context>
     <name>Settings</name>
     <message>
         <source>About</source>
-        <translation>Om</translation>
+        <translation>À propos de</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Inställningar</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Path to todo.txt</source>
-        <translation>Sökväg till todo.txt</translation>
+        <translation>Sentier vers todo.txt</translation>
     </message>
     <message>
         <source>Choose File</source>
-        <translation>Välj fil</translation>
+        <translation>Choisir fichier</translation>
     </message>
     <message>
         <source>Fontsize in Tasklist</source>
-        <translation>Teckenstorlek i uppgiftslistan</translation>
+        <translation>Taille de caractères dans la liste des tâches</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation>Filer</translation>
+        <translation>Fichiers</translation>
     </message>
     <message>
         <source>Attach project filter to the left of tasklist.</source>
-        <translation>Bifoga projektfilter till vänster om uppgiftslistan.</translation>
+        <translation>Attacher filtre de projets à la gauche de liste des tâches.</translation>
     </message>
 </context>
 <context>
     <name>SortPage</name>
     <message>
         <source>Toggle Order (</source>
-        <translation>Växla ordning (</translation>
+        <translation>Basculer ordre (</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation>Återställ</translation>
+        <translation>Réinitialiser</translation>
     </message>
     <message>
         <source>Sorting</source>
-        <translation>Sortering</translation>
+        <translation>Trier</translation>
     </message>
     <message>
         <source>Grouping</source>
-        <translation>Gruppering</translation>
+        <translation>Regrouper</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation>Sortering &amp; Gruppering</translation>
+        <translation>Trier &amp; Regrouper</translation>
     </message>
 </context>
 <context>
     <name>TaskEdit</name>
     <message>
         <source>Add New Task</source>
-        <translation>Lägg till ny uppgift</translation>
+        <translation>Ajouter nouvelle tâche</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Redigera uppgift</translation>
+        <translation>Éditer tâche</translation>
     </message>
 </context>
 <context>
     <name>TaskList</name>
     <message>
         <source>Settings</source>
-        <translation>Inställningar</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Add New Task</source>
-        <translation>Lägg till ny uppgift</translation>
+        <translation>Ajouter nouvelle tâche</translation>
     </message>
     <message>
         <source>Tasklist</source>
-        <translation>Uppgiftslista</translation>
+        <translation>Liste de tâches</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation>Visa</translation>
+        <translation>Montrer</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Dölj</translation>
+        <translation>Cacher</translation>
     </message>
     <message>
         <source> Completed Tasks</source>
-        <translation> slutförda uppgifter</translation>
+        <translation> Tâches accomplies</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation>Filter</translation>
+        <translation>Filtre</translation>
     </message>
     <message>
         <source>No Tasks</source>
-        <translation>Inga uppgifter</translation>
+        <translation>Aucunes tâches</translation>
     </message>
     <message>
         <source>Priority Up</source>
-        <translation>Prioritet upp</translation>
+        <translation>Relever priorité</translation>
     </message>
     <message>
         <source>Priority Down</source>
-        <translation>Prioritet ner</translation>
+        <translation>diminuer priorité</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Ta bort</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation>Sortering &amp; Gruppering</translation>
+        <translation>Trier &amp; Regrouper</translation>
     </message>
     <message>
         <source>created:</source>
-        <translation>skapad:</translation>
+        <translation>créé:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation>koppling:</translation>
+        <translation>échéance:</translation>
     </message>
 </context>
 <context>
     <name>TodoTxt</name>
     <message>
         <source>Hide Complete</source>
-        <translation>Dölj slutförda</translation>
+        <translation>Cacher Compléter</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation>stigande</translation>
+        <translation>tri croissant</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation>sjunkande</translation>
+        <translation>par ordre décroissant</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>naturligt</translation>
+        <translation>naturel</translation>
     </message>
     <message>
         <source>Creation Date</source>
-        <translation>Skapad</translation>
+        <translation>Date de création</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation>Ämne</translation>
+        <translation>Sujet</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Ingen</translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation>Projekt</translation>
+        <translation>Projets</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation>Sammanhang</translation>
+        <translation>Contextes</translation>
     </message>
     <message>
         <source>Sorted by %1</source>
-        <translation>Sorterat %1</translation>
+        <translation>Trié par %1</translation>
     </message>
     <message>
         <source>Grouped by %1, </source>
-        <translation>Grupperat %1, </translation>
+        <translation>Regroupé par %1, </translation>
     </message>
     <message>
         <source>Due Date</source>
-        <translation>Kopplingsdatum</translation>
+        <translation>Date d&apos;échéance</translation>
     </message>
 </context>
 </TS>

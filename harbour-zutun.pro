@@ -46,12 +46,14 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-zutun-de.ts \
+TRANSLATIONS += \
+    translations/harbour-zutun-de.ts \
     translations/harbour-zutun-es.ts \
-    translations/harbour-zutun-ru.ts \
+    translations/harbour-zutun-fr.ts \
     translations/harbour-zutun-nl.ts \
+    translations/harbour-zutun-nl_BE.ts \
+    translations/harbour-zutun-ru.ts \
     translations/harbour-zutun-sv.ts
 
 HEADERS += \
     src/fileio.hpp
-
