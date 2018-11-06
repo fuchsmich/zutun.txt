@@ -72,6 +72,7 @@ ApplicationWindow
     }
 
     DBusInterface {
+        //just for testing DBusAdaptor
         id: dbi
 
         service: 'info.fuxl.zutuntxt'
@@ -85,8 +86,9 @@ ApplicationWindow
 
     function addTask(text) {
         //safety check text
-        //if (typeof text !== "String") text = "";
+        if (typeof text !== "String") text = "";
         //TODO safely end all pending actions and go back to tasklist
+        pageStack.pop(pageStack.find(function(p){ return (p.name === "TaskList") }), PageStackAction.Immediate);
         pageStack.push(Qt.resolvedUrl("./pages/TaskEdit.qml"), {itemIndex: -1, text: text});
         app.activate();
     }
