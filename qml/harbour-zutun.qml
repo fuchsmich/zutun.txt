@@ -56,6 +56,27 @@ ApplicationWindow
         }
     }
 
+    DBusAdaptor {
+        id: dbusAdaptor
+
+        service: 'info.fuxl.zutuntxt'
+        iface: 'info.fuxl.zutuntxt'
+        path: '/info/fuxl/zutuntxt'
+
+        xml: '  <interface name="com.example.service">\n' +
+                      '    <method name="addTask" />\n' +
+                      '  </interface>\n'
+
+        function addTask() {
+            app.addTask("");
+        }
+    }
+
+    function addTask(text) {
+        //if (typeof text !== "String") text = "";
+        pageStack.push("../pages/TaskEdit.qml", {itemIndex: -1, text: text});
+    }
+
 
     TodoTxt {
         id: ttm1

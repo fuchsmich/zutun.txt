@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ru" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ru">
 <context>
     <name>About</name>
     <message>
@@ -7,18 +9,18 @@
     </message>
     <message>
         <source>Source</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Packages</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear Project Filters</source>
@@ -26,22 +28,22 @@
     </message>
     <message>
         <source>Filter Contexts</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear Context Filters</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>OtherFilters</name>
     <message>
         <source>Context Filters</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Project Filters</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back To Tasklist</source>
@@ -68,7 +70,7 @@
     </message>
     <message>
         <source>Path to todo.txt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Choose File</source>
@@ -84,18 +86,18 @@
     </message>
     <message>
         <source>Attach project filter to the left of tasklist.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SortPage</name>
     <message>
         <source>Toggle Order (</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sorting</source>
@@ -107,14 +109,14 @@
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TaskEdit</name>
     <message>
         <source>Add New Task</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Добавить новую задачу</translation>
     </message>
     <message>
         <source>Edit Task</source>
@@ -157,11 +159,11 @@
     </message>
     <message>
         <source>Priority Up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Priority Down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Remove</source>
@@ -169,15 +171,15 @@
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>created:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>due:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -188,19 +190,19 @@
     </message>
     <message>
         <source>asc</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>desc</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Creation Date</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Subject</source>
@@ -216,7 +218,7 @@
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sorted by %1</source>
@@ -228,7 +230,7 @@
     </message>
     <message>
         <source>Due Date</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
