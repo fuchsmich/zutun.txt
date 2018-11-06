@@ -1,13 +1,15 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import org.nemomobile.configuration 1.0
+import Nemo.Configuration 1.0
+import Nemo.DBus 2.0
+
 import "pages"
 import "tdt"
 
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
 //TODO Search field??
-//TODO File IO in Python?
+//DONE File IO in Python?
 
 ApplicationWindow
 {
