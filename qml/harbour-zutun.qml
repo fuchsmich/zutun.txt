@@ -9,7 +9,6 @@ import "tdt"
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
 //TODO Search field??
-//DONE File IO in Python?
 
 ApplicationWindow
 {
@@ -73,8 +72,11 @@ ApplicationWindow
     }
 
     function addTask(text) {
+        //safety check text
         //if (typeof text !== "String") text = "";
-        pageStack.push("../pages/TaskEdit.qml", {itemIndex: -1, text: text});
+        //TODO safely end all pending actions and go back to tasklist
+        pageStack.push(Qt.resolvedUrl("./pages/TaskEdit.qml"), {itemIndex: -1, text: text});
+        app.activate();
     }
 
 
