@@ -71,6 +71,18 @@ ApplicationWindow
         }
     }
 
+    DBusInterface {
+        id: dbi
+
+        service: 'info.fuxl.zutuntxt'
+        iface: 'info.fuxl.zutuntxt'
+        path: '/info/fuxl/zutuntxt'
+
+        function addTask() {
+            call('addTask', undefined)
+        }
+    }
+
     function addTask(text) {
         //safety check text
         //if (typeof text !== "String") text = "";

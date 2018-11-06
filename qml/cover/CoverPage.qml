@@ -33,6 +33,13 @@ id: cb
                 app.addTask();
             }
         }
+
+        CoverAction {
+            iconSource: "image://theme/icon-cover-new?" + Theme.highlightColor
+            onTriggered: {
+                dbi.addTask();
+            }
+        }
     }
 
     onStatusChanged: {
