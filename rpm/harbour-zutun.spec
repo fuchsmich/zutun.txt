@@ -59,6 +59,9 @@ rm -rf %{buildroot}
 %qmake5_install
 
 # >> install post
+pwd
+install -d %{buildroot}%{_datadir}/lipstick/quickactions
+install ../zutun.txt/quickaction.conf %{buildroot}%{_datadir}/lipstick/quickactions/info.fuxl.zutuntxt.conf
 # << install post
 
 desktop-file-install --delete-original       \
@@ -72,4 +75,5 @@ desktop-file-install --delete-original       \
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 # >> files
+%{_datadir}/lipstick/quickactions/info.fuxl.zutuntxt.conf
 # << files

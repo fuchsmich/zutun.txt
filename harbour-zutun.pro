@@ -34,7 +34,8 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/pages/SortPage.qml \
     qml/tdt/FileIO.qml \
     qml/python/fileio.py \
-    qml/tdt/Notification.qml
+    qml/tdt/Notification.qml \
+    quickaction.conf
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
