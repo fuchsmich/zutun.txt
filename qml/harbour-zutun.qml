@@ -9,6 +9,7 @@ import "tdt"
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
 //TODO Search field??
+//TODO more verbose placeholder in tasklist
 
 ApplicationWindow
 {

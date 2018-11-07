@@ -13,7 +13,7 @@ Name:       harbour-zutun
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    todo.txt GUI
-Version:    1.5.2
+Version:    1.6
 Release:    1
 Group:      Applications/Productivity
 License:    BSD
