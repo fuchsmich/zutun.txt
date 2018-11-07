@@ -60,9 +60,9 @@ rm -rf %{buildroot}
 
 # >> install post
 install -d %{buildroot}%{_datadir}/lipstick/quickactions
-install ../zutun.txt/quickaction.conf %{buildroot}%{_datadir}/lipstick/quickactions/info.fuxl.zutuntxt.conf
+install %{_builddir}/zutun.txt/quickaction.conf %{buildroot}%{_datadir}/lipstick/quickactions/info.fuxl.zutuntxt.conf
 install -d %{buildroot}%{_datadir}/jolla-settings/entries/
-install ../zutun.txt/shortcut.conf %{buildroot}%{_datadir}/jolla-settings/entries/info.fuxl.zutuntxt.json
+install %{_builddir}/zutun.txt/shortcut.conf %{buildroot}%{_datadir}/jolla-settings/entries/info.fuxl.zutuntxt.json
 # << install post
 
 desktop-file-install --delete-original       \

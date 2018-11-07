@@ -5,6 +5,9 @@
 # Add newest entries to the top of the list.
 # Separate entries from eachother with a blank line.
 
+* Wed Nov 7 2018 Michael Fuchs <michfu@gmx.at> 1.6
+- quickaction/shortcut added (app must be running)
+
 * Tue Mar 13 2018 Michael Fuchs <michfu@gmx.at> 1.5.1
 - update (some) translations
 - depend on linguist for obs merproject
