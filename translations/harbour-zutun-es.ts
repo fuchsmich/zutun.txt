@@ -4,16 +4,24 @@
 <context>
     <name>About</name>
     <message>
-        <source>About Zutun.txt</source>
-        <translation>Acerca de Zutun.txt</translation>
-    </message>
-    <message>
         <source>Source</source>
         <translation>Fuente</translation>
     </message>
     <message>
         <source>Packages</source>
         <translation>Paquetes</translation>
+    </message>
+    <message>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repository</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
