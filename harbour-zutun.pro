@@ -36,7 +36,9 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/python/fileio.py \
     qml/tdt/Notification.qml \
     quickaction.conf \
-    shortcut.conf
+    shortcut.conf \
+    icons/harbour-zutun.svg \
+    version
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 

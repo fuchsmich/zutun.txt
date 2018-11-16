@@ -16,13 +16,28 @@ Page {
             spacing: Theme.paddingLarge
             width: parent.width
             PageHeader {
+                property string version: "0.0-0"
                 title: qsTr("About %1").arg("ZuTun.txt")
+                description: qsTr("Version %1").arg(version)
+                Component.onCompleted: {
+                    var versionFile = Qt.resolvedUrl("../../version");
+                    var doc = new XMLHttpRequest();
+                    doc.onreadystatechange = function() {
+                        if (doc.readyState === XMLHttpRequest.DONE) {
+                            console.log(versionFile, doc.responseText)
+                            if (doc.status === 200) version = doc.responseText;
+                            else version = "not found";
+                        }
+                    }
+                    doc.open("GET", Qt.resolvedUrl("../../version"));
+                    doc.send();
+                }
             }
 
             Image {
                 id: name
                 source: "../harbour-zutun.svg"
-                sourceSize.width: parent.width*2
+                sourceSize.width: Math.max(page.width, page.height)
                 smooth: true
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: (orientation === Orientation.Portrait ?
@@ -31,19 +46,6 @@ Page {
                 height: width
                 cache: false
             }
-
-//            DetailItem {
-//                label: qsTr("Author")
-//                value: 'Michael Fuchs <michfu@gmx.at>'
-//            }
-//            DetailItem {
-//                label: qsTr("Source")
-//                value: '<a href=\'https://github.com/fuchsmich/zutun.txt/\'>github.com</a>'
-//            }
-//            DetailItem {
-//                label: qsTr("Repository")
-//                value: "<a href=\'https://openrepos.net/content/fooxl/zutuntxt\'>openrepos.net</a>"
-//            }
 
             SectionHeader {
                 text: qsTr("Author")
@@ -55,16 +57,22 @@ Page {
             SectionHeader {
                 text: qsTr("Source")
             }
-            Label {
-                x: Theme.horizontalPageMargin
-                text: "<a href=\'https://github.com/fuchsmich/zutun.txt/\'>github.com</a>"
+            Button {
+                //x: Theme.horizontalPageMargin
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: Theme.buttonWidthLarge
+                text: "github.com"
+                onClicked: Qt.openUrlExternally('https://github.com/fuchsmich/zutun.txt/')
             }
             SectionHeader {
                 text: qsTr("Packages")
             }
-            Label {
-                x: Theme.horizontalPageMargin
-                text: "<a href=\'https://openrepos.net/content/fooxl/zutuntxt\'>openrepos.net</a>"
+            Button {
+                //x: Theme.horizontalPageMargin
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: Theme.buttonWidthLarge
+                text: "openrepos.net"
+                onClicked: Qt.openUrlExternally('https://openrepos.net/content/fooxl/zutuntxt')
             }
         }
     }

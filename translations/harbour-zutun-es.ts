@@ -20,7 +20,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Repository</source>
+        <source>Version %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
