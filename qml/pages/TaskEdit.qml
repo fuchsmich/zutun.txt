@@ -14,7 +14,7 @@ Dialog {
     property string selectedPriority
     onSelectedPriorityChanged:{
         var cp = ta.cursorPosition;
-        var l = ta.text.length;
+        var l = ta.text.tim().length;
         ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority);
         ta.cursorPosition = cp + (ta.text.length - l);
     }
@@ -22,9 +22,17 @@ Dialog {
     property string appendText
     onAppendTextChanged: {
         var cp = ta.cursorPosition;
-        var l = ta.text.length;
+        var l = ta.text.trim().length;
         ta.text = (ta.text.trim() + " " + appendText).trim() + " ";
-        ta.cursorPosition = cp + (ta.text.length - l);
+        //ta.cursorPosition = cp + (ta.text.length - l);
+    }
+
+    property string insertText
+    onInsertTextChanged: {
+        var cp = ta.cursorPosition;
+        var l = ta.text.trim().length;
+        ta.text = (ta.text.trim() + " " + appendText).trim() + " ";
+        //ta.cursorPosition = cp + (ta.text.length - l);
     }
 
     acceptDestinationAction: PageStackAction.Pop
