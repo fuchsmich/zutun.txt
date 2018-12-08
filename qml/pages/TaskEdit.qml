@@ -14,25 +14,31 @@ Dialog {
     property string selectedPriority
     onSelectedPriorityChanged:{
         var cp = ta.cursorPosition;
-        var l = ta.text.tim().length;
+        var l = ta.text.length;
         ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority);
         ta.cursorPosition = cp + (ta.text.length - l);
     }
 
     property string appendText
     onAppendTextChanged: {
-        var cp = ta.cursorPosition;
-        var l = ta.text.trim().length;
-        ta.text = (ta.text.trim() + " " + appendText).trim() + " ";
-        //ta.cursorPosition = cp + (ta.text.length - l);
+        if (appendText !== "") {
+            var cp = ta.cursorPosition;
+            var l = ta.text.trim().length;
+            ta.text = (ta.text.trim() + " " + appendText).trim() + " ";
+            //ta.cursorPosition = cp + (ta.text.length - l);
+            appendText = "";
+        }
     }
 
     property string insertText
     onInsertTextChanged: {
-        var cp = ta.cursorPosition;
-        var l = ta.text.trim().length;
-        ta.text = (ta.text.trim() + " " + appendText).trim() + " ";
-        //ta.cursorPosition = cp + (ta.text.length - l);
+        if (insertText !== "") {
+            var cp = ta.cursorPosition;
+            var l = ta.text.trim().length;
+            ta.text = (ta.text.trim() + " " + insertText).trim() + " ";
+            //ta.cursorPosition = cp + (ta.text.length - l);
+            insertText = "";
+        }
     }
 
     acceptDestinationAction: PageStackAction.Pop
