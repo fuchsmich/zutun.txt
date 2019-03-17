@@ -13,8 +13,8 @@ Page {
         anchors.fill: parent
 
         VerticalScrollDecorator {}
-        header: PageHeader {
-            title: state
+        PageHeader {
+            id: pageHeader
         }
 
         delegate: ListItem {
@@ -37,20 +37,25 @@ Page {
     }
 
     function setString(txt) {
-        switch (state) {
-        case "priorities": pageStack.previousPage().selectedPriority = txt.charAt(1); break
-        case "projects": pageStack.previousPage().appendText = txt; break
-        case "contexts": pageStack.previousPage().appendText = txt; break
-        }
-        pageStack.pop();
+//        switch (state) {
+//        case "priorities": pageStack.previousPage().selectedPriority = txt.charAt(1); break
+//        case "projects": pageStack.previousPage().appendText = txt; break
+//        case "contexts": pageStack.previousPage().appendText = txt; break
+//        }
+        pageStack.previousPage().setText(state, txt)
+        pageStack.pop()
     }
 
     states: [
         State {
             name: "priorities"
             PropertyChanges {
-                target: lv;
-                model: prioritiesModel;
+                target: lv
+                model: prioritiesModel
+            }
+            PropertyChanges {
+                target: pageHeader
+                title: qsTr("Priorities")
             }
         },
         State {
@@ -59,12 +64,20 @@ Page {
                 target: lv;
                 model: ttm1.filters.projectsModel
             }
+            PropertyChanges {
+                target: pageHeader
+                title: qsTr("Projects")
+            }
         },
         State {
             name: "contexts"
             PropertyChanges {
                 target: lv;
                 model: ttm1.filters.contextsModel
+            }
+            PropertyChanges {
+                target: pageHeader
+                title: qsTr("Contexts")
             }
         }
     ]

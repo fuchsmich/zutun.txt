@@ -11,12 +11,26 @@ Dialog {
     property int itemIndex: -1
     property alias text: ta.text
 
-    property string selectedPriority
-    onSelectedPriorityChanged:{
-        var cp = ta.cursorPosition;
-        var l = ta.text.length;
-        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority);
-        ta.cursorPosition = cp + (ta.text.length - l);
+//    property string selectedPriority
+//    onSelectedPriorityChanged:{
+//        var cp = ta.cursorPosition;
+//        var l = ta.text.length;
+//        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority);
+//        ta.cursorPosition = cp + (ta.text.length - l);
+//    }
+
+    function setText(type, txt) {
+        console.debug(type, txt)
+        switch (type) {
+                case "priorities":
+                    var cp = ta.cursorPosition
+                    var l = ta.text.length
+                    ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, txt.charAt(1))
+                    ta.cursorPosition = cp + (ta.text.length - l)
+                    break
+                case "projects": pageStack.previousPage().appendText = txt; break
+                case "contexts": pageStack.previousPage().appendText = txt; break
+        }
     }
 
     property string appendText
@@ -81,8 +95,8 @@ Dialog {
                 verticalItemAlignment: Grid.AlignVCenter
                 columns: Math.floor(width/btn.width)
                 Button {
+                    //set priority
                     id: btn
-//                    height: Theme.iconSizeExtraLarge
                     width: height
                     text: "(A)"
                     onClicked: {
@@ -90,7 +104,7 @@ Dialog {
                     }
                 }
                 Button {
-//                    height: Theme.iconSizeLarge
+                    //remove priority
                     width: height
                     Label {
                         anchors.centerIn: parent
@@ -106,6 +120,7 @@ Dialog {
                     }
                 }
                 IconButton {
+                    //
                     icon.source: "image://theme/icon-l-date"
 
                     onClicked: {

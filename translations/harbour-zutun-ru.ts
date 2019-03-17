@@ -191,6 +191,21 @@
     </message>
 </context>
 <context>
+    <name>TextSelect</name>
+    <message>
+        <source>Priorities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Проекты</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TodoTxt</name>
     <message>
         <source>Hide Complete</source>

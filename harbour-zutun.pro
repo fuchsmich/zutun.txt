@@ -59,5 +59,4 @@ TRANSLATIONS += \
     translations/harbour-zutun-ru.ts \
     translations/harbour-zutun-sv.ts
 
-HEADERS += \
-    src/fileio.hpp
+HEADERS +=
