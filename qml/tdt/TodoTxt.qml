@@ -201,7 +201,6 @@ QtObject {
         ]
     }
 
-
     property var notifications: {
         "idList": [],
         "removeAll": function() {
@@ -216,6 +215,7 @@ QtObject {
             notifications.idList = [];
         }
     }
+
     property ListModel tasks: ListModel {
 
         //alles auf einmal 0:fullTxt, 1:done, 2:completionDate, 3:priority, 4:creationDate, 5:subject
@@ -334,6 +334,8 @@ QtObject {
 
                         var index = insertPosition(sorting.lessThanFunc(), json); //item)
                         insert(index, json);
+
+                        //for due dates add notification
                         if (item.due !== "") {
                             var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"));
 
@@ -351,6 +353,7 @@ QtObject {
             }
         }
     }
+
     Component.onDestruction: {
         notifications.removeAll();
     }

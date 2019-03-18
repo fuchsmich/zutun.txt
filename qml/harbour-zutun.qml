@@ -63,12 +63,13 @@ ApplicationWindow
         iface: 'info.fuxl.zutuntxt'
         path: '/info/fuxl/zutuntxt'
 
-        xml: '  <interface name="com.example.service">\n' +
-                      '    <method name="addTask" />\n' +
-                      '  </interface>\n'
-
         function addTask() {
-            app.addTask("");
+            app.addTask("")
+        }
+
+        function showApp() {
+            app.activate()
+            ttm1.readArray()
         }
     }
 
@@ -83,6 +84,7 @@ ApplicationWindow
         function addTask() {
             call('addTask', undefined)
         }
+
     }
 
     function addTask(text) {
