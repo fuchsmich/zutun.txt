@@ -99,7 +99,6 @@ Dialog {
                 IconButton {
                     //
                     icon.source: "image://theme/icon-l-date"
-
                     onClicked: {
                         var cp = ta.cursorPosition;
                         var tl = ta.text.length
@@ -109,7 +108,6 @@ Dialog {
                     }
                 }
                 Button {
-//                    height: Theme.iconSizeLarge
                     width: height
                     text: "+"
                     onClicked: {
@@ -117,7 +115,6 @@ Dialog {
                     }
                 }
                 Button {
-//                    height: Theme.iconSizeLarge
                     width: height
                     text: "@"
                     onClicked: {
@@ -125,11 +122,12 @@ Dialog {
                     }
                 }
                 Button {
-//                    height: Theme.iconSizeLarge
                     width: height
                     text: "due:"
                     onClicked: {
-                        var datePicker = pageStack.push(datePickerComp)
+                        var dueDate = JS.due.get(ta.text)[0]
+                        dueDate = (dueDate === "" ? new Date() : new Date(dueDate))
+                        var datePicker = pageStack.push("DateSelect.qml", {date: dueDate})
                         datePicker.accepted.connect(function() {
                             console.log(Qt.formatDate(datePicker.date, 'yyyy-MM-dd'));
                             ta.text = JS.due.set(ta.text, datePicker.date);
@@ -138,9 +136,7 @@ Dialog {
                     }
                     Component {
                         id: datePickerComp
-                        DatePickerDialog {
-//                            date: JS.today()
-                        }
+                        DateSelect { }
                     }
                 }
             }

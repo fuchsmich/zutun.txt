@@ -25,6 +25,13 @@
     </message>
 </context>
 <context>
+    <name>DateSelect</name>
+    <message>
+        <source>Select due date</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>

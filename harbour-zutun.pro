@@ -38,7 +38,8 @@ DISTFILES += qml/harbour-zutun.qml \
     quickaction.conf \
     shortcut.conf \
     icons/harbour-zutun.svg \
-    version
+    version \
+    qml/pages/DateSelect.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
