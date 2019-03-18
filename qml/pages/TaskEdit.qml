@@ -11,47 +11,24 @@ Dialog {
     property int itemIndex: -1
     property alias text: ta.text
 
-//    property string selectedPriority
-//    onSelectedPriorityChanged:{
-//        var cp = ta.cursorPosition;
-//        var l = ta.text.length;
-//        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, selectedPriority);
-//        ta.cursorPosition = cp + (ta.text.length - l);
-//    }
-
     function setText(type, txt) {
         console.debug(type, txt)
+        var cp = ta.cursorPosition
+        var l = ta.text.length
         switch (type) {
                 case "priorities":
-                    var cp = ta.cursorPosition
-                    var l = ta.text.length
                     ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, txt.charAt(1))
                     ta.cursorPosition = cp + (ta.text.length - l)
                     break
-                case "projects": pageStack.previousPage().appendText = txt; break
-                case "contexts": pageStack.previousPage().appendText = txt; break
-        }
-    }
-
-    property string appendText
-    onAppendTextChanged: {
-        if (appendText !== "") {
-            var cp = ta.cursorPosition;
-            var l = ta.text.trim().length;
-            ta.text = (ta.text.trim() + " " + appendText).trim() + " ";
-            //ta.cursorPosition = cp + (ta.text.length - l);
-            appendText = "";
-        }
-    }
-
-    property string insertText
-    onInsertTextChanged: {
-        if (insertText !== "") {
-            var cp = ta.cursorPosition;
-            var l = ta.text.trim().length;
-            ta.text = (ta.text.trim() + " " + insertText).trim() + " ";
-            //ta.cursorPosition = cp + (ta.text.length - l);
-            insertText = "";
+                case "projects":
+                case "contexts":
+                    var before = ta.text.substr(0,cp)
+                    var after = ta.text.substr(cp)
+                    txt = (before.charAt(before.length - 1) === " " ? "" : " ")
+                            + txt
+                            + (after.charAt(0) === " " ? "" : " ")
+                    ta.text = before + txt + after
+                    ta.cursorPosition = cp + txt.length
         }
     }
 
