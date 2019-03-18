@@ -13,8 +13,9 @@ Page {
         anchors.fill: parent
 
         VerticalScrollDecorator {}
-        PageHeader {
-            id: pageHeader
+        property string title: ""
+        header: PageHeader {
+            title: lv.title
         }
 
         delegate: ListItem {
@@ -52,33 +53,36 @@ Page {
             PropertyChanges {
                 target: lv
                 model: prioritiesModel
-            }
-            PropertyChanges {
-                target: pageHeader
                 title: qsTr("Priorities")
             }
+//            PropertyChanges {
+//                target: pageHeader
+//                title: qsTr("Priorities")
+//            }
         },
         State {
             name: "projects"
             PropertyChanges {
                 target: lv;
                 model: ttm1.filters.projectsModel
-            }
-            PropertyChanges {
-                target: pageHeader
                 title: qsTr("Projects")
             }
+//            PropertyChanges {
+//                target: pageHeader
+//                title: qsTr("Projects")
+//            }
         },
         State {
             name: "contexts"
             PropertyChanges {
                 target: lv;
                 model: ttm1.filters.contextsModel
-            }
-            PropertyChanges {
-                target: pageHeader
                 title: qsTr("Contexts")
             }
+//            PropertyChanges {
+//                target: pageHeader
+//                title: qsTr("Contexts")
+//            }
         }
     ]
 }
