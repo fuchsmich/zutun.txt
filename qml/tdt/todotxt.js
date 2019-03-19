@@ -74,6 +74,29 @@ var baseFeatures = {
     }
 }
 
+/* get list of matches*/
+function getMatchesList(tasks, pattern) {
+    var task = ""
+    var list = []
+
+    for (var t = 0; t < tasks.length; t++) {
+        task = tasks[t];
+        var matches = task.match(pattern);
+        //        console.log(matches)
+
+        var match = "";
+        for (var i in matches) {
+            match = matches[i].trim();
+            //            console.log(match)
+            if (typeof list[match] === 'undefined') list[match] = [];
+            if (list[match].indexOf(t) === -1) list[match].push(t);
+        }
+    }
+    //   console.log(list, list.length)
+    list.sort();
+    return list;
+}
+
 var projects = {
     pattern: /(^|\s)\+\S+/g ,
     list: function(tasks) {
@@ -123,29 +146,6 @@ var due = {
         return [dueDate, subject];
     }
 }
-
-function getMatchesList(tasks, pattern) {
-    var task = ""
-    var list = []
-
-    for (var t = 0; t < tasks.length; t++) {
-        task = tasks[t];
-        var matches = task.match(pattern);
-        //        console.log(matches)
-
-        var match = "";
-        for (var i in matches) {
-            match = matches[i].trim();
-            //            console.log(match)
-            if (typeof list[match] === 'undefined') list[match] = [];
-            if (list[match].indexOf(t) === -1) list[match].push(t);
-        }
-    }
-    //   console.log(list, list.length)
-    list.sort();
-    return list;
-}
-
 
 function splitLines(fileContent) {
     var tasks = []
