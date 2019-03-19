@@ -1,9 +1,13 @@
-# Rename this file as harbour-zutun.changes to include changelog
-# entries in your RPM file.
-#
 # Add new changelog entries following the format below.
 # Add newest entries to the top of the list.
 # Separate entries from eachother with a blank line.
+
+* Tue Mar 19 2019 Michael Fuchs <michfu@gmx.at> 1.7
+- cover: background image full size
+- taskedit: enter key bound to accept
+- notification: open app when clicking on notification
+- taskedit: new calendar widget for due:
+- taskedit: insert context/project at cursorposition
 
 * Wed Nov 7 2018 Michael Fuchs <michfu@gmx.at> 1.6
 - quickaction/shortcut added (app must be running)
