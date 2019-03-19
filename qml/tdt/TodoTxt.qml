@@ -307,9 +307,9 @@ QtObject {
                 }
                 for (var g in groups) {
                     var item = JS.baseFeatures.parseLine(line);
-                    var dueRes = JS.due.get(item.subject)
-                    item["due"] = dueRes[0];
-                    item.subject = dueRes[1];
+//                    var dueRes = JS.due.get(item.subject)
+//                    item["due"] = dueRes[0];
+//                    item.subject = dueRes[1];
                     //console.log(item.due, item.subject);
 
                     lowestPrio = (!item.done && item.priority !== "" && item.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)

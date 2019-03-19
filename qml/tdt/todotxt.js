@@ -4,6 +4,8 @@ var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 // fullTxt, complete, priority, (completionDate or creationDate), creationDate, subject
 var baseFeatures = {
     pattern: /^(x\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/ ,
+
+    //indices
     fullTxt: 0,
     done: 1,
     priority: 2,
@@ -20,25 +22,26 @@ var baseFeatures = {
     },
 
     parseLine: function(line) {
+        //baseFeatures
         var fields = baseFeatures.getMatches(line)
-        //        console.log(fields)
-        return {
+        var values = {
             fullTxt: fields[baseFeatures.fullTxt],
             done: fields[baseFeatures.done] !== undefined,
             priority: (fields[baseFeatures.priority] !== undefined ?
                            fields[baseFeatures.priority].charAt(1) : ""),
             //wenn creationDate auch gesetzt, im Feld completionDate
             completionDate: (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate] : "").trim(),
-            //                (fields[baseFeatures.creationDate] !== undefined ?
-            //                (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate] : "") :
-            //                                 "").trim(),
             //wenn creationDate leer, im Feld completionDate enthalten
             creationDate: (fields[baseFeatures.creationDate] !== undefined ? fields[baseFeatures.creationDate]: "").trim(),
-            //                (fields[baseFeatures.creationDate] === undefined ?
-            //                               (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate]: "") :
-            //                               fields[baseFeatures.creationDate]).trim(),
             subject: fields[baseFeatures.subject].trim()
         }
+
+        //due
+        var dueFields = due.get(values.subject)
+        values.subject = dueFields[due.subject]
+        values['due'] = dueFields[due.date]
+
+        return values
     },
 
     modifyLine: function(line, feature, value) {
@@ -89,15 +92,20 @@ var due = {
     datePattern: /^\d{4}-\d{2}-\d{2}$/,
     pattern: /(^|\s)due:\d{4}-\d{2}-\d{2}(\s|$)/,
     subjectPattern: /(^|.*\s)due:(\d{4}-\d{2}-\d{2})(\s.*|$)/,
+
+    //indices
+    date: 0,
+    subject: 1,
+
     set: function(task, date) {
-        console.log(typeof date, date);
+        //console.log(typeof date, date);
         var dueStr = "due:";
         if (typeof date === "string" && due.datePattern.test(date)) {
             dueStr += date.trim();
         } else if (date instanceof Date) {
             dueStr += Qt.formatDate(date, 'yyyy-MM-dd');
         }
-        console.log(dueStr);
+        //console.log(dueStr);
         if (due.pattern.test(dueStr))  {
             if (due.pattern.test(task))
                 return task.replace(due.pattern, " " + dueStr + " ");
