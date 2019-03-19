@@ -60,8 +60,8 @@ Dialog {
                 }
                 text: dialog.text
                 EnterKey.enabled: text.length > 0
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.iconSource: "image://theme/icon-m-enter-accept"
+                EnterKey.onClicked: dialog.accept()
                 Component.onCompleted: cursorPosition = ta.text.length
             }
             Grid { //turn into GridLayout for more Icons?

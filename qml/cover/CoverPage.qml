@@ -7,8 +7,7 @@ id: cb
         source: "coversmall.png"
         anchors.centerIn: parent
         opacity: 0.2
-        scale: 1.0
-
+        //scale: 1.0
     }
 
     Column {
