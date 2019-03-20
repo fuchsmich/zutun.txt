@@ -13,61 +13,25 @@ Page {
         property string title: "Projects"
 
         anchors.fill: parent
-        VerticalScrollDecorator {}
+
         PullDownMenu {
-//            MenuItem {
-//                text: qsTr("Other Filters")
-//                onClicked: //pageStack.push(Qt.resolvedUrl("ProjectFilter.qml"));
-//                           page.state = "others"
-//            }
-//            visible: pageStack.depth > 1
-//            MenuItem {
-//                visible: (page.state !== "contexts")
-//                text: qsTr("Context Filters")
-//                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"});
-//            }
-//            MenuItem {
-//                visible: (page.state !== "projects")
-//                text: qsTr("Project Filters")
-//                onClicked: pageStack.push(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"});
-//            }
-//            MenuItem {
-//                text: qsTr("Back To Tasklist")
-//                onClicked: pageStack.pop(pageStack.find(function(p){ return (p._depth === 0)}));
-//            }
+            enabled: lv.count > 0
             MenuItem {
                 text: lv.btnTxt
                 onClicked: { ttm1.filters.clearFilter(page.state); }
             }
         }
 
+        VerticalScrollDecorator {}
+
         header: PageHeader {
             title: lv.title
         }
-//        header: Item {
-//            width: page.width
-//            height: pgh.height + cbtn.height
 
-//            PageHeader {
-//                id: pgh
-//                title: lv.title
-//                //            description: ttm1.filters.string()
-//            }
-//            Button {
-//                id: cbtn
-//                width: Theme.buttonWidthLarge
-//                anchors {
-//                    top: pgh.bottom
-//                    topMargin: -Theme.paddingMedium
-//                    horizontalCenter: parent.horizontalCenter
-//                }
-//                text: lv.btnTxt
-//                onClicked: {
-//                    ttm1.filters.clearFilter(page.state);
-//                    //                        pageStack.navigateBack();
-//                }
-//            }
-//        }
+        ViewPlaceholder {
+            enabled: lv.count == 0
+            text: qsTr("No entries")
+        }
 
         delegate: ListItem {
             enabled: model.visibleItemCount > 0

@@ -13,15 +13,15 @@ Page {
         anchors.fill: parent
 
         VerticalScrollDecorator {}
+
+        ViewPlaceholder {
+            enabled: lv.count == 0
+            text: qsTr("No entries")
+        }
+
         property string title: ""
         header: PageHeader {
             title: lv.title
-        }
-
-        ViewPlaceholder {
-            enabled: lv.count === 0
-            id: vp
-            text: qsTr("No entries")
         }
 
         delegate: ListItem {

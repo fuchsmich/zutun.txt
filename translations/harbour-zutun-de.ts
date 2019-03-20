@@ -49,6 +49,10 @@
         <source>Clear Context Filters</source>
         <translation>Kontextfilter löschen</translation>
     </message>
+    <message>
+        <source>No entries</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OtherFilters</name>
@@ -207,6 +211,10 @@
 </context>
 <context>
     <name>TextSelect</name>
+    <message>
+        <source>No entries</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Priorities</source>
         <translation>Prioritäten</translation>
