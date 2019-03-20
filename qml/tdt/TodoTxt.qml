@@ -10,6 +10,10 @@ QtObject {
         onContentChanged:{
             tasksArray = JS.splitLines(content);
         }
+
+        onError: {
+
+        }
     }
 
     property var tasksArray: []

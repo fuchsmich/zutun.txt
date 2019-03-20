@@ -4,44 +4,41 @@ import io.thp.pyotherside 1.4
 Python {
     id: py
 
-    property string path: ""
-    onPathChanged: {
-        //console.log(path);
-        if (py.ready) {
-            py.call('fileio.setPath', [path], function(){});
-        }
-        read();
-    }
-
+    property bool pythonReady: false
+    onPythonReadyChanged: read();
+    property string path
+    onPathChanged: read();
+    property string folder: path.substring(0,path.lastIndexOf("/")+1)
     property string content: ""
-    property bool _write: false
-    onContentChanged: {
-        //console.log(content)
-        if (ready && _write) py.call('fileio.write', [content], function(){});
-    }
-
 
     function read() {
-        if (ready) {
-            py.call('fileio.read', [], function(content){
-                _write = false;
-                py.content = content;
-                _write = true;
+        console.log("reading", pythonReady, path)
+        if (pythonReady && path) {
+            py.call('fileio.read', [path], function(result){
+                //console.log(result);
+                content = result;
             });
         }
     }
 
-    property bool ready: false
+    function save(content) {
+        if (pythonReady && path) {
+            py.call('fileio.write', [path, content], function(){ });
+        }
+        read();
+    }
+
+    function create() {
+        if (pythonReady && path) {
+            py.call('fileio.create', [path], function(){ });
+        }
+    }
+
     Component.onCompleted: {
         addImportPath(Qt.resolvedUrl('../python'));
         importModule('fileio', function() {});
-        py.call('fileio.setPath', [path], function(){});
-        py.call('fileio.read', [], function(content){
-            _write = false;
-            py.content = content;
-            _write = true;
-        });
-        ready = true;
+        //console.log("ready")
+        pythonReady = true;
     }
 
     onReceived: {
