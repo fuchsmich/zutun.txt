@@ -18,6 +18,12 @@ Page {
             title: lv.title
         }
 
+        ViewPlaceholder {
+            enabled: lv.count === 0
+            id: vp
+            text: qsTr("No entries")
+        }
+
         delegate: ListItem {
             Label {
                 id: lbl;
@@ -38,11 +44,6 @@ Page {
     }
 
     function setString(txt) {
-//        switch (state) {
-//        case "priorities": pageStack.previousPage().selectedPriority = txt.charAt(1); break
-//        case "projects": pageStack.previousPage().appendText = txt; break
-//        case "contexts": pageStack.previousPage().appendText = txt; break
-//        }
         pageStack.previousPage().setText(state, txt)
         pageStack.pop()
     }
@@ -55,10 +56,6 @@ Page {
                 model: prioritiesModel
                 title: qsTr("Priorities")
             }
-//            PropertyChanges {
-//                target: pageHeader
-//                title: qsTr("Priorities")
-//            }
         },
         State {
             name: "projects"
@@ -67,10 +64,6 @@ Page {
                 model: ttm1.filters.projectsModel
                 title: qsTr("Projects")
             }
-//            PropertyChanges {
-//                target: pageHeader
-//                title: qsTr("Projects")
-//            }
         },
         State {
             name: "contexts"
@@ -79,10 +72,6 @@ Page {
                 model: ttm1.filters.contextsModel
                 title: qsTr("Contexts")
             }
-//            PropertyChanges {
-//                target: pageHeader
-//                title: qsTr("Contexts")
-//            }
         }
     ]
 }
