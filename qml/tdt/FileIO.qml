@@ -11,6 +11,11 @@ Python {
     property string folder: path.substring(0,path.lastIndexOf("/")+1)
     property string content: ""
 
+    signal ioError(string msg)
+    property bool pathExists: true
+    property bool exists: true
+    property bool writeable: true
+
     function read() {
         console.log("reading", pythonReady, path)
         if (pythonReady && path) {
@@ -32,12 +37,20 @@ Python {
         if (pythonReady && path) {
             py.call('fileio.create', [path], function(){ });
         }
+        read();
     }
 
     Component.onCompleted: {
         addImportPath(Qt.resolvedUrl('../python'));
         importModule('fileio', function() {});
         //console.log("ready")
+        setHandler('ioerror', ioError)
+        setHandler('pathExists', function(value) {
+            pathExists = value
+        })
+        setHandler('fileExists', function(value) {
+            exists = value
+        })
         pythonReady = true;
     }
 

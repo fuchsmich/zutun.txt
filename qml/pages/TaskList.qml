@@ -8,7 +8,6 @@ Page {
     id: page
     property string name: "TaskList"
 
-
     SilicaListView {
         id: lv
         anchors.fill: parent
@@ -25,8 +24,16 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
             }
             MenuItem {
+                visible: ttm1.file.writeable
                 text: qsTr("Add New Task")
                 onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: -1, text: ""});
+            }
+            MenuItem {
+                visible: ttm1.file.pathExists && !ttm1.file.exists
+                text: qsTr("Create file")
+                onClicked: {
+                    ttm1.file.create()
+                }
             }
         }
 
@@ -80,6 +87,8 @@ Page {
         ViewPlaceholder {
             enabled: lv.count === 0
             text: qsTr("No Tasks")
+            hintText: (ttm1.file.hintText === ""? qsTr("Pull down to add task.")
+                                                : ttm1.file.hintText)
         }
 
         model: ttm1.tasks

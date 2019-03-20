@@ -52,7 +52,8 @@ Page {
                     title: "todo.txt Location"
                     nameFilters: [ '*.txt']
                     onSelectedContentPropertiesChanged: {
-                        settings.todoTxtLocation = selectedContentProperties.filePath
+                        //settings.todoTxtLocation = selectedContentProperties.filePath
+                        todoTxtPath.text = selectedContentProperties.filePath
                     }
                 }
             }
@@ -97,6 +98,7 @@ Page {
         }
         Component.onDestruction: {
             // write back settings and save
+            settings.todoTxtLocation = todoTxtPath.text
             settings.fontSizeTaskList = fontSizeSlider.sliderValue;
             settings.sync();
         }

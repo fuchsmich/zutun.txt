@@ -196,6 +196,14 @@
         <source>due:</source>
         <translation>verwacht:</translation>
     </message>
+    <message>
+        <source>Create file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pull down to add task.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextSelect</name>

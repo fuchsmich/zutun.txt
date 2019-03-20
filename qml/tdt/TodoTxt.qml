@@ -6,13 +6,15 @@ import "todotxt.js" as JS
 
 QtObject {
     property FileIO file: FileIO {
+        property string hintText: ""
         path: settings.todoTxtLocation
         onContentChanged:{
             tasksArray = JS.splitLines(content);
         }
 
-        onError: {
-
+        onIoError: {
+            //TODO needs some rework for translation
+            hintText = msg;
         }
     }
 
