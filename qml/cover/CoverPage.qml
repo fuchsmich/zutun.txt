@@ -11,17 +11,15 @@ CoverBackground {
         fillMode: Image.PreserveAspectFit
     }
 
-    Column {
+    SilicaListView {
         anchors.fill: parent
         anchors.margins: Theme.paddingMedium
-        Repeater {
-            model: ttm1.tasks
-            Label {
-                //x: Theme.paddingMedium
-                text: model.displayText
-                width: cb.width - 2*x
-                truncationMode: TruncationMode.Elide
-            }
+        clip: true
+        model: ttm1.tasks
+        delegate: Label {
+            text: model.displayText
+            width: parent.width - 2*Theme.paddingMedium
+            truncationMode: TruncationMode.Elide
         }
     }
 
