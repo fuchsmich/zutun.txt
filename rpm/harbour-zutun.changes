@@ -2,6 +2,9 @@
 # Add newest entries to the top of the list.
 # Separate entries from eachother with a blank line.
 
+* Mon Apr 01 2019 Michael Fuchs <michfu@gmx.at> 1.7.1
+- updated langs: nl, nl_BE, de, sv
+
 * Tue Mar 19 2019 Michael Fuchs <michfu@gmx.at> 1.7
 - cover: background image full size
 - taskedit: enter key bound to accept

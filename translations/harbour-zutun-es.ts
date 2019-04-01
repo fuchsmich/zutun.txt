@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es">
 <context>
     <name>About</name>
     <message>
@@ -11,22 +13,22 @@
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Author</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateSelect</name>
     <message>
         <source>Select due date</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -199,15 +201,15 @@
     <name>TextSelect</name>
     <message>
         <source>Priorities</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Proyectos</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Contextos</translation>
     </message>
 </context>
 <context>
