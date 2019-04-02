@@ -5,7 +5,7 @@
     <name>About</name>
     <message>
         <source>Source</source>
-        <translation>Quelle</translation>
+        <translation>Quellcode</translation>
     </message>
     <message>
         <source>Packages</source>

@@ -13,22 +13,22 @@
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Acerca de %1</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation type="unfinished"></translation>
+        <translation>Autor</translation>
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión %1</translation>
     </message>
 </context>
 <context>
     <name>DateSelect</name>
     <message>
         <source>Select due date</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar fecha límite</translation>
     </message>
 </context>
 <context>
@@ -201,15 +201,15 @@
     <name>TextSelect</name>
     <message>
         <source>Priorities</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioridades</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation type="unfinished">Proyectos</translation>
+        <translation>Proyectos</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished">Contextos</translation>
+        <translation>Contextos</translation>
     </message>
 </context>
 <context>
