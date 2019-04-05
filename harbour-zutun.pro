@@ -35,10 +35,7 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/tdt/FileIO.qml \
     qml/python/fileio.py \
     qml/tdt/Notification.qml \
-    quickaction.conf \
-    shortcut.conf \
     icons/harbour-zutun.svg \
-    version \
     qml/pages/DateSelect.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
@@ -61,3 +58,8 @@ TRANSLATIONS += \
     translations/harbour-zutun-sv.ts
 
 HEADERS +=
+
+quickaction.path = /usr/share/lipstick/quickactions
+quickaction.files = info.fuxl.zutuntxt.conf
+
+INSTALLS += quickaction

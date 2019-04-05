@@ -59,8 +59,8 @@ rm -rf %{buildroot}
 %qmake5_install
 
 # >> install post
-install -d %{buildroot}%{_datadir}/lipstick/quickactions
-install %{_builddir}/../zutun.txt/quickaction.conf %{buildroot}%{_datadir}/lipstick/quickactions/info.fuxl.zutuntxt.conf
+#install -d %{buildroot}%{_datadir}/lipstick/quickactions
+#install %{_builddir}/../zutun.txt/quickaction.conf %{buildroot}%{_datadir}/lipstick/quickactions/info.fuxl.zutuntxt.conf
 install -d %{buildroot}%{_datadir}/jolla-settings/entries/
 install %{_builddir}/../zutun.txt/shortcut.conf %{buildroot}%{_datadir}/jolla-settings/entries/info.fuxl.zutuntxt.json
 echo %{version}-%{release} > %{buildroot}%{_datadir}/%{name}/version
