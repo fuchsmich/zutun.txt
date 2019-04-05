@@ -17,6 +17,7 @@ Page {
             width: parent.width
             PageHeader {
                 property string version: "0.0-0"
+                //: About Zutun.txt
                 title: qsTr("About %1").arg("ZuTun.txt")
                 description: qsTr("Version %1").arg(version)
                 Component.onCompleted: {
@@ -48,13 +49,16 @@ Page {
             }
 
             SectionHeader {
+                //: Author of the app
                 text: qsTr("Author")
             }
             Label {
                 x: Theme.horizontalPageMargin
                 text: "Michael Fuchs <michfu@gmx.at>"
             }
+
             SectionHeader {
+                //: Location of Sourcecode
                 text: qsTr("Source")
             }
             Button {
@@ -65,6 +69,19 @@ Page {
                 onClicked: Qt.openUrlExternally('https://github.com/fuchsmich/zutun.txt/')
             }
             SectionHeader {
+                //: Where to get the app
+                text: qsTr("Translation")
+            }
+            Label {
+                x: Theme.horizontalPageMargin
+                text:'es:
+nl, nl_BE:
+fr:
+sv:'
+            }
+
+            SectionHeader {
+                //% Where to get this app
                 text: qsTr("Packages")
             }
             Button {

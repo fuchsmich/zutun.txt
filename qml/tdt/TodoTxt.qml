@@ -41,7 +41,7 @@ QtObject {
             txt += newArray[t] + "\n";
         }
         //this writes to the file:
-        file.content = txt;
+        file.save(txt);
     }
 
     property QtObject filters: QtObject {

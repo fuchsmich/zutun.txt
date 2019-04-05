@@ -13,7 +13,7 @@ Name:       harbour-zutun
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    todo.txt GUI
-Version:    1.7.2
+Version:    1.7.99
 Release:    1
 Group:      Applications/Productivity
 License:    BSD
@@ -59,10 +59,6 @@ rm -rf %{buildroot}
 %qmake5_install
 
 # >> install post
-#install -d %{buildroot}%{_datadir}/lipstick/quickactions
-#install %{_builddir}/../zutun.txt/quickaction.conf %{buildroot}%{_datadir}/lipstick/quickactions/info.fuxl.zutuntxt.conf
-install -d %{buildroot}%{_datadir}/jolla-settings/entries/
-install %{_builddir}/../zutun.txt/shortcut.conf %{buildroot}%{_datadir}/jolla-settings/entries/info.fuxl.zutuntxt.json
 echo %{version}-%{release} > %{buildroot}%{_datadir}/%{name}/version
 # << install post
 

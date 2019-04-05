@@ -21,6 +21,11 @@ Dialog {
             }
             DatePicker {
                 id: dp
+                onViewMovingChanged: {
+                    if (viewMoving) {
+                        dialog.forwardNavigation = false
+                    } else dialog.forwardNavigation = true
+                }
             }
         }
     }

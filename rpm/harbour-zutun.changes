@@ -1,10 +1,12 @@
 # Add new changelog entries following the format below.
 # Add newest entries to the top of the list.
 # Separate entries from eachother with a blank line.
+
 * Tue Apr 02 2019 Michael Fuchs <michfu@gmx.at> 1.8
 - improved file handling and error feedback
 - create file from app
 - some work on cover
+- icon 172x172
 
 * Mon Apr 01 2019 Michael Fuchs <michfu@gmx.at> 1.7.2
 - updated langs: es

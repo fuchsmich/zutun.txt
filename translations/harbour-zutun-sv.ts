@@ -4,24 +4,36 @@
 <context>
     <name>About</name>
     <message>
+<<<<<<< HEAD
         <source>Source</source>
+        <extracomment>Location of Sourcecode</extracomment>
         <translation>Källa</translation>
     </message>
     <message>
+=======
+>>>>>>> 0d0cf69... grid
         <source>Packages</source>
+        <extracomment>Where to get this app</extracomment>
         <translation>Paket</translation>
     </message>
     <message>
         <source>About %1</source>
+        <extracomment>About Zutun.txt</extracomment>
         <translation>Om %1</translation>
     </message>
     <message>
         <source>Author</source>
+        <extracomment>Author of the app</extracomment>
         <translation>Utvecklare</translation>
     </message>
     <message>
         <source>Version %1</source>
         <translation>Version %1</translation>
+    </message>
+    <message>
+        <source>Translation</source>
+        <extracomment>Where to get the app</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

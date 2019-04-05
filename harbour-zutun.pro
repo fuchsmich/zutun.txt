@@ -1,15 +1,3 @@
-# NOTICE:
-#
-# Application name defined in TARGET has a corresponding QML filename.
-# If name defined in TARGET is changed, the following needs to be done
-# to match new name:
-#   - corresponding QML filename must be changed
-#   - desktop icon filename must be changed
-#   - desktop filename must be changed
-#   - icon definition filename in desktop file must be changed
-#   - translation filenames have to be changed
-
-# The name of your application
 TARGET = harbour-zutun
 
 CONFIG += sailfishapp_qml
@@ -36,18 +24,17 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/python/fileio.py \
     qml/tdt/Notification.qml \
     icons/harbour-zutun.svg \
-    qml/pages/DateSelect.qml
+    version \
+    qml/pages/DateSelect.qml \
+    qml/components/EditItem.qml \
+    qml/components/EditContextMenu.qml \
+    qml/components/EditItemContextList.qml \
+    qml/components/EditItemDatePicker.qml
 
-SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172 256x256
 
-# to disable building translations every time, comment out the
-# following CONFIG line
 CONFIG += sailfishapp_i18n
 
-# German translation is enabled as an example. If you aren't
-# planning to localize your app, remember to comment out the
-# following TRANSLATIONS line. And also do not forget to
-# modify the localized app name in the the .desktop file.
 TRANSLATIONS += \
     translations/harbour-zutun-de.ts \
     translations/harbour-zutun-es.ts \
@@ -57,9 +44,10 @@ TRANSLATIONS += \
     translations/harbour-zutun-ru.ts \
     translations/harbour-zutun-sv.ts
 
-HEADERS +=
-
 quickaction.path = /usr/share/lipstick/quickactions
 quickaction.files = info.fuxl.zutuntxt.conf
 
-INSTALLS += quickaction
+shortcut.path = /usr/share/jolla-settings/entries
+shortcut.files = info.fuxl.zutuntxt.json
+
+INSTALLS += quickaction shortcut

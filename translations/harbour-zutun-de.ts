@@ -5,23 +5,32 @@
     <name>About</name>
     <message>
         <source>Source</source>
+        <extracomment>Location of Sourcecode</extracomment>
         <translation>Quellcode</translation>
     </message>
     <message>
         <source>Packages</source>
+        <extracomment>Where to get this app</extracomment>
         <translation>Pakete</translation>
     </message>
     <message>
         <source>About %1</source>
+        <extracomment>About Zutun.txt</extracomment>
         <translation>Über %1</translation>
     </message>
     <message>
         <source>Author</source>
+        <extracomment>Author of the app</extracomment>
         <translation>Autor</translation>
     </message>
     <message>
         <source>Version %1</source>
         <translation>Version %1</translation>
+    </message>
+    <message>
+        <source>Translation</source>
+        <extracomment>Where to get the app</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

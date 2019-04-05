@@ -4,6 +4,8 @@ var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 // fullTxt, complete, priority, (completionDate or creationDate), creationDate, subject
 var baseFeatures = {
     pattern: /^(x\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/ ,
+    datePattern: /^\d{4}-\d{2}-\d{2}$/,
+
 
     //indices
     fullTxt: 0,
@@ -65,7 +67,8 @@ var baseFeatures = {
             break
         case baseFeatures.creationDate:
             if (value === false) fields[feature] = undefined
-            else fields[feature] = value + " "
+            else if (baseFeatures.datePattern.test(value)) fields[feature] = value + " "
+            else if (value instanceof Date) fields[feature] = Qt.formatDate(value, 'yyyy-MM-dd') + " "
             break
         }
         fields[baseFeatures.fullTxt] = undefined
@@ -121,29 +124,29 @@ var due = {
     subject: 1,
 
     set: function(task, date) {
-        //console.log(typeof date, date);
         var dueStr = "due:";
         if (typeof date === "string" && due.datePattern.test(date)) {
-            dueStr += date.trim();
+            dueStr += date.trim()
         } else if (date instanceof Date) {
-            dueStr += Qt.formatDate(date, 'yyyy-MM-dd');
+            dueStr += Qt.formatDate(date, 'yyyy-MM-dd')
         }
-        //console.log(dueStr);
         if (due.pattern.test(dueStr))  {
             if (due.pattern.test(task))
                 return task.replace(due.pattern, " " + dueStr + " ");
             else
-                return task + " " + dueStr.trim();
+                return task + " " + dueStr.trim()
+        } else if (date === "") {
+            return task.replace(due.pattern, "");
         }
     },
     get: function(subject) {
         var dueDate = "";
         if (due.subjectPattern.test(subject)) {
-            var matches = subject.match(due.subjectPattern);
+            var matches = subject.match(due.subjectPattern)
             dueDate = matches[2];
-            subject = matches[1].trim() + " " + matches[3].trim();
+            subject = matches[1].trim() + " " + matches[3].trim()
         }
-        return [dueDate, subject];
+        return [dueDate, subject]
     }
 }
 
