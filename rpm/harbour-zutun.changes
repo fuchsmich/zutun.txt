@@ -3,6 +3,7 @@
 # Separate entries from eachother with a blank line.
 
 * Tue Apr 02 2019 Michael Fuchs <michfu@gmx.at> 1.8
+- gridmenu in taskedit
 - improved file handling and error feedback
 - create file from app
 - some work on cover

@@ -2,6 +2,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 EditItem {
+    id: eip
     property alias model: horLV.model
     signal listItemSelected(string text)
 

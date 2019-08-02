@@ -10,7 +10,6 @@
     </message>
     <message>
         <source>Packages</source>
-        <extracomment>Where to get this app</extracomment>
         <translation>Paquetes</translation>
     </message>
     <message>

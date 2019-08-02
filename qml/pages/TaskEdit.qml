@@ -16,12 +16,14 @@ Dialog {
         var cp = ta.cursorPosition
         var l = ta.text.length
         switch (type) {
-        case "priorities":
-            ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, txt.charAt(1))
+        case "priority":
+            var arg =  (txt ? txt.charAt(1) : false)
+            console.log(arg)
+            ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, arg)
             ta.cursorPosition = cp + (ta.text.length - l)
             break
-        case "projects":
-        case "contexts":
+        case "project":
+        case "context":
             var before = ta.text.substr(0,cp)
             var after = ta.text.substr(cp)
             txt = (before.charAt(before.length - 1) === " " ? "" : " ")
@@ -35,10 +37,10 @@ Dialog {
             break
         case "creationDate":
             ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.creationDate, txt)
-            ta.focusTimer.start()
             ta.cursorPosition = cp + (ta.text.length - l)
             break
         }
+        ta.focusTimer.start()
     }
 
     acceptDestinationAction: PageStackAction.Pop
@@ -82,9 +84,8 @@ Dialog {
                 columns: Math.floor(width/Theme.itemSizeMedium)
                 property real itemWidth: width/columns
 
-                EditItem {
+                EditItemContextList {
                     //set priority
-                    id: eip
                     Label {
                         width: parent.width
                         height: width
@@ -93,41 +94,19 @@ Dialog {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
-                    onClicked: {
-                        openMenu()
-                    }
+//                    onClicked: {
+//                        openMenu()
+//                    }
 
-                    menu: EditContextMenu {
-                        SilicaListView {
-                            width: parent.width
-                            height: Theme.itemSizeMedium
-                            orientation: ListView.Horizontal
-                            model: ListModel {
-                                id: prioritiesModel
-                                Component.onCompleted: {
-                                    for (var a in JS.alphabet) {
-                                        append({"name": "(" + JS.alphabet[a] + ") "});
-                                    }
-                                }
+                    model: ListModel {
+                        id: prioritiesModel
+                        Component.onCompleted: {
+                            for (var a in JS.alphabet) {
+                                append({"name": "(" + JS.alphabet[a] + ") "});
                             }
-
-                            delegate: MouseArea {
-                                width: Theme.itemSizeMedium
-                                height: parent.height
-                                //anchors.fill: parent
-                                onClicked: {
-                                    console.log(text)
-                                    eip.closeMenu()
-                                    setText("priorities", model.name)
-                                }
-                                Label {
-                                    anchors.centerIn: parent
-                                    text: model.name
-                                }
-                            }
-                            HorizontalScrollDecorator { }
                         }
                     }
+                    onListItemSelected: setText("priority", text)
                 }
                 EditItem {
                     //remove priority
@@ -141,11 +120,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
                     onClicked: {
-                        var cp = ta.cursorPosition;
-                        var tl = ta.text.length
-                        ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, false)
-                        ta.focusTimer.start()
-                        ta.cursorPosition = cp + (ta.text.length - tl)
+                        setText("priority", false)
                     }
                 }
 
@@ -175,7 +150,7 @@ Dialog {
                     }
 
                     model: ttm1.filters.projectsModel
-                    onListItemSelected: setText("projects", text)
+                    onListItemSelected: setText("project", text)
                 }
 
                 EditItemContextList {
@@ -190,7 +165,7 @@ Dialog {
                     }
 
                     model: ttm1.filters.contextsModel
-                    onListItemSelected: setText("contexts", text)
+                    onListItemSelected: setText("context", text)
                 }
 
                 EditItemDatePicker {
@@ -228,11 +203,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
                     onClicked: {
-                        var cp = ta.cursorPosition;
-                        var tl = ta.text.length
-                        ta.text = JS.due.set(ta.text, "")
-                        ta.focusTimer.start()
-                        ta.cursorPosition = cp + (ta.text.length - tl)
+                        setText("due", "")
                     }
                 }
             }

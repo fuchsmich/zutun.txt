@@ -74,10 +74,11 @@ Page {
             }
             Label {
                 x: Theme.horizontalPageMargin
-                text:'es:
-nl, nl_BE:
-fr:
-sv:'
+                text:'es: Carmen Fernández B.
+nl, nl_BE: Nathan Follens
+fr: my brother
+sv: Åke Engelbrektson
+ru: Алексей Дедун'
             }
 
             SectionHeader {
