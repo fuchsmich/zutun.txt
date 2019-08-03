@@ -14,6 +14,7 @@ EditItem {
             width: parent.width
             height: Theme.itemSizeMedium
             orientation: ListView.Horizontal
+            spacing: Theme.paddingMedium
 
             delegate: MouseArea {
                 width: Math.max(Theme.itemSizeMedium, lbl.width)
