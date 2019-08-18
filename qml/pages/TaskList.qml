@@ -2,7 +2,9 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-//import QtQml.Models 2.1
+import Sailfish.Silica.private 1.0
+
+import "../tdt/todotxt.js" as JS
 
 Page {
     id: page
@@ -119,11 +121,35 @@ Page {
 
                     Label {
                         id:lbl
+
                         width: listItem.width - doneSw.width - 2*Theme.horizontalPageMargin
-                        text: model.displayText
+                        linkColor: Theme.primaryColor
+                        text: formatText(parser.linkedText)
+                        textFormat: Text.StyledText
                         wrapMode: Text.Wrap
                         font.strikeout: model.done
                         font.pixelSize: settings.fontSizeTaskList
+
+                        onLinkActivated: {
+                            //if (defaultLinkActions) {
+                                Qt.openUrlExternally(link)
+                            //}
+                        }
+
+                        function formatText(txt) {
+                            txt = txt.replace(/\n/g, '<br>')
+                            txt = txt.replace(JS.projects.pattern,
+                                    function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'})
+                            return txt.replace(JS.contexts.pattern,
+                                    function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'})
+                        }
+
+                        LinkParser {
+                            id: parser
+                            text: model.subject
+                        }
+
+                        onTextChanged: console.log(text)
                     }
                 }
                 Row {

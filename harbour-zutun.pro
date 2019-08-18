@@ -29,7 +29,8 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/components/EditItem.qml \
     qml/components/EditContextMenu.qml \
     qml/components/EditItemContextList.qml \
-    qml/components/EditItemDatePicker.qml
+    qml/components/EditItemDatePicker.qml \
+    qml/components/TaskListItem.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172 256x256
 

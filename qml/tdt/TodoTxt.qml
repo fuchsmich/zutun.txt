@@ -332,9 +332,14 @@ QtObject {
                                                '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
                                 + formattedSubject //item.subject //+ '<br/>' +item.creationDate
 
-                        var json = {"lineNum": a, "fullTxt": item.fullTxt, "done": item.done,
-                            "priority": item.priority, "displayText": displayText,
-                            "creationDate": item.creationDate, "due": item.due,
+                        var json = {"lineNum": a,
+                            "fullTxt": item.fullTxt, //raw text
+                            "subject": item.subject, //raw text without prio, creationDate,...
+                            "displayText": displayText, //subject with colored proj, subj
+                            "done": item.done,
+                            "priority": item.priority,
+                            "creationDate": item.creationDate,
+                            "due": item.due,
                             "section": g //section
                         };
 
