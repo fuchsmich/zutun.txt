@@ -25,12 +25,12 @@ ListItem {
         })
     }
     onClicked: editItem()
-    contentHeight: col.height + lv.spacing
+    contentHeight: col.height //+ lv.spacing
 
     Column {
         id: col
-        width: page.width
-        anchors.verticalCenter: parent.verticalCenter
+        width: parent.width
+        //anchors.verticalCenter: parent.verticalCenter
         Row {
             id: row
             //            x: Theme.horizontalPageMargin

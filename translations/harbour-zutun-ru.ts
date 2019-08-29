@@ -221,6 +221,57 @@
     </message>
 </context>
 <context>
+    <name>TaskModel</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Скрыть завершенные</translation>
+    </message>
+    <message>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Сортировано по %1</translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Сгруппировано по %1,</translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Объекты</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Нет</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Проекты</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextSelect</name>
     <message>
         <source>No entries</source>
@@ -236,57 +287,6 @@
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TodoTxt</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation>Скрыть завершенные</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation>Объекты</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Нет</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation>Проекты</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation>Сортировано по %1</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation>Сгруппировано по %1,</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

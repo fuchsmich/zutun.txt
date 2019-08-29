@@ -221,6 +221,57 @@
     </message>
 </context>
 <context>
+    <name>TaskModel</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Ocultar completadas</translation>
+    </message>
+    <message>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Ordenado por %1</translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished">asc</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">desc</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Agrupado por %1,</translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">Orden natural</translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished">Fecha de creación</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Fecha límite</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Asunto</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Ninguno</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Proyectos</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Contextos</translation>
+    </message>
+</context>
+<context>
     <name>TextSelect</name>
     <message>
         <source>No entries</source>
@@ -237,57 +288,6 @@
     <message>
         <source>Contexts</source>
         <translation>Contextos</translation>
-    </message>
-</context>
-<context>
-    <name>TodoTxt</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation>Ocultar completadas</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation>asc</translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation>desc</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>Orden natural</translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation>Fecha de creación</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation>Asunto</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Ninguno</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation>Proyectos</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation>Contextos</translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation>Ordenado por %1</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation>Agrupado por %1,</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Fecha límite</translation>
     </message>
 </context>
 </TS>

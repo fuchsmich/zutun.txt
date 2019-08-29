@@ -221,6 +221,57 @@
     </message>
 </context>
 <context>
+    <name>TaskModel</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Voltooid verbergen</translation>
+    </message>
+    <message>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Gesorteerd op %1</translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished">oplopend</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">aflopend</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Gegroepeerd op %1,</translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">natuurlijk</translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished">Datum van aanmaken</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Einddatum</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Onderwerp</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Geen</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Projecten</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Contexten</translation>
+    </message>
+</context>
+<context>
     <name>TextSelect</name>
     <message>
         <source>No entries</source>
@@ -237,57 +288,6 @@
     <message>
         <source>Contexts</source>
         <translation>Contexten</translation>
-    </message>
-</context>
-<context>
-    <name>TodoTxt</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation>Voltooid verbergen</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation>oplopend</translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation>aflopend</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>natuurlijk</translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation>Datum van aanmaken</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation>Onderwerp</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Geen</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation>Projecten</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation>Contexten</translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation>Gesorteerd op %1</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation>Gegroepeerd op %1,</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Einddatum</translation>
     </message>
 </context>
 </TS>

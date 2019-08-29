@@ -53,7 +53,7 @@ Page {
             PageHeader {
                 id: pgh
                 title: qsTr("Tasklist")
-                description: ttm1.sorting.groupText + ttm1.sorting.sortText
+                description: taskModel.sorting.groupText + taskModel.sorting.sortText
             }
             Label { /*from PageHeaderDescription.qml */
                 id: flbl
@@ -69,7 +69,7 @@ Page {
                 opacity: 0.6
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
-                text: qsTr("Filter") + ": " + ttm1.filters.text
+                text: qsTr("Filter") + ": " + taskModel.filters.text
             }
         }
 
@@ -93,8 +93,7 @@ Page {
                                                 : ttm1.file.hintText)
         }
 
-        model: TaskModel {
-        }
+        model: taskModel
     }
 
 //    onActiveFocusChanged: {

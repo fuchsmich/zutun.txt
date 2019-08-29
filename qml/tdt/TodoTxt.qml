@@ -30,7 +30,7 @@ QtObject {
     signal readArray()
     onReadArray: {
         tasks.populate(tasksArray);
-        filters.fetchModels();
+        //filters.fetchModels();
     }
 
     signal listToFile(var newArray)
@@ -42,169 +42,6 @@ QtObject {
         }
         //this writes to the file:
         file.save(txt);
-    }
-
-    property QtObject filters: QtObject {
-        property bool hideDone: filterSettings.hideDone
-        property var projects: filterSettings.projects.value
-        property var contexts: filterSettings.contexts.value
-        property string text: [hideDone? qsTr("Hide Complete"): undefined].concat(projects.concat(contexts)).join(", ")
-
-        property ListModel projectsModel: ListModel {}
-        property ListModel contextsModel: ListModel {}
-
-        onProjectsChanged: readArray();
-        onContextsChanged: readArray();
-        onHideDoneChanged: readArray();
-
-        signal fetchModels()
-        onFetchModels: {
-            populate(projectsModel, JS.projects.list(tasksArray));
-            populate(contextsModel, JS.contexts.list(tasksArray));
-        }
-
-        function clearFilter(filterName) {
-            switch(filterName) {
-            case "projects": filterSettings.projects.value = []; break;
-            case "contexts": filterSettings.contexts.value = []; break;
-            }
-        }
-
-        function visibleItem(item) {
-            //            console.log(item.subject, projects, contexts)
-            if ((hideDone && item.done)) return false;
-
-            for (var p in projects) {
-                //                console.log(item.subject,projects[p],item.subject.indexOf(projects[p]))
-                if (item.subject.indexOf(projects[p]) === -1) return false;
-            }
-
-            for (var c in contexts) {
-                if (item.subject.indexOf(contexts[c]) === -1) return false;
-            }
-
-            return true;
-        }
-
-        /* set filter; name... filterstring; onOff... turn it on (true) or off (false)*/
-        function setByName(name, onOff) {
-            var list = [];
-            switch (name.charAt(0)) {
-            case "+": list = projects; break;
-            case "@": list = contexts; break;
-            default: return;
-            }
-            if (onOff) list.push(name);
-            else list.splice(list.indexOf(name), 1);
-            //console.log(typeof filterSettings.projects, typeof list[0]);
-            list.sort();
-            switch (name.charAt(0)) {
-            case "+": filterSettings.projects.value = list; break;
-            case "@": filterSettings.contexts.value = list; break;
-            default: return;
-            }
-        }
-
-        function populate(model, array) {
-            model.clear();
-            var sortedArray, tmpArray = [];
-            var itemCount, active, name, visibleItemCount;
-            for ( var a in array) {
-                tmpArray.push(a);
-            }
-            sortedArray = tmpArray.sort();
-            for (var i in sortedArray) {
-                name = sortedArray[i];
-                itemCount = array[name].length;
-                visibleItemCount = 0;
-                for (var j =0;  j < array[name].length; j++){
-                    var taskItem = JS.baseFeatures.parseLine(tasksArray[array[name][j]]);
-                    if (visibleItem(taskItem)) visibleItemCount++;
-                }
-                active = ((filters.projects !== undefined && filters.projects.indexOf(name) !== -1) ||
-                          (filters.contexts !== undefined && filters.contexts.indexOf(name) !== -1))
-                model.append( {"name": name, "active": active, "itemCount": itemCount, "visibleItemCount": visibleItemCount});
-            }
-        }
-
-    }
-
-
-    property QtObject sorting: QtObject {
-        property bool asc: sortSettings.asc
-        onAscChanged: tasks.populate(tasksArray);
-
-        property int order: sortSettings.order
-        onOrderChanged: tasks.populate(tasksArray);
-
-        property int grouping: sortSettings.grouping
-        onGroupingChanged: tasks.populate(tasksArray);
-
-        property string sortText: qsTr("Sorted by %1").arg(functionList[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc")))
-        property string groupText: (grouping > 0 ? qsTr("Grouped by %1, ").arg(groupFunctionList[grouping][0]) : "")
-
-
-        //returns a function, which compares two items
-        function lessThanFunc() {
-            return groupFunctionList[grouping][1];
-        }
-
-        //list of functions for sorting; *left* and *right* are the items to compare
-        property var functionList: [
-            [qsTr("natural"), function(left, right) {
-                return (left.fullTxt === right.fullTxt ?
-                            false :
-                            (left.fullTxt < right.fullTxt) ^ !asc
-                        );
-            }],
-            [qsTr("Creation Date"), function(left, right) {
-                return (left.creationDate === right.creationDate ?
-                            functionList[0][1](left, right) :
-                            (left.creationDate < right.creationDate) ^ !asc
-                        );
-            }],
-            [qsTr("Due Date"), function(left, right) {
-                return (left.due === right.due ?
-                            functionList[0][1](left, right) :
-                            (left.due < right.due) ^ !asc
-                        );
-            }],
-            [qsTr("Subject"), function(left, right) {
-                return (left.subject === right.subject ?
-                            functionList[0][1](left, right) :
-                            (left.subject < right.subject)^ !asc
-                        );
-            }]
-        ]
-
-        property var groupFunctionList: [
-            [qsTr("None"),
-             function(left, right) {
-                 return functionList[order][1](left, right);
-             },
-             function(line) {
-                 return [];
-             }
-            ]
-            ,[qsTr("Projects"),
-              function(left, right) {
-                  //console.log(typeof left.section, right.section)
-                  return (left.section === right.section ?
-                               functionList[order][1](left, right) :
-                              (left.section < right.section) ^ !asc
-                          );
-              },
-              function(line) {
-                  return JS.projects.list([line]);
-              }]
-            ,[qsTr("Contexts"),
-              function(left, right) {
-                  return groupFunctionList[1][1](left,right);
-              },
-              function(line) {
-                  return JS.contexts.list([line]);
-              }]
-        ]
     }
 
     property var notifications: {
@@ -311,63 +148,57 @@ QtObject {
             });
         }
 
+        function lineToJSON(num, line) {
+            var item = JS.baseFeatures.parseLine(line);
+
+            var displayText = linkify(item.subject)
+            displayText = displayText.replace(
+                        JS.projects.pattern,
+                        function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'});
+            displayText = displayText.replace(
+                        JS.contexts.pattern,
+                        function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'});
+            displayText = (item.priority !== "" ?
+                               '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
+                    + displayText //item.subject //+ '<br/>' +item.creationDate
+
+            return {"lineNum": num,
+                "fullTxt": item.fullTxt, //raw text
+                "subject": item.subject, //raw text without prio, creationDate,...
+                "formattedSubject": displayText, //subject with colored proj, subj
+                "done": item.done,
+                "priority": item.priority,
+                "creationDate": item.creationDate,
+                "due": item.due,
+                "section": ""
+            }
+
+        }
+
         function populate(array) {
             //clear();
             notifications.removeAll();
             for (var a = 0; a < array.length; a++) {
                 var line = array[a];
-                var groups = sorting.groupFunctionList[sorting.grouping][2](line)
-                if (Object.keys(groups).length === 0) {
-                    groups[""] = [];
-                }
-                for (var g in groups) {
-                    var item = JS.baseFeatures.parseLine(line);
 
-                    lowestPrio = (!item.done && item.priority !== "" && item.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
-                                  ? item.priority : lowestPrio);
+                var json = lineToJSON(a, line)
 
-                    //if (filters.visibleItem(item)) {
+                lowestPrio = (!json.done && json.priority !== "" && json.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
+                              ? json.priority : lowestPrio);
 
-                        var displayText = linkify(item.subject)
-                        displayText = displayText.replace(
-                                    JS.projects.pattern,
-                                    function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'});
-                        displayText = displayText.replace(
-                                    JS.contexts.pattern,
-                                    function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'});
-                        displayText = (item.priority !== "" ?
-                                               '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
-                                + displayText //item.subject //+ '<br/>' +item.creationDate
+                append(json)
 
-                        var json = {"lineNum": a,
-                            "fullTxt": item.fullTxt, //raw text
-                            "subject": item.subject, //raw text without prio, creationDate,...
-                            "formattedSubject": displayText, //subject with colored proj, subj
-                            "done": item.done,
-                            "priority": item.priority,
-                            "creationDate": item.creationDate,
-                            "due": item.due,
-                            "section": g //section
-                        };
+                //for due dates add notification
+                if (json.due !== "") {
+                    var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
-                        //var index = insertPosition(sorting.lessThanFunc(), json); //item)
-                        //insert(index, json);
-
-                    append(json)
-
-                        //for due dates add notification
-                        if (item.due !== "") {
-                            var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"));
-
-                            var notification = notificationComp.createObject(app);
-                            notification.timestamp = Date.fromLocaleString(Qt.locale(), item.due, "yyyy-MM-dd");
-                            notification.body = item.subject;
-                            notification.summary = item.due;
-                            notification.publish();
-                            notifications.idList.push(notification.replacesId)
-                            //console.log(notification.replacesId, notifications.idList);
-                        }
-                    //}
+                    var notification = notificationComp.createObject(app)
+                    notification.timestamp = Date.fromLocaleString(Qt.locale(), json.due, "yyyy-MM-dd")
+                    notification.body = json.subject
+                    notification.summary = json.due
+                    notification.publish()
+                    notifications.idList.push(notification.replacesId)
+                    //console.log(notification.replacesId, notifications.idList);
                 }
 
             }

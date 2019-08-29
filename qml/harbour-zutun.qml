@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
 import Nemo.DBus 2.0
 
+import "components"
 import "pages"
 import "tdt"
 
@@ -95,6 +96,11 @@ ApplicationWindow
         app.activate();
     }
 
+
+    TaskModel {
+        id: taskModel
+        model: ttm1.tasks
+    }
 
     TodoTxt {
         id: ttm1

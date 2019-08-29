@@ -221,6 +221,57 @@
     </message>
 </context>
 <context>
+    <name>TaskModel</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Cacher Compléter</translation>
+    </message>
+    <message>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Trié par %1</translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished">tri croissant</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">par ordre décroissant</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Regroupé par %1, </translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">naturel</translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished">Date de création</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Date d&apos;échéance</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Sujet</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Aucun</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Projets</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Contextes</translation>
+    </message>
+</context>
+<context>
     <name>TextSelect</name>
     <message>
         <source>No entries</source>
@@ -237,57 +288,6 @@
     <message>
         <source>Contexts</source>
         <translation type="unfinished">Contextes</translation>
-    </message>
-</context>
-<context>
-    <name>TodoTxt</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation>Cacher Compléter</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation>tri croissant</translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation>par ordre décroissant</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>naturel</translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation>Date de création</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation>Sujet</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Aucun</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation>Projets</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation>Contextes</translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation>Trié par %1</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation>Regroupé par %1, </translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Date d&apos;échéance</translation>
     </message>
 </context>
 </TS>

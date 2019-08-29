@@ -221,6 +221,57 @@
     </message>
 </context>
 <context>
+    <name>TaskModel</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Verberge fertige</translation>
+    </message>
+    <message>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Sortiert nach %1</translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished">aufsteigend</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">absteigend</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Gruppiert nach %1, </translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">natürlich</translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished">Erstelldatum</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Enddatum</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Betreff</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Keine</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Projekte</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Kontexte</translation>
+    </message>
+</context>
+<context>
     <name>TextSelect</name>
     <message>
         <source>No entries</source>
@@ -237,57 +288,6 @@
     <message>
         <source>Contexts</source>
         <translation>Kontexte</translation>
-    </message>
-</context>
-<context>
-    <name>TodoTxt</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation>Verberge fertige</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation>aufsteigend</translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation>absteigend</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>natürlich</translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation>Erstelldatum</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation>Betreff</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Keine</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation>Projekte</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation>Kontext</translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation>Sortiert nach %1</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation>Gruppiert nach %1, </translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Enddatum</translation>
     </message>
 </context>
 </TS>

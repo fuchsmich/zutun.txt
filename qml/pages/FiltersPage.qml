@@ -18,7 +18,7 @@ Page {
             enabled: lv.count > 0
             MenuItem {
                 text: lv.btnTxt
-                onClicked: { ttm1.filters.clearFilter(page.state); }
+                onClicked: { taskModel.filters.clearFilter(page.state); }
             }
         }
 
@@ -36,7 +36,7 @@ Page {
         delegate: ListItem {
             enabled: model.visibleItemCount > 0
             highlighted: model.active
-            onClicked: ttm1.filters.setByName(model.name, !model.active);
+            onClicked: taskModel.filters.setByName(model.name, !model.active);
             Label {
                 //                        id: lbl
                 color: (model.visibleItemCount > 0? Theme.primaryColor : Theme.secondaryColor)
@@ -72,7 +72,7 @@ Page {
                 target: lv;
                 //                delegate: projectDelegate
                 title: qsTr("Filter Projects")
-                model: ttm1.filters.projectsModel
+                model: taskModel.filters.projectsModel
                 btnTxt: qsTr("Clear Project Filters")
             }
         }
@@ -83,7 +83,7 @@ Page {
                 //                delegate: contextDelegate
                 //                list: ["All"].concat(tdt.getContextList());
                 title: qsTr("Filter Contexts")
-                model: ttm1.filters.contextsModel
+                model: taskModel.filters.contextsModel
                 btnTxt: qsTr("Clear Context Filters")
             }
         }
