@@ -312,7 +312,7 @@ QtObject {
         }
 
         function populate(array) {
-            clear();
+            //clear();
             notifications.removeAll();
             for (var a = 0; a < array.length; a++) {
                 var line = array[a];
@@ -322,15 +322,11 @@ QtObject {
                 }
                 for (var g in groups) {
                     var item = JS.baseFeatures.parseLine(line);
-//                    var dueRes = JS.due.get(item.subject)
-//                    item["due"] = dueRes[0];
-//                    item.subject = dueRes[1];
-                    //console.log(item.due, item.subject);
 
                     lowestPrio = (!item.done && item.priority !== "" && item.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
                                   ? item.priority : lowestPrio);
 
-                    if (filters.visibleItem(item)) {
+                    //if (filters.visibleItem(item)) {
 
                         var displayText = linkify(item.subject)
                         displayText = displayText.replace(
@@ -369,7 +365,7 @@ QtObject {
                             notifications.idList.push(notification.replacesId)
                             //console.log(notification.replacesId, notifications.idList);
                         }
-                    }
+                    //}
                 }
 
             }
