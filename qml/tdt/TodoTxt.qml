@@ -148,7 +148,7 @@ QtObject {
             });
         }
 
-        function lineToJSON(num, line) {
+        function lineToJSON(line) {
             var item = JS.baseFeatures.parseLine(line);
 
             var displayText = linkify(item.subject)
@@ -162,7 +162,7 @@ QtObject {
                                '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
                     + displayText //item.subject //+ '<br/>' +item.creationDate
 
-            return {"lineNum": num,
+            return { //"lineNum": num,
                 "fullTxt": item.fullTxt, //raw text
                 "subject": item.subject, //raw text without prio, creationDate,...
                 "formattedSubject": displayText, //subject with colored proj, subj
@@ -181,7 +181,7 @@ QtObject {
             for (var a = 0; a < array.length; a++) {
                 var line = array[a];
 
-                var json = lineToJSON(a, line)
+                var json = lineToJSON(line)
 
                 lowestPrio = (!json.done && json.priority !== "" && json.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
                               ? json.priority : lowestPrio);

@@ -170,9 +170,15 @@ DelegateModel {
 
     function setProperty(index, prop, value) {
         var item = items.get(index)
+        console.log(prop, value, item.model.fullTxt)
+        var feature
         switch (prop) {
-        case "done" : item.model.done = value
+        case "done" : feature = JS.baseFeatures.done; break;
         }
+        var json = ttm1.tasks.lineToJSON(
+                    JS.baseFeatures.modifyLine(item.model.fullTxt, feature, value))
+        console.log(JSON.stringify(json))
+        ttm1.tasks.set(item.model.index, json)
         item.groups = "unsorted"
     }
 
@@ -218,9 +224,9 @@ DelegateModel {
         subject: model.formattedSubject
         done: model.done
         creationDate: model.creationDate
-        due: model.due
+        due: due
 
-        onToggleDone: setProperty(model.index, "done", !model.done)
+        onToggleDone: setProperty(DelegateModel.itemsIndex, "done", !model.done)
         onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: model.index, text: model.fullTxt})
         onRemoveItem: ttm1.tasks.removeItem(model.index)
         onPrioUp: ttm1.tasks.alterPriority(model.index, true)
