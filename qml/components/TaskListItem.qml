@@ -60,8 +60,18 @@ ListItem {
                     //}
                 }
 
+                function prioColor(p) {
+                    console.log(Theme.colorScheme)
+                    return "red"
+                }
+
                 function formatText(txt) {
                     txt = txt.replace(/\n/g, '<br>')
+                    txt = (priority !== "" ?
+                                           '<font color="' + prioColor(priority)
+                                           + '">(' + priority + ') </font>' : "")
+                            + txt
+
                     txt = txt.replace(JS.projects.pattern,
                                       function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'})
                     return txt.replace(JS.contexts.pattern,
