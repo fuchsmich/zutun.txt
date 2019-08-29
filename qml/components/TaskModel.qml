@@ -198,6 +198,7 @@ DelegateModel {
             var item = unsortedItems.get(0)
             console.log(item.model.fullTxt, filters.visibility(item.model))
             if (filters.visibility(item.model)) {
+                //TODO set section here
                 var index = insertPosition(lessThan, item)
 
                 item.groups = "items"
