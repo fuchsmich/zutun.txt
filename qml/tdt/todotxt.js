@@ -1,6 +1,9 @@
 .pragma library
 
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var urlPattern =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
+var mailPattern= /([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)/ig
+
 // fullTxt, complete, priority, (completionDate or creationDate), creationDate, subject
 var baseFeatures = {
     pattern: /^(x\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/ ,

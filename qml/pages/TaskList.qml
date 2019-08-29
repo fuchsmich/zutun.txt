@@ -95,7 +95,7 @@ Page {
 
         model: ttm1.tasks
         delegate: TaskListItem {
-            subject: model.subject
+            subject: model.formattedSubject
             done: model.done
             creationDate: model.creationDate
             due: model.due

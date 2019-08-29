@@ -1,6 +1,5 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
-import Sailfish.Silica.private 1.0
 
 import "../tdt/todotxt.js" as JS
 
@@ -9,7 +8,7 @@ ListItem {
 
     property alias done: doneSw.checked
     property string priority: ""
-    property alias subject: parser.text
+    property alias subject: lbl.text
     property alias creationDate: cdLbl.text
     property alias due: dueLbl.text
 
@@ -48,7 +47,7 @@ ListItem {
 
                 width: listItem.width - doneSw.width - 2*Theme.horizontalPageMargin
                 linkColor: Theme.primaryColor
-                text: formatText(parser.linkedText)
+                //text: formatText(parser.linkedText)
                 textFormat: Text.StyledText
                 wrapMode: Text.Wrap
                 font.strikeout: listItem.done
@@ -56,30 +55,9 @@ ListItem {
 
                 onLinkActivated: {
                     //if (defaultLinkActions) {
+                    console.log("opening", link)
                     Qt.openUrlExternally(link)
                     //}
-                }
-
-                function prioColor(p) {
-                    console.log(Theme.colorScheme)
-                    return "red"
-                }
-
-                function formatText(txt) {
-                    txt = txt.replace(/\n/g, '<br>')
-                    txt = (priority !== "" ?
-                                           '<font color="' + prioColor(priority)
-                                           + '">(' + priority + ') </font>' : "")
-                            + txt
-
-                    txt = txt.replace(JS.projects.pattern,
-                                      function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'})
-                    return txt.replace(JS.contexts.pattern,
-                                       function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'})
-                }
-
-                LinkParser {
-                    id: parser
                 }
             }
         }

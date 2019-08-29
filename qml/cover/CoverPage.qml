@@ -17,7 +17,7 @@ CoverBackground {
         clip: true
         model: ttm1.tasks
         delegate: Label {
-            text: model.displayText
+            text: model.formattedSubject
             width: parent.width - 2*Theme.paddingMedium
             truncationMode: TruncationMode.Elide
         }

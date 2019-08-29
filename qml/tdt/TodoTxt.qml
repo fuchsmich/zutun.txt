@@ -302,6 +302,15 @@ QtObject {
             return lower;
         }
 
+        function linkify(text) {
+            text = text.replace(JS.mailPattern, function(url) {
+                return '<a href="mailto:' + url + '">' + url + '</a>';
+            });
+            return text.replace(JS.urlPattern, function(url) {
+                return '<a href="' + url + '">' + url + '</a>';
+            });
+        }
+
         function populate(array) {
             clear();
             notifications.removeAll();
@@ -322,20 +331,22 @@ QtObject {
                                   ? item.priority : lowestPrio);
 
                     if (filters.visibleItem(item)) {
-                        var formattedPSubject = item.subject.replace(
+
+                        var displayText = linkify(item.subject)
+                        displayText = displayText.replace(
                                     JS.projects.pattern,
                                     function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'});
-                        var formattedSubject = formattedPSubject.replace(
+                        displayText = displayText.replace(
                                     JS.contexts.pattern,
                                     function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'});
-                        var displayText = (item.priority !== "" ?
+                        displayText = (item.priority !== "" ?
                                                '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
-                                + formattedSubject //item.subject //+ '<br/>' +item.creationDate
+                                + displayText //item.subject //+ '<br/>' +item.creationDate
 
                         var json = {"lineNum": a,
                             "fullTxt": item.fullTxt, //raw text
                             "subject": item.subject, //raw text without prio, creationDate,...
-                            "displayText": displayText, //subject with colored proj, subj
+                            "formattedSubject": displayText, //subject with colored proj, subj
                             "done": item.done,
                             "priority": item.priority,
                             "creationDate": item.creationDate,
