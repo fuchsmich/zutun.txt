@@ -350,8 +350,10 @@ QtObject {
                             "section": g //section
                         };
 
-                        var index = insertPosition(sorting.lessThanFunc(), json); //item)
-                        insert(index, json);
+                        //var index = insertPosition(sorting.lessThanFunc(), json); //item)
+                        //insert(index, json);
+
+                    append(json)
 
                         //for due dates add notification
                         if (item.due !== "") {
