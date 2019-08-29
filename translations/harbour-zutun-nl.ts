@@ -185,28 +185,8 @@
         <translation>Geen taken</translation>
     </message>
     <message>
-        <source>Priority Up</source>
-        <translation>Prioriteit omhoog</translation>
-    </message>
-    <message>
-        <source>Priority Down</source>
-        <translation>Prioriteit omlaag</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
         <source>Sorting &amp; Grouping</source>
         <translation>Sorteren &amp; groeperen</translation>
-    </message>
-    <message>
-        <source>created:</source>
-        <translation>aangemaakt:</translation>
-    </message>
-    <message>
-        <source>due:</source>
-        <translation>verwacht:</translation>
     </message>
     <message>
         <source>Create file</source>
@@ -215,6 +195,29 @@
     <message>
         <source>Pull down to add task.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListItem</name>
+    <message>
+        <source>created:</source>
+        <translation type="unfinished">aangemaakt:</translation>
+    </message>
+    <message>
+        <source>due:</source>
+        <translation type="unfinished">verwacht:</translation>
+    </message>
+    <message>
+        <source>Priority Up</source>
+        <translation type="unfinished">Prioriteit omhoog</translation>
+    </message>
+    <message>
+        <source>Priority Down</source>
+        <translation type="unfinished">Prioriteit omlaag</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Verwijderen</translation>
     </message>
 </context>
 <context>

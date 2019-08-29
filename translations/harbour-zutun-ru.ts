@@ -185,27 +185,7 @@
         <translation>Нет задач</translation>
     </message>
     <message>
-        <source>Priority Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Удалить</translation>
-    </message>
-    <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>created:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>due:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -215,6 +195,29 @@
     <message>
         <source>Pull down to add task.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListItem</name>
+    <message>
+        <source>created:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>due:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Удалить</translation>
     </message>
 </context>
 <context>

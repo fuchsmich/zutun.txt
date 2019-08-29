@@ -185,28 +185,8 @@
         <translation>No hay tareas</translation>
     </message>
     <message>
-        <source>Priority Up</source>
-        <translation>Subir prioridad</translation>
-    </message>
-    <message>
-        <source>Priority Down</source>
-        <translation>Bajar prioridad</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Eliminar</translation>
-    </message>
-    <message>
         <source>Sorting &amp; Grouping</source>
         <translation>Orden y agrupación</translation>
-    </message>
-    <message>
-        <source>created:</source>
-        <translation>creado:</translation>
-    </message>
-    <message>
-        <source>due:</source>
-        <translation>plazo:</translation>
     </message>
     <message>
         <source>Create file</source>
@@ -215,6 +195,29 @@
     <message>
         <source>Pull down to add task.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListItem</name>
+    <message>
+        <source>created:</source>
+        <translation type="unfinished">creado:</translation>
+    </message>
+    <message>
+        <source>due:</source>
+        <translation type="unfinished">plazo:</translation>
+    </message>
+    <message>
+        <source>Priority Up</source>
+        <translation type="unfinished">Subir prioridad</translation>
+    </message>
+    <message>
+        <source>Priority Down</source>
+        <translation type="unfinished">Bajar prioridad</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Eliminar</translation>
     </message>
 </context>
 <context>

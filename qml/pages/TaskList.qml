@@ -2,9 +2,9 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Sailfish.Silica.private 1.0
 
-import "../tdt/todotxt.js" as JS
+import "../components"
+//import "../tdt/todotxt.js" as JS
 
 Page {
     id: page
@@ -94,115 +94,17 @@ Page {
         }
 
         model: ttm1.tasks
-        delegate:
-            ListItem {
+        delegate: TaskListItem {
+            subject: model.subject
+            done: model.done
+            creationDate: model.creationDate
+            due: model.due
 
-            id: listItem
-            function remove() {
-                remorseAction("Deleting", function() { ttm1.tasks.removeItem(index) })
-            }
-            onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: index, text: model.fullTxt})
-            contentHeight: col.height + lv.spacing
-
-            Column {
-                id: col
-                width: page.width
-                anchors.verticalCenter: parent.verticalCenter
-                Row {
-                    id: row
-                    //            x: Theme.horizontalPageMargin
-                    Switch {
-                        id: doneSw
-                        height: lbl.height
-                        automaticCheck: false
-                        checked: model.done
-                        onClicked: ttm1.tasks.setProperty(model.index, "done", !model.done);
-                    }
-
-                    Label {
-                        id:lbl
-
-                        width: listItem.width - doneSw.width - 2*Theme.horizontalPageMargin
-                        linkColor: Theme.primaryColor
-                        text: formatText(parser.linkedText)
-                        textFormat: Text.StyledText
-                        wrapMode: Text.Wrap
-                        font.strikeout: model.done
-                        font.pixelSize: settings.fontSizeTaskList
-
-                        onLinkActivated: {
-                            //if (defaultLinkActions) {
-                                Qt.openUrlExternally(link)
-                            //}
-                        }
-
-                        function formatText(txt) {
-                            txt = txt.replace(/\n/g, '<br>')
-                            txt = txt.replace(JS.projects.pattern,
-                                    function(x) { return ' <font color="' + Theme.highlightColor + '">' + x + ' </font>'})
-                            return txt.replace(JS.contexts.pattern,
-                                    function(x) { return ' <font color="' + Theme.secondaryHighlightColor + '">' + x + ' </font>'})
-                        }
-
-                        LinkParser {
-                            id: parser
-                            text: model.subject
-                        }
-
-                        onTextChanged: console.log(text)
-                    }
-                }
-                Row {
-                    //                            x: Theme.horizontalPageMargin
-                    spacing: Theme.paddingSmall
-                    anchors.right: parent.right
-                    anchors.rightMargin: Theme.horizontalPageMargin
-                    Label {
-                        visible: model.creationDate !== "";
-                        text: qsTr("created:");
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        //font.bold: true;
-                        color: Theme.highlightColor
-                    }
-                    Label {
-                        //anchors.leftMargin: Theme.paddingSmall
-                        visible: model.creationDate !== "";
-                        text: model.creationDate;
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                    }
-                    Label {
-                        visible: model.due !== "";
-                        text: qsTr("due:");
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        //font.bold: true;
-                        color: Theme.highlightColor
-                    }
-                    Label {
-                        //anchors.leftMargin: Theme.paddingSmall
-                        visible: model.due !== "";
-                        text: model.due;
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                    }
-                }
-            }
-
-            menu: ContextMenu {
-                //                    DetailItem { visible: model.creationDate !== ""; label: qsTr("Creation Date"); value: model.creationDate }
-                MenuItem {
-                    visible: !(model.done || model.priority === "A")
-                    text: qsTr("Priority Up")
-                    onClicked: ttm1.tasks.alterPriority(index, true)
-                }
-                MenuItem {
-                    visible: !(model.done || model.priority === "")
-                    text: qsTr("Priority Down")
-                    onClicked: ttm1.tasks.alterPriority(index, false)
-                }
-                MenuItem {
-                    text: qsTr("Remove")
-                    onClicked: remove()
-                }
-            }
+            onToggleDone: ttm1.tasks.setProperty(model.index, "done", !model.done)
+            onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: model.index, text: model.fullTxt})
+            onRemoveItem: ttm1.tasks.removeItem(model.index)
+            onPrioUp: ttm1.tasks.alterPriority(model.index, true)
+            onPrioDown: ttm1.tasks.alterPriority(model.index, false)
         }
 
     }
