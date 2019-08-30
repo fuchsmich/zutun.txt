@@ -34,6 +34,7 @@ ListItem {
         Row {
             id: row
             //            x: Theme.horizontalPageMargin
+            height: lbl.height
             Switch {
                 id: doneSw
                 height: lbl.height
@@ -63,9 +64,10 @@ ListItem {
         }
         Row {
             //                            x: Theme.horizontalPageMargin
-            spacing: Theme.paddingSmall
+            height: cdLbl.height
             anchors.right: parent.right
             anchors.rightMargin: Theme.horizontalPageMargin
+            spacing: Theme.paddingSmall
             property int fontSize: Theme.fontSizeExtraSmall
 
             Label {
@@ -111,4 +113,12 @@ ListItem {
             onClicked: remove()
         }
     }
+
+    ListView.onAdd: AddAnimation {
+        target: listItem
+    }
+    //ListView.onRemove: animateRemoval()
+//    ListView.onRemove: RemoveAnimation {
+//        target: listItem
+//    }
 }

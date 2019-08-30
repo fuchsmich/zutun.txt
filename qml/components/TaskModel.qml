@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQml.Models 2.1
 
+import Sailfish.Silica 1.0
+
 import "../tdt/todotxt.js" as JS
 
 DelegateModel {
@@ -170,16 +172,21 @@ DelegateModel {
 
     function setProperty(index, prop, value) {
         var item = items.get(index)
-        console.log(prop, value, item.model.fullTxt)
+        //console.log(prop, value, item.model.fullTxt)
         var feature
         switch (prop) {
         case "done" : feature = JS.baseFeatures.done; break;
         }
         var json = ttm1.tasks.lineToJSON(
                     JS.baseFeatures.modifyLine(item.model.fullTxt, feature, value))
-        console.log(JSON.stringify(json))
+        //console.log(JSON.stringify(json))
+        var newIndex = insertPosition(sorting.lessThanFunc(), json)
+        if (newIndex > item.itemsIndex) newIndex--
         ttm1.tasks.set(item.model.index, json)
-        item.groups = "unsorted"
+
+        if (filters.visibility(item.model))
+            items.move(item.itemsIndex, newIndex)
+        else item.groups = "invisible"
     }
 
     function insertPosition(lessThanFunc, item) {
@@ -188,7 +195,8 @@ DelegateModel {
         while (lower < upper) {
             var middle = Math.floor(lower + (upper - lower)/2)
             var result =
-                    lessThanFunc(item.model, items.get(middle).model) //JS.baseFeatures.parseLine(tasksArray[get(middle).lineNum]));
+                    lessThanFunc(
+                        (item.model ? item.model : item), items.get(middle).model)
             if (result) {
                 upper = middle
             } else {
@@ -221,16 +229,18 @@ DelegateModel {
     //https://doc.qt.io/qt-5/qtquick-tutorials-dynamicview-dynamicview4-example.html
     //model: ttm1.tasks
     delegate: TaskListItem {
+        id: listItem
         subject: model.formattedSubject
         done: model.done
         creationDate: model.creationDate
         due: due
 
         onToggleDone: setProperty(DelegateModel.itemsIndex, "done", !model.done)
+        //onPrioUp: ttm1.tasks.alterPriority(model.index, true)
+        //onPrioDown: ttm1.tasks.alterPriority(model.index, false)
         onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: model.index, text: model.fullTxt})
-        onRemoveItem: ttm1.tasks.removeItem(model.index)
-        onPrioUp: ttm1.tasks.alterPriority(model.index, true)
-        onPrioDown: ttm1.tasks.alterPriority(model.index, false)
+        //onRemoveItem: ttm1.tasks.removeItem(model.index)
+
     }
     items.includeByDefault: false
 

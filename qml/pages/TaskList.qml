@@ -94,6 +94,9 @@ Page {
         }
 
         model: taskModel
+        move: Transition {
+            NumberAnimation { properties: "x,y"; duration: 150 }
+        }
     }
 
 //    onActiveFocusChanged: {

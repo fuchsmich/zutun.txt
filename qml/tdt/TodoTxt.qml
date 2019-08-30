@@ -71,13 +71,10 @@ QtObject {
             var lineNum = get(index).lineNum
 
             var feature = -1;
-            switch (prop) {
-            case "done" : feature = JS.baseFeatures.done; break;
-            case "priority" : feature = JS.baseFeatures.priority; break;
-            default: break
-            }
 
-            newArr[lineNum] = JS.baseFeatures.modifyLine(tasksArray[lineNum], feature, value);
+            newArr[lineNum] = JS.baseFeatures.modifyLine(
+                        tasksArray[lineNum], JS.baseFeatures[prop], value);
+
             listToFile(newArr);
         }
 
