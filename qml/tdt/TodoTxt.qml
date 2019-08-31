@@ -8,40 +8,11 @@ QtObject {
     property FileIO file: FileIO {
         property string hintText: ""
         path: settings.todoTxtLocation
-        onContentChanged:{
-            tasksArray = JS.splitLines(content);
-        }
 
         onIoError: {
             //TODO needs some rework for translation
             hintText = msg;
         }
-    }
-
-    property var tasksArray: []
-    onTasksArrayChanged: {
-        readArray();
-    }
-
-    function reloadFile() {
-        file.read();
-    }
-
-    signal readArray()
-    onReadArray: {
-        tasks.populate(tasksArray);
-        //filters.fetchModels();
-    }
-
-    signal listToFile(var newArray)
-    onListToFile: {
-        newArray.sort();
-        var txt = "";
-        for (var t in newArray) {
-            txt += newArray[t] + "\n";
-        }
-        //this writes to the file:
-        file.save(txt);
     }
 
     property var notifications: {
@@ -59,13 +30,23 @@ QtObject {
         }
     }
 
+    function saveList() {
+        var array
+        for (var i = 0; i < count; i++) {
+            array.append(tasks.get(i).fullTxt)
+        }
+        array.sort()
+        file.save(array)
+    }
+
+    function readFile() {
+        var content = file.read()
+        if (content) tasks.populate(JS.splitLines(content))
+    }
+
     property ListModel tasks: ListModel {
 
-        //alles auf einmal 0:fullTxt, 1:done, 2:completionDate, 3:priority, 4:creationDate, 5:subject
-        //        property var basicPattern: JS.baseFeatures.pattern
-        property string lowestPrio: "A"
-
-        /* überschreiben der Funktion setProperty: */
+        /* überschreiben contentder Funktion setProperty: */
         function setProperty(index, prop, value) {
             var item = get(index)
             var json = ttm1.tasks.lineToJSON(
@@ -74,26 +55,6 @@ QtObject {
             ttm1.tasks.set(index, json)
         }
 
-//        function setFullTxt(index, fullTxt) {
-//            var json = lineToJSON(fullTxt)
-//            set(index, json)
-//        }
-
-
-        /*raise/lower priority*/
-        function alterPriority(index, raise) {
-            var newPrio = get(index).priority
-            if (raise) {
-                if (newPrio === "") newPrio = String.fromCharCode(lowestPrio.charCodeAt(0) + 1);
-                else if (newPrio > "A") newPrio = String.fromCharCode(newPrio.charCodeAt(0) - 1);
-            } else  {
-                if (newPrio !== "") {
-                    if (newPrio < "Z") newPrio = String.fromCharCode(newPrio.charCodeAt(0) + 1);
-                    else newPrio = "";
-                }
-            }
-            setProperty(index, "priority", newPrio);
-        }
 
         function removeItem(index) {
             var newArr = tasksArray;
@@ -109,23 +70,6 @@ QtObject {
                           "#e3e601", "#e5bc00", "#e78601"];
 
             return colors[JS.alphabet.search(prio) % colors.length];
-        }
-
-        //returns position where to insert *item* decieded by *lessThanFunc*
-        function insertPosition(lessThanFunc, item) {
-            var lower = 0;
-            var upper = count;
-            while (lower < upper) {
-                var middle = Math.floor(lower + (upper - lower) / 2);
-                var result =
-                        lessThanFunc(item, get(middle)); //JS.baseFeatures.parseLine(tasksArray[get(middle).lineNum]));
-                if (result) {
-                    upper = middle;
-                } else {
-                    lower = middle + 1;
-                }
-            }
-            return lower;
         }
 
         function linkify(text) {
@@ -151,29 +95,18 @@ QtObject {
                                '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
                     + displayText //item.subject //+ '<br/>' +item.creationDate
 
-            return { //"lineNum": num,
-                "fullTxt": item.fullTxt, //raw text
-                "subject": item.subject, //raw text without prio, creationDate,...
-                "formattedSubject": displayText, //subject with colored proj, subj
-                "done": item.done,
-                "priority": item.priority,
-                "creationDate": item.creationDate,
-                "due": item.due,
-                "section": ""
-            }
+            item["formattedSubject"] = displayText
 
+            return  item
         }
 
         function populate(array) {
-            //clear();
-            notifications.removeAll();
+            clear()
+            notifications.removeAll()
             for (var a = 0; a < array.length; a++) {
                 var line = array[a];
 
                 var json = lineToJSON(line)
-
-                lowestPrio = (!json.done && json.priority !== "" && json.priority.charCodeAt(0) > lowestPrio.charCodeAt(0)
-                              ? json.priority : lowestPrio);
 
                 append(json)
 

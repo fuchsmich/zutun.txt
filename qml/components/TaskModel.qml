@@ -191,17 +191,6 @@ DelegateModel {
 
         ttm1.tasks.setProperty(item.model.index, prop, value)
         item.groups = "unsorted"
-
-//        var json = ttm1.tasks.lineToJSON(
-//                    JS.baseFeatures.modifyLine(item.model.fullTxt, JS.baseFeatures[prop], value))
-//        console.log(JSON.stringify(json))
-//        var newIndex = insertPosition(sorting.lessThanFunc(), json)
-//        if (newIndex > item.itemsIndex) newIndex--
-//        ttm1.tasks.set(item.model.index, json)
-
-//        if (filters.visibility(item.model))
-//            items.move(item.itemsIndex, newIndex)
-//        else item.groups = "invisible"
     }
 
     function insertPosition(lessThanFunc, item) {
@@ -225,6 +214,9 @@ DelegateModel {
         console.log("begin sort")
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
+            defaultPrio = (!item.model.done && item.model.priority !== "" && item.model.priority.charCodeAt(0) > defaultPrio.charCodeAt(0)
+                          ? item.model.priority : defaultPrio)
+
             console.log(item.model.fullTxt, filters.visibility(item.model))
             if (filters.visibility(item.model)) {
                 //TODO set section here
@@ -241,8 +233,6 @@ DelegateModel {
         invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
     }
 
-    //https://doc.qt.io/qt-5/qtquick-tutorials-dynamicview-dynamicview4-example.html
-    //model: ttm1.tasks
     delegate: TaskListItem {
         id: listItem
         done: model.done
@@ -256,7 +246,7 @@ DelegateModel {
         onPrioUp: setProperty(DelegateModel.itemsIndex, "priority", "up")
         onPrioDown: setProperty(DelegateModel.itemsIndex, "priority", "down")
         onEditItem: visualModel.editItem(model.index)
-        //onRemoveItem: ttm1.tasks.removeItem(model.index)
+        onRemoveItem: ttm1.tasks.removeItem(model.index)
 
     }
     items.includeByDefault: false

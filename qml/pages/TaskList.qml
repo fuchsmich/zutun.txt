@@ -28,7 +28,8 @@ Page {
             MenuItem {
                 visible: ttm1.file.writeable
                 text: qsTr("Add New Task")
-                onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {taskIndex: -1, text: ""});
+                onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
+                                          {taskIndex: -1, text: ""});
             }
             MenuItem {
                 visible: ttm1.file.pathExists && !ttm1.file.exists
@@ -123,18 +124,20 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            ttm1.reloadFile()
+            ttm1.readFile()
             /* attach filter page: */
             if ( pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {
                     //                    console.log("replacing tl")
-                    pageStack.replace(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects", skip: true}, PageStackAction.Immediate);
+                    pageStack.replace(Qt.resolvedUrl("FiltersPage.qml"),
+                                      {state: "projects", skip: true}, PageStackAction.Immediate);
                 } else {
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
                 }
             } else {
                 if (!settings.projectFilterLeft){
-                    pageStack.replaceAbove(null, Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate);
+                    pageStack.replaceAbove(null, Qt.resolvedUrl("TaskList.qml"),
+                                           {}, PageStackAction.Immediate);
                 } else {
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"})
                 }
