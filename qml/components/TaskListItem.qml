@@ -141,8 +141,6 @@ ListItem {
 //    }
 
 
-    //onHeightChanged: console.log(height)
-    onVisibleChanged: console.log("visible", visible)
 
-    Component.onDestruction: console.log(model.index, "I'm gone.")
+//    Component.onDestruction: console.log(model.index, "I'm gone.")
 }

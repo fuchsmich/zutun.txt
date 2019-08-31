@@ -177,6 +177,7 @@ DelegateModel {
     function setProperty(index, prop, value) {
         var item = items.get(index)
         //console.log(prop, value, item.model.fullTxt)
+        //property up and down
         if (prop === "priority") {
             var p =  item.model.priority
             if (value === "up") {
@@ -188,16 +189,19 @@ DelegateModel {
             }
         }
 
-        var json = ttm1.tasks.lineToJSON(
-                    JS.baseFeatures.modifyLine(item.model.fullTxt, JS.baseFeatures[prop], value))
-        console.log(JSON.stringify(json))
-        var newIndex = insertPosition(sorting.lessThanFunc(), json)
-        if (newIndex > item.itemsIndex) newIndex--
-        ttm1.tasks.set(item.model.index, json)
+        ttm1.tasks.setProperty(item.model.index, prop, value)
+        item.groups = "unsorted"
 
-        if (filters.visibility(item.model))
-            items.move(item.itemsIndex, newIndex)
-        else item.groups = "invisible"
+//        var json = ttm1.tasks.lineToJSON(
+//                    JS.baseFeatures.modifyLine(item.model.fullTxt, JS.baseFeatures[prop], value))
+//        console.log(JSON.stringify(json))
+//        var newIndex = insertPosition(sorting.lessThanFunc(), json)
+//        if (newIndex > item.itemsIndex) newIndex--
+//        ttm1.tasks.set(item.model.index, json)
+
+//        if (filters.visibility(item.model))
+//            items.move(item.itemsIndex, newIndex)
+//        else item.groups = "invisible"
     }
 
     function insertPosition(lessThanFunc, item) {
@@ -251,7 +255,7 @@ DelegateModel {
         onToggleDone: setProperty(DelegateModel.itemsIndex, "done", !model.done)
         onPrioUp: setProperty(DelegateModel.itemsIndex, "priority", "up")
         onPrioDown: setProperty(DelegateModel.itemsIndex, "priority", "down")
-        onEditItem: visualModel.editItem(model.index) //pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: model.index, text: model.fullTxt})
+        onEditItem: visualModel.editItem(model.index)
         //onRemoveItem: ttm1.tasks.removeItem(model.index)
 
     }

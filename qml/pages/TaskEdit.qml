@@ -8,7 +8,7 @@ Dialog {
     id: dialog
 
     //-1 for adding new task
-    property int itemIndex: -1
+    property int taskIndex: -1
     property alias text: ta.text
 
     function setText(type, txt) {
@@ -54,7 +54,7 @@ Dialog {
             id: col
             width: dialog.width
             DialogHeader {
-                title: (itemIndex == -1 ? qsTr("Add New Task") : qsTr("Edit Task"))
+                title: (taskIndex == -1 ? qsTr("Add New Task") : qsTr("Edit Task"))
             }
             TextArea {
                 id: ta
@@ -220,7 +220,7 @@ Dialog {
         ta.cursorPosition = ta.text.length
     }
 
-    onAccepted: {
-        ttm1.tasks.setFullTxt(itemIndex, ta.text);
-    }
+//    onAccepted: {
+//        ttm1.tasks.setFullTxt(taskIndex, ta.text);
+//    }
 }

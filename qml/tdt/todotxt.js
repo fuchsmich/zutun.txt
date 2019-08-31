@@ -54,6 +54,8 @@ var baseFeatures = {
         var fields = baseFeatures.getMatches(line)
         //        console.log(fields)
         switch (feature) {
+        case baseFeatures.fullTxt :
+            return value
         case baseFeatures.done :
             if (value === false) {
                 fields[feature] = undefined

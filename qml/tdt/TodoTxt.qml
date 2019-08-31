@@ -67,25 +67,17 @@ QtObject {
 
         /* überschreiben der Funktion setProperty: */
         function setProperty(index, prop, value) {
-            var newArr = tasksArray
-            var lineNum = get(index).lineNum
-
-            var feature = -1;
-
-            newArr[lineNum] = JS.baseFeatures.modifyLine(
-                        tasksArray[lineNum], JS.baseFeatures[prop], value);
-
-            listToFile(newArr);
+            var item = get(index)
+            var json = ttm1.tasks.lineToJSON(
+                        JS.baseFeatures.modifyLine(item.fullTxt, JS.baseFeatures[prop], value))
+            console.log(JSON.stringify(json))
+            ttm1.tasks.set(index, json)
         }
 
-        function setFullTxt(index, fullTxt) {
-            var newArr = tasksArray;
-
-            if (index === -1) newArr.push(fullTxt);
-            else  newArr[get(index).lineNum] = fullTxt;
-
-            listToFile(newArr);
-        }
+//        function setFullTxt(index, fullTxt) {
+//            var json = lineToJSON(fullTxt)
+//            set(index, json)
+//        }
 
 
         /*raise/lower priority*/

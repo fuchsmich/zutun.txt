@@ -28,7 +28,7 @@ Page {
             MenuItem {
                 visible: ttm1.file.writeable
                 text: qsTr("Add New Task")
-                onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: -1, text: ""});
+                onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {taskIndex: -1, text: ""});
             }
             MenuItem {
                 visible: ttm1.file.pathExists && !ttm1.file.exists
@@ -98,16 +98,23 @@ Page {
             NumberAnimation { properties: "x,y"; duration: 150 }
         }
 
-        Connections {
-            target: taskModel
-            onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
-                                       {itemIndex: index,
-                                           text: ttm1.tasks.get(index).fullTxt})
+        Component {
+            id: taskEditComp
+            TaskEdit {
+                text: (taskIndex > -1 ?
+                           ttm1.tasks.get(taskIndex).fullTxt:
+                           "")
+                onAccepted: ttm1.tasks.setProperty(taskIndex, "fullTxt", text);
+            }
         }
 
-//        remove: Transition {
-//            NumberAnimation { properties: "height"; to: 0; }
-//        }
+        Connections {
+            target: taskModel
+            onEditItem: pageStack.push(taskEditComp,
+                                       {
+                                           taskIndex: index,
+                                       })
+        }
     }
 
     //    onActiveFocusChanged: {
