@@ -24,13 +24,15 @@ ListItem {
             removeItem()
         })
     }
+
+    contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)*fadeFactor //+ lv.spacing
+    opacity: fadeFactor
     onClicked: editItem()
-    contentHeight: col.height //+ lv.spacing
 
     Column {
         id: col
         width: parent.width
-        //anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenter: parent.verticalCenter
         Row {
             id: row
             //            x: Theme.horizontalPageMargin
@@ -114,11 +116,33 @@ ListItem {
         }
     }
 
-    ListView.onAdd: AddAnimation {
-        target: listItem
+    Component {
+        AddAnimation {
+            target: listItem
+        }
     }
+
+    property real fadeFactor: 1
+
+    ListView.onAdd:
+        NumberAnimation {
+            properties: "fadeFactor"
+            from: 0; to: 1
+            duration: 150
+            easing.type: Easing.InOutQuad
+        }
+
     //ListView.onRemove: animateRemoval()
-//    ListView.onRemove: RemoveAnimation {
-//        target: listItem
+//    ListView.onRemove:  NumberAnimation {
+//        target: listItem;
+//        properties: "fadeFactor"; to: 0;
+//        duration: 150;
+//        easing.type: Easing.InOutQuad
 //    }
+
+
+    //onHeightChanged: console.log(height)
+    onVisibleChanged: console.log("visible", visible)
+
+    Component.onDestruction: console.log(model.index, "I'm gone.")
 }

@@ -13,7 +13,7 @@ Page {
     SilicaListView {
         id: lv
         anchors.fill: parent
-        spacing: Theme.paddingMedium
+        //spacing: Theme.paddingMedium
 
         VerticalScrollDecorator {}
         PullDownMenu {
@@ -97,11 +97,22 @@ Page {
         move: Transition {
             NumberAnimation { properties: "x,y"; duration: 150 }
         }
+
+        Connections {
+            target: taskModel
+            onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
+                                       {itemIndex: index,
+                                           text: ttm1.tasks.get(index).fullTxt})
+        }
+
+//        remove: Transition {
+//            NumberAnimation { properties: "height"; to: 0; }
+//        }
     }
 
-//    onActiveFocusChanged: {
-//        console.log("af", activeFocus)
-//    }
+    //    onActiveFocusChanged: {
+    //        console.log("af", activeFocus)
+    //    }
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
@@ -109,7 +120,7 @@ Page {
             /* attach filter page: */
             if ( pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {
-//                    console.log("replacing tl")
+                    //                    console.log("replacing tl")
                     pageStack.replace(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects", skip: true}, PageStackAction.Immediate);
                 } else {
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})

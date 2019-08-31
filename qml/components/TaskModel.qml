@@ -170,16 +170,27 @@ DelegateModel {
         ]
     }
 
+    signal editItem(int index)
+
+    property string defaultPrio: "F"
+
     function setProperty(index, prop, value) {
         var item = items.get(index)
         //console.log(prop, value, item.model.fullTxt)
-        var feature
-        switch (prop) {
-        case "done" : feature = JS.baseFeatures.done; break;
+        if (prop === "priority") {
+            var p =  item.model.priority
+            if (value === "up") {
+                if (p === "") value = String.fromCharCode(defaultPrio.charCodeAt(0) + 1);
+                else if (p > "A") value = String.fromCharCode(p.charCodeAt(0) - 1);
+            } else if (value === "down"){
+                if (p !== "" && p < "Z") value = String.fromCharCode(p.charCodeAt(0) + 1);
+                else value = ""
+            }
         }
+
         var json = ttm1.tasks.lineToJSON(
-                    JS.baseFeatures.modifyLine(item.model.fullTxt, feature, value))
-        //console.log(JSON.stringify(json))
+                    JS.baseFeatures.modifyLine(item.model.fullTxt, JS.baseFeatures[prop], value))
+        console.log(JSON.stringify(json))
         var newIndex = insertPosition(sorting.lessThanFunc(), json)
         if (newIndex > item.itemsIndex) newIndex--
         ttm1.tasks.set(item.model.index, json)
@@ -230,15 +241,17 @@ DelegateModel {
     //model: ttm1.tasks
     delegate: TaskListItem {
         id: listItem
-        subject: model.formattedSubject
         done: model.done
+        priority: model.priority
         creationDate: model.creationDate
-        due: due
+        subject: model.formattedSubject
+        due: model.due
+
 
         onToggleDone: setProperty(DelegateModel.itemsIndex, "done", !model.done)
-        //onPrioUp: ttm1.tasks.alterPriority(model.index, true)
-        //onPrioDown: ttm1.tasks.alterPriority(model.index, false)
-        onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: model.index, text: model.fullTxt})
+        onPrioUp: setProperty(DelegateModel.itemsIndex, "priority", "up")
+        onPrioDown: setProperty(DelegateModel.itemsIndex, "priority", "down")
+        onEditItem: visualModel.editItem(model.index) //pageStack.push(Qt.resolvedUrl("TaskEdit.qml"), {itemIndex: model.index, text: model.fullTxt})
         //onRemoveItem: ttm1.tasks.removeItem(model.index)
 
     }

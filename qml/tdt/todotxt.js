@@ -64,9 +64,9 @@ var baseFeatures = {
                 fields[baseFeatures.completionDate] = (fields[baseFeatures.creationDate] !== undefined ? today() + " " : undefined)
             }
             break
-        case baseFeatures.priority :
-            if (value === false) fields[feature] = undefined
-            else fields[feature] = "(" + value + ") "
+        case baseFeatures.priority:
+            if (value === false) { fields[feature] = undefined; break }
+            if (alphabet.indexOf(value) > -1) { fields[feature] = "(" + value + ") "; break }
             break
         case baseFeatures.creationDate:
             if (value === false) fields[feature] = undefined
