@@ -103,14 +103,10 @@ Page {
             onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
                                        {
                                            taskIndex: index,
-                                           text: ttm1.tasks.get(taskIndex).fullTxt
+                                           text: ttm1.tasks.get(index).fullTxt
                                        })
         }
     }
-
-    //    onActiveFocusChanged: {
-    //        console.log("af", activeFocus)
-    //    }
 
     onStatusChanged: {
         if (status === PageStatus.Active) {

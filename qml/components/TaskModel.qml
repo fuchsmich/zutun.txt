@@ -15,7 +15,9 @@ DelegateModel {
         onProjectsChanged: visualModel.resort()
         property var contexts: filterSettings.contexts.value
         onContextsChanged: visualModel.resort()
-        property string text: [hideDone? qsTr("Hide Complete"): undefined].concat(projects.concat(contexts)).join(", ")
+        property string text: [hideDone ?
+                qsTr("Hide Complete"):
+                undefined].concat(projects.concat(contexts)).join(", ")
 
         property ListModel projectsModel: ListModel {}
         property ListModel contextsModel: ListModel {}

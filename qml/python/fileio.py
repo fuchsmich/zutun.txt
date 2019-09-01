@@ -5,27 +5,42 @@ import os
 import pyotherside
 
 
-def checkFile(path, perm):
+
+def checkPath(path, perm):
     if os.path.exists(os.path.dirname(path)):
         pyotherside.send('pathExists', True)
     else:
         pyotherside.send('pathExists', False)
         return False
+    return True
+
+def checkFile(path, perm):
+    if checkPath(path, perm):
+        pyotherside.send('pathExists', True)
+    else:
+        pyotherside.send('pathExists', False)
+        pyotherside.send('fileExists', False)
+        pyotherside.send('readable', False)
+        pyotherside.send('writeable', True)
+        return False
     if os.access(path, os.F_OK):
         pyotherside.send('fileExists', True)
     else:
         pyotherside.send('fileExists', False)
+        pyotherside.send('readable', False)
+        pyotherside.send('writeable', True)
         return False
     if os.access(path, os.R_OK):
         pyotherside.send('readable', True)
     else:
         pyotherside.send('readable', False)
+        pyotherside.send('writeable', True)
         if ('r' in perm):
             return False
     if os.access(path, os.W_OK):
         pyotherside.send('writeable', True)
     else:
-        pyotherside.send('readable', False)
+        pyotherside.send('writeable', False)
         if ('w' in perm):
             return False
     return True
@@ -53,20 +68,11 @@ def write(path, content):
 
 def create(path):
     try:
-        with open(path, 'w+') as f:
-            pyotherside.send('log', "file {0} created.".format(path))
-            pyotherside.send('pathExists', True)
-            pyotherside.send('fileExists', True)
-            pyotherside.send('writeable', True)
-            pyotherside.send('ioerror', "")
-            f.close()
+        if (checkPath(path, 'rw'):
+            with open(path, 'w+') as f:
+                pyotherside.send('log', "file {0} created.".format(path))
+                f.close()
     except IOError:
         pyotherside.send('ioerror', "File not writeable {0}".format(path))
-        if not os.path.exists(os.path.dirname(path)):
-            pyotherside.send('pathExists', False)
-            pyotherside.send('fileExists', False)
-            pyotherside.send('ioerror', "Dir does not exist {0}".format(os.path.dirname(path)))
-        else:
-            pyotherside.send('ioerror', "Destination not writeable {0}".format(os.path.dirname(path)))
 
 

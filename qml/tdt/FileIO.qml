@@ -48,14 +48,22 @@ Python {
         importModule('fileio', function() {})
         setHandler('ioerror', ioError)
         setHandler('pathExists', function(value) {
-            //console.log("pathExists", value)
             pathExists = value
+            if (!value) {
+                exists = false
+            }
         })
         setHandler('fileExists', function(value) {
             exists = value
+            if (!value) {
+                readable = false
+            }
         })
         setHandler('readable', function(value) {
-            readable = value
+            readablereadable = value
+            if (!value) {
+                writeable = false
+            }
         })
         setHandler('writeable', function(value) {
             writeable = value
@@ -65,7 +73,6 @@ Python {
 
     onReceived: {
         console.log("Event: " + data)
-//        log = data.toString();
     }
 
     onError: console.log('Python error: ' + traceback)
