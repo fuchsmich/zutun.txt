@@ -34,7 +34,7 @@ CoverBackground {
 
     onStatusChanged: {
         if (status === Cover.Active ) {
-            ttm1.reloadFile();
+            ttm1.readFile();
         }
     }
 }

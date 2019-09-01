@@ -59,6 +59,11 @@ QtObject {
             saveList()
         }
 
+        function addTask(txt) {
+            console.log("adding", txt)
+            append(ttm1.tasks.lineToJSON(txt))
+            saveList()
+        }
 
         function removeItem(index) {
             remove(index)

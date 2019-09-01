@@ -220,7 +220,8 @@ Dialog {
         ta.cursorPosition = ta.text.length
     }
 
-//    onAccepted: {
-//        ttm1.tasks.setFullTxt(taskIndex, ta.text);
-//    }
+    onAccepted: {
+        if (taskIndex > -1) ttm1.tasks.setProperty(taskIndex, "fullTxt", text)
+        if (taskIndex === -1) ttm1.tasks.addTask(text)
+    }
 }

@@ -32,7 +32,7 @@ def checkFile(path, perm):
 
 def read(path):
     if (checkFile(path, "r")):
-        pyotherside.send('log', "File for read checked")
+        #pyotherside.send('log', "File for read checked")
         with open(path, 'rt') as f:
             read_data = f.read()
             #f.close()
@@ -44,7 +44,7 @@ def read(path):
 
 def write(path, content):
     if (checkFile(path, "w")):
-        pyotherside.send('log', "File for write checked")
+        #pyotherside.send('log', "File for write checked")
         with open(path, 'wt') as f:
             f.write(content)
             f.close()

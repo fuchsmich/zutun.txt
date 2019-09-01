@@ -24,7 +24,7 @@ Python {
         var content
         if (pythonReady && path) {
             py.call('fileio.read', [path], function(result){
-                console.log("read result:", result);
+                //console.log("read result:", result);
                 py.readSuccess(result)
             });
         }
@@ -48,7 +48,7 @@ Python {
         importModule('fileio', function() {})
         setHandler('ioerror', ioError)
         setHandler('pathExists', function(value) {
-            console.log("pathExists", value)
+            //console.log("pathExists", value)
             pathExists = value
         })
         setHandler('fileExists', function(value) {

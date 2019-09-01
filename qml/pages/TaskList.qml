@@ -28,8 +28,7 @@ Page {
             MenuItem {
                 visible: ttm1.file.writeable
                 text: qsTr("Add New Task")
-                onClicked: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
-                                          {taskIndex: -1, text: ""});
+                onClicked: app.addTask()
             }
             MenuItem {
                 visible: ttm1.file.pathExists && !ttm1.file.exists
@@ -99,21 +98,12 @@ Page {
             NumberAnimation { properties: "x,y"; duration: 150 }
         }
 
-        Component {
-            id: taskEditComp
-            TaskEdit {
-                text: (taskIndex > -1 ?
-                           ttm1.tasks.get(taskIndex).fullTxt:
-                           "")
-                onAccepted: ttm1.tasks.setProperty(taskIndex, "fullTxt", text);
-            }
-        }
-
         Connections {
             target: taskModel
-            onEditItem: pageStack.push(taskEditComp,
+            onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
                                        {
                                            taskIndex: index,
+                                           text: ttm1.tasks.get(taskIndex).fullTxt
                                        })
         }
     }
