@@ -9,6 +9,9 @@ QtObject {
         property string hintText: ""
         path: settings.todoTxtLocation
 
+        onReadSuccess:
+            if (content) tasks.populate(JS.splitLines(content))
+
         onIoError: {
             //TODO needs some rework for translation
             hintText = msg;
@@ -31,17 +34,17 @@ QtObject {
     }
 
     function saveList() {
-        var array
-        for (var i = 0; i < count; i++) {
-            array.append(tasks.get(i).fullTxt)
+        var array = []
+        for (var i = 0; i < tasks.count; i++) {
+            array.push(tasks.get(i).fullTxt)
         }
         array.sort()
-        file.save(array)
+        array.push('')
+        file.save(array.join("\n"))
     }
 
     function readFile() {
-        var content = file.read()
-        if (content) tasks.populate(JS.splitLines(content))
+        file.read()
     }
 
     property ListModel tasks: ListModel {
@@ -53,13 +56,13 @@ QtObject {
                         JS.baseFeatures.modifyLine(item.fullTxt, JS.baseFeatures[prop], value))
             console.log(JSON.stringify(json))
             ttm1.tasks.set(index, json)
+            saveList()
         }
 
 
         function removeItem(index) {
-            var newArr = tasksArray;
-            newArr.splice(get(index).lineNum, 1);
-            listToFile(newArr);
+            remove(index)
+            saveList()
         }
 
         function prioColor(prio) {

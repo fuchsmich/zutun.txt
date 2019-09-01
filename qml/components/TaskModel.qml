@@ -211,13 +211,13 @@ DelegateModel {
     }
 
     function sort(lessThan) {
-        console.log("begin sort")
+ //       console.log("begin sort")
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
             defaultPrio = (!item.model.done && item.model.priority !== "" && item.model.priority.charCodeAt(0) > defaultPrio.charCodeAt(0)
                           ? item.model.priority : defaultPrio)
 
-            console.log(item.model.fullTxt, filters.visibility(item.model))
+  //          console.log(item.model.fullTxt, filters.visibility(item.model))
             if (filters.visibility(item.model)) {
                 //TODO set section here
                 var index = insertPosition(lessThan, item)
