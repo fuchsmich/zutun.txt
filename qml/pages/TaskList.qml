@@ -107,6 +107,11 @@ Page {
             NumberAnimation { properties: "x,y"; duration: 150 }
         }
 
+        remove: Transition {
+            ScriptAction {
+                script: console.log("removing")
+            }
+        }
     }
 
     onStatusChanged: {

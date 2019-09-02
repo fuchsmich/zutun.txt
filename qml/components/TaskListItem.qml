@@ -20,7 +20,6 @@ ListItem {
 
     function remove() {
         remorseAction("Deleting", function() {
-            animateRemoval()
             removeItem()
         })
     }
@@ -118,35 +117,45 @@ ListItem {
     property real fadeFactor: 1
 //    opacity: fadeFactor
 
-    ListView.onAdd: ParallelAnimation {
+    ListView.onAdd: SequentialAnimation{
+        alwaysRunToEnd:  true
+//        PropertyAction {
+//            target: listItem
+//            property: "fadeFactor"
+//            value: 1
+//        }
+        NumberAnimation {
+            target: listItem
+            properties: "fadeFactor, opacity"
+            //from: 0;
+            to: 1
+            duration: 1500
+            easing.type: Easing.InOutQuad
+        }
         ScriptAction {
             script: {
-//                listItem.fadeFactor = 1
+//                listItem.fadeFactor= 1
                 console.log("adding", listItem.fadeFactor, listItem.subject)
             }
-        }
-        NumberAnimation {
-            target: listItem;
-            properties: "fadeFactor, opacity"
-            from: 0; to: 1
-            duration: 150
-            easing.type: Easing.InOutQuad
         }
     }
 
     ListView.onRemove:  SequentialAnimation {
-        ScriptAction {
-            script: listItem.ListView.delayRemove = true
-        }
+//        ScriptAction {
+//            script: listItem.ListView.delayRemove = true
+//        }
+        alwaysRunToEnd:  true
         NumberAnimation {
             target: listItem;
             properties: "fadeFactor, opacity";
-            to: 0; duration: 150; easing.type: Easing.InOutQuad
+            to: 0;
+            duration: 1500;
+            easing.type: Easing.InOutQuad
         }
         ScriptAction {
             script: {
-                listItem.ListView.delayRemove = false
-//                listItem.fadeFactor = 1
+//                listItem.ListView.delayRemove = false
+                console.log("removing", listItem.fadeFactor, listItem.subject)
             }
         }
     }
