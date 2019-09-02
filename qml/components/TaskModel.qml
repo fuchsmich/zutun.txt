@@ -250,9 +250,9 @@ DelegateModel {
         onEditItem: visualModel.editItem(model.index)
         onRemoveItem: ttm1.tasks.removeItem(model.index)
 
-    }
-    items.includeByDefault: false
+    }    
 
+    items.includeByDefault: false
     groups: [
         DelegateModelGroup {
             id: unsortedItems

@@ -94,10 +94,6 @@ Page {
         }
 
         model: taskModel
-        move: Transition {
-            NumberAnimation { properties: "x,y"; duration: 150 }
-        }
-
         Connections {
             target: taskModel
             onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
@@ -106,6 +102,11 @@ Page {
                                            text: ttm1.tasks.get(index).fullTxt
                                        })
         }
+
+        move: Transition {
+            NumberAnimation { properties: "x,y"; duration: 150 }
+        }
+
     }
 
     onStatusChanged: {

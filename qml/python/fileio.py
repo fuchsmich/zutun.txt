@@ -68,7 +68,7 @@ def write(path, content):
 
 def create(path):
     try:
-        if (checkPath(path, 'rw'):
+        if (checkPath(path, 'rw')):
             with open(path, 'w+') as f:
                 pyotherside.send('log', "file {0} created.".format(path))
                 f.close()

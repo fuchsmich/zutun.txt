@@ -25,8 +25,7 @@ ListItem {
         })
     }
 
-    contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)*fadeFactor //+ lv.spacing
-    opacity: fadeFactor
+    contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)*fadeFactor
     onClicked: editItem()
 
     Column {
@@ -116,31 +115,41 @@ ListItem {
         }
     }
 
-    Component {
-        AddAnimation {
-            target: listItem
-        }
-    }
-
     property real fadeFactor: 1
+//    opacity: fadeFactor
 
-    ListView.onAdd:
+    ListView.onAdd: ParallelAnimation {
+        ScriptAction {
+            script: {
+//                listItem.fadeFactor = 1
+                console.log("adding", listItem.fadeFactor, listItem.subject)
+            }
+        }
         NumberAnimation {
-            properties: "fadeFactor"
+            target: listItem;
+            properties: "fadeFactor, opacity"
             from: 0; to: 1
             duration: 150
             easing.type: Easing.InOutQuad
         }
+    }
 
-    //ListView.onRemove: animateRemoval()
-//    ListView.onRemove:  NumberAnimation {
-//        target: listItem;
-//        properties: "fadeFactor"; to: 0;
-//        duration: 150;
-//        easing.type: Easing.InOutQuad
-//    }
-
-
+    ListView.onRemove:  SequentialAnimation {
+        ScriptAction {
+            script: listItem.ListView.delayRemove = true
+        }
+        NumberAnimation {
+            target: listItem;
+            properties: "fadeFactor, opacity";
+            to: 0; duration: 150; easing.type: Easing.InOutQuad
+        }
+        ScriptAction {
+            script: {
+                listItem.ListView.delayRemove = false
+//                listItem.fadeFactor = 1
+            }
+        }
+    }
 
 //    Component.onDestruction: console.log(model.index, "I'm gone.")
 }

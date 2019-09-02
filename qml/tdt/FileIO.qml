@@ -60,7 +60,7 @@ Python {
             }
         })
         setHandler('readable', function(value) {
-            readablereadable = value
+            readable = value
             if (!value) {
                 writeable = false
             }
