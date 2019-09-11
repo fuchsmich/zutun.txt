@@ -110,18 +110,24 @@ function getMatchesList(tasks, pattern) {
 }
 
 function getMatchesLine(task, pattern) {
-//    var matches = task.match(projects.pattern)
-    return task.match(pattern)
+    var matches, trimmedMatches
+    if (matches = task.match(pattern))
+        trimmedMatches = matches.map(function (item, index, array) {
+            return item.trim()
+        })
+
+    return (trimmedMatches ? trimmedMatches : [])
 }
 
 var projects = {
-    pattern: /(^|\s)\+\S+/g ,
+    pattern: /(^|\s)(\+\S+)/g ,
     /* get list of projects for tasklist*/
     listAll: function(tasks) {
         return getMatchesList(tasks, projects.pattern)
     },
     /* get list of contexts for task*/
     listLine: function(task) {
+        console.log(getMatchesLine(task, projects.pattern))
         return getMatchesLine(task, projects.pattern)
     }
 }
@@ -134,7 +140,7 @@ var contexts = {
     },
     /* get list of contexts for task*/
     listLine: function(line) {
-        return line.match(contexts.pattern)
+        return getMatchesLine(task, contexts.pattern)
     }
 }
 

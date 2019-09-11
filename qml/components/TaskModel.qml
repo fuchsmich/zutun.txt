@@ -232,8 +232,6 @@ DelegateModel {
             } else item.groups = "invisible"
 
             var p = JS.projects.listLine(item.model.fullTxt)
-            console.log("x%1x".arg(p[0]))
-
         }
     }
 
