@@ -117,48 +117,48 @@ ListItem {
     property real fadeFactor: 1
 //    opacity: fadeFactor
 
-    ListView.onAdd: SequentialAnimation{
-        alwaysRunToEnd:  true
-//        PropertyAction {
-//            target: listItem
-//            property: "fadeFactor"
-//            value: 1
-//        }
-        NumberAnimation {
-            target: listItem
-            properties: "fadeFactor, opacity"
-            //from: 0;
-            to: 1
-            duration: 1500
-            easing.type: Easing.InOutQuad
-        }
-        ScriptAction {
-            script: {
-//                listItem.fadeFactor= 1
-                console.log("adding", listItem.fadeFactor, listItem.subject)
-            }
-        }
-    }
-
-    ListView.onRemove:  SequentialAnimation {
+//    ListView.onAdd: SequentialAnimation{
+////        alwaysRunToEnd:  true
+////        PropertyAction {
+////            target: listItem
+////            property: "fadeFactor"
+////            value: 1
+////        }
+////        NumberAnimation {
+////            target: listItem
+////            properties: "fadeFactor, opacity"
+////            //from: 0;
+////            to: 1
+////            duration: 1500
+////            easing.type: Easing.InOutQuad
+////        }
 //        ScriptAction {
-//            script: listItem.ListView.delayRemove = true
+//            script: {
+////                listItem.fadeFactor= 1
+//                console.log("adding", listItem.fadeFactor, listItem.subject)
+//            }
 //        }
-        alwaysRunToEnd:  true
-        NumberAnimation {
-            target: listItem;
-            properties: "fadeFactor, opacity";
-            to: 0;
-            duration: 1500;
-            easing.type: Easing.InOutQuad
-        }
-        ScriptAction {
-            script: {
-//                listItem.ListView.delayRemove = false
-                console.log("removing", listItem.fadeFactor, listItem.subject)
-            }
-        }
-    }
+//    }
+
+//    ListView.onRemove:  SequentialAnimation {
+////        ScriptAction {
+////            script: listItem.ListView.delayRemove = true
+////        }
+////        alwaysRunToEnd:  true
+////        NumberAnimation {
+////            target: listItem;
+////            properties: "fadeFactor, opacity";
+////            to: 0;
+////            duration: 1500;
+////            easing.type: Easing.InOutQuad
+////        }
+//        ScriptAction {
+//            script: {
+////                listItem.ListView.delayRemove = false
+//                console.log("removing", listItem.fadeFactor, listItem.subject)
+//            }
+//        }
+//    }
 
 //    Component.onDestruction: console.log(model.index, "I'm gone.")
 }

@@ -3,6 +3,7 @@ TARGET = harbour-zutun
 CONFIG += sailfishapp_qml
 
 DISTFILES += qml/harbour-zutun.qml \
+    qml/components/ProjectContextModel.qml \
     qml/components/TaskModel.qml \
     qml/cover/CoverPage.qml \
     rpm/harbour-zutun.spec \

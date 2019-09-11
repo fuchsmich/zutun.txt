@@ -224,9 +224,12 @@ DelegateModel {
                 //TODO set section here
                 var index = insertPosition(lessThan, item)
 
-                item.groups = "items"
+                item.groups = ["items", "cover"]
                 items.move(item.itemsIndex, index)
             } else item.groups = "invisible"
+
+            console.log(item.model.projects.length)
+
         }
     }
 
@@ -265,6 +268,10 @@ DelegateModel {
         DelegateModelGroup {
             id: invisibleItems
             name: "invisible"
+        },
+        DelegateModelGroup {
+            id: coverItems
+            name: "cover"
         }
     ]
 }

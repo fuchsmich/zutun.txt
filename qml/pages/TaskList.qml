@@ -1,5 +1,3 @@
-//TODO multiple tasklists?? (-> one model per view, but one global tastkarray)
-
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
@@ -103,15 +101,39 @@ Page {
                                        })
         }
 
-        move: Transition {
-            NumberAnimation { properties: "x,y"; duration: 150 }
-        }
+//        add: Transition {
+//            //            NumberAnimation { properties: "x,y"; duration: 150 }
+////                NumberAnimation {
+////                    properties: "fadeFactor, opacity";
+////                    to: 1;
+////                    duration: 150;
+////                    easing.type: Easing.InOutQuad
+////                }
+//        }
 
-        remove: Transition {
-            ScriptAction {
-                script: console.log("removing")
-            }
-        }
+//        displaced: Transition {
+//            NumberAnimation { properties: "x,y"; duration: 400; easing.type: Easing.OutBounce }
+////            NumberAnimation {
+////                properties: "fadeFactor, opacity";
+////                to: 1;
+////            }
+//        }
+
+//        move: Transition {
+//            NumberAnimation { properties: "x,y"; duration: 150 }
+//            ScriptAction {
+//                script: console.log("moving")
+//            }
+//        }
+
+//        remove: Transition {
+////            NumberAnimation {
+////                properties: "fadeFactor, opacity";
+////                to: 0;
+////                duration: 150;
+////                easing.type: Easing.InOutQuad
+////            }
+//        }
     }
 
     onStatusChanged: {

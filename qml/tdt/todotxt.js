@@ -41,6 +41,13 @@ var baseFeatures = {
             subject: fields[baseFeatures.subject].trim()
         }
 
+        //projects
+        values['projects'] = projects.listLine(line)
+        console.log(line, projects.listLine(line))
+
+        //contexts
+        //values['contexts'] = contexts.list([line])
+
         //due
         var dueFields = due.get(values.subject)
         values.subject = dueFields[due.subject]
@@ -90,28 +97,30 @@ function getMatchesList(tasks, pattern) {
     for (var t = 0; t < tasks.length; t++) {
         task = tasks[t];
         var matches = task.match(pattern);
-        //        console.log(matches)
 
         var match = "";
         for (var i in matches) {
             match = matches[i].trim();
-            //            console.log(match)
             if (typeof list[match] === 'undefined') list[match] = [];
             if (list[match].indexOf(t) === -1) list[match].push(t);
         }
     }
-    //   console.log(list, list.length)
     list.sort();
     return list;
 }
 
+/* get list of projects for tasklist*/
 var projects = {
     pattern: /(^|\s)\+\S+/g ,
-    list: function(tasks) {
+    listAll: function(tasks) {
         return getMatchesList(tasks, projects.pattern)
+    },
+    listLine: function(line) {
+        return line.match(projects.pattern)
     }
 }
 
+/* get list of contextsfor tasklist*/
 var contexts = {
     pattern: /(^|\s)\@\S+/g ,
     list: function(tasks) {
