@@ -42,8 +42,8 @@ var baseFeatures = {
         }
 
         //projects
-        values['projects'] = projects.listLine(line)
-        console.log(line, projects.listLine(line))
+//        values['projects'] = projects.listLine(line)
+//        console.log(line, projects.listLine(line))
 
         //contexts
         //values['contexts'] = contexts.list([line])
@@ -109,22 +109,32 @@ function getMatchesList(tasks, pattern) {
     return list;
 }
 
-/* get list of projects for tasklist*/
+function getMatchesLine(task, pattern) {
+//    var matches = task.match(projects.pattern)
+    return task.match(pattern)
+}
+
 var projects = {
     pattern: /(^|\s)\+\S+/g ,
+    /* get list of projects for tasklist*/
     listAll: function(tasks) {
         return getMatchesList(tasks, projects.pattern)
     },
-    listLine: function(line) {
-        return line.match(projects.pattern)
+    /* get list of contexts for task*/
+    listLine: function(task) {
+        return getMatchesLine(task, projects.pattern)
     }
 }
 
-/* get list of contextsfor tasklist*/
 var contexts = {
     pattern: /(^|\s)\@\S+/g ,
-    list: function(tasks) {
+    /* get list of contexts for tasklist*/
+    listAll: function(tasks) {
         return getMatchesList(tasks, contexts.pattern);
+    },
+    /* get list of contexts for task*/
+    listLine: function(line) {
+        return line.match(contexts.pattern)
     }
 }
 

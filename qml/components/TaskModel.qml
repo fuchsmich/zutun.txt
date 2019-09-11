@@ -231,7 +231,8 @@ DelegateModel {
                 items.move(item.itemsIndex, index)
             } else item.groups = "invisible"
 
-            console.log(item.model.projects.length)
+            var p = JS.projects.listLine(item.model.fullTxt)
+            console.log("x%1x".arg(p[0]))
 
         }
     }

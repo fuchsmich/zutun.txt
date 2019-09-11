@@ -72,6 +72,7 @@ def create(path):
             with open(path, 'w+') as f:
                 pyotherside.send('log', "file {0} created.".format(path))
                 f.close()
+                checkFile(path, "rw")
     except IOError:
         pyotherside.send('ioerror', "File not writeable {0}".format(path))
 
