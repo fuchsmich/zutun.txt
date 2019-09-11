@@ -193,8 +193,11 @@ DelegateModel {
 
         ttm1.tasks.setProperty(item.model.index, prop, value)
         item.groups = "unsorted"
+        //TODO: or move the item to correct place here?
     }
 
+
+    //return the positon of the item in the list due to sort function (lessThanFunc)
     function insertPosition(lessThanFunc, item) {
         var lower = 0
         var upper = items.count

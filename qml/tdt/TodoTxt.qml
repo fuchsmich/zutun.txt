@@ -54,7 +54,7 @@ QtObject {
             var item = get(index)
             var json = ttm1.tasks.lineToJSON(
                         JS.baseFeatures.modifyLine(item.fullTxt, JS.baseFeatures[prop], value))
-            console.log(JSON.stringify(json))
+            //console.log(JSON.stringify(json))
             ttm1.tasks.set(index, json)
             saveList()
         }
