@@ -11,21 +11,23 @@ DelegateModel {
     property QtObject filters: QtObject {
         property bool hideDone: filterSettings.hideDone
         onHideDoneChanged: visualModel.resort()
-        property var projects: filterSettings.projects.value
-        onProjectsChanged: visualModel.resort()
-        property var contexts: filterSettings.contexts.value
-        onContextsChanged: visualModel.resort()
-        property string text: [hideDone ?
-                qsTr("Hide Complete"):
-                undefined].concat(projects.concat(contexts)).join(", ")
+        property var text: function () {
+            var ftext = [(hideDone ? qsTr("Hide Complete"): undefined)].concat(
+            projects.active.concat(
+                contexts.active)).join(", ")
+            if (ftext) return ftext
+            else return qsTr("None")
+        }
 
-        property ListModel projectsModel: ListModel {}
-        property ListModel contextsModel: ListModel {}
-
-        signal fetchModels()
-        onFetchModels: {
-            populate(projectsModel, JS.projects.list(tasksArray));
-            populate(contextsModel, JS.contexts.list(tasksArray));
+        property FilterModel projects: FilterModel {
+            name: "projects"
+            active: filterSettings.projects.value
+            onActiveChanged: visualModel.resort()
+        }
+        property FilterModel contexts: FilterModel {
+            name: "contexts"
+            active: filterSettings.contexts.value
+            onActiveChanged: visualModel.resort()
         }
 
         function clearFilter(filterName) {
@@ -36,18 +38,14 @@ DelegateModel {
         }
 
         function visibility(item) {
-            //            console.log(item.subject, projects, contexts)
             if ((hideDone && item.done)) return false;
 
-            for (var p in projects) {
-                //                console.log(item.subject,projects[p],item.subject.indexOf(projects[p]))
-                if (item.subject.indexOf(projects[p]) === -1) return false;
+            for (var p in projects.active) {
+                if (item.subject.indexOf(projects.active[p]) === -1) return false;
             }
-
-            for (var c in contexts) {
-                if (item.subject.indexOf(contexts[c]) === -1) return false;
+            for (var c in contexts.active) {
+                if (item.subject.indexOf(contexts.active[c]) === -1) return false;
             }
-
             return true;
         }
 
@@ -55,8 +53,8 @@ DelegateModel {
         function setByName(name, onOff) {
             var list = [];
             switch (name.charAt(0)) {
-            case "+": list = projects; break;
-            case "@": list = contexts; break;
+            case "+": list = projects.active; break;
+            case "@": list = contexts.active; break;
             default: return;
             }
             if (onOff) list.push(name);
@@ -70,25 +68,16 @@ DelegateModel {
             }
         }
 
-        function populate(model, array) {
-            model.clear();
-            var sortedArray, tmpArray = [];
-            var itemCount, active, name, visibleItemCount;
-            for ( var a in array) {
-                tmpArray.push(a);
-            }
-            sortedArray = tmpArray.visibleItemsort();
-            for (var i in sortedArray) {
-                name = sortedArray[i];
-                itemCount = array[name].length;
-                visibleItemCount = 0;
-                for (var j =0;  j < array[name].length; j++){
-                    var taskItem = JS.baseFeatures.parseLine(tasksArray[array[name][j]]);
-                    if (visibleItem(taskItem)) visibleItemCount++;
-                }
-                active = ((filters.projects !== undefined && filters.projects.indexOf(name) !== -1) ||
-                          (filters.contexts !== undefined && filters.contexts.indexOf(name) !== -1))
-                model.append( {"name": name, "active": active, "itemCount": itemCount, "visibleItemCount": visibleItemCount});
+        function parseList() {
+            var taskList = visualModel.model
+            var filterList = []
+            projects.clear()
+            contexts.clear()
+            for (var i = 0; i < taskList.count; i++) {
+                var item = taskList.get(i)
+                console.log(JS.projects.listLine(item.fullTxt), JS.contexts.listLine(item.fullTxt))
+                projects.addFilterItems(JS.projects.listLine(item.fullTxt), filters.visibility(item))
+                contexts.addFilterItems(JS.contexts.listLine(item.fullTxt), filters.visibility(item))
             }
         }
 
@@ -191,7 +180,8 @@ DelegateModel {
             }
         }
 
-        ttm1.tasks.setProperty(item.model.index, prop, value)
+        //ttm1.tasks.setProperty(item.model.index, prop, value)
+        visualModel.model.setProperty(item.model.index, prop, value)
         item.groups = "unsorted"
         //TODO: or move the item to correct place here?
     }
@@ -216,13 +206,11 @@ DelegateModel {
     }
 
     function sort(lessThan) {
- //       console.log("begin sort")
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
             defaultPrio = (!item.model.done && item.model.priority !== "" && item.model.priority.charCodeAt(0) > defaultPrio.charCodeAt(0)
                           ? item.model.priority : defaultPrio)
 
-  //          console.log(item.model.fullTxt, filters.visibility(item.model))
             if (filters.visibility(item.model)) {
                 //TODO set section here
                 var index = insertPosition(lessThan, item)
@@ -230,9 +218,8 @@ DelegateModel {
                 item.groups = ["items", "cover"]
                 items.move(item.itemsIndex, index)
             } else item.groups = "invisible"
-
-            var p = JS.projects.listLine(item.model.fullTxt)
         }
+        filters.parseList()
     }
 
     function resort() {
@@ -253,7 +240,7 @@ DelegateModel {
         onPrioUp: setProperty(DelegateModel.itemsIndex, "priority", "up")
         onPrioDown: setProperty(DelegateModel.itemsIndex, "priority", "down")
         onEditItem: visualModel.editItem(model.index)
-        onRemoveItem: ttm1.tasks.removeItem(model.index)
+        onRemoveItem: visualModel.model.removeItem(model.index)
 
     }    
 

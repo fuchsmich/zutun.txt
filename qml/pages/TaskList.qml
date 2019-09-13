@@ -67,7 +67,7 @@ Page {
                 opacity: 0.6
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
-                text: qsTr("Filter") + ": " + taskModel.filters.text
+                text: qsTr("Filter") + ": " + taskModel.filters.text()
             }
         }
 

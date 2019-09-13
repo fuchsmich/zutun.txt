@@ -49,7 +49,7 @@ QtObject {
 
     property ListModel tasks: ListModel {
 
-        /* überschreiben contentder Funktion setProperty: */
+        /* überschreiben der Funktion setProperty: */
         function setProperty(index, prop, value) {
             var item = get(index)
             var json = ttm1.tasks.lineToJSON(

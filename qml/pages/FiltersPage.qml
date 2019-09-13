@@ -70,9 +70,8 @@ Page {
             name: "projects"
             PropertyChanges {
                 target: lv;
-                //                delegate: projectDelegate
                 title: qsTr("Filter Projects")
-                model: taskModel.filters.projectsModel
+                model: taskModel.filters.projects
                 btnTxt: qsTr("Clear Project Filters")
             }
         }
@@ -83,7 +82,7 @@ Page {
                 //                delegate: contextDelegate
                 //                list: ["All"].concat(tdt.getContextList());
                 title: qsTr("Filter Contexts")
-                model: taskModel.filters.contextsModel
+                model: taskModel.filters.contexts
                 btnTxt: qsTr("Clear Context Filters")
             }
         }

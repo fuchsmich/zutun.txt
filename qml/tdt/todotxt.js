@@ -19,26 +19,26 @@ var baseFeatures = {
     subject: 5,
 
     getMatches: function(line) {
-        var matches = line.match(baseFeatures.pattern)
-        if (matches[baseFeatures.creationDate] === undefined)
+        var matches = line.match(this.pattern)
+        if (matches[this.creationDate] === undefined)
             //swap creationDate, completionDate
-            matches[baseFeatures.creationDate] = matches.splice(baseFeatures.completionDate, 1, matches[baseFeatures.creationDate])[0]
+            matches[this.creationDate] = matches.splice(this.completionDate, 1, matches[this.creationDate])[0]
         return matches
     },
 
     parseLine: function(line) {
         //baseFeatures
-        var fields = baseFeatures.getMatches(line)
+        var fields = this.getMatches(line)
         var values = {
-            fullTxt: fields[baseFeatures.fullTxt],
-            done: fields[baseFeatures.done] !== undefined,
-            priority: (fields[baseFeatures.priority] !== undefined ?
-                           fields[baseFeatures.priority].charAt(1) : ""),
+            fullTxt: fields[this.fullTxt],
+            done: fields[this.done] !== undefined,
+            priority: (fields[this.priority] !== undefined ?
+                           fields[this.priority].charAt(1) : ""),
             //wenn creationDate auch gesetzt, im Feld completionDate
-            completionDate: (fields[baseFeatures.completionDate] !== undefined ? fields[baseFeatures.completionDate] : "").trim(),
+            completionDate: (fields[this.completionDate] !== undefined ? fields[this.completionDate] : "").trim(),
             //wenn creationDate leer, im Feld completionDate enthalten
-            creationDate: (fields[baseFeatures.creationDate] !== undefined ? fields[baseFeatures.creationDate]: "").trim(),
-            subject: fields[baseFeatures.subject].trim()
+            creationDate: (fields[this.creationDate] !== undefined ? fields[this.creationDate]: "").trim(),
+            subject: fields[this.subject].trim()
         }
 
         //projects
@@ -58,32 +58,32 @@ var baseFeatures = {
 
     modifyLine: function(line, feature, value) {
         //TODO validierung von value???
-        var fields = baseFeatures.getMatches(line)
+        var fields = this.getMatches(line)
         //        console.log(fields)
         switch (feature) {
-        case baseFeatures.fullTxt :
+        case this.fullTxt :
             return value
-        case baseFeatures.done :
+        case this.done :
             if (value === false) {
                 fields[feature] = undefined
-                fields[baseFeatures.completionDate] = undefined
+                fields[this.completionDate] = undefined
             } else {
                 fields[feature] = "x "
                 //nur setzen, wenn creationDate auch gesetzt
-                fields[baseFeatures.completionDate] = (fields[baseFeatures.creationDate] !== undefined ? today() + " " : undefined)
+                fields[this.completionDate] = (fields[this.creationDate] !== undefined ? today() + " " : undefined)
             }
             break
-        case baseFeatures.priority:
+        case this.priority:
             if (value === false) { fields[feature] = undefined; break }
             if (alphabet.indexOf(value) > -1) { fields[feature] = "(" + value + ") "; break }
             break
-        case baseFeatures.creationDate:
+        case this.creationDate:
             if (value === false) fields[feature] = undefined
-            else if (baseFeatures.datePattern.test(value)) fields[feature] = value + " "
+            else if (this.datePattern.test(value)) fields[feature] = value + " "
             else if (value instanceof Date) fields[feature] = Qt.formatDate(value, 'yyyy-MM-dd') + " "
             break
         }
-        fields[baseFeatures.fullTxt] = undefined
+        fields[this.fullTxt] = undefined
         //        console.log(fields)
         return fields.join("")
     }
@@ -123,12 +123,12 @@ var projects = {
     pattern: /(^|\s)(\+\S+)/g ,
     /* get list of projects for tasklist*/
     listAll: function(tasks) {
-        return getMatchesList(tasks, projects.pattern)
+        return getMatchesList(tasks, this.pattern)
     },
     /* get list of contexts for task*/
     listLine: function(task) {
-        console.log(getMatchesLine(task, projects.pattern))
-        return getMatchesLine(task, projects.pattern)
+        //console.log(getMatchesLine(task, projects.pattern))
+        return getMatchesLine(task, this.pattern)
     }
 }
 
@@ -136,11 +136,11 @@ var contexts = {
     pattern: /(^|\s)\@\S+/g ,
     /* get list of contexts for tasklist*/
     listAll: function(tasks) {
-        return getMatchesList(tasks, contexts.pattern);
+        return getMatchesList(tasks, this.pattern);
     },
     /* get list of contexts for task*/
-    listLine: function(line) {
-        return getMatchesLine(task, contexts.pattern)
+    listLine: function(task) {
+        return getMatchesLine(task, this.pattern)
     }
 }
 
