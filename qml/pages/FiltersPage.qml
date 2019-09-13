@@ -26,6 +26,7 @@ Page {
 
         header: PageHeader {
             title: lv.title
+            description: qsTr("Active Filters: %1").arg(taskModel.filters.text())
         }
 
         ViewPlaceholder {
@@ -79,8 +80,6 @@ Page {
             name: "contexts"
             PropertyChanges {
                 target: lv;
-                //                delegate: contextDelegate
-                //                list: ["All"].concat(tdt.getContextList());
                 title: qsTr("Filter Contexts")
                 model: taskModel.filters.contexts
                 btnTxt: qsTr("Clear Context Filters")
