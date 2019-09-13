@@ -59,7 +59,6 @@ DelegateModel {
             }
             if (onOff) list.push(name);
             else list.splice(list.indexOf(name), 1);
-            //console.log(typeof filterSettings.projects, typeof list[0]);
             list.sort();
             switch (name.charAt(0)) {
             case "+": filterSettings.projects.value = list; break;

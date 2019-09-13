@@ -5,6 +5,14 @@ ListModel {
     property var list: []
     property var active: []
 
+    function insertPosition(item) {
+        var i = 0
+        while (count > 0 && i < count && item.name > get(i).name) {
+            i++
+        }
+        return i
+    }
+
     function addFilterItems(items, visibility) {
         for (var i = 0; i < items.length; i++) {
             var found = false
@@ -17,10 +25,11 @@ ListModel {
                 }
             }
             if (!found) {
-                append({"name": items[i],
-                           "active": (active.indexOf(items[i]) !== -1),
-                           "itemCount": 1,
-                           "visibleItemCount": (visibility ? 1: 0)});
+                var newItem = {"name": items[i],
+                    "active": (active.indexOf(items[i]) !== -1),
+                    "itemCount": 1,
+                    "visibleItemCount": (visibility ? 1: 0)}
+                insert(insertPosition(newItem), newItem);
             }
         }
     }
