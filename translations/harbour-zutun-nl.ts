@@ -61,6 +61,10 @@
         <source>No entries</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Active Filters: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OtherFilters</name>
@@ -218,6 +222,10 @@
     <message>
         <source>Remove</source>
         <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

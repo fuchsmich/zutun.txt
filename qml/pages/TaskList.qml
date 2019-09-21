@@ -80,7 +80,7 @@ Page {
             property: "section"
             criteria: ViewSection.FullString
             delegate: SectionHeader {
-                text: section
+                text: "Section: %1".arg(section)
             }
         }
 

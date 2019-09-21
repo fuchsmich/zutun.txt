@@ -51,7 +51,7 @@ Page {
 
             Repeater {
                 id: rep
-                property var list: ttm1.sorting.functionList
+                property var list: taskModel.sorting.functionList
                 model: list.length
 
                 delegate: TextSwitch {
@@ -71,7 +71,7 @@ Page {
 
             Repeater {
                 id: groupRep
-                property var list: ttm1.sorting.groupFunctionList
+                property var list: taskModel.sorting.groupFunctionList
                 model: list.length
 
                 delegate: TextSwitch {

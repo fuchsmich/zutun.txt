@@ -19,9 +19,9 @@ ListItem {
     signal prioDown()
 
     function remove() {
-        remorseAction("Deleting", function() {
+        remorseAction(qsTr("Deleting"), function() {
             removeItem()
-        })
+        }, 3000)
     }
 
     contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)*fadeFactor
@@ -160,5 +160,5 @@ ListItem {
 //        }
 //    }
 
-//    Component.onDestruction: console.log(model.index, "I'm gone.")
+    Component.onDestruction: console.log(model.index, "I'm gone.")
 }

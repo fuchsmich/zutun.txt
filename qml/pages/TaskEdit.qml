@@ -221,7 +221,7 @@ Dialog {
     }
 
     onAccepted: {
-        if (taskIndex > -1) ttm1.tasks.setProperty(taskIndex, "fullTxt", text)
+        if (taskIndex > -1) ttm1.tasks.setTaskProperty(taskIndex, "fullTxt", text)
         if (taskIndex === -1) ttm1.tasks.addTask(text)
     }
 }

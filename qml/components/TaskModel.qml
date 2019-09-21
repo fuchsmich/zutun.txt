@@ -74,7 +74,6 @@ DelegateModel {
             contexts.clear()
             for (var i = 0; i < taskList.count; i++) {
                 var item = taskList.get(i)
-                console.log(JS.projects.listLine(item.fullTxt), JS.contexts.listLine(item.fullTxt))
                 projects.addFilterItems(JS.projects.listLine(item.fullTxt), filters.visibility(item))
                 contexts.addFilterItems(JS.contexts.listLine(item.fullTxt), filters.visibility(item))
             }
@@ -89,6 +88,7 @@ DelegateModel {
         property int order: sortSettings.order
         onOrderChanged: visualModel.resort()
 
+        //group by: 0..None, 1..projects, 2..contexts
         property int grouping: sortSettings.grouping
         onGroupingChanged: visualModel.resort()
 
@@ -148,14 +148,14 @@ DelegateModel {
                           )
               },
               function(line) {
-                  return JS.projects.list([line])
+                  return JS.projects.listLine(line)
               }]
             ,[qsTr("Contexts"),
               function(left, right) {
                   return groupFunctionList[1][1](left,right)
               },
               function(line) {
-                  return JS.contexts.list([line])
+                  return JS.contexts.listLine(line)
               }]
         ]
     }
@@ -163,6 +163,16 @@ DelegateModel {
     signal editItem(int index)
 
     property string defaultPrio: "F"
+
+    function removePersistedID (id) {
+        console.log("removing", id, persistedItems.count)
+        for (var i = 0; i < persistedItems.count; i++){
+            if (persistedItems.get(i).model.id === id){
+                persistedItems.get(i).inPersistedItems = false
+                persistedItems.get(i).setGroups(["invisible"])
+            }
+        }
+    }
 
     function setProperty(index, prop, value) {
         var item = items.get(index)
@@ -178,11 +188,14 @@ DelegateModel {
                 else value = ""
             }
         }
-
-        //ttm1.tasks.setProperty(item.model.index, prop, value)
-        visualModel.model.setProperty(item.model.index, prop, value)
+        visualModel.model.setTaskProperty(item.model.index, prop, value)
+        removePersistedID(item.model.id)
         item.groups = "unsorted"
-        //TODO: or move the item to correct place here?
+    }
+
+    function removeItem(index) {
+        removePersistedID(index)
+        visualModel.model.removeItem(model.index)
     }
 
 
@@ -211,19 +224,36 @@ DelegateModel {
                           ? item.model.priority : defaultPrio)
 
             if (filters.visibility(item.model)) {
-                //TODO set section here
+                var sections = sorting.groupFunctionList[sorting.grouping][2](item.model.fullTxt)
+//                console.log(sections)
+                visualModel.model.setProperty(item.model.index, "section",
+                                              (sections.length > 0 ? sections[0]  : ""))
                 var index = insertPosition(lessThan, item)
-
                 item.groups = ["items", "cover"]
                 items.move(item.itemsIndex, index)
+                var itemData = JSON.parse(JSON.stringify(visualModel.model.get(item.model.index)))
+                console.log(itemData.id, itemData.section)
+                removePersistedID(item.model.index)
+                for (var s = 1;  s < sections.length; s++) {
+                    itemData.section = sections[s]
+                    var ip = insertPosition(lessThan, itemData)
+                    var newItem = items.create(ip, itemData)
+//                    console.log(newItem.DelegateModel.persistedItemsIndex, newItem.DelegateModel.itemsIndex, newItem.DelegateModel.inPersistedItems,
+//                                newItem.DelegateModel.isUnresolved, newItem.DelegateModel.model)
+                    console.log(persistedItems.get(newItem.DelegateModel.persistedItemsIndex).model.id,
+                                persistedItems.get(newItem.DelegateModel.persistedItemsIndex).model.section)
+
+                }
             } else item.groups = "invisible"
         }
         filters.parseList()
     }
 
     function resort() {
-        items.setGroups(0, items.count, "unsorted")
-        invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
+        if (items.count > 0) items.setGroups(0, items.count, "unsorted")
+        if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
+        console.log(persistedItems.count)
+        if (persistedItems.count > 0) persistedItems.removeGroups(0, persistedItems.count, ["items", "persistedItems"])
     }
 
     delegate: TaskListItem {
@@ -235,15 +265,20 @@ DelegateModel {
         due: model.due
 
 
-        onToggleDone: setProperty(DelegateModel.itemsIndex, "done", !model.done)
+        onToggleDone: visualModel.model.setTaskProperty(model.id, "done", !model.done)
         onPrioUp: setProperty(DelegateModel.itemsIndex, "priority", "up")
         onPrioDown: setProperty(DelegateModel.itemsIndex, "priority", "down")
         onEditItem: visualModel.editItem(model.index)
-        onRemoveItem: visualModel.model.removeItem(model.index)
-
+        onRemoveItem: removeItem(model.id)
     }    
 
+
+    persistedItems.onChanged: {
+        console.log(persistedItems.count)
+    }
+
     items.includeByDefault: false
+    //filterOnGroup: "cover"
     groups: [
         DelegateModelGroup {
             id: unsortedItems

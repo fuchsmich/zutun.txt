@@ -35,11 +35,17 @@ QtObject {
 
     function saveList() {
         var array = []
+        var ids =[]
         for (var i = 0; i < tasks.count; i++) {
-            array.push(tasks.get(i).fullTxt)
+            console.log(JSON.stringify(tasks.get(i)))
+            if (ids.indexOf(tasks.get(i).id) === -1) {
+                ids.push(tasks.get(i).id)
+                array.push(tasks.get(i).fullTxt)
+            }
         }
         array.sort()
         array.push('')
+        console.log(array, ids)
         file.save(array.join("\n"))
     }
 
@@ -49,19 +55,22 @@ QtObject {
 
     property ListModel tasks: ListModel {
 
-        /* überschreiben der Funktion setProperty: */
-        function setProperty(index, prop, value) {
+        function setTaskProperty(index, prop, value) {
             var item = get(index)
             var json = ttm1.tasks.lineToJSON(
                         JS.baseFeatures.modifyLine(item.fullTxt, JS.baseFeatures[prop], value))
             //console.log(JSON.stringify(json))
-            ttm1.tasks.set(index, json)
+            for (var i = 0; i < count; i++) {
+                if (get(i).id === item.id) ttm1.tasks.set(i, json)
+            }
             saveList()
         }
 
         function addTask(txt) {
             console.log("adding", txt)
-            append(ttm1.tasks.lineToJSON(txt))
+            var json = ttm1.tasks.lineToJSON(txt)
+            json["id"] = count
+            append(json)
             saveList()
         }
 
@@ -115,6 +124,9 @@ QtObject {
                 var line = array[a];
 
                 var json = lineToJSON(line)
+                json["id"] = a
+                json["section"] = ""
+                //console.log(JSON.stringify(json))
 
                 append(json)
 
