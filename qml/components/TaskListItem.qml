@@ -24,6 +24,7 @@ ListItem {
         }, 3000)
     }
 
+    width: ListView.view.width
     contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)*fadeFactor
     onClicked: editItem()
 

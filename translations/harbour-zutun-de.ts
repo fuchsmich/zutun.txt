@@ -144,6 +144,57 @@
     </message>
 </context>
 <context>
+    <name>TaskDelegateModel</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Verberge fertige</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Keine</translation>
+    </message>
+    <message>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Sortiert nach %1</translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished">aufsteigend</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">absteigend</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Gruppiert nach %1, </translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">natürlich</translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished">Erstelldatum</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Enddatum</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Betreff</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Projekte</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Kontexte</translation>
+    </message>
+</context>
+<context>
     <name>TaskEdit</name>
     <message>
         <source>Add New Task</source>
@@ -226,57 +277,6 @@
     <message>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TaskModel</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation type="unfinished">Verberge fertige</translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation type="unfinished">Sortiert nach %1</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation type="unfinished">aufsteigend</translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation type="unfinished">absteigend</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation type="unfinished">Gruppiert nach %1, </translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation type="unfinished">natürlich</translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation type="unfinished">Erstelldatum</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation type="unfinished">Enddatum</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation type="unfinished">Betreff</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished">Keine</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation type="unfinished">Projekte</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation type="unfinished">Kontexte</translation>
     </message>
 </context>
 <context>

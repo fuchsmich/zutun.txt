@@ -7,6 +7,8 @@ import "components"
 import "pages"
 import "tdt"
 
+import "tdt/todotxt.js" as JS
+
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
 //TODO Search field??
@@ -44,7 +46,7 @@ ApplicationWindow
                 defaultValue: []
             }
 
-//            property var contexts: []
+            //            property var contexts: []
             onProjectsChanged: console.log(projects.toString())
         }
 
@@ -96,14 +98,28 @@ ApplicationWindow
         app.activate();
     }
 
+    FileIO {
+        id: file
+        property string hintText: ""
+        path: settings.todoTxtLocation
 
-    TaskModel {
-        id: taskModel
-        model: ttm1.tasks
+        onReadSuccess:
+            if (content) taskListModel.populateTextList(content)
+
+        onIoError: {
+            //TODO needs some rework for translation
+            hintText = msg;
+        }
     }
 
-    TodoTxt {
-        id: ttm1
+    TaskListModel {
+        id: taskListModel
+        section: taskDelegateModel.sorting.grouping
+    }
+
+    TaskDelegateModel {
+        id: taskDelegateModel
+        model: taskListModel
     }
 }
 

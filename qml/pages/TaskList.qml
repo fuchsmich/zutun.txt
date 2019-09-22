@@ -24,15 +24,15 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
             }
             MenuItem {
-                visible: ttm1.file.writeable
+                visible: file.writeable
                 text: qsTr("Add New Task")
                 onClicked: app.addTask()
             }
             MenuItem {
-                visible: ttm1.file.pathExists && !ttm1.file.exists
+                visible: file.pathExists && !file.exists
                 text: qsTr("Create file")
                 onClicked: {
-                    ttm1.file.create()
+                    taskListModel.file.create()
                 }
             }
         }
@@ -51,7 +51,7 @@ Page {
             PageHeader {
                 id: pgh
                 title: qsTr("Tasklist")
-                description: taskModel.sorting.groupText + taskModel.sorting.sortText
+                description: taskDelegateModel.sorting.groupText + taskDelegateModel.sorting.sortText
             }
             Label { /*from PageHeaderDescription.qml */
                 id: flbl
@@ -67,7 +67,7 @@ Page {
                 opacity: 0.6
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
-                text: qsTr("Filter") + ": " + taskModel.filters.text()
+                text: qsTr("Filter") + ": " + taskDelegateModel.filters.text()
             }
         }
 
@@ -87,17 +87,18 @@ Page {
         ViewPlaceholder {
             enabled: lv.count === 0
             text: qsTr("No Tasks")
-            hintText: (ttm1.file.hintText === ""? qsTr("Pull down to add task.")
-                                                : ttm1.file.hintText)
+            hintText: (file.hintText === ""? qsTr("Pull down to add task.")
+                                                : file.hintText)
         }
 
-        model: taskModel
+        model: taskDelegateModel
+
         Connections {
-            target: taskModel
+            target: taskDelegateModel
             onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
                                        {
                                            taskIndex: index,
-                                           text: ttm1.tasks.get(index).fullTxt
+                                           text: taskListModel.tasks.get(index).fullTxt
                                        })
         }
 
@@ -138,7 +139,7 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            ttm1.readFile()
+            taskListModel.readFile()
             /* attach filter page: */
             if ( pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {

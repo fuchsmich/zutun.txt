@@ -164,20 +164,10 @@ DelegateModel {
 
     property string defaultPrio: "F"
 
-    function removePersistedID (id) {
-        console.log("removing", id, persistedItems.count)
-        for (var i = 0; i < persistedItems.count; i++){
-            if (persistedItems.get(i).model.id === id){
-                persistedItems.get(i).inPersistedItems = false
-                persistedItems.get(i).setGroups(["invisible"])
-            }
-        }
-    }
+    function setTaskProperty(id, prop, value) {
+        var item = items.get(id)
 
-    function setProperty(index, prop, value) {
-        var item = items.get(index)
-        //console.log(prop, value, item.model.fullTxt)
-        //property up and down
+        //priority up and down
         if (prop === "priority") {
             var p =  item.model.priority
             if (value === "up") {
@@ -188,18 +178,18 @@ DelegateModel {
                 else value = ""
             }
         }
+
         visualModel.model.setTaskProperty(item.model.index, prop, value)
-        removePersistedID(item.model.id)
+
         item.groups = "unsorted"
     }
 
     function removeItem(index) {
-        removePersistedID(index)
         visualModel.model.removeItem(model.index)
     }
 
 
-    //return the positon of the item in the list due to sort function (lessThanFunc)
+    //return the positon of the item in the list due to function lessThanFunc
     function insertPosition(lessThanFunc, item) {
         var lower = 0
         var upper = items.count
@@ -218,46 +208,29 @@ DelegateModel {
     }
 
     function sort(lessThan) {
+        console.log(unsortedItems.count)
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
             defaultPrio = (!item.model.done && item.model.priority !== "" && item.model.priority.charCodeAt(0) > defaultPrio.charCodeAt(0)
                           ? item.model.priority : defaultPrio)
 
             if (filters.visibility(item.model)) {
-                var sections = sorting.groupFunctionList[sorting.grouping][2](item.model.fullTxt)
-//                console.log(sections)
-                visualModel.model.setProperty(item.model.index, "section",
-                                              (sections.length > 0 ? sections[0]  : ""))
                 var index = insertPosition(lessThan, item)
-                item.groups = ["items", "cover"]
+                item.groups = ["items"]
                 items.move(item.itemsIndex, index)
-                var itemData = JSON.parse(JSON.stringify(visualModel.model.get(item.model.index)))
-                console.log(itemData.id, itemData.section)
-                removePersistedID(item.model.index)
-                for (var s = 1;  s < sections.length; s++) {
-                    itemData.section = sections[s]
-                    var ip = insertPosition(lessThan, itemData)
-                    var newItem = items.create(ip, itemData)
-//                    console.log(newItem.DelegateModel.persistedItemsIndex, newItem.DelegateModel.itemsIndex, newItem.DelegateModel.inPersistedItems,
-//                                newItem.DelegateModel.isUnresolved, newItem.DelegateModel.model)
-                    console.log(persistedItems.get(newItem.DelegateModel.persistedItemsIndex).model.id,
-                                persistedItems.get(newItem.DelegateModel.persistedItemsIndex).model.section)
-
-                }
+                console.log("added", item.model.fullTxt)
             } else item.groups = "invisible"
         }
+        console.log(items.count, item.groups, filterOnGroup)
         filters.parseList()
     }
 
     function resort() {
         if (items.count > 0) items.setGroups(0, items.count, "unsorted")
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
-        console.log(persistedItems.count)
-        if (persistedItems.count > 0) persistedItems.removeGroups(0, persistedItems.count, ["items", "persistedItems"])
     }
 
     delegate: TaskListItem {
-        id: listItem
         done: model.done
         priority: model.priority
         creationDate: model.creationDate
@@ -265,20 +238,16 @@ DelegateModel {
         due: model.due
 
 
-        onToggleDone: visualModel.model.setTaskProperty(model.id, "done", !model.done)
-        onPrioUp: setProperty(DelegateModel.itemsIndex, "priority", "up")
-        onPrioDown: setProperty(DelegateModel.itemsIndex, "priority", "down")
+        onToggleDone: setTaskProperty(model.index, "done", !model.done)
+        onPrioUp: setTaskProperty(model.index, "priority", "up")
+        onPrioDown: setTaskProperty(model.index, "priority", "down")
         onEditItem: visualModel.editItem(model.index)
-        onRemoveItem: removeItem(model.id)
+        onRemoveItem: removeItem(model.intex)
     }    
 
 
-    persistedItems.onChanged: {
-        console.log(persistedItems.count)
-    }
-
     items.includeByDefault: false
-    //filterOnGroup: "cover"
+    //filterOnGroup: "items"
     groups: [
         DelegateModelGroup {
             id: unsortedItems
@@ -291,10 +260,6 @@ DelegateModel {
         DelegateModelGroup {
             id: invisibleItems
             name: "invisible"
-        },
-        DelegateModelGroup {
-            id: coverItems
-            name: "cover"
         }
     ]
 }

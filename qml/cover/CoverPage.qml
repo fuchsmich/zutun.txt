@@ -15,7 +15,7 @@ CoverBackground {
         anchors.fill: parent
         anchors.margins: Theme.paddingMedium
         clip: true
-        model: ttm1.tasks
+        model: taskListModel
         delegate: Label {
             text: model.formattedSubject
             width: parent.width - 2*Theme.paddingMedium

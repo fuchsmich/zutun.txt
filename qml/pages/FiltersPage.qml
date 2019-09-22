@@ -26,7 +26,7 @@ Page {
 
         header: PageHeader {
             title: lv.title
-            description: qsTr("Active Filters: %1").arg(taskModel.filters.text())
+            description: qsTr("Active Filters: %1").arg(taskDelegateModel.filters.text())
         }
 
         ViewPlaceholder {
@@ -37,7 +37,7 @@ Page {
         delegate: ListItem {
             enabled: model.visibleItemCount > 0
             highlighted: model.active
-            onClicked: taskModel.filters.setByName(model.name, !model.active);
+            onClicked: tasksDelegateModel.filters.setByName(model.name, !model.active);
             Label {
                 //                        id: lbl
                 color: (model.visibleItemCount > 0? Theme.primaryColor : Theme.secondaryColor)
@@ -72,7 +72,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 title: qsTr("Filter Projects")
-                model: taskModel.filters.projects
+                model: taskDelegateModel.filters.projects
                 btnTxt: qsTr("Clear Project Filters")
             }
         }
@@ -81,7 +81,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 title: qsTr("Filter Contexts")
-                model: taskModel.filters.contexts
+                model: taskDelegateModel.filters.contexts
                 btnTxt: qsTr("Clear Context Filters")
             }
         }

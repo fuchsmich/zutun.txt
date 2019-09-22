@@ -149,7 +149,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: taskModel.filters.projectsModel
+                    model: taskDelegateModel.filters.projectsModel
                     onListItemSelected: setText("project", text)
                 }
 
@@ -164,7 +164,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: taskModel.filters.contextsModel
+                    model: taskDelegateModel.filters.contextsModel
                     onListItemSelected: setText("context", text)
                 }
 
@@ -221,7 +221,7 @@ Dialog {
     }
 
     onAccepted: {
-        if (taskIndex > -1) ttm1.tasks.setTaskProperty(taskIndex, "fullTxt", text)
-        if (taskIndex === -1) ttm1.tasks.addTask(text)
+        if (taskIndex > -1) taskListModel.setTaskProperty(taskIndex, "fullTxt", text)
+        if (taskIndex === -1) taskListModel.addTask(text)
     }
 }

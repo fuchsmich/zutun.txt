@@ -5,16 +5,16 @@ CONFIG += sailfishapp_qml
 DISTFILES += qml/harbour-zutun.qml \
     harbour-zutun.desktop \
     qml/components/FilterModel.qml \
+    qml/components/TaskDelegateModel.qml \
+    qml/tdt/TaskListModel.qml \
     translations/*.ts \
     rpm/harbour-zutun.spec \
     rpm/harbour-zutun.yaml \
     rpm/harbour-zutun.changes \
     qml/cover/CoverPage.qml \
     qml/cover/zutun.png \
-    qml/components/TaskModel.qml \
     qml/tdt/todotxt.js \
     qml/tdt/FileIO.qml \
-    qml/tdt/TodoTxt.qml \
     qml/tdt/Notification.qml \
     qml/pages/Settings.qml \
     qml/pages/TaskEdit.qml \

@@ -144,6 +144,57 @@
     </message>
 </context>
 <context>
+    <name>TaskDelegateModel</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Voltooid verbergen</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Geen</translation>
+    </message>
+    <message>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Gesorteerd op %1</translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished">oplopend</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">aflopend</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Gegroepeerd op %1,</translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">natuurlijk</translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished">Datum van aanmaken</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Einddatum</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Onderwerp</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Projecten</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Contexten</translation>
+    </message>
+</context>
+<context>
     <name>TaskEdit</name>
     <message>
         <source>Add New Task</source>
@@ -226,57 +277,6 @@
     <message>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TaskModel</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation type="unfinished">Voltooid verbergen</translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation type="unfinished">Gesorteerd op %1</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation type="unfinished">oplopend</translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation type="unfinished">aflopend</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation type="unfinished">Gegroepeerd op %1,</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation type="unfinished">natuurlijk</translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation type="unfinished">Datum van aanmaken</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation type="unfinished">Einddatum</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation type="unfinished">Onderwerp</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished">Geen</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation type="unfinished">Projecten</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation type="unfinished">Contexten</translation>
     </message>
 </context>
 <context>
