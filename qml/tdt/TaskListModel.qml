@@ -85,7 +85,7 @@ ListModel {
     }
 
     function prioColor(prio) {
-        return colors[JS.alphabet.search(prio) % colors.length]
+        return prioColors[JS.alphabet.search(prio) % prioColors.length]
     }
 
     function linkify(text) {
