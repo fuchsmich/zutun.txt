@@ -98,13 +98,24 @@ ApplicationWindow
         app.activate();
     }
 
+    Filters {
+        id: filters
+        onFiltersChanged: taskDelegateModel.resort()
+        tasksModel: taskListModel
+    }
+
+    Sorting {
+        id: sorting
+        onSortingChanged: taskDelegateModel.resort()
+    }
+
     FileIO {
         id: file
         property string hintText: ""
         path: settings.todoTxtLocation
 
         onReadSuccess:
-            if (content) taskListModel.populateTextList(content)
+            if (content) taskListModel.setTextList(content)
 
         onIoError: {
             //TODO needs some rework for translation
@@ -114,7 +125,7 @@ ApplicationWindow
 
     TaskListModel {
         id: taskListModel
-        section: taskDelegateModel.sorting.grouping
+        section: sorting.grouping
     }
 
     TaskDelegateModel {

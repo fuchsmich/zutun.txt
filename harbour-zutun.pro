@@ -4,8 +4,10 @@ CONFIG += sailfishapp_qml
 
 DISTFILES += qml/harbour-zutun.qml \
     harbour-zutun.desktop \
-    qml/components/FilterModel.qml \
-    qml/components/TaskDelegateModel.qml \
+    qml/tdt/FilterModel.qml \
+    qml/tdt/Filters.qml \
+    qml/tdt/Sorting.qml \
+    qml/tdt/TaskDelegateModel.qml \
     qml/tdt/TaskListModel.qml \
     translations/*.ts \
     rpm/harbour-zutun.spec \

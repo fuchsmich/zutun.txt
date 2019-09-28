@@ -51,7 +51,7 @@ Page {
             PageHeader {
                 id: pgh
                 title: qsTr("Tasklist")
-                description: taskDelegateModel.sorting.groupText + taskDelegateModel.sorting.sortText
+                description: sorting.groupText + sorting.sortText
             }
             Label { /*from PageHeaderDescription.qml */
                 id: flbl
@@ -67,7 +67,7 @@ Page {
                 opacity: 0.6
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
-                text: qsTr("Filter") + ": " + taskDelegateModel.filters.text()
+                text: qsTr("Filter") + ": " + filters.text()
             }
         }
 

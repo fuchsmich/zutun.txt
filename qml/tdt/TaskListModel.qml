@@ -6,6 +6,9 @@ import "todotxt.js" as JS
 
 ListModel {
     // aus ColorPicker.qml:
+    property var textList: []
+    onTextListChanged: populateTextList()
+
     property var prioColors: ["#e60003", "#e6007c", "#e700cc", "#9d00e7",
         "#7b00e6", "#5d00e5", "#0077e7", "#01a9e7",
         "#00cce7", "#00e696", "#00e600", "#99e600",
@@ -28,27 +31,11 @@ ListModel {
 
     //group by: 0..None, 1..projects, 2..contexts
     property int section: 0
-
-//    enum Sections {
-//        None,
-//        Projects,
-//        Contexts
-//    }
+    onSectionChanged: populateTextList()
 
     function saveList() {
-        var array = []
-        var ids =[]
-        for (var i = 0; i < count; i++) {
-            console.log(JSON.stringify(get(i)))
-            if (ids.indexOf(get(i).id) === -1) {
-                ids.push(get(i).id)
-                array.push(get(i).fullTxt)
-            }
-        }
-        array.sort()
-        array.push('')
-        console.log(array, ids)
-        file.save(array.join("\n"))
+        textList.sort()
+        file.save(textList.join("\n"))
     }
 
     function readFile() {
@@ -56,22 +43,17 @@ ListModel {
     }
 
 
-    function setTaskProperty(index, prop, value) {
-        var item = get(index)
-        var json = lineToJSON(
-                    JS.baseFeatures.modifyLine(item.fullTxt, JS.baseFeatures[prop], value))
-        //console.log(JSON.stringify(json))
-        for (var i = 0; i < count; i++) {
-            if (get(i).id === item.id) set(i, json)
+    function setTaskProperty(id, prop, value) {
+        console.log(id, prop, value)
+        if (id < textList.length) {
+            textList[id] = JS.baseFeatures.modifyLine(textList[id], JS.baseFeatures[prop], value)
+            populateTextList()
         }
-        removeTask(index)
-        appendLine(count, json)
-        saveList()
     }
 
     function addTask(txt) {
-        console.log("adding", txt)
-        appendLine(count, txt)
+        textList.push(txt)
+        populateTextList()
         saveList()
     }
 
@@ -129,9 +111,10 @@ ListModel {
         case 2:
             itemSections = JS.contexts.listLine(line)
             break
+        default:
+            itemSections = false
         }
-
-        if (itemSections) {
+        if (itemSections.length > 0) {
             for (var s in itemSections) {
                 json.section = itemSections[s]
                 //console.log(JSON.stringify(json))
@@ -154,12 +137,19 @@ ListModel {
         }
     }
 
-    function populateTextList(list) {
-        var array = JS.splitLines(list)
+    function populateTextList() {
+        textList.sort()
         clear()
         notifications.removeAll()
-        for (var a = 0; a < array.length; a++) {
-            appendLine(a, array[a])
+        for (var a = 0; a < textList.length; a++) {
+            appendLine(a, textList[a])
+        }
+    }
+
+    function setTextList(newList) {
+        var array = JS.splitLines(newList)
+        if (array.join() !== textList.join()) {
+            textList = array
         }
     }
 }

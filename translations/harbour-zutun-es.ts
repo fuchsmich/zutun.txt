@@ -40,6 +40,17 @@
     </message>
 </context>
 <context>
+    <name>Filters</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Ocultar completadas</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Ninguno</translation>
+    </message>
+</context>
+<context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>
@@ -144,15 +155,7 @@
     </message>
 </context>
 <context>
-    <name>TaskDelegateModel</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation type="unfinished">Ocultar completadas</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished">Ninguno</translation>
-    </message>
+    <name>Sorting</name>
     <message>
         <source>Sorted by %1</source>
         <translation type="unfinished">Ordenado por %1</translation>
@@ -184,6 +187,10 @@
     <message>
         <source>Subject</source>
         <translation type="unfinished">Asunto</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Ninguno</translation>
     </message>
     <message>
         <source>Projects</source>

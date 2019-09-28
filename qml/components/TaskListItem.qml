@@ -161,5 +161,5 @@ ListItem {
 //        }
 //    }
 
-    Component.onDestruction: console.log(model.index, "I'm gone.")
+//    Component.onDestruction: console.log(model.index, "I'm gone.")
 }
