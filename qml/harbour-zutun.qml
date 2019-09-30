@@ -126,6 +126,7 @@ ApplicationWindow
     TaskListModel {
         id: taskListModel
         section: sorting.grouping
+        onListChanged: taskDelegateModel.resort()
     }
 
     TaskDelegateModel {

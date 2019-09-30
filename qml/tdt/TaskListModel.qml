@@ -5,6 +5,7 @@ import Sailfish.Silica 1.0
 import "todotxt.js" as JS
 
 ListModel {
+    signal listChanged()
     // aus ColorPicker.qml:
     property var textList: []
     onTextListChanged: populateTextList()
@@ -49,6 +50,7 @@ ListModel {
             textList[id] = JS.baseFeatures.modifyLine(textList[id], JS.baseFeatures[prop], value)
             populateTextList()
         }
+        saveList()
     }
 
     function addTask(txt) {
@@ -139,11 +141,43 @@ ListModel {
 
     function populateTextList() {
         textList.sort()
-        clear()
         notifications.removeAll()
+        var i = 0
         for (var a = 0; a < textList.length; a++) {
-            appendLine(a, textList[a])
+            var line = textList[a]
+            var json = lineToJSON(line)
+            json["id"] = a
+            json["section"] = ""
+
+            var itemSections = false
+            switch (section) {
+            case 1:
+                itemSections = JS.projects.listLine(line)
+                break
+            case 2:
+                itemSections = JS.contexts.listLine(line)
+                break
+            default:
+                itemSections = false
+            }
+
+            if (itemSections.length > 0) {
+                for (var s in itemSections) {
+                    json.section = itemSections[s]
+                    //console.log(JSON.stringify(json))
+                    if (i < count) set(i, json)
+                    else append(json)
+                    i++
+                }
+            }
+            else {
+                if (i < count) set(i, json)
+                else append(json)
+                i++
+            }
         }
+        if (i < count) remove(i, count - i)
+        listChanged()
     }
 
     function setTextList(newList) {

@@ -98,7 +98,7 @@ Page {
             onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
                                        {
                                            taskIndex: index,
-                                           text: taskListModel.tasks.get(index).fullTxt
+                                           text: taskListModel.get(index).fullTxt
                                        })
         }
 
