@@ -9,7 +9,7 @@ Python {
     property string path
     //onPathChanged: read()
     property string folder: path.substring(0, path.lastIndexOf("/")+1)
-    //property string content: ""
+    property string content: ""
 
     signal ioError(string msg)
     signal readSuccess(string content)
@@ -20,26 +20,29 @@ Python {
     property bool writeable: false
 
     function read() {
-        console.log("reading", pythonReady, path)
-        var content
+        console.log("reading", "ready:", pythonReady, "path:", path)
         if (pythonReady && path) {
-            py.call('fileio.read', [path], function(result){
+            var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
+            py.call('fileio.read', [pyPath], function(result){
                 //console.log("read result:", result);
+                content = result
                 py.readSuccess(result)
             });
         }
     }
 
     function save(content) {
-        console.log("saving", pythonReady, path)
+        console.log("saving", "ready:", pythonReady, "path:", path)
         if (pythonReady && path) {
-            py.call('fileio.write', [path, content], function(){ })
+            var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
+            py.call('fileio.write', [pyPath, content], function(){ })
         }
     }
 
     function create() {
         if (pythonReady && path) {
-            py.call('fileio.create', [path], function(){ })
+            var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
+            py.call('fileio.create', [pyPath], function(){ })
         }
     }
 

@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQml.Models 2.1
 
-import "../components"
+import "qrc:/"
 import "../tdt/todotxt.js" as JS
 
 DelegateModel {
@@ -11,26 +11,13 @@ DelegateModel {
 
     property string defaultPrio: "F"
 
-    function setTaskProperty(id, prop, value) {
-//        var item = items.get(id)
-
-        //priority up and down
-        if (prop === "priority") {
-            var p =  item.model.priority
-            if (value === "up") {
-                if (p === "") value = String.fromCharCode(defaultPrio.charCodeAt(0) + 1);
-                else if (p > "A") value = String.fromCharCode(p.charCodeAt(0) - 1);
-            } else if (value === "down"){
-                if (p !== "" && p < "Z") value = String.fromCharCode(p.charCodeAt(0) + 1);
-                else value = ""
-            }
-        }
-
-        visualModel.model.setTaskProperty(id, prop, value)
-
-        //item.groups = "unsorted"
+    property var lessThanFunc: function (left, right) {
+        return false
     }
 
+    property var visibility: function (item) {
+        return true
+    }
 
     //return the positon of the item in the list due to function lessThanFunc
     function insertPosition(lessThanFunc, item) {
@@ -51,13 +38,13 @@ DelegateModel {
     }
 
     function sort(lessThan) {
-        //console.log(unsortedItems.count)
+        console.log("sorting", unsortedItems.count)
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
             defaultPrio = (!item.model.done && item.model.priority !== "" && item.model.priority.charCodeAt(0) > defaultPrio.charCodeAt(0)
                           ? item.model.priority : defaultPrio)
 
-            if (filters.visibility(item.model)) {
+            if (visibility(item.model)) {
                 var index = insertPosition(lessThan, item)
                 item.groups = ["items"]
                 items.move(item.itemsIndex, index)
@@ -65,7 +52,7 @@ DelegateModel {
             } else item.groups = "invisible"
         }
         //console.log(items.count, item.groups, filterOnGroup)
-        filters.parseList()
+        //filters.parseList()
     }
 
     function resort() {
@@ -81,11 +68,13 @@ DelegateModel {
         due: model.due
 
 
-        onToggleDone: setTaskProperty(model.id, "done", !model.done)
+        onToggleDone: model.done = !model.done
         onPrioUp: setTaskProperty(model.index, "priority", "up")
         onPrioDown: setTaskProperty(model.index, "priority", "down")
         onEditItem: visualModel.editItem(model.index)
         onRemoveItem: removeItem(model.intex)
+
+        width: app.width
     }    
 
 
@@ -97,7 +86,7 @@ DelegateModel {
             name: "unsorted"
             includeByDefault: true
             onChanged: {
-                visualModel.sort(sorting.lessThanFunc())
+                visualModel.sort(lessThanFunc)
             }
         },
         DelegateModelGroup {

@@ -5,7 +5,10 @@ QtObject {
     signal filtersChanged()
     property var tasksModel: []
 
-    property bool hideDone: filterSettings.hideDone
+    property bool hideDone: true//filterSettings.hideDone
+    //property alias projectsActive: projects.active
+    //property alias contextsActive: contexts.active
+
     onHideDoneChanged: filtersChanged() //visualModel.resort()
     property var text: function () {
         var ftext = [(hideDone ? qsTr("Hide Complete"): undefined)].concat(
@@ -17,12 +20,12 @@ QtObject {
 
     property FilterModel projects: FilterModel {
         name: "projects"
-        active: filterSettings.projects.value
+        //active: filterSettings.projects.value
         onActiveChanged: filtersChanged() //visualModel.resort()
     }
     property FilterModel contexts: FilterModel {
         name: "contexts"
-        active: filterSettings.contexts.value
+        //active: filterSettings.contexts.value
         onActiveChanged: filtersChanged() //visualModel.resort()
     }
 

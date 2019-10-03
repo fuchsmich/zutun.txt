@@ -127,6 +127,8 @@ ApplicationWindow
         id: taskListModel
         section: sorting.grouping
         onListChanged: taskDelegateModel.resort()
+        projectColor: Theme.highlightColor
+        contextColor: Theme.secondaryHighlightColor
     }
 
     TaskDelegateModel {

@@ -7,6 +7,7 @@ import pyotherside
 
 
 def checkPath(path, perm):
+    #pyotherside.send('log', "checking path {0}".format(path), os.path.exists(os.path.dirname(path)))
     if os.path.exists(os.path.dirname(path)):
         pyotherside.send('pathExists', True)
     else:
@@ -51,7 +52,7 @@ def read(path):
         with open(path, 'rt') as f:
             read_data = f.read()
             #f.close()
-            pyotherside.send('log', "Content read {0}".format(path))
+            #pyotherside.send('log', "Content read {0}".format(path))
             return read_data
     else:
         return ""

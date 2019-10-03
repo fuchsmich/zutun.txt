@@ -3,14 +3,15 @@ import QtQuick 2.0
 QtObject {
     signal sortingChanged()
 
-    property bool asc: sortSettings.asc
+    property bool asc: true
     onAscChanged: sortingChanged()
 
-    property int order: sortSettings.order
+    //order: 0..natural, 1..creation date, 2..due date, 3..subject
+    property int order: 0 //sortSettings.order
     onOrderChanged: sortingChanged()
 
     //group by: 0..None, 1..projects, 2..contexts
-    property int grouping: sortSettings.grouping
+    property int grouping: 0 //sortSettings.grouping
     onGroupingChanged: sortingChanged()
 
     property string sortText: qsTr("Sorted by %1").arg(functionList[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc")))
