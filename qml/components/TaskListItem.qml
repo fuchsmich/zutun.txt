@@ -25,7 +25,7 @@ ListItem {
     }
 
     width: ListView.view.width
-    contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)*fadeFactor
+    contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)
     onClicked: editItem()
 
     Column {
@@ -34,7 +34,6 @@ ListItem {
         anchors.verticalCenter: parent.verticalCenter
         Row {
             id: row
-            //            x: Theme.horizontalPageMargin
             height: lbl.height
             Switch {
                 id: doneSw
@@ -49,22 +48,18 @@ ListItem {
 
                 width: listItem.width - doneSw.width - 2*Theme.horizontalPageMargin
                 linkColor: Theme.primaryColor
-                //text: formatText(parser.linkedText)
                 textFormat: Text.StyledText
                 wrapMode: Text.Wrap
                 font.strikeout: listItem.done
                 font.pixelSize: settings.fontSizeTaskList
 
                 onLinkActivated: {
-                    //if (defaultLinkActions) {
                     console.log("opening", link)
                     Qt.openUrlExternally(link)
-                    //}
                 }
             }
         }
         Row {
-            //                            x: Theme.horizontalPageMargin
             height: cdLbl.height
             anchors.right: parent.right
             anchors.rightMargin: Theme.horizontalPageMargin
@@ -75,7 +70,6 @@ ListItem {
                 visible: creationDate !== "";
                 text: qsTr("created:");
                 font.pixelSize: parent.fontSize
-                //font.bold: true;
                 color: Theme.highlightColor
             }
             Label {
@@ -98,7 +92,6 @@ ListItem {
     }
 
     menu: ContextMenu {
-        //                    DetailItem { visible: model.creationDate !== ""; label: qsTr("Creation Date"); value: model.creationDate }
         MenuItem {
             visible: !(done || priority === "A")
             text: qsTr("Priority Up")
@@ -115,51 +108,4 @@ ListItem {
         }
     }
 
-    property real fadeFactor: 1
-//    opacity: fadeFactor
-
-//    ListView.onAdd: SequentialAnimation{
-////        alwaysRunToEnd:  true
-////        PropertyAction {
-////            target: listItem
-////            property: "fadeFactor"
-////            value: 1
-////        }
-////        NumberAnimation {
-////            target: listItem
-////            properties: "fadeFactor, opacity"
-////            //from: 0;
-////            to: 1
-////            duration: 1500
-////            easing.type: Easing.InOutQuad
-////        }
-//        ScriptAction {
-//            script: {
-////                listItem.fadeFactor= 1
-//                console.log("adding", listItem.fadeFactor, listItem.subject)
-//            }
-//        }
-//    }
-
-//    ListView.onRemove:  SequentialAnimation {
-////        ScriptAction {
-////            script: listItem.ListView.delayRemove = true
-////        }
-////        alwaysRunToEnd:  true
-////        NumberAnimation {
-////            target: listItem;
-////            properties: "fadeFactor, opacity";
-////            to: 0;
-////            duration: 1500;
-////            easing.type: Easing.InOutQuad
-////        }
-//        ScriptAction {
-//            script: {
-////                listItem.ListView.delayRemove = false
-//                console.log("removing", listItem.fadeFactor, listItem.subject)
-//            }
-//        }
-//    }
-
-//    Component.onDestruction: console.log(model.index, "I'm gone.")
 }

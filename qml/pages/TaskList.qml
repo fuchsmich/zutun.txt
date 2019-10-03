@@ -2,7 +2,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 import "../components"
-//import "../tdt/todotxt.js" as JS
 
 Page {
     id: page
@@ -11,7 +10,6 @@ Page {
     SilicaListView {
         id: lv
         anchors.fill: parent
-        //spacing: Theme.paddingMedium
 
         VerticalScrollDecorator {}
         PullDownMenu {
@@ -101,40 +99,6 @@ Page {
                                            text: taskListModel.get(index).fullTxt
                                        })
         }
-
-//        add: Transition {
-//            //            NumberAnimation { properties: "x,y"; duration: 150 }
-////                NumberAnimation {
-////                    properties: "fadeFactor, opacity";
-////                    to: 1;
-////                    duration: 150;
-////                    easing.type: Easing.InOutQuad
-////                }
-//        }
-
-//        displaced: Transition {
-//            NumberAnimation { properties: "x,y"; duration: 400; easing.type: Easing.OutBounce }
-////            NumberAnimation {
-////                properties: "fadeFactor, opacity";
-////                to: 1;
-////            }
-//        }
-
-//        move: Transition {
-//            NumberAnimation { properties: "x,y"; duration: 150 }
-//            ScriptAction {
-//                script: console.log("moving")
-//            }
-//        }
-
-//        remove: Transition {
-////            NumberAnimation {
-////                properties: "fadeFactor, opacity";
-////                to: 0;
-////                duration: 150;
-////                easing.type: Easing.InOutQuad
-////            }
-//        }
     }
 
     onStatusChanged: {

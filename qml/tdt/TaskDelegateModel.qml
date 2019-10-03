@@ -14,25 +14,21 @@ DelegateModel {
     function setTaskProperty(id, prop, value) {
 //        var item = items.get(id)
 
-//        //priority up and down
-//        if (prop === "priority") {
-//            var p =  item.model.priority
-//            if (value === "up") {
-//                if (p === "") value = String.fromCharCode(defaultPrio.charCodeAt(0) + 1);
-//                else if (p > "A") value = String.fromCharCode(p.charCodeAt(0) - 1);
-//            } else if (value === "down"){
-//                if (p !== "" && p < "Z") value = String.fromCharCode(p.charCodeAt(0) + 1);
-//                else value = ""
-//            }
-//        }
+        //priority up and down
+        if (prop === "priority") {
+            var p =  item.model.priority
+            if (value === "up") {
+                if (p === "") value = String.fromCharCode(defaultPrio.charCodeAt(0) + 1);
+                else if (p > "A") value = String.fromCharCode(p.charCodeAt(0) - 1);
+            } else if (value === "down"){
+                if (p !== "" && p < "Z") value = String.fromCharCode(p.charCodeAt(0) + 1);
+                else value = ""
+            }
+        }
 
         visualModel.model.setTaskProperty(id, prop, value)
 
         //item.groups = "unsorted"
-    }
-
-    function removeItem(index) {
-        visualModel.model.removeItem(model.index)
     }
 
 
