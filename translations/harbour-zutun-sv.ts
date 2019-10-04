@@ -15,12 +15,10 @@
     </message>
     <message>
         <source>About %1</source>
-        <extracomment>About Zutun.txt</extracomment>
         <translation>Om %1</translation>
     </message>
     <message>
         <source>Author</source>
-        <extracomment>Author of the app</extracomment>
         <translation>Utvecklare</translation>
     </message>
     <message>
@@ -78,12 +76,17 @@
         <translation>Sammanhang</translation>
     </message>
     <message>
+<<<<<<< HEAD
         <source>Other Filters</source>
         <translation>Andra filter</translation>
     </message>
     <message>
         <source>Hide complete tasks</source>
         <translation>Dölj slutförda aktiviteter</translation>
+=======
+        <source>No entries</source>
+        <translation>Inga poster</translation>
+>>>>>>> c87e53e... Update harbour-zutun-sv.ts
     </message>
 </context>
 <context>
