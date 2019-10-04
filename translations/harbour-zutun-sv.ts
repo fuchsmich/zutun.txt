@@ -4,26 +4,19 @@
 <context>
     <name>About</name>
     <message>
-<<<<<<< HEAD
         <source>Source</source>
-        <extracomment>Location of Sourcecode</extracomment>
         <translation>Källa</translation>
     </message>
     <message>
-=======
->>>>>>> 0d0cf69... grid
         <source>Packages</source>
-        <extracomment>Where to get this app</extracomment>
         <translation>Paket</translation>
     </message>
     <message>
         <source>About %1</source>
-        <extracomment>About Zutun.txt</extracomment>
         <translation>Om %1</translation>
     </message>
     <message>
         <source>Author</source>
-        <extracomment>Author of the app</extracomment>
         <translation>Utvecklare</translation>
     </message>
     <message>
@@ -33,7 +26,7 @@
     <message>
         <source>Translation</source>
         <extracomment>Where to get the app</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Översättning</translation>
     </message>
 </context>
 <context>
@@ -63,7 +56,7 @@
     </message>
     <message>
         <source>No entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga poster</translation>
     </message>
 </context>
 <context>
@@ -214,18 +207,18 @@
     </message>
     <message>
         <source>Create file</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapa fil</translation>
     </message>
     <message>
         <source>Pull down to add task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dra neråt för att lägga till uppgift.</translation>
     </message>
 </context>
 <context>
     <name>TextSelect</name>
     <message>
         <source>No entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga poster</translation>
     </message>
     <message>
         <source>Priorities</source>
