@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-import org.kde.kirigami 2.4 as Kirigami
+//import org.kde.kirigami 2.4 as Kirigami
 import Qt.labs.settings 1.0
 import Qt.labs.platform 1.1
 import QtQuick.Layouts 1.1

@@ -8,5 +8,4 @@
         <file>Home.qml</file>
         <file>TaskListItem.qml</file>
     </qresource>
-    <qresource prefix="/tdt"/>
 </RCC>
