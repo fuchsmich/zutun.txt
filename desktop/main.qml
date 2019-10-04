@@ -49,6 +49,7 @@ ApplicationWindow {
         projectColor: "red"
         contextColor: "blue"
         onListChanged: taskDelegateModel.resort()
+        onItemChanged: taskDelegateModel.resortItem(index)
     }
 
     Settings {
@@ -78,27 +79,6 @@ ApplicationWindow {
         id: taskDelegateModel
         model: taskListModel
         lessThanFunc: sorting.lessThanFunc()
-    }
-
-    ////array of Strings
-    property var taskListArray: []
-    onTaskListArrayChanged: populateJSObjects()
-
-    function populateArray (taskListText) {
-        taskListArray = JS.splitLines(taskListText)
-    }
-
-    ////array of objects
-    property var taskListJSObjects: []
-
-    function populateJSObjects () {
-        var tmp = []
-        for (var line in taskListArray) {
-            var item = JS.baseFeatures.parseLine(line)
-            tmp.push(item)
-        }
-        taskListJSObjects = tmp
-        //console.log(taskListJSObjects.length)
     }
 
 

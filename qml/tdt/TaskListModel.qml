@@ -6,6 +6,7 @@ import "todotxt.js" as JS
 
 ListModel {
     signal listChanged()
+    signal itemChanged(int index)
     property var textList: []
     onTextListChanged: populateTextList()
 
@@ -103,7 +104,7 @@ ListModel {
             list.push(get(i).fullTxt)
         }
         list.sort()
-        console.log("Saving:", list.join("\n"))
+        //console.log("Saving:", list.join("\n"))
         todoTxtFile.content = list.join("\n")
     }
 
@@ -119,7 +120,7 @@ ListModel {
         }
         if (roles[0] == JS.baseFeatures.fullTxt){
             saveList()
-            listChanged()
+            itemChanged(topLeft.row)
         }
     }
 }

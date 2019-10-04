@@ -60,17 +60,28 @@ DelegateModel {
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
     }
 
+    function resortItem(index) {
+        for (var i = 0; i < items.count; i++) {
+            var item = items.get(i)
+            if (item.model.index == index) {
+                item.groups = "unsorted"
+                return
+            }
+        }
+    }
+
     delegate: TaskListItem {
         done: model.done
+        onToggleDone: model.done = !model.done
         priority: model.priority
+        onPrioUp: setTaskProperty(model.index, "priority", "up")
+        onPrioDown: setTaskProperty(model.index, "priority", "down")
+
         creationDate: model.creationDate
         subject: model.formattedSubject
         due: model.due
 
 
-        onToggleDone: model.done = !model.done
-        onPrioUp: setTaskProperty(model.index, "priority", "up")
-        onPrioDown: setTaskProperty(model.index, "priority", "down")
         onEditItem: visualModel.editItem(model.index)
         onRemoveItem: removeItem(model.intex)
 
