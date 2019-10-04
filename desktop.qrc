@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/tdt">
-        <file>qml/tdt/FileIO.qml</file>
         <file>qml/tdt/FilterModel.qml</file>
         <file>qml/tdt/Filters.qml</file>
         <file>qml/tdt/Notification.qml</file>

@@ -6,7 +6,18 @@ Page {
     anchors.fill: parent
     title: "Tasklist"
 
+
     ListView {
+        property Menu contextMenu:     Menu {
+            id: contextMenu
+            MenuItem {
+                text: "Remove"
+            }
+            MenuItem {
+                text: "Raise Priority"
+            }
+        }
+
         id: taskListView
         anchors.fill: parent
         model: taskDelegateModel
@@ -28,6 +39,12 @@ Page {
         //            onRemoveItem: removeItem(model.intex)
         //        }
 
+        section.delegate: Label {
+            text: section
+        }
+        section.property: "section"
+
+        ScrollIndicator.vertical: ScrollIndicator { }
     }
 
     Column {

@@ -9,26 +9,35 @@ import "qrc:/tdt/qml/tdt/"
 
 import "qrc:/tdt/qml/tdt/todotxt.js" as JS
 
+import FileIO 1.0
+
 ApplicationWindow {
     id: app
     visible: true
     width: 480
     height: 640
-    title: qsTr("Stack")
+    title: qsTr("ZuTun.txt")
 
     Settings {
         id: settings
-        property string todoTxtLocation: StandardPaths.writableLocation(StandardPaths.DocumentsLocation) + '/todo.txt'
+        property alias todoTxtFileLocation: todoTxtFile.path
         property alias width: app.width
         property alias height: app.height
     }
 
     FileIO {
         id: todoTxtFile
-        path: settings.todoTxtLocation
+        path: StandardPaths.writableLocation(StandardPaths.DocumentsLocation) + '/todo.txt'
 
-        onContentChanged: {
+//        onContentChanged: {
+//            taskListModel.setTextList(content)
+//        }
+        function read() {
             taskListModel.setTextList(content)
+        }
+
+        function save(text) {
+            content = text
         }
 
     }
@@ -121,6 +130,13 @@ ApplicationWindow {
         }
     }
 
+    Component {
+        id: fdComp
+        FileDialog {
+            id: fd
+        }
+    }
+
     Drawer {
         id: drawer
         width: app.width * 0.66
@@ -129,6 +145,19 @@ ApplicationWindow {
         Column {
             anchors.fill: parent
 
+
+            ItemDelegate {
+                text: qsTr("Open File")
+                width: parent.width
+                onClicked: {
+                    var dialog = fdComp.createObject(app)
+                    dialog.open()
+                    dialog.accepted.connect(function () {
+                        console.log(dialog.file)
+                        todoTxtFile.path = dialog.file
+                    })
+                }
+            }
             ItemDelegate {
                 text: qsTr("Read File")
                 width: parent.width
@@ -149,7 +178,7 @@ ApplicationWindow {
 
     StackView {
         id: stackView
-        initialItem: "Home.qml"
+        initialItem: "TaskListPage.qml"
         anchors.fill: parent
     }
 

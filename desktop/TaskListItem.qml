@@ -9,6 +9,11 @@ Column {
     property alias creationDate: cdLbl.text
     property alias due: dueLbl.text
 
+    property Menu contextMenu:
+        Menu {
+        MenuItem { text: "Placeholder" }
+    }
+
     signal toggleDone()
     signal editItem()
     signal removeItem()
@@ -26,7 +31,17 @@ Column {
             text: model.formattedSubject
             //text: ListView.model.
             width: taskListItem.width - cb.width
-            onClicked: editItem()
+            onClicked:{
+                editItem()
+            }
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.RightButton
+                onClicked: {
+                    if (mouse.button === Qt.RightButton)
+                        contextMenu.popup()
+                }
+            }
         }
     }
     Row {

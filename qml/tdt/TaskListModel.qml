@@ -17,55 +17,15 @@ ListModel {
     property color projectColor
     property color contextColor
 
-//    property var notifications: {
-//        "idList": [],
-//        "removeAll": function() {
-//            for (var i = 0; i < notifications.idList.length; i++) {
-//                var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"));
-
-//                var notification = notificationComp.createObject(app);
-//                notification.replacesId =  notifications.idList[i];
-//                notification.close();
-//                notification.publish();
-//            }
-//            notifications.idList = [];
-//        }
-//    }
-
     //group by: 0..None, 1..projects, 2..contexts
-    property int section: 0
+    property int section: 1
     onSectionChanged: populateTextList()
 
-    function saveList() {
-        textList.sort()
-        file.save(textList.join("\n"))
-    }
-
-    function readFile() {
-        file.read()
-    }
-
-
-    function setTaskProperty(id, prop, value) {
-        console.log(id, prop, value)
-        if (id < textList.length) {
-            textList[id] = JS.baseFeatures.modifyLine(textList[id], JS.baseFeatures[prop], value)
-            populateTextList()
-        }
-        saveList()
-    }
-
     function addTask(txt) {
-        textList.push(txt)
-        populateTextList()
         saveList()
     }
 
     function removeTask(index) {
-        var item = get(index)
-        for (var i = 0; i < count; i++) {
-            if (get(i).id === item.id) remove(i)
-        }
         remove(index)
         saveList()
     }
@@ -109,35 +69,22 @@ ListModel {
         for (var a = 0; a < textList.length; a++) {
             var line = textList[a]
             var json = lineToJSON(line)
-            json["id"] = a
-            json["section"] = ""
 
-            var itemSections = false
+            var itemSections = ""
             switch (section) {
             case 1:
-                itemSections = JS.projects.listLine(line)
+                json["section"] = JS.projects.listLine(line).sort().join(", ")
                 break
             case 2:
-                itemSections = JS.contexts.listLine(line)
+                json["section"] = JS.contexts.listLine(line).sort().join(", ")
                 break
             default:
-                itemSections = false
+                json["section"] = ""
             }
 
-            if (itemSections.length > 0) {
-                for (var s in itemSections) {
-                    json.section = itemSections[s]
-                    //console.log(JSON.stringify(json))
-                    if (i < count) set(i, json)
-                    else append(json)
-                    i++
-                }
-            }
-            else {
-                if (i < count) set(i, json)
-                else append(json)
-                i++
-            }
+            if (i < count) set(i, json)
+            else append(json)
+            i++
         }
         if (i < count) remove(i, count - i)
         listChanged()
@@ -150,13 +97,29 @@ ListModel {
         }
     }
 
+    function saveList() {
+        var list = []
+        for (var i = 0; i < count; i++) {
+            list.push(get(i).fullTxt)
+        }
+        list.sort()
+        console.log("Saving:", list.join("\n"))
+        todoTxtFile.content = list.join("\n")
+    }
+
     onDataChanged: {
-        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles.length, data(topLeft, roles[0]))
-        var oldLine = get(topLeft.row).fullTxt
-        var newValue = data(topLeft, roles[0])
-        var newLine = JS.baseFeatures.modifyLine(oldLine, roles[0], newValue)
-        console.log(newLine)
-        set(topLeft.row, lineToJSON(newLine))
-        listChanged()
+        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles.length, roles[0], data(topLeft, roles[0]))
+
+        if (roles[0] >= JS.baseFeatures.fullTxt && roles[0] <= JS.baseFeatures.creationDate) {
+            var oldLine = get(topLeft.row).fullTxt
+            var newValue = data(topLeft, roles[0])
+            var newLine = JS.baseFeatures.modifyLine(oldLine, roles[0], newValue)
+            console.log(newLine)
+            set(topLeft.row, lineToJSON(newLine))
+        }
+        if (roles[0] == JS.baseFeatures.fullTxt){
+            saveList()
+            listChanged()
+        }
     }
 }
