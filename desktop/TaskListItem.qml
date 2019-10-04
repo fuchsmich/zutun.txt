@@ -48,7 +48,7 @@ Column {
         anchors.right: parent.right
         anchors.rightMargin: spacing
         spacing: 10
-        property int fontSize: 10 //Theme.fontSizeExtraSmall
+        property int fontSize: Qt.application.font.pixelSize * 0.7
 
         Label {
             visible: creationDate !== ""

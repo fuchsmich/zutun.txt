@@ -79,34 +79,38 @@ ApplicationWindow {
         id: taskDelegateModel
         model: taskListModel
         lessThanFunc: sorting.lessThanFunc()
+        visibility: filters.visibility
     }
 
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
         RowLayout {
-        ToolButton {
-            id: toolButton
-            text: stackView.depth > 1 ? "\u25C0" : "\u2630"
-            font.pixelSize: Qt.application.font.pixelSize * 1.6
-            onClicked: {
-                if (stackView.depth > 1) {
-                    stackView.pop()
-                } else {
-                    drawer.open()
+            ToolButton {
+                id: toolButton
+                text: stackView.depth > 1 ? "\u25C0" : "\u2630"
+                font.pixelSize: Qt.application.font.pixelSize * 1.6
+                onClicked: {
+                    if (stackView.depth > 1) {
+                        stackView.pop()
+                    } else {
+                        drawer.open()
+                    }
                 }
             }
-        }
 
-        ToolButton {
-            text: "✓"
-            checkable: true
-        }
+            ToolButton {
+                text: "✓"
+                font.pixelSize: Qt.application.font.pixelSize * 1.6
+                checkable: true
+                checked: !filters.hideDone
+                onClicked: filters.hideDone = !checked
+            }
 
-        Label {
-            text: stackView.currentItem.title
-            //anchors.centerIn: parent
-        }
+            Label {
+                text: stackView.currentItem.title
+                //anchors.centerIn: parent
+            }
         }
     }
 
