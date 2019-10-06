@@ -133,7 +133,7 @@ ListModel {
         //if fullTxt is set, list can be saved
         if (roles[0] == JS.baseFeatures.fullTxt){
             saveList()
-            itemChanged(topLeft.row)
+            //itemChanged(topLeft.row)
         }
     }
 }

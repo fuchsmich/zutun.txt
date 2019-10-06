@@ -4,5 +4,6 @@
         <file>qtquickcontrols2.conf</file>
         <file>TaskListPage.qml</file>
         <file>TaskListItem.qml</file>
+        <file>SettingsPage.qml</file>
     </qresource>
 </RCC>

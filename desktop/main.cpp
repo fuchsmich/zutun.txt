@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
+#include <QIcon>
 
 #include "fileio.hpp"
 
@@ -11,6 +12,7 @@ int main(int argc, char *argv[])
     app.setOrganizationName("fuxl.info");
     app.setOrganizationDomain("fuxl.info");
     app.setApplicationName("zutun.txt");
+    QIcon::setThemeName("breeze-dark");
 
     qmlRegisterType<FileIO>("FileIO", 1, 0, "FileIO");
 

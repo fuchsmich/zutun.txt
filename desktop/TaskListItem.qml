@@ -6,6 +6,8 @@ Loader {
     id: loader
     state: "view"
 
+    signal resort()
+
     Component {
         id: viewComp
         Column {
@@ -16,7 +18,10 @@ Loader {
                     id: doneCB
                     //checkState: model.done*2
                     checked: model.done
-                    onClicked: model.done = !model.done
+                    onClicked: {
+                        model.done = !model.done
+                        resort()
+                    }
                     anchors.verticalCenter: id.verticalCenter
                 }
                 ItemDelegate {
@@ -38,29 +43,33 @@ Loader {
                         }
                         hoverEnabled: true
                     }
-//                    Row {
-//                        anchors.right: parent.right
-//                        height: parent.height
-//                        visible: mouse.containsMouse
-//                        Button {
-//                            display: AbstractButton.IconOnly
-//                            icon.name: "up"
-//                            text: "up"
-//                            opacity: 0.5
-//                        }
-//                        Button {
-//                            display: AbstractButton.IconOnly
-//                            icon.name: "down"
-//                            text: "down"
-//                            opacity: 0.5
-//                        }
-//                        Button {
-//                            display: AbstractButton.IconOnly
+                    Row {
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        //height: parent.height
+                        visible: mouse.containsMouse
+                        ToolButton {
+                            display: AbstractButton.IconOnly
+                            icon.name: "font-size-up"
+                            text: "up"
+                            opacity: 0.5
+                        }
+                        ToolButton {
+                            display: AbstractButton.IconOnly
+                            icon.name: "font-size-down"
+                            text: "down"
+                            opacity: 0.5
+                        }
+                        ToolButton {
+                            property int taskIndex: model.index
+                            display: AbstractButton.IconOnly
+                            action: deleteTaskAction
 //                            icon.name: "delete"
+                            icon.color: "red"
 //                            text: "delete"
-//                            opacity: 0.5
-//                        }
-//                    }
+                            opacity: 0.5
+                        }
+                    }
                 }
             }
 //            Row {
@@ -120,6 +129,7 @@ Loader {
             }
         },
         State {
+            when: DelegateModel.inPersistedItems
             name: "edit"
             PropertyChanges {
                 target: loader
@@ -128,4 +138,6 @@ Loader {
             }
         }
     ]
+
+    Component.onCompleted: console.log(loader.DelegateModel.isUnresolved)
 }

@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
+import QtQuick.Layouts 1.1
 
 Page {
     id: page
@@ -25,6 +26,22 @@ Page {
 
         ScrollIndicator.vertical: ScrollIndicator { }
         keyNavigationEnabled: true
+
+        header: ToolBar {
+            RowLayout {
+                ToolButton {
+                    action: addTaskAction
+                }
+
+                ToolButton {
+                    action: hideDoneAction
+                    font.pixelSize: Qt.application.font.pixelSize * 1.2
+                }
+                ToolButton {
+                    action: toogleSortOrderAction
+                }
+            }
+        }
     }
 
     Column {

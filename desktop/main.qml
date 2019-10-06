@@ -21,9 +21,22 @@ ApplicationWindow {
     title: qsTr("ZuTun.txt")
 
     Action {
+        id: addTaskAction
+        icon.name: "list-add"
+        text: qsTr("&Add Task")
+        onTriggered: {
+            taskDelegateModel.addTask(taskListModel.lineToJSON("test"))
+        }
+    }
+
+    Action {
         id: deleteTaskAction
         icon.name: "delete"
+        icon.color: "red"
         text: qsTr("Delete Task")
+        onTriggered: {
+            console.log(source.taskIndex)
+        }
     }
 
     Action {
@@ -31,8 +44,20 @@ ApplicationWindow {
         text: "✓"
         checkable: true
         checked: !filters.hideDone
-        onTriggered: filters.hideDone = !filters.hideDone
+        onToggled: filters.hideDone = !filters.hideDone
         shortcut: "Ctrl+D"
+    }
+
+    Action {
+        id: toogleSortOrderAction
+        icon.name: (!checked ? "view-sort-ascending-name" : "view-sort-descending-name")
+        checkable: true
+        checked: !sorting.asc
+        onToggled: {
+            sorting.asc = !checked
+            icon.name = (!checked ? "view-sort-ascending-name" : "view-sort-descending-name")
+        }
+        shortcut: "Ctrl+S"
     }
 
     Settings {
@@ -61,8 +86,7 @@ ApplicationWindow {
 
     TaskListModel {
         id: taskListModel
-        //        section: sorting.grouping
-        //      onListChanged: taskDelegateModel.resort()
+        section: sorting.grouping
         projectColor: "red"
         contextColor: "blue"
         onListChanged: taskDelegateModel.resort()
@@ -98,23 +122,12 @@ ApplicationWindow {
         lessThanFunc: sorting.lessThanFunc()
         visibility: filters.visibility
         delegate: TaskListItem {
+            id: item
             width: app.width
-
-//            property int index: model.index
-//            done: model.done
-//            onToggleDone: model.done = !model.done
-//            priority: model.priority
-//            onPrioUp: setTaskProperty(model.index, "priority", "up")
-//            onPrioDown: setTaskProperty(model.index, "priority", "down")
-
-//            creationDate: model.creationDate
-//            subject: model.formattedSubject + DelegateModel.isUnresolved + index
-//            due: model.due
-
-
-//            onEditItem: visualModel.editItem(model.index)
-//            onRemoveItem: removeItem(model.intex)
-
+            onResort: {
+                item.DelegateModel.inItems = false
+                item.DelegateModel.inUnsorted = true
+            }
         }
     }
 
@@ -134,11 +147,6 @@ ApplicationWindow {
                         drawer.open()
                     }
                 }
-            }
-
-            ToolButton {
-                action: hideDoneAction
-                font.pixelSize: Qt.application.font.pixelSize * 1.6
             }
 
             Label {

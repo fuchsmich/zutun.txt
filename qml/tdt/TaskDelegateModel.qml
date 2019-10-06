@@ -7,7 +7,7 @@ import "../tdt/todotxt.js" as JS
 DelegateModel {
     id: visualModel
 
-    signal editItem(int index)
+    //signal editItem(int index)
 
     property string defaultPrio: "F"
 
@@ -17,6 +17,14 @@ DelegateModel {
 
     property var visibility: function (item) {
         return true
+    }
+
+    function addTask(data) {
+        console.log("diesdas")
+
+        items.insert(0, data)
+        var newItem = items.get(0)
+        console.log(newItem)
     }
 
     //return the positon of the item in the list due to function lessThanFunc
