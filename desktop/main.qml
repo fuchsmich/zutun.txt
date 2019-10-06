@@ -5,6 +5,8 @@ import Qt.labs.settings 1.0
 import Qt.labs.platform 1.1
 import QtQuick.Layouts 1.1
 
+import QtQml.Models 2.2
+
 import "qrc:/tdt/qml/tdt/"
 import "qrc:/tdt/qml/tdt/todotxt.js" as JS
 
@@ -125,7 +127,7 @@ ApplicationWindow {
             id: item
             width: app.width
             onResort: {
-                item.DelegateModel.inItems = false
+                console.log(DelegateModel.inItems)
                 item.DelegateModel.inUnsorted = true
             }
         }

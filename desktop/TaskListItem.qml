@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
 
+import QtQml.Models 2.2
 
 Loader {
     id: loader
@@ -20,7 +21,7 @@ Loader {
                     checked: model.done
                     onClicked: {
                         model.done = !model.done
-                        resort()
+                        loader.DelegateModel.groups = "unsorted"
                     }
                     anchors.verticalCenter: id.verticalCenter
                 }
@@ -129,7 +130,7 @@ Loader {
             }
         },
         State {
-            when: DelegateModel.inPersistedItems
+            when: loader.DelegateModel.isUnresolved
             name: "edit"
             PropertyChanges {
                 target: loader
@@ -138,6 +139,4 @@ Loader {
             }
         }
     ]
-
-    Component.onCompleted: console.log(loader.DelegateModel.isUnresolved)
 }
