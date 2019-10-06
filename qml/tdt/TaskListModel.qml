@@ -60,6 +60,17 @@ ListModel {
 
         item["formattedSubject"] = displayText
 
+        switch (section) {
+        case 1:
+            item["section"] = JS.projects.listLine(line).sort().join(", ")
+            break
+        case 2:
+            item["section"] = JS.contexts.listLine(line).sort().join(", ")
+            break
+        default:
+            item["section"] = ""
+        }
+
         return  item
     }
 
@@ -71,17 +82,17 @@ ListModel {
             var line = textList[a]
             var json = lineToJSON(line)
 
-            var itemSections = ""
-            switch (section) {
-            case 1:
-                json["section"] = JS.projects.listLine(line).sort().join(", ")
-                break
-            case 2:
-                json["section"] = JS.contexts.listLine(line).sort().join(", ")
-                break
-            default:
-                json["section"] = ""
-            }
+//            var itemSections = ""
+//            switch (section) {
+//            case 1:
+//                json["section"] = JS.projects.listLine(line).sort().join(", ")
+//                break
+//            case 2:
+//                json["section"] = JS.contexts.listLine(line).sort().join(", ")
+//                break
+//            default:
+//                json["section"] = ""
+//            }
 
             if (i < count) set(i, json)
             else append(json)
@@ -118,6 +129,8 @@ ListModel {
             console.log(newLine)
             set(topLeft.row, lineToJSON(newLine))
         }
+
+        //if fullTxt is set, list can be saved
         if (roles[0] == JS.baseFeatures.fullTxt){
             saveList()
             itemChanged(topLeft.row)

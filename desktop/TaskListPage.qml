@@ -8,72 +8,38 @@ Page {
 
 
     ListView {
-        property Menu contextMenu:     Menu {
-            id: contextMenu
-            MenuItem {
-                text: "Remove"
-            }
-            MenuItem {
-                text: "Raise Priority"
-            }
-        }
-
         id: taskListView
         anchors.fill: parent
         model: taskDelegateModel
-        //model: taskListModel
-        //        model: app.taskListJSObjects //app.taskListArray //taskListModel
-        //        delegate: TaskListItem {
-        //            width: taskListView.width
-        //            done: model.done
-        //            priority: model.priority
-        //            creationDate: model.creationDate
-        //            subject: model.formattedSubject
-        //            due: model.due
 
-
-        //            onToggleDone: model.done = !model.done
-        //            onPrioUp: setTaskProperty(model.index, "priority", "up")
-        //            onPrioDown: setTaskProperty(model.index, "priority", "down")
-        //            onEditItem: visualModel.editItem(model.index)
-        //            onRemoveItem: removeItem(model.intex)
-        //        }
-
-        section.delegate: Label {
-            text: section
+        section.delegate: Rectangle {
+            width: page.width
+            height: childrenRect.height
+            color: "lightsteelblue"
+            Label {
+                text: section
+                font.pixelSize: Qt.application.font.pixelSize * 1.6
+            }
         }
         section.property: "section"
 
         ScrollIndicator.vertical: ScrollIndicator { }
+        keyNavigationEnabled: true
     }
 
     Column {
         id: column
         anchors.centerIn: parent
-        //        visible: !(todoTxtFile.pathExists
-        //                   && todoTxtFile.exists
-        //                   && todoTxtFile.readable
-        //                   && todoTxtFile.writeable)
         visible: taskListView.count == 0
         Button {
             text: "Load File"
             onClicked: todoTxtFile.read()
         }
 
-        Label {
-            text: "Path: %1".arg(todoTxtFile.path)
-        }
-        Label {
-            text: "Path exists: %1".arg(todoTxtFile.pathExists ? "Yes" : "No")
-        }
-        Label {
-            text: "File exists: %1".arg(todoTxtFile.exists ? "Yes" : "No")
-        }
-        Label {
-            text: "File readable: %1".arg(todoTxtFile.readable ? "Yes" : "No")
-        }
-        Label {
-            text: "File writeable: %1".arg(todoTxtFile.writeable ? "Yes" : "No")
-        }
+        Label { text: "Path: %1".arg(todoTxtFile.path) }
+        Label { text: "Path exists: %1".arg(todoTxtFile.pathExists ? "Yes" : "No") }
+        Label { text: "File exists: %1".arg(todoTxtFile.exists ? "Yes" : "No") }
+        Label { text: "File readable: %1".arg(todoTxtFile.readable ? "Yes" : "No") }
+        Label { text: "File writeable: %1".arg(todoTxtFile.writeable ? "Yes" : "No") }
     }
 }

@@ -38,56 +38,47 @@ DelegateModel {
     }
 
     function sort(lessThan) {
-        console.log("sorting", unsortedItems.count)
+        //console.log("sorting", unsortedItems.count)
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
-            defaultPrio = (!item.model.done && item.model.priority !== "" && item.model.priority.charCodeAt(0) > defaultPrio.charCodeAt(0)
-                          ? item.model.priority : defaultPrio)
-
+            //console.log(item.model.index, item.groups, item.isUnresolved)
             if (visibility(item.model)) {
+                if (item.model.priority.charCodeAt(0) > defaultPrio.charCodeAt(0)) defaultPrio = item.model.priority
                 var index = insertPosition(lessThan, item)
                 item.groups = ["items"]
                 items.move(item.itemsIndex, index)
-                //console.log("added", item.model.fullTxt)
+                //Duplicate items
+                //model.get(item.model.index).section = "original"
+//                if (!item.isUnresolved) {
+//                    var data = JSON.parse(JSON.stringify(model.get(item.model.index)))
+//                    //data.section = "clone"
+//                    console.log(JSON.stringify(data))
+//                    items.insert(JSON.parse(JSON.stringify(data)))
+//                }
+                //}
             } else item.groups = "invisible"
         }
-        //console.log(items.count, item.groups, filterOnGroup)
-        //filters.parseList()
     }
 
     function resort() {
+        console.log("resort called")
+//        for (var i = 0; i < persistedItems.count; i++) {
+//            persistedItems.get(i).inPersistedItems = false
+//        }
         if (items.count > 0) items.setGroups(0, items.count, "unsorted")
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
     }
 
     function resortItem(index) {
+        console.log("resort item", index)
         for (var i = 0; i < items.count; i++) {
             var item = items.get(i)
-            if (item.model.index == index) {
+            if (item.model.index === index) {
                 item.groups = "unsorted"
                 return
             }
         }
     }
-
-    delegate: TaskListItem {
-        done: model.done
-        onToggleDone: model.done = !model.done
-        priority: model.priority
-        onPrioUp: setTaskProperty(model.index, "priority", "up")
-        onPrioDown: setTaskProperty(model.index, "priority", "down")
-
-        creationDate: model.creationDate
-        subject: model.formattedSubject
-        due: model.due
-
-
-        onEditItem: visualModel.editItem(model.index)
-        onRemoveItem: removeItem(model.intex)
-
-        width: app.width
-    }    
-
 
     items.includeByDefault: false
     //filterOnGroup: "items"

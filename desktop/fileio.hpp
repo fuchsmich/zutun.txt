@@ -31,7 +31,7 @@ public:
     QString readContent() {
         QString m_content = "";
         if (!m_path.isEmpty()) {
-            QFile textfile(m_path.path().mid(1)); //pfad f windows und linux unterschiedlich behandeln?
+            QFile textfile(m_path.toLocalFile());
             qDebug() << textfile.fileName() << "reading content...";
             qDebug() << "file exists:" << textfile.exists();
             if (textfile.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -51,7 +51,7 @@ public:
     void writeContent(const QString &data) {
         if (!m_path.isEmpty()) {
             qDebug() << "writing content...";
-            QFile textfile(m_path.path().mid(1)); //pfad f windows und linux unterschiedlich behandeln?
+            QFile textfile(m_path.toLocalFile());
             if (textfile.open(QIODevice::WriteOnly | QIODevice::Text)) {
                 QTextStream out(&textfile);
                 out.setCodec("UTF-8");

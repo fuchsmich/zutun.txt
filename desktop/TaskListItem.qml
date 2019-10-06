@@ -1,78 +1,131 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
 
-Column {
-    id: taskListItem
-    property alias done: cb.checked
-    property string priority: ""
-    property alias subject: id.text
-    property alias creationDate: cdLbl.text
-    property alias due: dueLbl.text
 
-    property Menu contextMenu:
-        Menu {
-        MenuItem { text: "Placeholder" }
-    }
+Loader {
+    id: loader
+    state: "view"
 
-    signal toggleDone()
-    signal editItem()
-    signal removeItem()
-    signal prioUp()
-    signal prioDown()
+    Component {
+        id: viewComp
+        Column {
+            id: taskListItem
 
-    Row {
-        CheckBox {
-            id: cb
-            //checkState: model.done*2
-            onClicked: toggleDone()
-        }
-        ItemDelegate {
-            id: id
-            text: model.formattedSubject
-            //text: ListView.model.
-            width: taskListItem.width - cb.width
-            onClicked:{
-                editItem()
-            }
-            MouseArea {
-                anchors.fill: parent
-                acceptedButtons: Qt.RightButton
-                onClicked: {
-                    if (mouse.button === Qt.RightButton)
-                        contextMenu.popup()
+            Row {
+                CheckBox {
+                    id: doneCB
+                    //checkState: model.done*2
+                    checked: model.done
+                    onClicked: model.done = !model.done
+                    anchors.verticalCenter: id.verticalCenter
+                }
+                ItemDelegate {
+                    id: id
+                    text: model.formattedSubject
+                    //text: ListView.model.
+                    width: loader.width - doneCB.width
+                    highlighted: true //ListView.isCurrentItem
+                    onClicked:{
+                        loader.state = "edit"
+                    }
+                    MouseArea {
+                        id: mouse
+                        anchors.fill: parent
+                        acceptedButtons: Qt.RightButton
+                        onClicked: {
+                            if (mouse.button === Qt.RightButton)
+                                contextMenu.popup()
+                        }
+                        hoverEnabled: true
+                    }
+//                    Row {
+//                        anchors.right: parent.right
+//                        height: parent.height
+//                        visible: mouse.containsMouse
+//                        Button {
+//                            display: AbstractButton.IconOnly
+//                            icon.name: "up"
+//                            text: "up"
+//                            opacity: 0.5
+//                        }
+//                        Button {
+//                            display: AbstractButton.IconOnly
+//                            icon.name: "down"
+//                            text: "down"
+//                            opacity: 0.5
+//                        }
+//                        Button {
+//                            display: AbstractButton.IconOnly
+//                            icon.name: "delete"
+//                            text: "delete"
+//                            opacity: 0.5
+//                        }
+//                    }
                 }
             }
-        }
-    }
-    Row {
-        anchors.right: parent.right
-        anchors.rightMargin: spacing
-        spacing: 10
-        property int fontSize: Qt.application.font.pixelSize * 0.7
+//            Row {
+//                anchors.right: parent.right
+//                anchors.rightMargin: spacing
+//                spacing: 10
+//                property int fontSize: Qt.application.font.pixelSize * 0.7
 
-        Label {
-            visible: creationDate !== ""
-            text: qsTr("created:")
-            font.pixelSize: parent.fontSize
-            font.italic: true
-            //color: Theme.highlightColor
-        }
-        Label {
-            id: cdLbl
-            visible: creationDate !== ""
-            font.pixelSize: parent.fontSize
-        }
-        Label {
-            visible: due !== "";
-            text: qsTr("due:");
-            font.pixelSize: parent.fontSize
-            font.italic: true
-            //color: Theme.highlightColor
-        }
-        Label {
-            id: dueLbl
-            visible: due !== ""
-            font.pixelSize: parent.fontSize
+//                Label {
+//                    visible: creationDate !== ""
+//                    text: qsTr("created:")
+//                    font.pixelSize: parent.fontSize
+//                    font.italic: true
+//                    //color: Theme.highlightColor
+//                }
+//                Label {
+//                    id: cdLbl
+//                    visible: creationDate !== ""
+//                    font.pixelSize: parent.fontSize
+//                }
+//                Label {
+//                    visible: due !== "";
+//                    text: qsTr("due:");
+//                    font.pixelSize: parent.fontSize
+//                    font.italic: true
+//                    //color: Theme.highlightColor
+//                }
+//                Label {
+//                    id: dueLbl
+//                    visible: due !== ""
+//                    font.pixelSize: parent.fontSize
+//                }
+//            }
         }
     }
+
+    Component {
+        id: editComp
+        TextField {
+            text: model.fullTxt
+            Keys.onEscapePressed: loader.state = "view"
+            onEditingFinished: {
+                model.fullTxt = text
+                loader.state = "view"
+            }
+            Component.onCompleted: forceActiveFocus()
+        }
+    }
+
+    states: [
+        State {
+            name: "view"
+            PropertyChanges {
+                target: loader
+                sourceComponent: viewComp
+                //height: Math.max(taskLine.item.lblHeight, Theme.minRowHeight)
+            }
+        },
+        State {
+            name: "edit"
+            PropertyChanges {
+                target: loader
+                sourceComponent: editComp
+//                height: Math.max(taskLine.item.contentHeight, Theme.minRowHeight)
+            }
+        }
+    ]
 }

@@ -6,10 +6,12 @@ import Qt.labs.platform 1.1
 import QtQuick.Layouts 1.1
 
 import "qrc:/tdt/qml/tdt/"
-
 import "qrc:/tdt/qml/tdt/todotxt.js" as JS
 
 import FileIO 1.0
+
+
+//TODO icons don't work (in KDE??)
 
 ApplicationWindow {
     id: app
@@ -17,6 +19,21 @@ ApplicationWindow {
     width: 480
     height: 640
     title: qsTr("ZuTun.txt")
+
+    Action {
+        id: deleteTaskAction
+        icon.name: "delete"
+        text: qsTr("Delete Task")
+    }
+
+    Action {
+        id: hideDoneAction
+        text: "✓"
+        checkable: true
+        checked: !filters.hideDone
+        onTriggered: filters.hideDone = !filters.hideDone
+        shortcut: "Ctrl+D"
+    }
 
     Settings {
         id: settings
@@ -29,9 +46,9 @@ ApplicationWindow {
         id: todoTxtFile
         path: StandardPaths.writableLocation(StandardPaths.DocumentsLocation) + '/todo.txt'
 
-//        onContentChanged: {
-//            taskListModel.setTextList(content)
-//        }
+        //        onContentChanged: {
+        //            taskListModel.setTextList(content)
+        //        }
         function read() {
             taskListModel.setTextList(content)
         }
@@ -80,14 +97,34 @@ ApplicationWindow {
         model: taskListModel
         lessThanFunc: sorting.lessThanFunc()
         visibility: filters.visibility
+        delegate: TaskListItem {
+            width: app.width
+
+//            property int index: model.index
+//            done: model.done
+//            onToggleDone: model.done = !model.done
+//            priority: model.priority
+//            onPrioUp: setTaskProperty(model.index, "priority", "up")
+//            onPrioDown: setTaskProperty(model.index, "priority", "down")
+
+//            creationDate: model.creationDate
+//            subject: model.formattedSubject + DelegateModel.isUnresolved + index
+//            due: model.due
+
+
+//            onEditItem: visualModel.editItem(model.index)
+//            onRemoveItem: removeItem(model.intex)
+
+        }
     }
 
 
     header: ToolBar {
-        contentHeight: toolButton.implicitHeight
+        contentHeight: menuButton.implicitHeight
         RowLayout {
+            width: app.width
             ToolButton {
-                id: toolButton
+                id: menuButton
                 text: stackView.depth > 1 ? "\u25C0" : "\u2630"
                 font.pixelSize: Qt.application.font.pixelSize * 1.6
                 onClicked: {
@@ -100,19 +137,28 @@ ApplicationWindow {
             }
 
             ToolButton {
-                text: "✓"
+                action: hideDoneAction
                 font.pixelSize: Qt.application.font.pixelSize * 1.6
-                checkable: true
-                checked: !filters.hideDone
-                onClicked: filters.hideDone = !checked
             }
 
             Label {
+                id: titleLbl
+                Layout.fillWidth: true
                 text: stackView.currentItem.title
-                //anchors.centerIn: parent
+                horizontalAlignment: Text.AlignHCenter
             }
         }
     }
+
+    footer: ToolBar {
+        RowLayout {
+            width: app.width
+            Label {
+                text: "Messages go here."
+            }
+        }
+    }
+
 
     Component {
         id: fdComp
@@ -137,13 +183,12 @@ ApplicationWindow {
                     var dialog = fdComp.createObject(app)
                     dialog.open()
                     dialog.accepted.connect(function () {
-                        console.log(dialog.file)
                         todoTxtFile.path = dialog.file
                     })
                 }
             }
             ItemDelegate {
-                text: qsTr("Read File")
+                text: qsTr("(Re)Read File")
                 width: parent.width
                 onClicked: {
                     todoTxtFile.read()
@@ -153,7 +198,7 @@ ApplicationWindow {
                 text: qsTr("Settings")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page2Form.ui.qml")
+                    stackView.push("SettingsPage.qml")
                     drawer.close()
                 }
             }
