@@ -23,8 +23,10 @@ DelegateModel {
         console.log("diesdas")
 
         items.insert(0, data)
-        var newItem = items.get(0)
-        console.log(newItem)
+        var newItem = items.create(0)
+        newItem.state = "add"
+        console.log(newItem.state, newItem.item)
+        newItem.item.forceActiveFocus()
     }
 
     function priorityUpDown(up) {

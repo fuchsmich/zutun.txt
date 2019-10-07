@@ -25,7 +25,7 @@ Page {
         section.property: "section"
 
         ScrollIndicator.vertical: ScrollIndicator { }
-        keyNavigationEnabled: true
+        focus: true
 
         header: ToolBar {
             RowLayout {
@@ -42,6 +42,8 @@ Page {
                 }
             }
         }
+        Keys.onPressed: console.log(currentIndex)
+        Component.onCompleted: forceActiveFocus()
     }
 
     Column {

@@ -52,7 +52,8 @@ ApplicationWindow {
 
     Action {
         id: toogleSortOrderAction
-        icon.name: (!checked ? "view-sort-ascending-name" : "view-sort-descending-name")
+        //icon.name: (!checked ? "view-sort-ascending-name" : "view-sort-descending-name")
+        text: "abc" + (!checked ? "\u2193" : "\u2191")
         checkable: true
         checked: !sorting.asc
         onToggled: {
