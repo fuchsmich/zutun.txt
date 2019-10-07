@@ -35,8 +35,7 @@ Page {
                 }
 
                 ToolButton {
-                    action: hideDoneAction
-                    font.pixelSize: Qt.application.font.pixelSize * 1.2
+                    action: filterHideDoneAction
                 }
                 ToolButton {
                     action: toogleSortOrderAction

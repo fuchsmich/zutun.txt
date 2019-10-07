@@ -19,7 +19,7 @@ DelegateModel {
         return true
     }
 
-    function addTask(data) {
+    function addTaskItem(data) {
         console.log("diesdas")
 
         items.insert(0, data)
@@ -27,6 +27,10 @@ DelegateModel {
         newItem.state = "add"
         console.log(newItem.state, newItem.item)
         newItem.item.forceActiveFocus()
+    }
+
+    function cancelAdd() {
+        items.remove(0, 1)
     }
 
     function priorityUpDown(up) {
@@ -63,12 +67,12 @@ DelegateModel {
                 items.move(item.itemsIndex, index)
                 //Duplicate items
                 //model.get(item.model.index).section = "original"
-                if (!item.isUnresolved) {
-                    var data = JSON.parse(JSON.stringify(model.get(item.model.index)))
-                    data.section = "clone"
-                    duplicateItems.insert(JSON.parse(JSON.stringify(data)))
-                    console.log(JSON.stringify(data))
-                }
+//                if (!item.isUnresolved) {
+//                    var data = JSON.parse(JSON.stringify(model.get(item.model.index)))
+//                    data.section = "clone"
+//                    duplicateItems.insert(JSON.parse(JSON.stringify(data)))
+//                    console.log(JSON.stringify(data))
+//                }
                 //}
             } else item.groups = "invisible"
         }

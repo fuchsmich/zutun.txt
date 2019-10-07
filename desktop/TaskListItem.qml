@@ -7,7 +7,7 @@ Loader {
     id: loader
     state: "view"
 
-    signal resort()
+    signal addTask(string text)
 
     Component {
         id: viewComp
@@ -64,7 +64,8 @@ Loader {
                             display: AbstractButton.IconOnly
                             action: deleteTaskAction
 //                            icon.name: "delete"
-                            icon.color: "red"
+                            //icon.color: "red"
+                            icon.color: "transparent"
 //                            text: "\u007F"
                             opacity: 0.5
                         }
@@ -75,32 +76,24 @@ Loader {
                 anchors.right: parent.right
                 anchors.rightMargin: spacing
                 spacing: 10
-                //property int fontSize: Qt.application.font.pixelSize * 0.7
-
                 Label {
                     visible: model.creationDate !== ""
                     text: qsTr("created:")
-                    //font.pixelSize: parent.fontSize
                     font.italic: true
-                    //color: Theme.highlightColor
                 }
                 Label {
                     id: cdLbl
                     visible: model.creationDate !== ""
-                    //font.pixelSize: parent.fontSize
                     text: model.creationDate
                 }
                 Label {
                     visible: model.due !== "";
                     text: qsTr("due:");
-                    //font.pixelSize: parent.fontSize
                     font.italic: true
-                    //color: Theme.highlightColor
                 }
                 Label {
                     id: dueLbl
                     visible: model.due !== ""
-                    //font.pixelSize: parent.fontSize
                     text: model.due
                 }
             }
@@ -111,7 +104,9 @@ Loader {
         id: editComp
         TextField {
             text: model.fullTxt
-            Keys.onEscapePressed: loader.state = "view"
+            Keys.onEscapePressed: {
+                loader.state = "view"
+            }
             onEditingFinished: {
                 model.fullTxt = text
                 loader.state = "view"
@@ -125,8 +120,14 @@ Loader {
         id: addComp
         TextField {
             text: model.fullTxt
-            Keys.onEscapePressed: loader.state = "view"
+            Keys.onEscapePressed: {
+                loader.state = "view"
+                loader.DelegateModel.inItems = false
+            }
             onEditingFinished: {
+                loader.state = "view"
+                loader.addTask(text)
+                loader.DelegateModel.inItems = false
             }
             Component.onCompleted: forceActiveFocus() //doe not work here??
         }
@@ -138,20 +139,16 @@ Loader {
             PropertyChanges {
                 target: loader
                 sourceComponent: viewComp
-                //height: Math.max(taskLine.item.lblHeight, Theme.minRowHeight)
             }
         },
         State {
-            //when: loader.DelegateModel.isUnresolved
             name: "edit"
             PropertyChanges {
                 target: loader
                 sourceComponent: editComp
-//                height: Math.max(taskLine.item.contentHeight, Theme.minRowHeight)
             }
         },
         State {
-            //when: loader.DelegateModel.isUnresolved
             name: "add"
             extend: "edit"
             PropertyChanges {
@@ -160,9 +157,9 @@ Loader {
             }
         }
     ]
-    onStateChanged: console.log("Item:", model.index,  "state:", state, )
+    //onStateChanged: console.log("Item:", model.index,  "state:", state, )
 
-    Component.onCompleted: {
-        console.log("Item:", model.index,  "state:", state)
-    }
+//    Component.onCompleted: {
+//        console.log("Item:", model.index,  "state:", state)
+//    }
 }

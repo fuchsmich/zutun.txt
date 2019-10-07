@@ -65,6 +65,12 @@ ListModel {
         return  item
     }
 
+    function addTask(text) {
+        console.log("adding", text)
+        append(lineToJSON(text))
+        saveList()
+    }
+
     function populateTextList() {
         //textList.sort()
         //notifications.removeAll()

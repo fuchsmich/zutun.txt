@@ -27,23 +27,25 @@ ApplicationWindow {
         icon.name: "list-add"
         text: qsTr("&Add Task")
         onTriggered: {
-            taskDelegateModel.addTask(taskListModel.lineToJSON("test"))
+            taskDelegateModel.addTaskItem(taskListModel.lineToJSON(""))
         }
     }
 
     Action {
         id: deleteTaskAction
         icon.name: "delete"
-        icon.color: "red"
-        text: qsTr("Delete Task")
+        text: qsTr("&Delete Task")
         onTriggered: {
+            console.log(source)
             console.log(source.taskIndex)
         }
+        shortcut: "Delete"
     }
 
     Action {
-        id: hideDoneAction
-        text: "✓"
+        id: filterHideDoneAction
+        icon.name: "checkbox"
+        text: qsTr("Hide &Done")
         checkable: true
         checked: !filters.hideDone
         onToggled: filters.hideDone = !filters.hideDone
@@ -52,14 +54,12 @@ ApplicationWindow {
 
     Action {
         id: toogleSortOrderAction
-        //icon.name: (!checked ? "view-sort-ascending-name" : "view-sort-descending-name")
+        icon.name: (!checked ? "view-sort-ascending-name" : "view-sort-descending-name")
+        icon.cache: false
         text: "abc" + (!checked ? "\u2193" : "\u2191")
         checkable: true
         checked: !sorting.asc
-        onToggled: {
-            sorting.asc = !checked
-            icon.name = (!checked ? "view-sort-ascending-name" : "view-sort-descending-name")
-        }
+        onToggled: sorting.asc = !checked
         shortcut: "Ctrl+S"
     }
 
@@ -128,10 +128,7 @@ ApplicationWindow {
         delegate: TaskListItem {
             id: item
             width: app.width
-            onResort: {
-                console.log(DelegateModel.inItems)
-                item.DelegateModel.inUnsorted = true
-            }
+            onAddTask: taskListModel.addTask(text)
         }
     }
 
