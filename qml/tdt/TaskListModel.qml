@@ -71,6 +71,11 @@ ListModel {
         saveList()
     }
 
+    function removeTask(index) {
+        remove(index)
+        saveList()
+    }
+
     function populateTextList() {
         //textList.sort()
         //notifications.removeAll()

@@ -22,6 +22,8 @@ ApplicationWindow {
     height: 640
     title: qsTr("ZuTun.txt")
 
+    property int currentTaskIndex: -1
+
     Action {
         id: addTaskAction
         icon.name: "list-add"
@@ -36,8 +38,9 @@ ApplicationWindow {
         icon.name: "delete"
         text: qsTr("&Delete Task")
         onTriggered: {
-            console.log(source)
-            console.log(source.taskIndex)
+            if (currentTaskIndex > -1 && currentTaskIndex < taskListModel.count) {
+                taskListModel.removeTask(currentTaskIndex)
+            }
         }
         shortcut: "Delete"
     }
@@ -47,19 +50,19 @@ ApplicationWindow {
         icon.name: "checkbox"
         text: qsTr("Hide &Done")
         checkable: true
-        checked: !filters.hideDone
+        checked: filters.hideDone
         onToggled: filters.hideDone = !filters.hideDone
         shortcut: "Ctrl+D"
     }
 
     Action {
         id: toogleSortOrderAction
-        icon.name: (!checked ? "view-sort-ascending-name" : "view-sort-descending-name")
+        icon.name: "view-sort-ascending-name"
         icon.cache: false
-        text: "abc" + (!checked ? "\u2193" : "\u2191")
+        text: (!checked ? "Ascendending" : "Descendending")
         checkable: true
-        checked: !sorting.asc
-        onToggled: sorting.asc = !checked
+        checked: sorting.asc
+        onToggled: sorting.asc = !sorting.asc
         shortcut: "Ctrl+S"
     }
 
@@ -74,9 +77,6 @@ ApplicationWindow {
         id: todoTxtFile
         path: StandardPaths.writableLocation(StandardPaths.DocumentsLocation) + '/todo.txt'
 
-        //        onContentChanged: {
-        //            taskListModel.setTextList(content)
-        //        }
         function read() {
             taskListModel.setTextList(content)
         }
@@ -193,6 +193,7 @@ ApplicationWindow {
                     dialog.open()
                     dialog.accepted.connect(function () {
                         todoTxtFile.path = dialog.file
+                        drawer.close()
                     })
                 }
             }
@@ -201,6 +202,15 @@ ApplicationWindow {
                 width: parent.width
                 onClicked: {
                     todoTxtFile.read()
+                    drawer.close()
+                }
+            }
+            ItemDelegate {
+                text: qsTr("Project Filters")
+                width: parent.width
+                onClicked: {
+                    stackView.push("FiltersPage.qml")
+                    drawer.close()
                 }
             }
             ItemDelegate {
@@ -220,5 +230,7 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
+    //TODO in edit mode vllt nicht lesen??
+    // auf tasklistpage verlagern??
     onActiveChanged: if (active) todoTxtFile.read()
 }

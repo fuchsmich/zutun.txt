@@ -7,7 +7,6 @@ Page {
     anchors.fill: parent
     title: "Tasklist"
 
-
     ListView {
         id: taskListView
         anchors.fill: parent
@@ -56,6 +55,7 @@ Page {
         }
         Keys.onPressed: console.log(currentIndex)
         Component.onCompleted: forceActiveFocus()
+        onCurrentIndexChanged: app.currentTaskIndex = currentIndex
     }
 
     Column {
@@ -68,9 +68,9 @@ Page {
         }
 
         Label { text: "Path: %1".arg(todoTxtFile.path) }
-        Label { text: "Path exists: %1".arg(todoTxtFile.pathExists ? "Yes" : "No") }
-        Label { text: "File exists: %1".arg(todoTxtFile.exists ? "Yes" : "No") }
-        Label { text: "File readable: %1".arg(todoTxtFile.readable ? "Yes" : "No") }
-        Label { text: "File writeable: %1".arg(todoTxtFile.writeable ? "Yes" : "No") }
+//        Label { text: "Path exists: %1".arg(todoTxtFile.pathExists ? "Yes" : "No") }
+//        Label { text: "File exists: %1".arg(todoTxtFile.exists ? "Yes" : "No") }
+//        Label { text: "File readable: %1".arg(todoTxtFile.readable ? "Yes" : "No") }
+//        Label { text: "File writeable: %1".arg(todoTxtFile.writeable ? "Yes" : "No") }
     }
 }
