@@ -22,15 +22,6 @@ ListModel {
     property int section: 1
     onSectionChanged: populateTextList()
 
-    function addTask(txt) {
-        saveList()
-    }
-
-    function removeTask(index) {
-        remove(index)
-        saveList()
-    }
-
     function prioColor(prio) {
         return prioColors[JS.alphabet.search(prio) % prioColors.length]
     }

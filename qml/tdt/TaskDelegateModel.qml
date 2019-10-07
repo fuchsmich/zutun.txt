@@ -27,6 +27,10 @@ DelegateModel {
         console.log(newItem)
     }
 
+    function priorityUpDown(up) {
+
+    }
+
     //return the positon of the item in the list due to function lessThanFunc
     function insertPosition(lessThanFunc, item) {
         var lower = 0
@@ -60,8 +64,8 @@ DelegateModel {
 //                if (!item.isUnresolved) {
 //                    var data = JSON.parse(JSON.stringify(model.get(item.model.index)))
 //                    //data.section = "clone"
-//                    console.log(JSON.stringify(data))
 //                    items.insert(JSON.parse(JSON.stringify(data)))
+//                    console.log(JSON.stringify(data))
 //                }
                 //}
             } else item.groups = "invisible"

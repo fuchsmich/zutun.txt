@@ -110,11 +110,13 @@ Loader {
     Component {
         id: editComp
         TextField {
+            id: editField
             text: model.fullTxt
             Keys.onEscapePressed: loader.state = "view"
             onEditingFinished: {
                 model.fullTxt = text
                 loader.state = "view"
+                loader.DelegateModel.groups = "unsorted"
             }
             Component.onCompleted: forceActiveFocus()
         }
@@ -130,13 +132,28 @@ Loader {
             }
         },
         State {
-            when: loader.DelegateModel.isUnresolved
+            //when: loader.DelegateModel.isUnresolved
             name: "edit"
             PropertyChanges {
                 target: loader
                 sourceComponent: editComp
 //                height: Math.max(taskLine.item.contentHeight, Theme.minRowHeight)
             }
+        },
+        State {
+            when: loader.DelegateModel.isUnresolved
+            name: "add"
+            extend: "edit"
+            PropertyChanges {
+                target: editField
+                onEditingFinished: console.log("asd")
+            }
+            StateChangeScript {
+                script: editField.forceActiveFocus()
+            }
         }
     ]
+    Component.onCompleted: {
+        //if (loader.DelegateModel.isUnresolved) loader.state = "edit"
+    }
 }
