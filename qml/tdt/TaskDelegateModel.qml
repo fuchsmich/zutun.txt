@@ -63,12 +63,12 @@ DelegateModel {
                 items.move(item.itemsIndex, index)
                 //Duplicate items
                 //model.get(item.model.index).section = "original"
-//                if (!item.isUnresolved) {
-//                    var data = JSON.parse(JSON.stringify(model.get(item.model.index)))
-//                    //data.section = "clone"
-//                    items.insert(JSON.parse(JSON.stringify(data)))
-//                    console.log(JSON.stringify(data))
-//                }
+                if (!item.isUnresolved) {
+                    var data = JSON.parse(JSON.stringify(model.get(item.model.index)))
+                    data.section = "clone"
+                    duplicateItems.insert(JSON.parse(JSON.stringify(data)))
+                    console.log(JSON.stringify(data))
+                }
                 //}
             } else item.groups = "invisible"
         }
@@ -108,6 +108,13 @@ DelegateModel {
         DelegateModelGroup {
             id: invisibleItems
             name: "invisible"
+        },
+        DelegateModelGroup {
+            id: duplicateItems
+            name: "duplicate"
+            onChanged: {
+                console.log(JSON.stringify(get(count-1).model))
+            }
         }
     ]
 }
