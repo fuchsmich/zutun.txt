@@ -117,6 +117,7 @@ ApplicationWindow {
     Sorting {
         id: sorting
         onSortingChanged: taskDelegateModel.resort()
+        onGroupingChanged: taskDelegateModel.resort()
     }
 
     TaskDelegateModel {

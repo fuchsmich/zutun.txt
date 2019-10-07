@@ -27,6 +27,7 @@ Page {
         ScrollIndicator.vertical: ScrollIndicator { }
         focus: true
 
+        headerPositioning: ListView.OverlayHeader
         header: ToolBar {
             RowLayout {
                 ToolButton {
@@ -39,6 +40,18 @@ Page {
                 }
                 ToolButton {
                     action: toogleSortOrderAction
+                }
+
+                ComboBox {
+                    model: {
+                        var m = []
+                        for (var i in sorting.groupFunctionList) {
+                            m.push(sorting.groupFunctionList[i][0])
+                        }
+                        return m
+                    }
+                    currentIndex: sorting.grouping
+                    onCurrentIndexChanged: sorting.grouping = currentIndex
                 }
             }
         }
