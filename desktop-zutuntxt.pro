@@ -55,4 +55,5 @@ isEmpty(LIBDIR) {
     LIBDIR = $$PREFIX/lib
 }
 
+target = zutuntxt
 target.path = $$BINDIR
