@@ -1,3 +1,5 @@
+//see also https://github.com/dant3/qmlcompletionbox/blob/master/SuggestionBox.qml
+
 import QtQuick 2.5
 
 Rectangle {
@@ -31,7 +33,7 @@ Rectangle {
     y: parent.y + parent.cursorRectangle.y + parent.cursorRectangle.height
 
     Text {
-        //this is just for the calculation of text width in setPosition
+        //this is just for the calculation of position due to prefix length
         id: prefixItem
         text: completionPrefix
         visible: false
