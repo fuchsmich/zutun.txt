@@ -34,4 +34,25 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-target.path = $${PREFIX}
+# install
+isEmpty(PREFIX) {
+    PREFIX = /usr
+}
+
+isEmpty(BINDIR) {
+    BINDIR = $$PREFIX/bin
+}
+
+isEmpty(DATADIR) {
+    DATADIR = $$PREFIX/share
+}
+
+isEmpty(ETCDIR) {
+    ETCDIR = /etc
+}
+
+isEmpty(LIBDIR) {
+    LIBDIR = $$PREFIX/lib
+}
+
+target.path = $$BINDIR
