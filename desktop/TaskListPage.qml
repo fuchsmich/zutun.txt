@@ -28,34 +28,83 @@ Page {
 
         headerPositioning: ListView.OverlayHeader
         header: ToolBar {
-            RowLayout {
-                ToolButton {
-                    action: addTaskAction
-                }
-
-                ToolButton {
-                    action: filterHideDoneAction
-                }
-                ToolButton {
-                    action: toogleSortOrderAction
-                }
-
-                ComboBox {
-                    model: {
-                        var m = []
-                        for (var i in sorting.groupFunctionList) {
-                            m.push(sorting.groupFunctionList[i][0])
-                        }
-                        return m
+            width: page.width
+            Column {
+                width: parent.width
+                RowLayout {
+                    //Actions
+                    ToolButton {
+                        action: addTaskAction
                     }
-                    currentIndex: sorting.grouping
-                    onCurrentIndexChanged: sorting.grouping = currentIndex
+
+                    //Filter
+                    ToolButton {
+                        action: filterHideDoneAction
+                    }
+                    ToolButton {
+                        action: filterShowSearchBar
+                    }
+
+                    //Sort
+                    ToolButton {
+                        action: toogleSortOrderAction
+                    }
+                    ComboBox {
+                        model: {
+                            var m = []
+                            for (var i in sorting.groupFunctionList) {
+                                m.push(sorting.groupFunctionList[i][0])
+                            }
+                            return m
+                        }
+                        currentIndex: sorting.grouping
+                        onCurrentIndexChanged: sorting.grouping = currentIndex
+                    }
+                }
+                RowLayout {
+                    visible: filterShowSearchBar.checked
+                    width: parent.width
+                    TextField {
+                        //TODO searchbar loses focus. Timer?
+                        id: searchField
+                        property bool searchBarActive: false
+                        Layout.fillWidth: true
+                        placeholderText: qsTr("Search")
+                        onTextChanged: {
+                            searchBarActive = true
+                            taskListView.focus = false
+                            filters.searchString = text
+                        }
+                        onVisibleChanged: {
+                            if (!visible) text = ""
+                            else forceActiveFocus()
+                        }
+                        Keys.onEscapePressed: filterShowSearchBar.checked = false
+                        Connections {
+                            target: filterActivateSearch
+                            onTriggered: {
+                                searchField.forceActiveFocus()
+                                searchField.selectAll()
+                            }
+                        }
+                        Connections {
+                            target: taskDelegateModel
+                            onSortFinished: {
+                                if (searchField.searchBarActive) searchField.forceActiveFocus()
+                            }
+                        }
+                    }
+                    ToolButton {
+                        icon.name: "edit-clear"
+                        onClicked: searchField.clear()
+                    }
                 }
             }
         }
-        Keys.onPressed: console.log(currentIndex)
-        Component.onCompleted: forceActiveFocus()
+        //Keys.onPressed: console.log(currentIndex)
+        //Component.onCompleted: forceActiveFocus()
         onCurrentIndexChanged: app.currentTaskIndex = currentIndex
+        onActiveFocusChanged: console.log("lv activeFocus", activeFocus)
     }
 
     Column {
@@ -68,9 +117,9 @@ Page {
         }
 
         Label { text: "Path: %1".arg(todoTxtFile.path) }
-//        Label { text: "Path exists: %1".arg(todoTxtFile.pathExists ? "Yes" : "No") }
-//        Label { text: "File exists: %1".arg(todoTxtFile.exists ? "Yes" : "No") }
-//        Label { text: "File readable: %1".arg(todoTxtFile.readable ? "Yes" : "No") }
-//        Label { text: "File writeable: %1".arg(todoTxtFile.writeable ? "Yes" : "No") }
+        //        Label { text: "Path exists: %1".arg(todoTxtFile.pathExists ? "Yes" : "No") }
+        //        Label { text: "File exists: %1".arg(todoTxtFile.exists ? "Yes" : "No") }
+        //        Label { text: "File readable: %1".arg(todoTxtFile.readable ? "Yes" : "No") }
+        //        Label { text: "File writeable: %1".arg(todoTxtFile.writeable ? "Yes" : "No") }
     }
 }

@@ -56,6 +56,21 @@ ApplicationWindow {
     }
 
     Action {
+        id: filterShowSearchBar
+        icon.name: "search"
+        text: "Show Search"
+        checkable: true
+    }
+
+    Action {
+        id: filterActivateSearch
+        shortcut: "Ctrl+F"
+        onTriggered: {
+            filterShowSearchBar.checked = true
+        }
+    }
+
+    Action {
         id: toogleSortOrderAction
         icon.name: "view-sort-ascending-name"
         icon.cache: false
@@ -101,6 +116,7 @@ ApplicationWindow {
         property alias hideDone: filters.hideDone
         //property alias projectsActive: filters.projects.active
         //property alias contextsActive: filters.contextsActive
+        property alias showSearchBar: filterShowSearchBar.checked
     }
     Filters {
         id: filters

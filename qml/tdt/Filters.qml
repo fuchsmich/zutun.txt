@@ -18,6 +18,9 @@ QtObject {
         else return qsTr("None")
     }
 
+    property string searchString: ""
+    onSearchStringChanged: filtersChanged()
+
     property FilterModel projects: FilterModel {
         name: "projects"
         //active: filterSettings.projects.value
@@ -37,15 +40,17 @@ QtObject {
     }
 
     function visibility(item) {
-        if ((hideDone && item.done)) return false;
+        if ((hideDone && item.done)) return false
+
+        if (item.fullTxt.indexOf(searchString) === -1) return false
 
         for (var p in projects.active) {
-            if (item.subject.indexOf(projects.active[p]) === -1) return false;
+            if (item.subject.indexOf(projects.active[p]) === -1) return false
         }
         for (var c in contexts.active) {
-            if (item.subject.indexOf(contexts.active[c]) === -1) return false;
+            if (item.subject.indexOf(contexts.active[c]) === -1) return false
         }
-        return true;
+        return true
     }
 
     /* set filter; name... filterstring; onOff... turn it on (true) or off (false)*/

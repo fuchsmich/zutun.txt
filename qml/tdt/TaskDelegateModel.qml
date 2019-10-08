@@ -7,7 +7,7 @@ import "../tdt/todotxt.js" as JS
 DelegateModel {
     id: visualModel
 
-    //signal editItem(int index)
+    signal sortFinished()
 
     property string defaultPriority: "F"
 

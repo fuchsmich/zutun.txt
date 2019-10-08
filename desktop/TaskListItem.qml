@@ -31,23 +31,43 @@ Loader {
             id: taskListItem
 
             Row {
-                CheckBox {
-                    id: doneCB
-                    checked: model.done
-                    onClicked: {
-                        model.done = !model.done
-                        loader.DelegateModel.groups = "unsorted"
-                    }
-                    anchors.verticalCenter: id.verticalCenter
-                }
+//                CheckBox {
+//                    id: doneCB
+//                    checked: model.done
+//                    onClicked: {
+//                        model.done = !model.done
+//                        loader.DelegateModel.groups = "unsorted"
+//                    }
+//                    anchors.verticalCenter: id.verticalCenter
+//                }
                 ItemDelegate {
                     id: id
-                    text: model.formattedSubject
-                    width: loader.width - doneCB.width
+                    //text: model.formattedSubject
+                    width: taskListItem.width//loader.width - doneCB.width
+                    height: Math.max(doneCB.height, subjectLbl.height)
                     highlighted: loader.DelegateModel.itemsIndex === loader.ListView.view.currentIndex
                     onClicked:{
                         loader.state = "edit"
                     }
+                    CheckBox {
+                        id: doneCB
+                        checked: model.done
+                        onClicked: {
+                            model.done = !model.done
+                            loader.DelegateModel.groups = "unsorted"
+                        }
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                    }
+                    Label {
+                        id: subjectLbl
+                        anchors.left: doneCB.right
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: model.formattedSubject
+                        onLinkActivated: Qt.openUrlExternally(link)
+                    }
+
                     MouseArea {
                         id: mouse
                         anchors.fill: parent
@@ -63,11 +83,11 @@ Loader {
                         anchors.verticalCenter: parent.verticalCenter
                         //height: parent.height
                         visible: mouse.containsMouse
+                        opacity: 0.7
                         ToolButton {
                             display: AbstractButton.TextOnly
                             icon.name: "font-size-up"
                             text: "(B)" + "\u2191"
-                            opacity: 0.5
                             onClicked: {
                                 model.priority = priorityUpDown(model.priority, true)
                                 loader.DelegateModel.groups = "unsorted"
@@ -77,7 +97,6 @@ Loader {
                             display: AbstractButton.TextOnly
                             icon.name: "font-size-down"
                             text: "(A)" + "\u2193"
-                            opacity: 0.5
                             onClicked: {
                                 model.priority = priorityUpDown(model.priority, false)
                                 loader.DelegateModel.groups = "unsorted"
@@ -87,11 +106,7 @@ Loader {
                             property int taskIndex: model.index
                             display: AbstractButton.IconOnly
                             action: deleteTaskAction
-//                            icon.name: "delete"
-                            //icon.color: "red"
                             icon.color: "transparent"
-//                            text: "\u007F"
-                            opacity: 0.5
                         }
                     }
                 }
@@ -153,7 +168,7 @@ Loader {
                 loader.addTask(text)
                 loader.DelegateModel.inItems = false
             }
-            Component.onCompleted: forceActiveFocus() //doe not work here??
+            Component.onCompleted: forceActiveFocus() //does not work here??
         }
     }
 
