@@ -169,6 +169,7 @@ Loader {
                 loader.DelegateModel.inItems = false
             }
             Component.onCompleted: forceActiveFocus() //does not work here??
+            Completer { }
         }
     }
 
