@@ -87,11 +87,11 @@ Page {
                             }
                         }
                         onActiveFocusChanged: {
-                            console.log("activefocus", activeFocus)
+                            //console.log("activefocus", activeFocus)
                             if (keepFocus) forceActiveFocus()
                             keepFocus = false
                         }
-
+                        Completer { }
                     }
                     ToolButton {
                         icon.name: "edit-clear"
@@ -103,7 +103,7 @@ Page {
         //Keys.onPressed: console.log(currentIndex)
         //Component.onCompleted: forceActiveFocus()
         onCurrentIndexChanged: app.currentTaskIndex = currentIndex
-        onActiveFocusChanged: console.log("lv activeFocus", activeFocus)
+        //onActiveFocusChanged: console.log("lv activeFocus", activeFocus)
     }
 
     Column {

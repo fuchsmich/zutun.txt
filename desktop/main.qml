@@ -247,8 +247,7 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
-    //TODO in edit mode vllt nicht lesen??
-    // auf tasklistpage verlagern??
+    //TODO Datei in edit mode vllt nicht lesen??
+    // -> auf tasklistpage verlagern??
     onActiveChanged: if (active) todoTxtFile.read()
-    onActiveFocusControlChanged: console.log("activeItems", activeFocusControl, activeFocusItem)
 }

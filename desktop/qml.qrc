@@ -5,5 +5,7 @@
         <file>TaskListPage.qml</file>
         <file>TaskListItem.qml</file>
         <file>SettingsPage.qml</file>
+        <file>Completer.qml</file>
+        <file>Completer_copy.qml</file>
     </qresource>
 </RCC>
