@@ -72,6 +72,7 @@ DelegateModel {
                 //}
             } else item.groups = "invisible"
         }
+        sortFinished()
     }
 
     function resort() {

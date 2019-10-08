@@ -65,14 +65,13 @@ Page {
                     visible: filterShowSearchBar.checked
                     width: parent.width
                     TextField {
-                        //TODO searchbar loses focus. Timer?
                         id: searchField
-                        property bool searchBarActive: false
+                        property bool keepFocus: false
                         Layout.fillWidth: true
                         placeholderText: qsTr("Search")
+                        focus: true
                         onTextChanged: {
-                            searchBarActive = true
-                            taskListView.focus = false
+                            keepFocus = true
                             filters.searchString = text
                         }
                         onVisibleChanged: {
@@ -87,12 +86,12 @@ Page {
                                 searchField.selectAll()
                             }
                         }
-                        Connections {
-                            target: taskDelegateModel
-                            onSortFinished: {
-                                if (searchField.searchBarActive) searchField.forceActiveFocus()
-                            }
+                        onActiveFocusChanged: {
+                            console.log("activefocus", activeFocus)
+                            if (keepFocus) forceActiveFocus()
+                            keepFocus = false
                         }
+
                     }
                     ToolButton {
                         icon.name: "edit-clear"
