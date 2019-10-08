@@ -1,3 +1,5 @@
+TARGET = zutuntxt
+
 QT += quick widgets
 
 CONFIG += c++11
@@ -55,5 +57,4 @@ isEmpty(LIBDIR) {
     LIBDIR = $$PREFIX/lib
 }
 
-target = zutuntxt
 target.path = $$BINDIR
