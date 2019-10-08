@@ -20,6 +20,8 @@ RESOURCES += \
         desktop.qrc \
         desktop/qml.qrc
 
+HEADERS += \
+    desktop/fileio.hpp
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH += qml/tdt/
@@ -32,5 +34,4 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    desktop/fileio.hpp
+target.path = = $${PREFIX}

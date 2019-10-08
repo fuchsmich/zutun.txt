@@ -93,7 +93,7 @@ ApplicationWindow {
         projectColor: "red"
         contextColor: "blue"
         onListChanged: taskDelegateModel.resort()
-        onItemChanged: taskDelegateModel.resortItem(index)
+        //onItemChanged: taskDelegateModel.resortItem(index)
     }
 
     Settings {
