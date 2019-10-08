@@ -9,7 +9,7 @@ DelegateModel {
 
     //signal editItem(int index)
 
-    property string defaultPrio: "F"
+    property string defaultPriority: "F"
 
     property var lessThanFunc: function (left, right) {
         return false
@@ -31,10 +31,6 @@ DelegateModel {
 
     function cancelAdd() {
         items.remove(0, 1)
-    }
-
-    function priorityUpDown(up) {
-
     }
 
     //return the positon of the item in the list due to function lessThanFunc
@@ -61,18 +57,18 @@ DelegateModel {
             var item = unsortedItems.get(0)
             //console.log(item.model.index, item.groups, item.isUnresolved)
             if (visibility(item.model)) {
-                if (item.model.priority.charCodeAt(0) > defaultPrio.charCodeAt(0)) defaultPrio = item.model.priority
+                if (item.model.priority.charCodeAt(0) > defaultPriority.charCodeAt(0)) defaultPriority = item.model.priority
                 var index = insertPosition(lessThan, item)
                 item.groups = ["items"]
                 items.move(item.itemsIndex, index)
                 //Duplicate items
                 //model.get(item.model.index).section = "original"
-//                if (!item.isUnresolved) {
-//                    var data = JSON.parse(JSON.stringify(model.get(item.model.index)))
-//                    data.section = "clone"
-//                    duplicateItems.insert(JSON.parse(JSON.stringify(data)))
-//                    console.log(JSON.stringify(data))
-//                }
+                //                if (!item.isUnresolved) {
+                //                    var data = JSON.parse(JSON.stringify(model.get(item.model.index)))
+                //                    data.section = "clone"
+                //                    duplicateItems.insert(JSON.parse(JSON.stringify(data)))
+                //                    console.log(JSON.stringify(data))
+                //                }
                 //}
             } else item.groups = "invisible"
         }
@@ -80,9 +76,9 @@ DelegateModel {
 
     function resort() {
         console.log("resort called")
-//        for (var i = 0; i < persistedItems.count; i++) {
-//            persistedItems.get(i).inPersistedItems = false
-//        }
+        //        for (var i = 0; i < persistedItems.count; i++) {
+        //            persistedItems.get(i).inPersistedItems = false
+        //        }
         if (items.count > 0) items.setGroups(0, items.count, "unsorted")
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
     }

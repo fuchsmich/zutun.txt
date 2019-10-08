@@ -9,6 +9,22 @@ Loader {
 
     signal addTask(string text)
 
+    property string defaultPriority: "F"
+
+    function priorityUpDown(priority, up) {
+        //console.log("A"++)
+        if (up) {
+            if (priority === "") return String.fromCharCode(defaultPriority.charCodeAt(0));
+            else if (priority > "A") return String.fromCharCode(priority.charCodeAt(0) - 1);
+        } else  {
+            if (priority !== "") {
+                if (priority < "Z") return String.fromCharCode(priority.charCodeAt(0) + 1);
+                return ""
+            }
+        }
+        return priority
+    }
+
     Component {
         id: viewComp
         Column {
@@ -52,12 +68,20 @@ Loader {
                             icon.name: "font-size-up"
                             text: "(B)" + "\u2191"
                             opacity: 0.5
+                            onClicked: {
+                                model.priority = priorityUpDown(model.priority, true)
+                                loader.DelegateModel.groups = "unsorted"
+                            }
                         }
                         ToolButton {
                             display: AbstractButton.TextOnly
                             icon.name: "font-size-down"
                             text: "(A)" + "\u2193"
                             opacity: 0.5
+                            onClicked: {
+                                model.priority = priorityUpDown(model.priority, false)
+                                loader.DelegateModel.groups = "unsorted"
+                            }
                         }
                         ToolButton {
                             property int taskIndex: model.index

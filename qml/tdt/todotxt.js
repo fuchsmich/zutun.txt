@@ -74,8 +74,8 @@ var baseFeatures = {
             }
             break
         case this.priority:
-            if (value === false) { fields[feature] = undefined; break }
-            if (alphabet.indexOf(value) > -1) { fields[feature] = "(" + value + ") "; break }
+            if (value === false || value === "") { fields[feature] = undefined; break }
+            else if (alphabet.indexOf(value) > -1) { fields[feature] = "(" + value + ") "; break }
             break
         case this.creationDate:
             if (value === false) fields[feature] = undefined

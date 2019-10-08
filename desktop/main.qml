@@ -129,6 +129,7 @@ ApplicationWindow {
             id: item
             width: app.width
             onAddTask: taskListModel.addTask(text)
+            defaultPriority: taskDelegateModel.defaultPriority
         }
     }
 
