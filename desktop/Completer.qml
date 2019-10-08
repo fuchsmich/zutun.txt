@@ -23,7 +23,7 @@ Rectangle {
     signal activated(int index, string text)
 
     z: parent.z + 100000
-    visible: completionPrefix.length >= minCompletionPrefixLength && completionCount > 0
+    visible: (completionPrefix.length >= Math.max(1, minCompletionPrefixLength) && completionCount > 0)
     width: 200 //lv.implicitWidth
     height: 200 //Math.min(200, lv.contentHeight)
     border.color: "black"
