@@ -77,7 +77,7 @@ Rectangle {
                 id: grid
                 month: Calendar.December
                 year: 2015
-                locale: Qt.locale("en_US")
+                locale: Qt.locale()
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
