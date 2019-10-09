@@ -19,6 +19,8 @@ Page {
             Label {
                 text: section
                 font.pixelSize: Qt.application.font.pixelSize * 1.6
+                onZChanged: app.maxZ = Math.max(z, app.maxZ)
+                Component.onCompleted: app.maxZ = Math.max(z, app.maxZ)
             }
         }
         section.property: "section"

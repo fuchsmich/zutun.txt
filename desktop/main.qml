@@ -23,6 +23,8 @@ ApplicationWindow {
     title: qsTr("ZuTun.txt")
 
     property int currentTaskIndex: -1
+    property real maxZ: -100
+    onMaxZChanged: console.log("maxZ", maxZ)
 
     Action {
         id: addTaskAction
