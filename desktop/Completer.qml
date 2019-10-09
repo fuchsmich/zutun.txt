@@ -5,6 +5,7 @@ import QtQuick.Controls 2.2
 
 Rectangle {
     id: completer
+
     property TextInput textInput
     property var model: ["asddasd", "asdasd", "asdsadas", "adasd"]
     readonly property var completionModel: { model.filter(function(currentValue){
@@ -75,20 +76,27 @@ Rectangle {
         anchors.centerIn: parent
     }
 
-    Component.onCompleted: textInput = parent
+    state: "initial"
     states: [
         State {
             name: "lv"
             when: (completionPrefix.length >= Math.max(1, minCompletionPrefixLength) && completionCount > 0)
+            extend: "initial"
             PropertyChanges {
                 target: loader
                 sourceComponent: lvComp
             }
+        },
+        State {
+            name: "initial"
+            when: textInput
             ParentChange {
                 target: completer
-                parent: app.contentItem //ApplicationWindow.contentItem //TODO warum geht ApplicationWindow nicht?
+                parent: completer.ApplicationWindow.overlay
             }
         }
     ]
+    Component.onCompleted: textInput = parent
     onParentChanged: console.log(parent)
+    onStateChanged: console.log(state)
 }
