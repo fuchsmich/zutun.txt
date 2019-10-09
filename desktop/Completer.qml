@@ -2,6 +2,8 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 2.2
+import Qt.labs.calendar 1.0
+import QtQuick.Layouts 1.3
 
 Rectangle {
     id: completer
@@ -25,6 +27,7 @@ Rectangle {
     }
     onCompletionPrefixChanged: console.debug(completionPrefix)
     onCompletionModelChanged: console.debug(completionModel)
+    property var calendarKeywords: ["due:"]
 
     signal activated(int index, string text)
     onActivated: console.log("selected", index, text)
@@ -49,15 +52,44 @@ Rectangle {
     }
 
     Component {
-        id: lvComp
-        ListView {
-            id: lv
-            //anchors.fill: parent
+        id: calendarComponent
+        GridLayout {
+            width:200
+            height: 150
+            columns: 2
 
+            DayOfWeekRow {
+                locale: grid.locale
+
+                Layout.column: 1
+                Layout.fillWidth: true
+            }
+
+            WeekNumberColumn {
+                month: grid.month
+                year: grid.year
+                locale: grid.locale
+
+                Layout.fillHeight: true
+            }
+
+            MonthGrid {
+                id: grid
+                month: Calendar.December
+                year: 2015
+                locale: Qt.locale("en_US")
+
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+        }
+    }
+
+    Component {
+        id: listComp
+        ListView {
             width: contentItem.childrenRect.width
-            height: Math.min(contentItem.childrenRect.height, 50) //contentHeight //contentItem.childrenRect.height //Math.min(200, lv.contentHeight)
-            //contentWidth: contentItem.childrenRect.width
-            //contentHeight: Math.min(contentItem.childrenRect.height, 10)
+            height: Math.min(contentItem.childrenRect.height, 50)
             model: completionModel
             delegate: Text {
                 text: modelData
@@ -79,12 +111,21 @@ Rectangle {
     state: "initial"
     states: [
         State {
-            name: "lv"
+            name: "calendar"
+            when: calendarKeywords.indexOf(completionPrefix) !== -1
+            extend: "initial"
+            PropertyChanges {
+                target: loader
+                sourceComponent: calendarComponent
+            }
+        },
+        State {
+            name: "list"
             when: (completionPrefix.length >= Math.max(1, minCompletionPrefixLength) && completionCount > 0)
             extend: "initial"
             PropertyChanges {
                 target: loader
-                sourceComponent: lvComp
+                sourceComponent: listComp
             }
         },
         State {
