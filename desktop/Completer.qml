@@ -26,6 +26,7 @@ Rectangle {
     onCompletionModelChanged: console.debug(completionModel)
 
     signal activated(int index, string text)
+    onActivated: console.log("selected", index, text)
 
     z: 10 //parent.z + 100000
     visible: loader.status === Loader.Ready//(completionPrefix.length >= Math.max(1, minCompletionPrefixLength) && completionCount > 0)
@@ -52,13 +53,20 @@ Rectangle {
             id: lv
             //anchors.fill: parent
 
-            width: contentWidth
-            height: contentHeight //contentItem.childrenRect.height //Math.min(200, lv.contentHeight)
-            contentWidth: contentItem.childrenRect.width
-            contentHeight: Math.min(contentItem.childrenRect.height, 10)
+            width: contentItem.childrenRect.width
+            height: Math.min(contentItem.childrenRect.height, 50) //contentHeight //contentItem.childrenRect.height //Math.min(200, lv.contentHeight)
+            //contentWidth: contentItem.childrenRect.width
+            //contentHeight: Math.min(contentItem.childrenRect.height, 10)
             model: completionModel
-            delegate: Text { text: modelData }
+            delegate: Text {
+                text: modelData
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: activated(model.index, modelData)
+                }
+            }
             ScrollIndicator.vertical: ScrollIndicator { }
+            clip: true
         }
     }
 
