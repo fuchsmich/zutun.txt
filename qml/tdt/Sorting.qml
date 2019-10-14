@@ -1,4 +1,6 @@
 import QtQuick 2.0
+import "todotxt.js" as JS
+
 
 QtObject {
     signal sortingChanged()
@@ -19,9 +21,7 @@ QtObject {
 
 
     //returns a function, which compares two items
-    function lessThanFunc() {
-        return groupFunctionList[grouping][1]
-    }
+    property var lessThanFunc: groupFunctionList[grouping][1]
 
     //list of functions for sorting; *left* and *right* are the items to compare
     property var functionList: [
@@ -51,6 +51,8 @@ QtObject {
         }]
     ]
 
+    property var getGroup: groupFunctionList[grouping][2]
+
     //0..Name, 1..lessThanFunc, 2..return list of groups
     property var groupFunctionList: [
         [qsTr("None"),
@@ -69,15 +71,15 @@ QtObject {
                           (left.section < right.section) ^ !asc
                       )
           },
-          function(line) {
-              return JS.projects.listLine(line)
+          function(task) {
+              return JS.projects.getList(task)
           }]
         ,[qsTr("Contexts"),
           function(left, right) {
               return groupFunctionList[1][1](left,right)
           },
-          function(line) {
-              return JS.contexts.listLine(line)
+          function(task) {
+              return JS.contexts.getList(task)
           }]
     ]
 }

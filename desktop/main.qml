@@ -141,8 +141,9 @@ ApplicationWindow {
     TaskDelegateModel {
         id: taskDelegateModel
         model: taskListModel
-        lessThanFunc: sorting.lessThanFunc()
+        lessThanFunc: sorting.lessThanFunc
         visibility: filters.visibility
+        getSection: sorting.getGroup
         delegate: TaskListItem {
             id: item
             width: app.width

@@ -136,7 +136,7 @@ function getMatchesList2(text, pattern) {
         if (matchesList.indexOf(match) === -1) matchesList.push(match)
     }
     matchesList.sort()
-    console.log("matcheslist", matchesList)
+    //console.log("matcheslist", matchesList)
     return matchesList;
 }
 
@@ -151,6 +151,7 @@ var projects = {
         //console.log(getMatchesLine(task, projects.pattern))
         return getMatchesLine(task, this.pattern)
     },
+    /* get list of contexts for text*/
     getList: function(text) {
         return getMatchesList2(text, this.pattern)
     }
@@ -166,6 +167,7 @@ var contexts = {
     listLine: function(task) {
         return getMatchesLine(task, this.pattern)
     },
+    /* get list of contexts for text*/
     getList: function(text) {
         return getMatchesList2(text, this.pattern)
     }
