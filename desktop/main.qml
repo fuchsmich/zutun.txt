@@ -116,14 +116,15 @@ ApplicationWindow {
     Settings {
         category: "Filters"
         property alias hideDone: filters.hideDone
+        //kann kein array speichern??
         //property alias projectsActive: filters.projects.active
-        //property alias contextsActive: filters.contextsActive
+        //property alias contextsActive: filters.contexts.active
         property alias showSearchBar: filterShowSearchBar.checked
     }
     Filters {
         id: filters
         onFiltersChanged: taskDelegateModel.resort()
-        tasksModel: taskListModel
+        taskList: taskListModel
     }
 
     Settings {
@@ -226,10 +227,10 @@ ApplicationWindow {
                 }
             }
             ItemDelegate {
-                text: qsTr("Project Filters")
+                text: qsTr("Filters")
                 width: parent.width
                 onClicked: {
-                    stackView.push("FiltersPage.qml")
+                    stackView.push("FilterPage.qml")
                     drawer.close()
                 }
             }

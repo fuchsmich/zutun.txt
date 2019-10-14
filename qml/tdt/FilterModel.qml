@@ -4,6 +4,14 @@ ListModel {
     property string name: ""
     property var list: []
     property var active: []
+    onActiveChanged: console.log("active", active)
+
+    function toggleFilter(item) {
+        if (active.indexOf(item) === -1) active.push(item)
+        else active.splice(active.indexOf(item))
+        active.sort()
+        activeChanged()
+    }
 
     function insertPosition(item) {
         var i = 0
