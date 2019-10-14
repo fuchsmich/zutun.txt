@@ -3,6 +3,7 @@ import QtQuick 2.0
 ListModel {
     property string name: ""
     property var list: []
+    onListChanged: console.log("list", list)
     property var active: []
     onActiveChanged: console.log("active", active)
 
@@ -11,6 +12,7 @@ ListModel {
         else active.splice(active.indexOf(item))
         active.sort()
         activeChanged()
+        listChanged()
     }
 
     function insertPosition(item) {
