@@ -119,6 +119,27 @@ function getMatchesLine(task, pattern) {
     return (trimmedMatches ? trimmedMatches : [])
 }
 
+function getMatchesList2(text, pattern) {
+    //console.log("isarray", Array.isArray(text))
+    //console.log("typeof", typeof text)
+    //console.log("matches", text.match(pattern))
+    //var taskList = []
+    var matchesList = []
+
+    if (Array.isArray(text)) text = text.join("\n")
+
+    var matches = text.match(pattern)
+
+    var match = "";
+    for (var i in matches) {
+        match = matches[i].trim()
+        if (matchesList.indexOf(match) === -1) matchesList.push(match)
+    }
+    matchesList.sort()
+    console.log("matcheslist", matchesList)
+    return matchesList;
+}
+
 var projects = {
     pattern: /(^|\s)(\+\S+)/g ,
     /* get list of projects for tasklist*/
@@ -129,6 +150,9 @@ var projects = {
     listLine: function(task) {
         //console.log(getMatchesLine(task, projects.pattern))
         return getMatchesLine(task, this.pattern)
+    },
+    getList: function(text) {
+        return getMatchesList2(text, this.pattern)
     }
 }
 
@@ -141,6 +165,9 @@ var contexts = {
     /* get list of contexts for task*/
     listLine: function(task) {
         return getMatchesLine(task, this.pattern)
+    },
+    getList: function(text) {
+        return getMatchesList2(text, this.pattern)
     }
 }
 

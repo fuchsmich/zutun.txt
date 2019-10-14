@@ -106,7 +106,7 @@ ApplicationWindow {
 
     TaskListModel {
         id: taskListModel
-        section: sorting.grouping
+        //section: sorting.grouping
         projectColor: "red"
         contextColor: "blue"
         onListChanged: taskDelegateModel.resort()

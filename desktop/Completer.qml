@@ -75,12 +75,13 @@ Rectangle {
 
             MonthGrid {
                 id: grid
-                month: Calendar.December
-                year: 2015
+                //month: Calendar.December
+                //year: 2015
                 locale: Qt.locale()
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                onClicked: console.log(date)
             }
         }
     }
