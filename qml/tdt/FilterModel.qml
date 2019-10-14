@@ -33,4 +33,8 @@ ListModel {
             }
         }
     }
+    onDataChanged: {
+        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles.length, roles[0], data(topLeft, roles[0]))
+
+    }
 }
