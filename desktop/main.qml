@@ -183,38 +183,35 @@ ApplicationWindow {
         }
     }
     menuBar:  ToolBar {
-        width: page.width
-        Column {
-            width: parent.width
-            RowLayout {
-                //Actions
-                ToolButton {
-                    action: addTaskAction
-                }
+        //width: app.window.width
+        RowLayout {
+            //Actions
+            ToolButton {
+                action: addTaskAction
+            }
 
-                //Filter
-                ToolButton {
-                    action: filterHideDoneAction
-                }
-                ToolButton {
-                    action: filterShowSearchBarAction
-                }
+            //Filter
+            ToolButton {
+                action: filterHideDoneAction
+            }
+            ToolButton {
+                action: filterShowSearchBarAction
+            }
 
-                //Sort
-                ToolButton {
-                    action: toogleSortOrderAction
-                }
-                ComboBox {
-                    model: {
-                        var m = []
-                        for (var i in sorting.groupFunctionList) {
-                            m.push(sorting.groupFunctionList[i][0])
-                        }
-                        return m
+            //Sort
+            ToolButton {
+                action: toogleSortOrderAction
+            }
+            ComboBox {
+                model: {
+                    var m = []
+                    for (var i in sorting.groupFunctionList) {
+                        m.push(sorting.groupFunctionList[i][0])
                     }
-                    currentIndex: sorting.grouping
-                    onCurrentIndexChanged: sorting.grouping = currentIndex
+                    return m
                 }
+                currentIndex: sorting.grouping
+                onCurrentIndexChanged: sorting.grouping = currentIndex
             }
         }
     }
@@ -257,14 +254,14 @@ ApplicationWindow {
                     })
                 }
             }
-//            ItemDelegate {
-//                text: qsTr("(Re)Read File")
-//                width: parent.width
-//                onClicked: {
-//                    todoTxtFile.read()
-//                    drawer.close()
-//                }
-//            }
+            //            ItemDelegate {
+            //                text: qsTr("(Re)Read File")
+            //                width: parent.width
+            //                onClicked: {
+            //                    todoTxtFile.read()
+            //                    drawer.close()
+            //                }
+            //            }
             ItemDelegate {
                 text: qsTr("Filters")
                 width: parent.width
