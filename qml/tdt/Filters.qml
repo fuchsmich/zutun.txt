@@ -2,6 +2,7 @@ import QtQuick 2.0
 import "../tdt/todotxt.js" as JS
 
 QtObject {
+    id: filters
     signal filtersChanged()
     property ListModel taskList
 
@@ -24,12 +25,14 @@ QtObject {
         list: taskListModel.projects
         //active: filterSettings.projects.value
         onActiveChanged: filtersChanged()
+        numTasksHavingItem: filters.numTasksHavingItem
     }
     property FilterModel contexts: FilterModel {
         name: "contexts"
         list: taskListModel.contexts
         //active: filterSettings.contexts.value
         onActiveChanged: filtersChanged()
+        numTasksHavingItem: filters.numTasksHavingItem
     }
 
     function clearFilter(filterName) {
@@ -53,7 +56,7 @@ QtObject {
         return true
     }
 
-    function numTasksWithItem(item, visible) {
+    function numTasksHavingItem(item, visible) {
         var num = 0
         for (var i = 0; i < taskList.count; i++ ) {
             if (taskList.get(i).fullTxt.indexOf(item) > -1) {

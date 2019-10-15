@@ -8,26 +8,30 @@ Page {
         Column {
             Label { text: qsTr("Projects") }
             Repeater {
-                property var f: filters.projects
-                model: f.list
+                model: filters.projects.list
                 ItemDelegate {
                     width:page.width
                     checkable: true
-                    //TODO doesnt work
-                    checked: filters.projects.active.indexOf(modelData) !== -1
-                    text: modelData + "(%1/%2)".arg(filters.numTasksWithItem(modelData)).arg(filters.numTasksWithItem(modelData))
+                    checked: filters.projects.itemActive(modelData)
+                    text: modelData + "(%1/%2)".arg(
+                              filters.projects.numTasksHavingItem(modelData, true)).arg(
+                              filters.projects.numTasksHavingItem(modelData, false))
                     onClicked: filters.projects.toggleFilter(modelData)
+                    highlighted: checked
                 }
             }
             Label { text: qsTr("Contexts") }
             Repeater {
-                property var f: filters.contexts
-                model: f.list
+                model: filters.contexts.list
                 ItemDelegate {
+                    width:page.width
                     checkable: true
-                    checked: f.active.indexOf(item) !== -1
-                    text: modelData
-                    onClicked: f.toggleFilter(modelData)
+                    checked: filters.contexts.itemActive(modelData)
+                    text: modelData + "(%1/%2)".arg(
+                              filters.contexts.numTasksHavingItem(modelData, true)).arg(
+                              filters.contexts.numTasksHavingItem(modelData, false))
+                    onClicked: filters.contexts.toggleFilter(modelData)
+                    highlighted: checked
                 }
             }
         }

@@ -12,6 +12,7 @@ ListModel {
     property var projects: {
         return JS.projects.getList(textList)
     }
+    //onProjectsChanged: console.log("projects", projects)
     property var contexts: {
         return JS.contexts.getList(textList)
     }
@@ -74,7 +75,7 @@ ListModel {
     }
 
     function addTask(text) {
-        console.log("adding", text)
+        //console.log("adding", text)
         append(lineToJSON(text))
         saveList()
     }
@@ -110,18 +111,19 @@ ListModel {
             list.push(get(i).fullTxt)
         }
         list.sort()
+        textList = list
         //console.log("Saving:", list.join("\n"))
         todoTxtFile.content = list.join("\n")
     }
 
     onDataChanged: {
-        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles.length, roles[0], data(topLeft, roles[0]))
+        //console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles.length, roles[0], data(topLeft, roles[0]))
 
         if (roles[0] >= JS.baseFeatures.fullTxt && roles[0] <= JS.baseFeatures.creationDate) {
             var oldLine = get(topLeft.row).fullTxt
             var newValue = data(topLeft, roles[0])
             var newLine = JS.baseFeatures.modifyLine(oldLine, roles[0], newValue)
-            console.log(newLine)
+            //console.log(newLine)
             set(topLeft.row, lineToJSON(newLine))
         }
 
