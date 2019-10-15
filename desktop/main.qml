@@ -39,7 +39,7 @@ ApplicationWindow {
         //kann kein array speichern??
         //property alias projectsActive: filters.projects.active
         //property alias contextsActive: filters.contexts.active
-        property alias showSearchBar: filterShowSearchBar.checked
+        property alias showSearchBar: filterShowSearchBarAction.checked
     }
 
     Settings {
@@ -82,7 +82,7 @@ ApplicationWindow {
     }
 
     Action {
-        id: filterShowSearchBar
+        id: filterShowSearchBarAction
         icon.name: "search"
         text: "Show Search"
         checkable: true
@@ -92,7 +92,7 @@ ApplicationWindow {
         id: filterActivateSearch
         shortcut: "Ctrl+F"
         onTriggered: {
-            filterShowSearchBar.checked = true
+            filterShowSearchBarAction.checked = true
         }
     }
 
@@ -157,7 +157,6 @@ ApplicationWindow {
         }
     }
 
-
     header: ToolBar {
         contentHeight: menuButton.implicitHeight
         RowLayout {
@@ -198,7 +197,7 @@ ApplicationWindow {
                     action: filterHideDoneAction
                 }
                 ToolButton {
-                    action: filterShowSearchBar
+                    action: filterShowSearchBarAction
                 }
 
                 //Sort

@@ -31,7 +31,8 @@ Page {
         headerPositioning: ListView.OverlayHeader
         header: ToolBar {
             width: page.width
-            visible: filterShowSearchBar.checked
+            height: (visible ? row.height : 0)
+            visible: filterShowSearchBarAction.checked
             RowLayout {
                 id: row
                 width: parent.width
@@ -49,7 +50,7 @@ Page {
                         if (!visible) text = ""
                         else forceActiveFocus()
                     }
-                    Keys.onEscapePressed: filterShowSearchBar.checked = false
+                    Keys.onEscapePressed: filterShowSearchBarAction.checked = false
                     Connections {
                         target: filterActivateSearch
                         onTriggered: {
