@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.1
 
 Page {
     id: page
-    anchors.fill: parent
+    anchors.fill: app.window
     title: "Tasklist"
 
     ListView {
@@ -19,8 +19,8 @@ Page {
             Label {
                 text: section
                 font.pixelSize: Qt.application.font.pixelSize * 1.6
-                onZChanged: app.maxZ = Math.max(z, app.maxZ)
-                Component.onCompleted: app.maxZ = Math.max(z, app.maxZ)
+                //                onZChanged: app.maxZ = Math.max(z, app.maxZ)
+                //                Component.onCompleted: app.maxZ = Math.max(z, app.maxZ)
             }
         }
         section.property: "section"
@@ -31,77 +31,46 @@ Page {
         headerPositioning: ListView.OverlayHeader
         header: ToolBar {
             width: page.width
-            Column {
+            visible: filterShowSearchBar.checked
+            RowLayout {
+                id: row
                 width: parent.width
-                RowLayout {
-                    //Actions
-                    ToolButton {
-                        action: addTaskAction
+                TextField {
+                    id: searchField
+                    property bool keepFocus: false
+                    Layout.fillWidth: true
+                    placeholderText: qsTr("Search")
+                    focus: true
+                    onTextChanged: {
+                        keepFocus = true
+                        filters.searchString = text
                     }
-
-                    //Filter
-                    ToolButton {
-                        action: filterHideDoneAction
+                    onVisibleChanged: {
+                        if (!visible) text = ""
+                        else forceActiveFocus()
                     }
-                    ToolButton {
-                        action: filterShowSearchBar
-                    }
-
-                    //Sort
-                    ToolButton {
-                        action: toogleSortOrderAction
-                    }
-                    ComboBox {
-                        model: {
-                            var m = []
-                            for (var i in sorting.groupFunctionList) {
-                                m.push(sorting.groupFunctionList[i][0])
-                            }
-                            return m
+                    Keys.onEscapePressed: filterShowSearchBar.checked = false
+                    Connections {
+                        target: filterActivateSearch
+                        onTriggered: {
+                            searchField.forceActiveFocus()
+                            searchField.selectAll()
                         }
-                        currentIndex: sorting.grouping
-                        onCurrentIndexChanged: sorting.grouping = currentIndex
                     }
+                    onActiveFocusChanged: {
+                        //console.log("activefocus", activeFocus)
+                        if (keepFocus) forceActiveFocus()
+                        keepFocus = false
+                    }
+                    Completer { }
                 }
-                RowLayout {
-                    visible: filterShowSearchBar.checked
-                    width: parent.width
-                    TextField {
-                        id: searchField
-                        property bool keepFocus: false
-                        Layout.fillWidth: true
-                        placeholderText: qsTr("Search")
-                        focus: true
-                        onTextChanged: {
-                            keepFocus = true
-                            filters.searchString = text
-                        }
-                        onVisibleChanged: {
-                            if (!visible) text = ""
-                            else forceActiveFocus()
-                        }
-                        Keys.onEscapePressed: filterShowSearchBar.checked = false
-                        Connections {
-                            target: filterActivateSearch
-                            onTriggered: {
-                                searchField.forceActiveFocus()
-                                searchField.selectAll()
-                            }
-                        }
-                        onActiveFocusChanged: {
-                            //console.log("activefocus", activeFocus)
-                            if (keepFocus) forceActiveFocus()
-                            keepFocus = false
-                        }
-                        Completer { }
-                    }
-                    ToolButton {
-                        icon.name: "edit-clear"
-                        onClicked: searchField.clear()
-                    }
+                ToolButton {
+                    icon.name: "edit-clear"
+                    onClicked: searchField.clear()
                 }
             }
         }
+
         //Keys.onPressed: console.log(currentIndex)
         //Component.onCompleted: forceActiveFocus()
         onCurrentIndexChanged: app.currentTaskIndex = currentIndex

@@ -23,8 +23,31 @@ ApplicationWindow {
     title: qsTr("ZuTun.txt")
 
     property int currentTaskIndex: -1
-    property real maxZ: -100
-    onMaxZChanged: console.log("maxZ", maxZ)
+    //    property real maxZ: -100
+    //    onMaxZChanged: console.log("maxZ", maxZ)
+
+    Settings {
+        id: settings
+        property alias todoTxtFileLocation: todoTxtFile.path
+        property alias width: app.width
+        property alias height: app.height
+    }
+
+    Settings {
+        category: "Filters"
+        property alias hideDone: filters.hideDone
+        //kann kein array speichern??
+        //property alias projectsActive: filters.projects.active
+        //property alias contextsActive: filters.contexts.active
+        property alias showSearchBar: filterShowSearchBar.checked
+    }
+
+    Settings {
+        category: "Sorting"
+        property alias asc: sorting.asc
+        property alias key: sorting.order
+        property alias grouping: sorting.grouping
+    }
 
     Action {
         id: addTaskAction
@@ -36,6 +59,7 @@ ApplicationWindow {
     }
 
     Action {
+        //TODO remorse delete
         id: deleteTaskAction
         icon.name: "delete"
         text: qsTr("&Delete Task")
@@ -83,12 +107,6 @@ ApplicationWindow {
         shortcut: "Ctrl+S"
     }
 
-    Settings {
-        id: settings
-        property alias todoTxtFileLocation: todoTxtFile.path
-        property alias width: app.width
-        property alias height: app.height
-    }
 
     FileIO {
         id: todoTxtFile
@@ -113,26 +131,12 @@ ApplicationWindow {
         //onItemChanged: taskDelegateModel.resortItem(index)
     }
 
-    Settings {
-        category: "Filters"
-        property alias hideDone: filters.hideDone
-        //kann kein array speichern??
-        //property alias projectsActive: filters.projects.active
-        //property alias contextsActive: filters.contexts.active
-        property alias showSearchBar: filterShowSearchBar.checked
-    }
     Filters {
         id: filters
         onFiltersChanged: taskDelegateModel.resort()
         taskList: taskListModel
     }
 
-    Settings {
-        category: "Sorting"
-        property alias asc: sorting.asc
-        property alias key: sorting.order
-        property alias grouping: sorting.grouping
-    }
     Sorting {
         id: sorting
         onSortingChanged: taskDelegateModel.resort()
@@ -179,6 +183,42 @@ ApplicationWindow {
             }
         }
     }
+    menuBar:  ToolBar {
+        width: page.width
+        Column {
+            width: parent.width
+            RowLayout {
+                //Actions
+                ToolButton {
+                    action: addTaskAction
+                }
+
+                //Filter
+                ToolButton {
+                    action: filterHideDoneAction
+                }
+                ToolButton {
+                    action: filterShowSearchBar
+                }
+
+                //Sort
+                ToolButton {
+                    action: toogleSortOrderAction
+                }
+                ComboBox {
+                    model: {
+                        var m = []
+                        for (var i in sorting.groupFunctionList) {
+                            m.push(sorting.groupFunctionList[i][0])
+                        }
+                        return m
+                    }
+                    currentIndex: sorting.grouping
+                    onCurrentIndexChanged: sorting.grouping = currentIndex
+                }
+            }
+        }
+    }
 
     footer: ToolBar {
         RowLayout {
@@ -218,14 +258,14 @@ ApplicationWindow {
                     })
                 }
             }
-            ItemDelegate {
-                text: qsTr("(Re)Read File")
-                width: parent.width
-                onClicked: {
-                    todoTxtFile.read()
-                    drawer.close()
-                }
-            }
+//            ItemDelegate {
+//                text: qsTr("(Re)Read File")
+//                width: parent.width
+//                onClicked: {
+//                    todoTxtFile.read()
+//                    drawer.close()
+//                }
+//            }
             ItemDelegate {
                 text: qsTr("Filters")
                 width: parent.width

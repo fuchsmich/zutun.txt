@@ -20,14 +20,14 @@ QtObject {
     property string searchString: ""
     onSearchStringChanged: filtersChanged()
 
-    property FilterModel projects: FilterModel {
+    property ProjectContextFilter projects: ProjectContextFilter {
         name: "projects"
         list: taskListModel.projects
         //active: filterSettings.projects.value
         onActiveChanged: filtersChanged()
         numTasksHavingItem: filters.numTasksHavingItem
     }
-    property FilterModel contexts: FilterModel {
+    property ProjectContextFilter contexts: ProjectContextFilter {
         name: "contexts"
         list: taskListModel.contexts
         //active: filterSettings.contexts.value
@@ -67,35 +67,4 @@ QtObject {
         }
         return num
     }
-
-//    /* set filter; name... filterstring; onOff... turn it on (true) or off (false)*/
-//    function setByName(name, onOff) {
-//        var list = [];
-//        switch (name.charAt(0)) {
-//        case "+": list = projects.active; break;
-//        case "@": list = contexts.active; break;
-//        default: return;
-//        }
-//        if (onOff) list.push(name);
-//        else list.splice(list.indexOf(name), 1);
-//        list.sort();
-//        switch (name.charAt(0)) {
-//        case "+": filterSettings.projects.value = list; break;
-//        case "@": filterSettings.contexts.value = list; break;
-//        default: return;
-//        }
-//    }
-
-//    function parseList() {
-//        var taskList = tasksModel
-//        var filterList = []
-//        projects.clear()
-//        contexts.clear()
-//        for (var i = 0; i < taskList.count; i++) {
-//            var item = taskList.get(i)
-//            projects.addFilterItems(JS.projects.listLine(item.fullTxt), filters.visibility(item))
-//            contexts.addFilterItems(JS.contexts.listLine(item.fullTxt), filters.visibility(item))
-//        }
-//    }
-
 }

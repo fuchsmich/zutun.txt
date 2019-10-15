@@ -24,12 +24,12 @@ DelegateModel {
     }
 
     function addTaskItem(data) {
-        console.log("diesdas")
+        //console.log("diesdas")
 
         items.insert(0, data)
         var newItem = items.create(0)
         newItem.state = "add"
-        console.log(newItem.state, newItem.item)
+        //console.log(newItem.state, newItem.item)
         newItem.item.forceActiveFocus()
     }
 
@@ -63,7 +63,7 @@ DelegateModel {
             if (visibility(item.model)) {
                 if (item.model.priority.charCodeAt(0) > defaultPriority.charCodeAt(0)) defaultPriority = item.model.priority
                 model.get(item.model.index).section = getSection(item.model.fullTxt).join(', ')
-                console.log("section", item.model.section, getSection(item.model.fullTxt).join(', '))
+                //console.log("section", item.model.section, getSection(item.model.fullTxt).join(', '))
                 var index = insertPosition(lessThan, item)
                 item.groups = ["items"]
                 items.move(item.itemsIndex, index)
@@ -90,16 +90,16 @@ DelegateModel {
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
     }
 
-    function resortItem(index) {
-        console.log("resort item", index)
-        for (var i = 0; i < items.count; i++) {
-            var item = items.get(i)
-            if (item.model.index === index) {
-                item.groups = "unsorted"
-                return
-            }
-        }
-    }
+//    function resortItem(index) {
+//        //console.log("resort item", index)
+//        for (var i = 0; i < items.count; i++) {
+//            var item = items.get(i)
+//            if (item.model.index === index) {
+//                item.groups = "unsorted"
+//                return
+//            }
+//        }
+//    }
 
     items.includeByDefault: false
     //filterOnGroup: "items"

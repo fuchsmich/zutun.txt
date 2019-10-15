@@ -3,7 +3,7 @@ import QtQuick.Controls 2.5
 
 Page {
     id: page
-    width: parent.width
+    anchors.fill: app.window
     Flickable {
         Column {
             Label { text: qsTr("Projects") }
