@@ -12,7 +12,7 @@ ListModel {
     property var projects: {
         return JS.projects.getList(textList)
     }
-    //onProjectsChanged: console.log("projects", projects)
+    onProjectsChanged: console.log("projects", projects)
     property var contexts: {
         return JS.contexts.getList(textList)
     }

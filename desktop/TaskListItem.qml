@@ -161,15 +161,16 @@ Loader {
             text: model.fullTxt
             Keys.onEscapePressed: {
                 loader.state = "view"
-                loader.DelegateModel.inItems = false
+                //loader.DelegateModel.inItems = false
             }
             onEditingFinished: {
                 loader.state = "view"
                 loader.addTask(text)
-                loader.DelegateModel.inItems = false
+                //loader.DelegateModel.inItems = false
             }
-            Component.onCompleted: forceActiveFocus() //does not work here??
-            Completer { }
+            Completer {
+               model: [].concat(taskListModel.projects).concat(taskListModel.contexts)
+            }
         }
     }
 
@@ -197,9 +198,4 @@ Loader {
             }
         }
     ]
-    //onStateChanged: console.log("Item:", model.index,  "state:", state, )
-
-//    Component.onCompleted: {
-//        console.log("Item:", model.index,  "state:", state)
-//    }
 }
