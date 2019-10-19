@@ -160,17 +160,18 @@ Loader {
         TextField {
             text: model.fullTxt
             Keys.onEscapePressed: {
-                loader.state = "view"
-                //loader.DelegateModel.inItems = false
+                //loader.state = "view"
+                loader.DelegateModel.groups = ""
             }
             onEditingFinished: {
-                loader.state = "view"
+                loader.DelegateModel.groups = ""
+                //loader.state = "view"
                 loader.addTask(text)
-                //loader.DelegateModel.inItems = false
             }
             Completer {
                model: [].concat(taskListModel.projects).concat(taskListModel.contexts)
             }
+            Component.onCompleted: console.log("groups", loader.DelegateModel.groups)
         }
     }
 
@@ -198,4 +199,5 @@ Loader {
             }
         }
     ]
+    onStateChanged: console.log("state", loader.state, "groups", loader.DelegateModel.groups)
 }
