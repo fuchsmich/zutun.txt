@@ -46,7 +46,8 @@ Loader {
                     width: taskListItem.width//loader.width - doneCB.width
                     height: Math.max(doneCB.height, subjectLbl.height)
                     highlighted: loader.DelegateModel.itemsIndex === loader.ListView.view.currentIndex
-                    onClicked:{
+                    onClicked: loader.ListView.view.currentIndex = model.index
+                    onDoubleClicked:{
                         loader.state = "edit"
                     }
                     CheckBox {
@@ -169,9 +170,10 @@ Loader {
                 loader.addTask(text)
             }
             Completer {
-               model: [].concat(taskListModel.projects).concat(taskListModel.contexts)
+               model: app.completerKeywords
+               calendarKeywords: app.completerCalendardKeywords
             }
-            Component.onCompleted: console.log("groups", loader.DelegateModel.groups)
+            //Component.onCompleted: console.log("groups", loader.DelegateModel.groups)
         }
     }
 
@@ -199,5 +201,5 @@ Loader {
             }
         }
     ]
-    onStateChanged: console.log("state", loader.state, "groups", loader.DelegateModel.groups)
+    //onStateChanged: console.log("state", loader.state, "groups", loader.DelegateModel.groups)
 }

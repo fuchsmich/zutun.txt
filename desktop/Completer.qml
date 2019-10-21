@@ -8,16 +8,15 @@ import QtQuick.Layouts 1.3
 Rectangle {
     id: completer
 
-    property TextInput textInput
-    property var model: ["asddasd", "asdasd", "asdsadas", "adasd"]
-    readonly property var completionModel: { model.filter(function(currentValue){
-        //console.log(currentValue, completionPrefix)
-        //if (completionPrefix.length >=  minCompletionPrefixLength)
-        return currentValue.startsWith(completionPrefix)
-        //else return false
-    }) }
-    readonly property int completionCount: completionModel.length
+    property var model: []
+    property var calendarKeywords: []
     property int minCompletionPrefixLength: 1
+
+    signal activated(int index, string text)
+    onActivated: console.log("selected", index, text)
+
+    property TextInput textInput
+    Component.onCompleted: textInput = parent
     readonly property var completionPrefix: {
         var match = textInput.text.substring(0, textInput.cursorPosition).match(/(^.*\s|^)(\S+)$/)
         if (match) {
@@ -25,23 +24,28 @@ Rectangle {
         }
         else return ""
     }
-    onCompletionPrefixChanged: console.debug(completionPrefix)
-    onCompletionModelChanged: console.debug(completionModel)
-    property var calendarKeywords: ["due:"]
+    onCompletionPrefixChanged: manualTrigger = false
+    property bool manualTrigger: false
+    readonly property var completionModel: { model.filter(function(currentValue){
+        //console.log(currentValue, completionPrefix)
+        if (completionPrefix.length >= minCompletionPrefixLength || manualTrigger)
+        return currentValue.startsWith(completionPrefix)
+        //else return false
+    }) }
+    readonly property int completionCount: completionModel.length
+//    onCompletionPrefixChanged: console.debug(completionPrefix)
+//    onCompletionModelChanged: console.debug(completionModel)
 
-    signal activated(int index, string text)
-    onActivated: console.log("selected", index, text)
-
-    z: 10 //parent.z + 100000
+    //z: 10 //parent.z + 100000
     visible: loader.status === Loader.Ready//(completionPrefix.length >= Math.max(1, minCompletionPrefixLength) && completionCount > 0)
     width: loader.width + 2*anchors.leftMargin
     height: loader.height //Math.min(200, lv.contentHeight)
     anchors.leftMargin: 5 //TODO what here?
     anchors.rightMargin: anchors.leftMargin
     border.color: "black"
+
     readonly property point positionInParent: textInput.mapToItem(parent, textInput.x + textInput.cursorRectangle.x - prefixItem.width - anchors.leftMargin,
                                                                   textInput.y + textInput.cursorRectangle.y + textInput.cursorRectangle.height)
-
     x: positionInParent.x
     y: positionInParent.y
     Text {
@@ -49,6 +53,23 @@ Rectangle {
         id: prefixItem
         text: completionPrefix
         visible: false
+    }
+
+    Keys.onPressed: console.log("key", event.key)
+    Keys.onSpacePressed: {
+        if (event.modifiers === Qt.ControlModifier) {
+            console.log("Ctrl+space")
+            //completionModel.triggered(true)
+            manualTrigger = true
+            event.accepted = true
+        }
+        else event.accepted = false
+    }
+
+    Component {
+        id: keyHandlerComp
+        Item {
+        }
     }
 
     Component {
@@ -90,7 +111,7 @@ Rectangle {
         id: listComp
         ListView {
             width: contentItem.childrenRect.width
-            height: Math.min(contentItem.childrenRect.height, 50)
+            height: Math.min(contentItem.childrenRect.height, 200)
             model: completionModel
             delegate: Text {
                 text: modelData
@@ -101,6 +122,13 @@ Rectangle {
             }
             ScrollIndicator.vertical: ScrollIndicator { }
             clip: true
+            //Keys.onDownPressed: incrementCurrentIndex()
+            //Keys.onUpPressed: decrementCurrentIndex()
+            highlight: Rectangle {
+                color: "lightsteelblue"
+                opacity: 0.5
+            }
+            focus: true
         }
     }
 
@@ -109,7 +137,7 @@ Rectangle {
         anchors.centerIn: parent
     }
 
-    state: "initial"
+    //state: "initial"
     states: [
         State {
             name: "calendar"
@@ -122,23 +150,34 @@ Rectangle {
         },
         State {
             name: "list"
-            when: (completionPrefix.length >= Math.max(1, minCompletionPrefixLength) && completionCount > 0)
+            when: completionCount > 0 //(completionPrefix.length >= Math.max(1, minCompletionPrefixLength) && completionCount > 0)
             extend: "initial"
             PropertyChanges {
                 target: loader
                 sourceComponent: listComp
             }
+            PropertyChanges {
+                target: textInput
+                Keys.forwardTo: [completer, loader.item]
+            }
         },
         State {
             name: "initial"
-            when: textInput
+            when: textInput.activeFocus
             ParentChange {
                 target: completer
                 parent: completer.ApplicationWindow.overlay
             }
+            PropertyChanges {
+                target: loader
+                sourceComponent: keyHandlerComp
+            }
+            PropertyChanges {
+                target: textInput
+                Keys.forwardTo: [completer]
+            }
         }
     ]
-    Component.onCompleted: textInput = parent
-    onParentChanged: console.log(parent)
-    onStateChanged: console.log(state)
+    onParentChanged: console.log("parent", parent, "state", state)
+    onStateChanged: console.log("state", state, "parent", parent)
 }

@@ -12,8 +12,7 @@ import "qrc:/tdt/qml/tdt/todotxt.js" as JS
 
 import FileIO 1.0
 
-
-//TODO icons don't work (in KDE??)
+//TODO icons don't work in Windows
 
 ApplicationWindow {
     id: app
@@ -23,6 +22,20 @@ ApplicationWindow {
     title: qsTr("ZuTun.txt")
 
     property int currentTaskIndex: -1
+    property var completerCalendardKeywords: ["due:", "t:"]
+    property var completerKeywords: {
+        var k = []
+        k = k.concat(taskListModel.projects)
+        k = k.concat(taskListModel.contexts)
+        for (var a in JS.alphabet) {
+            k.push("(" + JS.alphabet[a] + ")")
+        }
+        k = k.concat(completerCalendardKeywords)
+        k.sort()
+        //console.log(k, taskListModel.projects, completerCalendardKeywords)
+        return k
+    }
+
     //    property real maxZ: -100
     //    onMaxZChanged: console.log("maxZ", maxZ)
 

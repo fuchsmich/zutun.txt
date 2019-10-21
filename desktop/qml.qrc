@@ -8,5 +8,7 @@
         <file>Completer.qml</file>
         <file>Completer_copy.qml</file>
         <file>FilterPage.qml</file>
+        <file>SearchBar.qml</file>
+        <file>Completer_copy1.qml</file>
     </qresource>
 </RCC>

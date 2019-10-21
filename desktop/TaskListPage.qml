@@ -29,46 +29,10 @@ Page {
         focus: true
 
         headerPositioning: ListView.OverlayHeader
-        header: ToolBar {
-            width: page.width
-            height: (visible ? row.height : 0)
-            visible: filterShowSearchBarAction.checked
-            RowLayout {
-                id: row
-                width: parent.width
-                TextField {
-                    id: searchField
-                    property bool keepFocus: false
-                    Layout.fillWidth: true
-                    placeholderText: qsTr("Search")
-                    focus: true
-                    onTextChanged: {
-                        keepFocus = true
-                        filters.searchString = text
-                    }
-                    onVisibleChanged: {
-                        if (!visible) text = ""
-                        else forceActiveFocus()
-                    }
-                    Keys.onEscapePressed: filterShowSearchBarAction.checked = false
-                    Connections {
-                        target: filterActivateSearch
-                        onTriggered: {
-                            searchField.forceActiveFocus()
-                            searchField.selectAll()
-                        }
-                    }
-                    onActiveFocusChanged: {
-                        //console.log("activefocus", activeFocus)
-                        if (keepFocus) forceActiveFocus()
-                        keepFocus = false
-                    }
-                    Completer { }
-                }
-                ToolButton {
-                    icon.name: "edit-clear"
-                    onClicked: searchField.clear()
-                }
+        header: Loader {
+            sourceComponent: SearchBar {
+                width: page.width
+
             }
         }
 

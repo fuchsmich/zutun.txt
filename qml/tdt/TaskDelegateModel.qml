@@ -61,7 +61,7 @@ DelegateModel {
             var item = unsortedItems.get(0)
             //console.log(item.model.index, item.groups, item.isUnresolved)
             model.get(item.model.index).section = getSection(item.model.fullTxt).join(', ')
-            console.log("section", item.model.section, getSection(item.model.fullTxt).join(', '))
+            //console.log("section", item.model.section, getSection(item.model.fullTxt).join(', '))
             if (visibility(item.model)) {
                 if (item.model.priority.charCodeAt(0) > defaultPriority.charCodeAt(0)) defaultPriority = item.model.priority
                 var index = insertPosition(lessThan, item)
