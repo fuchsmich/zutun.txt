@@ -15,7 +15,7 @@ Rectangle {
     signal activated(int index, string text)
     onActivated: console.log("selected", index, text)
 
-    property TextInput textInput
+    property TextInput textInput: parent
     Component.onCompleted: textInput = parent
     readonly property var completionPrefix: {
         var match = textInput.text.substring(0, textInput.cursorPosition).match(/(^.*\s|^)(\S+)$/)
@@ -26,6 +26,7 @@ Rectangle {
     }
     onCompletionPrefixChanged: manualTrigger = false
     property bool manualTrigger: false
+    //property bool escPressed: false
     readonly property var completionModel: { model.filter(function(currentValue){
         //console.log(currentValue, completionPrefix)
         if (completionPrefix.length >= minCompletionPrefixLength || manualTrigger)
@@ -65,6 +66,7 @@ Rectangle {
         }
         else event.accepted = false
     }
+    Keys.onEscapePressed: completer.state = "initial"
 
     Component {
         id: keyHandlerComp
@@ -122,13 +124,19 @@ Rectangle {
             }
             ScrollIndicator.vertical: ScrollIndicator { }
             clip: true
-            //Keys.onDownPressed: incrementCurrentIndex()
-            //Keys.onUpPressed: decrementCurrentIndex()
             highlight: Rectangle {
                 color: "lightsteelblue"
                 opacity: 0.5
             }
             focus: true
+            Keys.onDownPressed: {
+                incrementCurrentIndex()
+                event.accepted
+            }
+            Keys.onUpPressed: {
+                decrementCurrentIndex()
+                event.accepted
+            }
         }
     }
 
