@@ -100,13 +100,6 @@ ApplicationWindow {
     }
 
     Action {
-        id: showSearchBarAction
-        icon.name: "search"
-        text: "Show Search"
-        checkable: true
-    }
-
-    Action {
         id: filterActivateSearch
         shortcut: "Ctrl+F"
         onTriggered: {
@@ -125,6 +118,12 @@ ApplicationWindow {
         shortcut: "Ctrl+S"
     }
 
+    Action {
+        id: showSearchBarAction
+        icon.name: "search"
+        text: "Show Search"
+        checkable: true
+    }
 
     FileIO {
         id: todoTxtFile
@@ -157,16 +156,17 @@ ApplicationWindow {
 
     Sorting {
         id: sorting
-        onSortingChanged: taskDelegateModel.resort()
-        onGroupingChanged: taskDelegateModel.resort()
+        onSortingChanged: {
+            taskDelegateModel.resort()
+        }
     }
 
     TaskDelegateModel {
         id: taskDelegateModel
         model: taskListModel
-        lessThanFunc: sorting.lessThanFunc
+        lessThanFunc: sorting.lessThanFunc //changed too late in sorting ??
+        getSectionFunc: sorting.getGroup //changed too late in sorting ??
         visibility: filters.visibility
-        getSection: sorting.getGroup
         delegate: TaskListItem {
             id: item
             width: app.width

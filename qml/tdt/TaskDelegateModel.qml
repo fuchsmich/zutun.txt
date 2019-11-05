@@ -19,7 +19,7 @@ DelegateModel {
         return true
     }
 
-    property var getSection: function (text) {
+    property var getSectionFunc: function (text) {
         return []
     }
 
@@ -60,68 +60,37 @@ DelegateModel {
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
             //console.log(item.model.index, item.groups, item.isUnresolved)
-            model.get(item.model.index).section = getSection(item.model.fullTxt).join(', ')
-            //console.log("section", item.model.section, getSection(item.model.fullTxt).join(', '))
+            //model.get(item.model.index).section = getSectionFunc(item.model.fullTxt).join(', ')
+            model.get(item.model.index).section = sorting.groupFunctionList[sorting.grouping][2](item.model.fullTxt).join(', ')
             if (visibility(item.model)) {
                 if (item.model.priority.charCodeAt(0) > defaultPriority.charCodeAt(0)) defaultPriority = item.model.priority
                 var index = insertPosition(lessThan, item)
                 item.groups = ["items"]
                 items.move(item.itemsIndex, index)
-                //Duplicate items
-                //model.get(item.model.index).section = "original"
-                //                if (!item.isUnresolved) {
-                //                    var data = JSON.parse(JSON.stringify(model.get(item.model.index)))
-                //                    data.section = "clone"
-                //                    duplicateItems.insert(JSON.parse(JSON.stringify(data)))
-                //                    console.log(JSON.stringify(data))
-                //                }
-                //}
             } else item.groups = "invisible"
         }
         sortFinished()
     }
 
     function resort() {
-        console.log("resort called")
-        //        for (var i = 0; i < persistedItems.count; i++) {
-        //            persistedItems.get(i).inPersistedItems = false
-        //        }
+        console.log("resort called", sorting.grouping)
         if (items.count > 0) items.setGroups(0, items.count, "unsorted")
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
     }
 
-//    function resortItem(index) {
-//        //console.log("resort item", index)
-//        for (var i = 0; i < items.count; i++) {
-//            var item = items.get(i)
-//            if (item.model.index === index) {
-//                item.groups = "unsorted"
-//                return
-//            }
-//        }
-//    }
-
     items.includeByDefault: false
-    //filterOnGroup: "items"
     groups: [
         DelegateModelGroup {
             id: unsortedItems
             name: "unsorted"
             includeByDefault: true
             onChanged: {
-                visualModel.sort(lessThanFunc)
+                visualModel.sort(sorting.groupFunctionList[sorting.grouping][1]) // changed too late ?? lessThanFunc)
             }
         },
         DelegateModelGroup {
             id: invisibleItems
             name: "invisible"
-        },
-        DelegateModelGroup {
-            id: duplicateItems
-            name: "duplicate"
-            onChanged: {
-                console.log(JSON.stringify(get(count-1).model))
-            }
         }
     ]
 }

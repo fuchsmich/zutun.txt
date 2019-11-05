@@ -19,9 +19,11 @@ QtObject {
     property string sortText: qsTr("Sorted by %1").arg(functionList[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc")))
     property string groupText: (grouping > 0 ? qsTr("Grouped by %1, ").arg(groupFunctionList[grouping][0]) : "")
 
-
     //returns a function, which compares two items
     property var lessThanFunc: groupFunctionList[grouping][1]
+
+    //returns a function, which returns a list of groups (=sections)
+    property var getGroup: groupFunctionList[grouping][2]
 
     //list of functions for sorting; *left* and *right* are the items to compare
     property var functionList: [
@@ -51,7 +53,6 @@ QtObject {
         }]
     ]
 
-    property var getGroup: groupFunctionList[grouping][2]
 
     //0..Name, 1..lessThanFunc, 2..return list of groups
     property var groupFunctionList: [
