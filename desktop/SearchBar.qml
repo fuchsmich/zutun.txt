@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.1
 ToolBar {
     width: page.width
     //height: (visible ? row.height : 0)
-    //visible: filterShowSearchBarAction.checked
+    //visible: showSearchBarAction.checked
     RowLayout {
         id: row
         width: parent.width
@@ -23,7 +23,7 @@ ToolBar {
                 if (!visible) text = ""
                 else forceActiveFocus()
             }
-            Keys.onEscapePressed: filterShowSearchBarAction.checked = false
+            Keys.onEscapePressed: showSearchBarAction.checked = false
             Connections {
                 target: filterActivateSearch
                 onTriggered: {

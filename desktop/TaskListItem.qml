@@ -83,7 +83,7 @@ Loader {
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
                         //height: parent.height
-                        visible: mouse.containsMouse
+                        visible: mouse.containsMouse || loader.ListView.isCurrentItem
                         opacity: 0.7
                         ToolButton {
                             display: AbstractButton.TextOnly

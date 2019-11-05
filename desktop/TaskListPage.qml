@@ -29,10 +29,48 @@ Page {
         focus: true
 
         headerPositioning: ListView.OverlayHeader
-        header: Loader {
-            sourceComponent: SearchBar {
-                width: page.width
+        header: Item {
+            width: page.width
+            height: 40* showSearchBarAction.checked //headerLoader.height//(headerLoader.status === Loader.Ready ? headerLoader.item.height : 0)
+            Loader {
+                id: headerLoader
+//                height: (status === Loader.Ready ? item.height : 0)
+//                state: "empty"
+                Component {
+                    id: searchComp
+                    SearchBar {
+                        width: page.width
+                    }
+                }
 
+                Component {
+                    id: emptyComp
+                    Item {
+                    }
+                }
+
+                states: [
+                    State {
+                        name: "search"
+                        when: showSearchBarAction.checked
+                        PropertyChanges {
+                            target: headerLoader
+                            sourceComponent: searchComp
+                            //height: headerLoader.item.height
+                        }
+                    }
+//                    ,
+//                    State {
+//                        name: "empty"
+//                        when: !showSearchBarAction.checked
+//                        PropertyChanges {
+//                            target: headerLoader
+//                            sourceComponent: emptyComp
+//                            height: 0
+//                        }
+//                    }
+                ]
+                onHeightChanged: console.log("height", height)
             }
         }
 

@@ -36,8 +36,9 @@ ApplicationWindow {
         return k
     }
 
-    //    property real maxZ: -100
-    //    onMaxZChanged: console.log("maxZ", maxZ)
+
+    //// Settings
+
 
     Settings {
         id: settings
@@ -52,7 +53,7 @@ ApplicationWindow {
         //kann kein array speichern??
         //property alias projectsActive: filters.projects.active
         //property alias contextsActive: filters.contexts.active
-        property alias showSearchBar: filterShowSearchBarAction.checked
+        property alias showSearchBar: showSearchBarAction.checked
     }
 
     Settings {
@@ -61,6 +62,9 @@ ApplicationWindow {
         property alias key: sorting.order
         property alias grouping: sorting.grouping
     }
+
+
+    //// Actions
 
     Action {
         id: addTaskAction
@@ -77,8 +81,9 @@ ApplicationWindow {
         icon.name: "delete"
         text: qsTr("&Delete Task")
         onTriggered: {
-            if (currentTaskIndex > -1 && currentTaskIndex < taskListModel.count) {
-                taskListModel.removeTask(currentTaskIndex)
+            //console.log(source, source.taskIndex)
+            if (source.taskIndex > -1 && source.taskIndex < taskListModel.count) {
+                taskListModel.removeTask(source.taskIndex)
             }
         }
         shortcut: "Delete"
@@ -95,7 +100,7 @@ ApplicationWindow {
     }
 
     Action {
-        id: filterShowSearchBarAction
+        id: showSearchBarAction
         icon.name: "search"
         text: "Show Search"
         checkable: true
@@ -105,7 +110,7 @@ ApplicationWindow {
         id: filterActivateSearch
         shortcut: "Ctrl+F"
         onTriggered: {
-            filterShowSearchBarAction.checked = true
+            showSearchBarAction.checked = true
         }
     }
 
@@ -208,7 +213,7 @@ ApplicationWindow {
                 action: filterHideDoneAction
             }
             ToolButton {
-                action: filterShowSearchBarAction
+                action: showSearchBarAction
             }
 
             //Sort
