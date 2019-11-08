@@ -30,7 +30,7 @@ Page {
                 visible: file.pathExists && !file.exists
                 text: qsTr("Create file")
                 onClicked: {
-                    taskListModel.file.create()
+                    file.create()
                 }
             }
         }
@@ -91,19 +91,19 @@ Page {
 
         model: taskDelegateModel
 
-        Connections {
-            target: taskDelegateModel
-            onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
-                                       {
-                                           taskIndex: index,
-                                           text: taskListModel.get(index).fullTxt
-                                       })
-        }
+//        Connections {
+//            target: taskDelegateModel
+//            onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
+//                                       {
+//                                           taskIndex: index,
+//                                           text: taskListModel.get(index).fullTxt
+//                                       })
+//        }
     }
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            taskListModel.readFile()
+            file.read()
             /* attach filter page: */
             if ( pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {

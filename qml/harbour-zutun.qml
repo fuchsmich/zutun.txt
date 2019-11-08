@@ -98,17 +98,6 @@ ApplicationWindow
         app.activate();
     }
 
-    Filters {
-        id: filters
-        onFiltersChanged: taskDelegateModel.resort()
-        tasksModel: taskListModel
-    }
-
-    Sorting {
-        id: sorting
-        onSortingChanged: taskDelegateModel.resort()
-    }
-
     FileIO {
         id: file
         property string hintText: ""
@@ -123,17 +112,64 @@ ApplicationWindow
         }
     }
 
+//    Filters {
+//        id: filters
+//        onFiltersChanged: taskDelegateModel.resort()
+//        tasksModel: taskListModel
+//    }
+
+//    Sorting {
+//        id: sorting
+//        onSortingChanged: taskDelegateModel.resort()
+//    }
+
+//    TaskListModel {
+//        id: taskListModel
+//        section: sorting.grouping
+//        onListChanged: taskDelegateModel.resort()
+//        projectColor: Theme.highlightColor
+//        contextColor: Theme.secondaryHighlightColor
+//    }
+
+//    TaskDelegateModel {
+//        id: taskDelegateModel
+//        model: taskListModel
+//    }
+
     TaskListModel {
         id: taskListModel
-        section: sorting.grouping
+        //section: sorting.grouping
+        projectColor: "red"
+        contextColor: "blue"
         onListChanged: taskDelegateModel.resort()
-        projectColor: Theme.highlightColor
-        contextColor: Theme.secondaryHighlightColor
+        //onItemChanged: taskDelegateModel.resortItem(index)
+    }
+
+    Filters {
+        id: filters
+        onFiltersChanged: taskDelegateModel.resort()
+        taskList: taskListModel
+    }
+
+    Sorting {
+        id: sorting
+        onSortingChanged: {
+            taskDelegateModel.resort()
+        }
     }
 
     TaskDelegateModel {
         id: taskDelegateModel
         model: taskListModel
+        lessThanFunc: sorting.lessThanFunc //changed too late in sorting ??
+        getSectionFunc: sorting.getGroup //changed too late in sorting ??
+        visibility: filters.visibility
+        delegate: TaskListItem {
+            id: item
+            width: app.width
+//            onAddTask: taskListModel.addTask(text)
+//            defaultPriority: taskDelegateModel.defaultPriority
+        }
     }
 }
 

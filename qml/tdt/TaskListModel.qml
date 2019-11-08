@@ -117,7 +117,7 @@ ListModel {
     }
 
     onDataChanged: {
-        //console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles.length, roles[0], data(topLeft, roles[0]))
+        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles.length, roles[0], data(topLeft, roles[0]))
 
         if (roles[0] >= JS.baseFeatures.fullTxt && roles[0] <= JS.baseFeatures.creationDate) {
             var oldLine = get(topLeft.row).fullTxt
