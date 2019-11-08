@@ -47,7 +47,7 @@ ApplicationWindow
             }
 
             //            property var contexts: []
-            onProjectsChanged: console.log(projects.toString())
+            //onProjectsChanged: console.log(projects.toString())
         }
 
         ConfigurationGroup {
@@ -147,8 +147,10 @@ ApplicationWindow
 
     Filters {
         id: filters
-        onFiltersChanged: taskDelegateModel.resort()
         taskList: taskListModel
+        projects.active: filterSettings.projects.value
+        contexts.active: filterSettings.contexts.value
+        onFiltersChanged: taskDelegateModel.resort()
     }
 
     Sorting {

@@ -72,7 +72,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 title: qsTr("Filter Projects")
-                model: filters.projects
+                model: filters.projects.list
                 btnTxt: qsTr("Clear Project Filters")
             }
         }
@@ -81,7 +81,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 title: qsTr("Filter Contexts")
-                model: filters.contexts
+                model: filters.contexts.list
                 btnTxt: qsTr("Clear Context Filters")
             }
         }
