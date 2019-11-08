@@ -17,7 +17,7 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/cover/zutun.png \
     qml/tdt/todotxt.js \
     qml/tdt/FileIO.qml \
-    qml/tdt/Notification.qml \
+    qml/components/Notification.qml \
     qml/pages/Settings.qml \
     qml/pages/TaskEdit.qml \
     qml/pages/TaskList.qml \
