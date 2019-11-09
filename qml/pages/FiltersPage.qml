@@ -34,16 +34,23 @@ Page {
             text: qsTr("No entries")
         }
 
+        property var filter: filters.projects
+        model: filter.list
         delegate: ListItem {
-            enabled: model.visibleItemCount > 0
-            highlighted: model.active
-            onClicked: filters.setByName(model.name, !model.active);
+            id: li
+            property int visibleCount: lv.filter.numTasksHavingItem(modelData, true)
+            property int invisibleCount: lv.filter.numTasksHavingItem(modelData, false)
+            property bool active: lv.filter.itemActive(modelData)
+            enabled: visibleCount > 0
+            highlighted: active
+            onClicked: lv.filter.toggleFilter(modelData)
             Label {
-                //                        id: lbl
-                color: (model.visibleItemCount > 0? Theme.primaryColor : Theme.secondaryColor)
+                color: (li.enabled ? Theme.primaryColor : Theme.secondaryColor)
                 anchors.verticalCenter: parent.verticalCenter
                 x: Theme.horizontalPageMargin
-                text: model.name + " (" + model.visibleItemCount + "/" + model.itemCount + ")"
+                text: modelData + "(%1/%2)".arg(
+                          li.visibleCount).arg(
+                          li.invisibleCount)
             }
         }
     }
@@ -51,17 +58,17 @@ Page {
         if (status === PageStatus.Active) {
             if ( pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {
-                    pageStack.pushAttached(Qt.resolvedUrl("TaskList.qml"), {});
+                    pageStack.pushAttached(Qt.resolvedUrl("TaskList.qml"), {})
                     if (skip) {
                         pageStack.navigateForward(PageStackAction.Immediate)
                         skip = false
                     }
                 } else {
-                    pageStack.replace(Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate);
+                    pageStack.replace(Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate)
                 }
             } else {
-                if (state == "contexts") { pageStack.pushAttached("OtherFilters.qml");}
-                if (state == "projects") pageStack.pushAttached("FiltersPage.qml", {state: "contexts"});
+                if (state == "contexts") pageStack.pushAttached("OtherFilters.qml")
+                if (state == "projects") pageStack.pushAttached("FiltersPage.qml", {state: "contexts"})
             }
         }
     }
@@ -72,7 +79,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 title: qsTr("Filter Projects")
-                model: filters.projects.list
+                filter: filters.projects
                 btnTxt: qsTr("Clear Project Filters")
             }
         }
@@ -81,7 +88,7 @@ Page {
             PropertyChanges {
                 target: lv;
                 title: qsTr("Filter Contexts")
-                model: filters.contexts.list
+                filter: filters.contexts
                 btnTxt: qsTr("Clear Context Filters")
             }
         }
