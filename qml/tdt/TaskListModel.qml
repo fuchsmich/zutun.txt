@@ -116,19 +116,38 @@ ListModel {
         todoTxtFile.content = list.join("\n")
     }
 
-    onDataChanged: {
-        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles.length, roles[0], data(topLeft, roles[0]))
+    function setTaskProperty(index, role, value) {
+        if (roles >= JS.baseFeatures.fullTxt && role <= JS.baseFeatures.creationDate) {
+            var oldLine = get(index).fullTxt
+            var newLine = JS.baseFeatures.modifyLine(oldLine, role, value)
+            console.log(newLine)
+            set(topLeft.row, lineToJSON(newLine))
+        }
+        saveList()
+    }
 
+    onDataChanged: {
+        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles, roles.size, roles[0], data(topLeft, roles[0]))
+
+
+        //in SFOS kommt kein "roles" an???
+        if (typeof roles.length === 'undefined') {
+            console.log("qt 5.6 qml can't handle role")
+        }
+
+
+        //replace below with (?): setTaskProperty(topLeft.row, roles[0], data(topLeft, roles[0]))
+        //property changed, sync other properties
         if (roles[0] >= JS.baseFeatures.fullTxt && roles[0] <= JS.baseFeatures.creationDate) {
             var oldLine = get(topLeft.row).fullTxt
             var newValue = data(topLeft, roles[0])
             var newLine = JS.baseFeatures.modifyLine(oldLine, roles[0], newValue)
-            //console.log(newLine)
+            console.log(newLine)
             set(topLeft.row, lineToJSON(newLine))
         }
 
-        //if fullTxt is set, list can be saved
-        if (roles[0] == JS.baseFeatures.fullTxt){
+        //fullTxt changed, list can be saved
+        if (roles[0] === JS.baseFeatures.fullTxt){
             saveList()
             //itemChanged(topLeft.row)
         }

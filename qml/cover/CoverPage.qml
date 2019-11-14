@@ -34,7 +34,7 @@ CoverBackground {
 
     onStatusChanged: {
         if (status === Cover.Active ) {
-            taskListModel.readFile();
+            //taskListModel.readFile();
         }
     }
 }

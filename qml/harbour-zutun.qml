@@ -29,13 +29,13 @@ ApplicationWindow
         path: "/apps/harbour-zutun/settings"
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
         property string doneTxtLocation: StandardPaths.documents + '/done.txt'
-        property bool autoSave: true
+        //property alias autoSave: file.autoSave
         property int fontSizeTaskList: Theme.fontSizeMedium
         property bool projectFilterLeft: false
         ConfigurationGroup {
             id: filterSettings
             path: "filters"
-            property bool hideDone: true
+            property alias hideDone: filters.hideDone
             //TODO filters are not stored (anymore?)
             property ConfigurationValue projects: ConfigurationValue {
                 key: "/apps/harbour-zutun/settings/filters/projects"

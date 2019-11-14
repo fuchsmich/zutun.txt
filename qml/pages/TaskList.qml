@@ -38,8 +38,8 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                text: (filterSettings.hideDone ? qsTr("Show") : qsTr("Hide")) + qsTr(" Completed Tasks")
-                onClicked: filterSettings.hideDone = !filterSettings.hideDone
+                text: (filters.hideDone ? qsTr("Show") : qsTr("Hide")) + qsTr(" Completed Tasks")
+                onClicked: filters.hideDone = !filters.hideDone
             }
         }
 
