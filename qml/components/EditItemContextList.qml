@@ -29,7 +29,7 @@ EditItem {
                 Label {
                     id: lbl
                     anchors.centerIn: parent
-                    text: model.name
+                    text: modelData
                 }
             }
             HorizontalScrollDecorator { }
