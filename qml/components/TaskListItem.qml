@@ -58,7 +58,8 @@ ListItem {
                 automaticCheck: false
                 checked: model.done
                 onClicked: {
-                    model.done = !checked
+                    //model.done = !checked
+                    taskListModel.setTaskProperty(model.index, JS.baseFeatures.done, !checked)
                     listItem.DelegateModel.groups = "unsorted"
                 }
             }

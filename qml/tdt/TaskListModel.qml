@@ -113,15 +113,15 @@ ListModel {
         list.sort()
         textList = list
         //console.log("Saving:", list.join("\n"))
-        todoTxtFile.content = list.join("\n")
+        //todoTxtFile.content = list.join("\n")
     }
 
     function setTaskProperty(index, role, value) {
-        if (roles >= JS.baseFeatures.fullTxt && role <= JS.baseFeatures.creationDate) {
+        if (role >= JS.baseFeatures.fullTxt && role <= JS.baseFeatures.creationDate) {
             var oldLine = get(index).fullTxt
             var newLine = JS.baseFeatures.modifyLine(oldLine, role, value)
-            console.log(newLine)
-            set(topLeft.row, lineToJSON(newLine))
+            console.log(index, newLine)
+            set(index, lineToJSON(newLine))
         }
         saveList()
     }
