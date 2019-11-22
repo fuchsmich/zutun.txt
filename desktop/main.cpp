@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QIcon>
+#include <QDebug>
 
 #include "fileio.hpp"
 
@@ -12,7 +13,9 @@ int main(int argc, char *argv[])
     app.setOrganizationName("fuxl.info");
     app.setOrganizationDomain("fuxl.info");
     app.setApplicationName("zutun.txt");
-    QIcon::setThemeName("breeze-dark");
+    QIcon::setThemeName("breeze-dark"); //TODO how to get this from environment?
+    //QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << "qrc:/icons");
+    //qDebug() << QIcon::fallbackSearchPaths();
 
     qmlRegisterType<FileIO>("FileIO", 1, 0, "FileIO");
 

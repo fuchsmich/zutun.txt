@@ -78,7 +78,8 @@ ApplicationWindow {
     Action {
         //TODO remorse delete
         id: deleteTaskAction
-        icon.name: "delete"
+        icon.name: "edit-delete"
+        icon.source: "icons/edit-delete.svg"
         text: qsTr("&Delete Task")
         onTriggered: {
             //console.log(source, source.taskIndex)
@@ -110,7 +111,7 @@ ApplicationWindow {
     Action {
         id: toogleSortOrderAction
         icon.name: "view-sort-ascending-name"
-        icon.cache: false
+        //icon.cache: false
         text: (!checked ? "Ascendending" : "Descendending")
         checkable: true
         checked: sorting.asc

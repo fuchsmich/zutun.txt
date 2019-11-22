@@ -10,5 +10,7 @@
         <file>FilterPage.qml</file>
         <file>SearchBar.qml</file>
         <file>Completer_copy1.qml</file>
+        <file>icons/edit-delete.svg</file>
+        <file>icons/edit-delete.png</file>
     </qresource>
 </RCC>
