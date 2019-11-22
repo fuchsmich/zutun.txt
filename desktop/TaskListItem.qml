@@ -46,7 +46,7 @@ Loader {
                     width: taskListItem.width//loader.width - doneCB.width
                     height: Math.max(doneCB.height, subjectLbl.height)
                     highlighted: loader.DelegateModel.itemsIndex === loader.ListView.view.currentIndex
-                    onClicked: loader.ListView.view.currentIndex = model.index
+                    onClicked: loader.ListView.view.currentIndex = loader.DelegateModel.itemsIndex
                     onDoubleClicked:{
                         loader.state = "edit"
                     }
