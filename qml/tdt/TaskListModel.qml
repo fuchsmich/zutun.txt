@@ -7,6 +7,8 @@ import "todotxt.js" as JS
 ListModel {
     signal listChanged()
     signal itemChanged(int index)
+    signal saveList(string content)
+
     property var textList: []
     //onTextListChanged: populateTextList()
     property var projects: {
@@ -77,12 +79,12 @@ ListModel {
     function addTask(text) {
         //console.log("adding", text)
         append(lineToJSON(text))
-        saveList()
+        _saveList()
     }
 
     function removeTask(index) {
         remove(index)
-        saveList()
+        _saveList()
     }
 
     function setTextList(newList) {
@@ -105,15 +107,15 @@ ListModel {
         listChanged()
     }
 
-    function saveList() {
+    function _saveList() {
         var list = []
         for (var i = 0; i < count; i++) {
             list.push(get(i).fullTxt)
         }
         list.sort()
         textList = list
-        //console.log("Saving:", list.join("\n"))
-        //todoTxtFile.content = list.join("\n")
+        console.log("Saving:", list.join("\n"))
+        saveList(list.join("\n"))
     }
 
     function setTaskProperty(index, role, value) {
@@ -123,7 +125,7 @@ ListModel {
             console.log(index, newLine)
             set(index, lineToJSON(newLine))
         }
-        saveList()
+        _saveList()
     }
 
     onDataChanged: {
@@ -148,7 +150,7 @@ ListModel {
 
         //fullTxt changed, list can be saved
         if (roles[0] === JS.baseFeatures.fullTxt){
-            saveList()
+            _saveList()
             //itemChanged(topLeft.row)
         }
     }

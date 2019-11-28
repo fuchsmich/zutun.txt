@@ -7,17 +7,7 @@ import "../tdt/todotxt.js" as JS
 ListItem {
     id: listItem
 
-//    property alias done: doneSw.checked
-//    property string priority: ""
-//    property alias subject: lbl.text
-//    property alias creationDate: cdLbl.text
-//    property alias due: dueLbl.text
-
-//    signal toggleDone()
     signal editItem()
-//    signal removeItem()
-//    signal prioUp()
-//    signal prioDown()
 
     property string minPriority: "F"
 
@@ -37,7 +27,7 @@ ListItem {
 
     function remove() {
         remorseAction(qsTr("Deleting"), function() {
-            removeItem()
+            taskListModel.removeTask(model.index)
         }, 3000)
     }
 
@@ -117,7 +107,8 @@ ListItem {
             visible: !(model.done || model.priority === "A")
             text: qsTr("Priority Up")
             onClicked: {
-                model.priority = priorityUpDown(model.priority, true)
+                taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, true))
+                //model.priority = priorityUpDown(model.priority, true)
                 listItem.DelegateModel.groups = "unsorted"
             }
         }
@@ -125,7 +116,8 @@ ListItem {
             visible: !(model.done || model.priority === "")
             text: qsTr("Priority Down")
             onClicked: {
-                model.priority = priorityUpDown(model.priority, true)
+                taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, false))
+                //model.priority = priorityUpDown(model.priority, true)
                 listItem.DelegateModel.groups = "unsorted"
             }
         }

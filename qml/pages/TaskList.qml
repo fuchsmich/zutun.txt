@@ -22,15 +22,15 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
             }
             MenuItem {
-                visible: file.writeable
+                visible: todoTxtFile.writeable
                 text: qsTr("Add New Task")
                 onClicked: app.addTask()
             }
             MenuItem {
-                visible: file.pathExists && !file.exists
+                visible: todoTxtFile.pathExists && !todoTxtFile.exists
                 text: qsTr("Create file")
                 onClicked: {
-                    file.create()
+                    todoTxtFile.create()
                 }
             }
         }
@@ -85,8 +85,8 @@ Page {
         ViewPlaceholder {
             enabled: lv.count === 0
             text: qsTr("No Tasks")
-            hintText: (file.hintText === ""? qsTr("Pull down to add task.")
-                                                : file.hintText)
+            hintText: (todoTxtFile.hintText === ""? qsTr("Pull down to add task.")
+                                                : todoTxtFile.hintText)
         }
 
         model: taskDelegateModel
@@ -103,7 +103,7 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            file.read()
+            todoTxtFile.read()
             /* attach filter page: */
             if ( pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {

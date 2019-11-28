@@ -99,7 +99,7 @@ ApplicationWindow
     }
 
     FileIO {
-        id: file
+        id: todoTxtFile
         property string hintText: ""
         path: settings.todoTxtLocation
 
@@ -142,6 +142,7 @@ ApplicationWindow
         projectColor: "red"
         contextColor: "blue"
         onListChanged: taskDelegateModel.resort()
+        onSaveList: todoTxtFile.save(content)
         //onItemChanged: taskDelegateModel.resortItem(index)
     }
 
