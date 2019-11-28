@@ -10,6 +10,8 @@ Page {
     ListView {
         id: taskListView
         anchors.fill: parent
+        //clip: true
+
         model: taskDelegateModel
 
         section.delegate: Rectangle {
@@ -27,7 +29,16 @@ Page {
         focus: true
 
         headerPositioning: ListView.OverlayHeader
-        header: Item {
+        header:
+        SearchBar {
+            width: page.width
+            z: 2
+            //visible: false
+        }
+
+
+            /*Item {
+            id: headerItem
             width: page.width
             height: 40* showSearchBarAction.checked //headerLoader.height//(headerLoader.status === Loader.Ready ? headerLoader.item.height : 0)
             Loader {
@@ -38,13 +49,6 @@ Page {
                         width: page.width
                     }
                 }
-
-                Component {
-                    id: emptyComp
-                    Item {
-                    }
-                }
-
                 states: [
                     State {
                         name: "search"
@@ -68,7 +72,7 @@ Page {
                 ]
                 onHeightChanged: console.log("height", height)
             }
-        }
+        }*/
 
         //Keys.onPressed: console.log(currentIndex)
         //Component.onCompleted: forceActiveFocus()
