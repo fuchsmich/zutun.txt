@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.1
 Page {
     id: page
     anchors.fill: app.window
-    title: "Tasklist"
+    title: "Tasklist" + " " + todoTxtFile.path
 
     ListView {
         id: taskListView
