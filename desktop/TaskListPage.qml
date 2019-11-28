@@ -19,8 +19,6 @@ Page {
             Label {
                 text: section
                 font.pixelSize: Qt.application.font.pixelSize * 1.6
-                //                onZChanged: app.maxZ = Math.max(z, app.maxZ)
-                //                Component.onCompleted: app.maxZ = Math.max(z, app.maxZ)
             }
         }
         section.property: "section"
@@ -34,8 +32,6 @@ Page {
             height: 40* showSearchBarAction.checked //headerLoader.height//(headerLoader.status === Loader.Ready ? headerLoader.item.height : 0)
             Loader {
                 id: headerLoader
-//                height: (status === Loader.Ready ? item.height : 0)
-//                state: "empty"
                 Component {
                     id: searchComp
                     SearchBar {

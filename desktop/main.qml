@@ -69,6 +69,7 @@ ApplicationWindow {
     Action {
         id: addTaskAction
         icon.name: "list-add"
+        icon.source: "icons/list-add.svg"
         text: qsTr("&Add Task")
         onTriggered: {
             taskDelegateModel.addTaskItem(taskListModel.lineToJSON(""))
@@ -93,6 +94,7 @@ ApplicationWindow {
     Action {
         id: filterHideDoneAction
         icon.name: "checkbox"
+        icon.source: "icons/checkbox.svg"
         text: qsTr("Hide &Done")
         checkable: true
         checked: filters.hideDone
@@ -110,7 +112,8 @@ ApplicationWindow {
 
     Action {
         id: toogleSortOrderAction
-        icon.name: "view-sort-ascending-name"
+        icon.name: "view-sort-ascending"
+        icon.source: "icons/view-sort-ascending.svg"
         //icon.cache: false
         text: (!checked ? "Ascendending" : "Descendending")
         checkable: true
@@ -121,10 +124,13 @@ ApplicationWindow {
 
     Action {
         id: showSearchBarAction
-        icon.name: "search"
+        icon.name: "edit-find"
+        icon.source: "icons/edit-find.svg"
         text: "Show Search"
         checkable: true
     }
+
+    //// Actions Ende
 
     FileIO {
         id: todoTxtFile
@@ -137,7 +143,6 @@ ApplicationWindow {
         function save(text) {
             content = text
         }
-
     }
 
     TaskListModel {

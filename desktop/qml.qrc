@@ -10,7 +10,11 @@
         <file>FilterPage.qml</file>
         <file>SearchBar.qml</file>
         <file>Completer_copy1.qml</file>
+        <file>icons/checkbox.svg</file>
         <file>icons/edit-delete.svg</file>
-        <file>icons/edit-delete.png</file>
+        <file>icons/edit-find.svg</file>
+        <file>icons/list-add.svg</file>
+        <file>icons/view-sort-ascending.svg</file>
+        <file>icons/view-sort-descending.svg</file>
     </qresource>
 </RCC>
