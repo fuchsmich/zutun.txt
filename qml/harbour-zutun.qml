@@ -53,9 +53,9 @@ ApplicationWindow
         ConfigurationGroup {
             id: sortSettings
             path: "sorting"
-            property bool asc: true
-            property int order: 0
-            property int grouping: 0
+            property alias asc: sorting.asc
+            property alias order: sorting.order
+            property alias grouping: sorting.grouping
         }
     }
 

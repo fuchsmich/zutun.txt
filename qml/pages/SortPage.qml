@@ -16,11 +16,11 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Reset")
-                //                iconsource: "image://theme/icon-m-" + (sortSettings.asc ? "down" :"up")
+                //                iconsource: "image://theme/icon-m-" + (sorting.asc ? "down" :"up")
                 onClicked:{
-                    sortSettings.asc = true
-                    sortSettings.order = 0
-                    sortSettings.grouping = 0
+                    sorting.asc = true
+                    sorting.order = 0
+                    sorting.grouping = 0
                 }
             }
         }
@@ -41,8 +41,8 @@ Page {
                 //                        topMargin: -Theme.paddingMedium
                                         horizontalCenter: parent.horizontalCenter
                                     }
-                text: qsTr("Toggle Order (") + (sortSettings.asc ? "asc" :"desc") + ")"
-                onClicked: sortSettings.asc = !sortSettings.asc
+                text: qsTr("Toggle Order (") + (sorting.asc ? "asc" :"desc") + ")"
+                onClicked: sorting.asc = !sorting.asc
             }
 
             SectionHeader {
@@ -55,11 +55,11 @@ Page {
                 model: list.length
 
                 delegate: TextSwitch {
-                    checked: sortSettings.order === model.index
+                    checked: sorting.order === model.index
                     text: rep.list[model.index][0]
                     automaticCheck: false
                     onClicked:{
-                        sortSettings.order = model.index
+                        sorting.order = model.index
 //                        pageStack.navigateBack();
                     }
                 }
@@ -75,11 +75,11 @@ Page {
                 model: list.length
 
                 delegate: TextSwitch {
-                    checked: sortSettings.grouping === model.index
+                    checked: sorting.grouping === model.index
                     text: groupRep.list[model.index][0]
                     automaticCheck: false
                     onClicked:{
-                        sortSettings.grouping = model.index
+                        sorting.grouping = model.index
 //                        pageStack.navigateBack();
                     }
                 }

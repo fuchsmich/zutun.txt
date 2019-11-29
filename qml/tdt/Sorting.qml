@@ -9,11 +9,11 @@ QtObject {
     onAscChanged: sortingChanged()
 
     //order: 0..natural, 1..creation date, 2..due date, 3..subject
-    property int order: 0 //sortSettings.order
+    property int order: 0
     onOrderChanged: sortingChanged()
 
     //group by: 0..None, 1..projects, 2..contexts
-    property int grouping: 0 //sortSettings.grouping
+    property int grouping: 0
     onGroupingChanged: sortingChanged()
 
     property string sortText: qsTr("Sorted by %1").arg(functionList[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc")))
