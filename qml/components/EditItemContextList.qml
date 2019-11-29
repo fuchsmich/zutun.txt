@@ -21,10 +21,10 @@ EditItem {
                 height: parent.height
                 //anchors.fill: parent
                 onClicked: {
-                    console.log(text)
+                    //console.log(modelData)
                     eip.closeMenu()
                     //setText("projects", model.name)
-                    listItemSelected(model.name)
+                    listItemSelected(modelData)
                 }
                 Label {
                     id: lbl

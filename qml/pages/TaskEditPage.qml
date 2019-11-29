@@ -149,7 +149,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: filters.projects
+                    model: filters.projects.list
                     onListItemSelected: setText("project", text)
                 }
 
@@ -164,7 +164,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: filters.contexts
+                    model: filters.projects.list
                     onListItemSelected: setText("context", text)
                 }
 
