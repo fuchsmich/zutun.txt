@@ -58,7 +58,7 @@ Page {
         if (status === PageStatus.Active) {
             if ( pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {
-                    pageStack.pushAttached(Qt.resolvedUrl("TaskList.qml"), {})
+                    pageStack.pushAttached(Qt.resolvedUrl("TaskListPage.qml"), {})
                     if (skip) {
                         pageStack.navigateForward(PageStackAction.Immediate)
                         skip = false

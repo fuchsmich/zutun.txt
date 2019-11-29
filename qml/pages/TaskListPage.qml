@@ -90,15 +90,6 @@ Page {
         }
 
         model: taskDelegateModel
-
-//        Connections {
-//            target: taskDelegateModel
-//            onEditItem: pageStack.push(Qt.resolvedUrl("TaskEdit.qml"),
-//                                       {
-//                                           taskIndex: index,
-//                                           text: taskListModel.get(index).fullTxt
-//                                       })
-//        }
     }
 
     onStatusChanged: {
@@ -115,7 +106,7 @@ Page {
                 }
             } else {
                 if (!settings.projectFilterLeft){
-                    pageStack.replaceAbove(null, Qt.resolvedUrl("TaskList.qml"),
+                    pageStack.replaceAbove(null, Qt.resolvedUrl("TaskListPage.qml"),
                                            {}, PageStackAction.Immediate);
                 } else {
                     pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"})
