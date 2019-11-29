@@ -64,7 +64,7 @@ Page {
                         skip = false
                     }
                 } else {
-                    pageStack.replace(Qt.resolvedUrl("TaskList.qml"), {}, PageStackAction.Immediate)
+                    pageStack.replace(Qt.resolvedUrl("TaskListPage.qml"), {}, PageStackAction.Immediate)
                 }
             } else {
                 if (state == "contexts") pageStack.pushAttached("OtherFilters.qml")
