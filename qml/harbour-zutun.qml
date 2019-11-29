@@ -17,7 +17,7 @@ import "tdt/todotxt.js" as JS
 ApplicationWindow
 {
     id: app
-    initialPage: Component { TaskList{} }
+    initialPage: Component { TaskListPage{} }
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
@@ -94,7 +94,7 @@ ApplicationWindow
         //safety check text
         if (typeof text !== "String") text = "";
         pageStack.pop(pageStack.find(function(p){ return (p.name === "TaskList") }), PageStackAction.Immediate);
-        pageStack.push(Qt.resolvedUrl("./pages/TaskEdit.qml"), {itemIndex: -1, text: text});
+        pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: -1, text: text});
         app.activate();
     }
 
@@ -111,30 +111,6 @@ ApplicationWindow
             hintText = msg;
         }
     }
-
-//    Filters {
-//        id: filters
-//        onFiltersChanged: taskDelegateModel.resort()
-//        tasksModel: taskListModel
-//    }
-
-//    Sorting {
-//        id: sorting
-//        onSortingChanged: taskDelegateModel.resort()
-//    }
-
-//    TaskListModel {
-//        id: taskListModel
-//        section: sorting.grouping
-//        onListChanged: taskDelegateModel.resort()
-//        projectColor: Theme.highlightColor
-//        contextColor: Theme.secondaryHighlightColor
-//    }
-
-//    TaskDelegateModel {
-//        id: taskDelegateModel
-//        model: taskListModel
-//    }
 
     TaskListModel {
         id: taskListModel
@@ -172,6 +148,7 @@ ApplicationWindow
             width: app.width
 //            onAddTask: taskListModel.addTask(text)
 //            defaultPriority: taskDelegateModel.defaultPriority
+            onEditItem: pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: model.index, text: model.fullTxt});
         }
     }
 }

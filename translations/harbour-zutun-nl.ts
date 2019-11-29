@@ -202,61 +202,14 @@
     </message>
 </context>
 <context>
-    <name>TaskEdit</name>
+    <name>TaskEditPage</name>
     <message>
         <source>Add New Task</source>
-        <translation>Nieuwe taak toevoegen</translation>
+        <translation type="unfinished">Nieuwe taak toevoegen</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Taak bewerken</translation>
-    </message>
-</context>
-<context>
-    <name>TaskList</name>
-    <message>
-        <source>Settings</source>
-        <translation>Instellingen</translation>
-    </message>
-    <message>
-        <source>Add New Task</source>
-        <translation>Nieuwe taak toevoegen</translation>
-    </message>
-    <message>
-        <source>Tasklist</source>
-        <translation>Takenlijst</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>Tonen</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation>Verbergen</translation>
-    </message>
-    <message>
-        <source> Completed Tasks</source>
-        <translation>Voltooide taken</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation>Filter</translation>
-    </message>
-    <message>
-        <source>No Tasks</source>
-        <translation>Geen taken</translation>
-    </message>
-    <message>
-        <source>Sorting &amp; Grouping</source>
-        <translation>Sorteren &amp; groeperen</translation>
-    </message>
-    <message>
-        <source>Create file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pull down to add task.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Taak bewerken</translation>
     </message>
 </context>
 <context>
@@ -283,6 +236,53 @@
     </message>
     <message>
         <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Instellingen</translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished">Sorteren &amp; groeperen</translation>
+    </message>
+    <message>
+        <source>Add New Task</source>
+        <translation type="unfinished">Nieuwe taak toevoegen</translation>
+    </message>
+    <message>
+        <source>Create file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished">Tonen</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished">Verbergen</translation>
+    </message>
+    <message>
+        <source> Completed Tasks</source>
+        <translation type="unfinished">Voltooide taken</translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <translation type="unfinished">Takenlijst</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished">Filter</translation>
+    </message>
+    <message>
+        <source>No Tasks</source>
+        <translation type="unfinished">Geen taken</translation>
+    </message>
+    <message>
+        <source>Pull down to add task.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

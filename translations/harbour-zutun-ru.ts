@@ -202,61 +202,14 @@
     </message>
 </context>
 <context>
-    <name>TaskEdit</name>
+    <name>TaskEditPage</name>
     <message>
         <source>Add New Task</source>
         <translation type="unfinished">Добавить новую задачу</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Отредактировать задачу</translation>
-    </message>
-</context>
-<context>
-    <name>TaskList</name>
-    <message>
-        <source>Settings</source>
-        <translation>Настройки</translation>
-    </message>
-    <message>
-        <source>Add New Task</source>
-        <translation>Добавить новую задачу</translation>
-    </message>
-    <message>
-        <source>Tasklist</source>
-        <translation>Список задач</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>Показать</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation>Скрыть</translation>
-    </message>
-    <message>
-        <source> Completed Tasks</source>
-        <translation>Завершенные задачи</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation>Фильтр</translation>
-    </message>
-    <message>
-        <source>No Tasks</source>
-        <translation>Нет задач</translation>
-    </message>
-    <message>
-        <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pull down to add task.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отредактировать задачу</translation>
     </message>
 </context>
 <context>
@@ -283,6 +236,53 @@
     </message>
     <message>
         <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Настройки</translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add New Task</source>
+        <translation type="unfinished">Добавить новую задачу</translation>
+    </message>
+    <message>
+        <source>Create file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished">Показать</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished">Скрыть</translation>
+    </message>
+    <message>
+        <source> Completed Tasks</source>
+        <translation type="unfinished">Завершенные задачи</translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <translation type="unfinished">Список задач</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished">Фильтр</translation>
+    </message>
+    <message>
+        <source>No Tasks</source>
+        <translation type="unfinished">Нет задач</translation>
+    </message>
+    <message>
+        <source>Pull down to add task.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

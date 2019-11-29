@@ -4,6 +4,8 @@ CONFIG += sailfishapp_qml
 
 DISTFILES += qml/harbour-zutun.qml \
     harbour-zutun.desktop \
+    qml/pages/TaskEditPage.qml \
+    qml/pages/TaskListPage.qml \
     qml/tdt/FilterModel.qml \
     qml/tdt/Filters.qml \
     qml/tdt/Sorting.qml \
@@ -19,8 +21,6 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/tdt/FileIO.qml \
     qml/components/Notification.qml \
     qml/pages/Settings.qml \
-    qml/pages/TaskEdit.qml \
-    qml/pages/TaskList.qml \
     qml/pages/TextSelect.qml \
     qml/pages/OtherFilters.qml \
     qml/pages/FiltersPage.qml \

@@ -202,61 +202,14 @@
     </message>
 </context>
 <context>
-    <name>TaskEdit</name>
+    <name>TaskEditPage</name>
     <message>
         <source>Add New Task</source>
-        <translation>Añadir nueva tarea</translation>
+        <translation type="unfinished">Añadir nueva tarea</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Editar tarea</translation>
-    </message>
-</context>
-<context>
-    <name>TaskList</name>
-    <message>
-        <source>Settings</source>
-        <translation>Ajustes</translation>
-    </message>
-    <message>
-        <source>Add New Task</source>
-        <translation>Añadir nueva tarea</translation>
-    </message>
-    <message>
-        <source>Tasklist</source>
-        <translation>Lista de tareas</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>Mostrar</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation>Ocultar</translation>
-    </message>
-    <message>
-        <source> Completed Tasks</source>
-        <translation>Tareas completadas</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation>Filtro</translation>
-    </message>
-    <message>
-        <source>No Tasks</source>
-        <translation>No hay tareas</translation>
-    </message>
-    <message>
-        <source>Sorting &amp; Grouping</source>
-        <translation>Orden y agrupación</translation>
-    </message>
-    <message>
-        <source>Create file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pull down to add task.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Editar tarea</translation>
     </message>
 </context>
 <context>
@@ -283,6 +236,53 @@
     </message>
     <message>
         <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Ajustes</translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished">Orden y agrupación</translation>
+    </message>
+    <message>
+        <source>Add New Task</source>
+        <translation type="unfinished">Añadir nueva tarea</translation>
+    </message>
+    <message>
+        <source>Create file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished">Mostrar</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished">Ocultar</translation>
+    </message>
+    <message>
+        <source> Completed Tasks</source>
+        <translation type="unfinished">Tareas completadas</translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <translation type="unfinished">Lista de tareas</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished">Filtro</translation>
+    </message>
+    <message>
+        <source>No Tasks</source>
+        <translation type="unfinished">No hay tareas</translation>
+    </message>
+    <message>
+        <source>Pull down to add task.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
