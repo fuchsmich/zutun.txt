@@ -41,6 +41,7 @@ ApplicationWindow
                 key: "/apps/harbour-zutun/settings/filters/projects"
                 defaultValue: []
             }
+            property string projectFilters: ""
             property ConfigurationValue contexts: ConfigurationValue {
                 key: "/apps/harbour-zutun/settings/filters/contexts"
                 defaultValue: []
@@ -117,39 +118,26 @@ ApplicationWindow
         //section: sorting.grouping
         projectColor: "red"
         contextColor: "blue"
-        onListChanged: taskDelegateModel.resort()
+        //onListChanged: taskDelegateModel.resort()
         onSaveList: todoTxtFile.save(content)
         //onItemChanged: taskDelegateModel.resortItem(index)
     }
 
     Filters {
         id: filters
+        property var pl: projects.active
         taskList: taskListModel
         projects.active: filterSettings.projects.value
-        contexts.active: filterSettings.contexts.value
-        onFiltersChanged: taskDelegateModel.resort()
+        //contexts.active: filterSettings.contexts.value
+        onFiltersChanged: {
+            //taskDelegateModel.resort()
+            filterSettings.projects = projects.active
+            console.log(filterSettings.projects, projects.active)
+        }
     }
 
     Sorting {
         id: sorting
-        onSortingChanged: {
-            taskDelegateModel.resort()
-        }
-    }
-
-    TaskDelegateModel {
-        id: taskDelegateModel
-        model: taskListModel
-        lessThanFunc: sorting.lessThanFunc //changed too late in sorting ??
-        getSectionFunc: sorting.getGroup //changed too late in sorting ??
-        visibility: filters.visibility
-        delegate: TaskListItem {
-            id: item
-            width: app.width
-//            onAddTask: taskListModel.addTask(text)
-//            defaultPriority: taskDelegateModel.defaultPriority
-            onEditItem: pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: model.index, text: model.fullTxt});
-        }
     }
 }
 

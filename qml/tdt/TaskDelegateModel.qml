@@ -14,14 +14,17 @@ DelegateModel {
     property var lessThanFunc: function (left, right) {
         return false
     }
+    onLessThanFuncChanged: resort("lessThan (sorting)")
 
-    property var visibility: function (item) {
+    property var visibilityFunc: function (item) {
         return true
     }
+    onVisibilityFuncChanged: resort("visibility (filter)")
 
     property var getSectionFunc: function (text) {
         return []
     }
+    onGetSectionFuncChanged: resort("section")
 
     function addTaskItem(data) {
         //console.log("diesdas")
@@ -62,7 +65,7 @@ DelegateModel {
             //console.log(item.model.index, item.groups, item.isUnresolved)
             //model.get(item.model.index).section = getSectionFunc(item.model.fullTxt).join(', ')
             model.get(item.model.index).section = sorting.groupFunctionList[sorting.grouping][2](item.model.fullTxt).join(', ')
-            if (visibility(item.model)) {
+            if (visibilityFunc(item.model)) {
                 if (item.model.priority.charCodeAt(0) > defaultPriority.charCodeAt(0)) defaultPriority = item.model.priority
                 var index = insertPosition(lessThan, item)
                 item.groups = ["items"]
@@ -72,8 +75,8 @@ DelegateModel {
         sortFinished()
     }
 
-    function resort() {
-        console.log("resort called", sorting.grouping)
+    function resort(reason) {
+        console.log("resort called", sorting.grouping, reason)
         if (items.count > 0) items.setGroups(0, items.count, "unsorted")
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
     }

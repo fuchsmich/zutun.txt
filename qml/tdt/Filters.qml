@@ -4,11 +4,13 @@ import "../tdt/todotxt.js" as JS
 QtObject {
     id: filters
     signal filtersChanged()
+
     property ListModel taskList
 
-    property bool hideDone: true//filterSettings.hideDone
+    property bool hideDone: true
+    onHideDoneChanged: filtersChanged()
 
-    onHideDoneChanged: filtersChanged() //visualModel.resort()
+
     property var text: function () {
         var ftext = [(hideDone ? qsTr("Hide Complete"): undefined)].concat(
                     projects.active.concat(
@@ -42,16 +44,18 @@ QtObject {
         }
     }
 
-    function visibility(item) {
-        if ((hideDone && item.done)) return false
 
-        if (item.fullTxt.indexOf(searchString) === -1) return false
+    //return the visibility of a task
+    function visibility(task) {
+        if ((hideDone && task.done)) return false
+
+        if (task.fullTxt.indexOf(searchString) === -1) return false
 
         for (var p in projects.active) {
-            if (item.subject.indexOf(projects.active[p]) === -1) return false
+            if (task.subject.indexOf(projects.active[p]) === -1) return false
         }
         for (var c in contexts.active) {
-            if (item.subject.indexOf(contexts.active[c]) === -1) return false
+            if (task.subject.indexOf(contexts.active[c]) === -1) return false
         }
         return true
     }

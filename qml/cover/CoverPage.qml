@@ -1,6 +1,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../components"
+import "../tdt"
+
 CoverBackground {
     id: cb
     Image {
@@ -15,11 +18,16 @@ CoverBackground {
         anchors.fill: parent
         anchors.margins: Theme.paddingMedium
         clip: true
-        model: taskListModel
-        delegate: Label {
-            text: model.formattedSubject
-            width: parent.width - 2*Theme.paddingMedium
-            truncationMode: TruncationMode.Elide
+        model: TaskDelegateModel {
+            model: taskListModel
+            lessThanFunc: sorting.lessThanFunc //changed too late in sorting ??
+            //getSectionFunc: sorting.getGroup //changed too late in sorting ??
+            visibilityFunc: filters.visibility
+            delegate: Label {
+                text: model.formattedSubject
+                width: parent.width - 2*Theme.paddingMedium
+                truncationMode: TruncationMode.Elide
+            }
         }
     }
 

@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 import "../components"
+import "../tdt"
 
 Page {
     id: page
@@ -89,7 +90,27 @@ Page {
                                                 : todoTxtFile.hintText)
         }
 
-        model: taskDelegateModel
+        model: TaskDelegateModel {
+            model: taskListModel
+            lessThanFunc: sorting.lessThanFunc //changed too late in sorting ??
+            getSectionFunc: sorting.getGroup //changed too late in sorting ??
+            visibilityFunc: filters.visibility
+            Connections {
+                target: filters
+                onFiltersChanged: resort("filtersChanged")
+            }
+            Connections {
+                target: sorting
+                onSortingChanged: resort("sortingChanged")
+            }
+            delegate: TaskListItem {
+                id: item
+                width: lv.width
+    //            onAddTask: taskListModel.addTask(text)
+    //            defaultPriority: taskDelegateModel.defaultPriority
+                onEditItem: pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: model.index, text: model.fullTxt});
+            }
+        }
     }
 
     onStatusChanged: {
