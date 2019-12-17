@@ -97,7 +97,10 @@ Page {
             visibilityFunc: filters.visibility
             Connections {
                 target: filters
-                onFiltersChanged: resort("filtersChanged")
+                onFiltersChanged:{
+                    console.log("fc")
+                    resort("filtersChanged")
+                }
             }
             Connections {
                 target: sorting

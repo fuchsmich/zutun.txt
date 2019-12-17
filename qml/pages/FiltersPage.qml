@@ -18,7 +18,7 @@ Page {
             enabled: lv.count > 0
             MenuItem {
                 text: lv.btnTxt
-                onClicked: { taskModel.filters.clearFilter(page.state); }
+                onClicked: { lv.filter.clearFilter(page.state); }
             }
         }
 

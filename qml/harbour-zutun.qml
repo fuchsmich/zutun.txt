@@ -35,20 +35,20 @@ ApplicationWindow
         ConfigurationGroup {
             id: filterSettings
             path: "filters"
-            property alias hideDone: filters.hideDone
+            property bool hideDone: true
             //TODO filters are not stored (anymore?)
-            property ConfigurationValue projects: ConfigurationValue {
-                key: "/apps/harbour-zutun/settings/filters/projects"
-                defaultValue: []
-            }
-            property string projectFilters: ""
-            property ConfigurationValue contexts: ConfigurationValue {
-                key: "/apps/harbour-zutun/settings/filters/contexts"
-                defaultValue: []
-            }
+//            property ConfigurationValue projects: ConfigurationValue {
+//                key: "/apps/harbour-zutun/settings/filters/projects"
+//                defaultValue: []
+//            }
+//            property ConfigurationValue contexts: ConfigurationValue {
+//                key: "/apps/harbour-zutun/settings/filters/contexts"
+//                defaultValue: []
+//            }
 
-            //            property var contexts: []
-            //onProjectsChanged: console.log(projects.toString())
+            //store as strings??
+            property string projectsActive: ""
+            property string contextsActive: ""
         }
 
         ConfigurationGroup {
@@ -127,12 +127,14 @@ ApplicationWindow
         id: filters
         property var pl: projects.active
         taskList: taskListModel
-        projects.active: filterSettings.projects.value
-        //contexts.active: filterSettings.contexts.value
+        hideDone: filterSettings.hideDone
+        projects.active: filterSettings.projectsActive.split(' ')
+        contexts.active: filterSettings.contextsActive.split(' ')
         onFiltersChanged: {
             //taskDelegateModel.resort()
-            filterSettings.projects = projects.active
-            console.log(filterSettings.projects, projects.active)
+            filterSettings.projectsActive = projects.active.join(' ').trim()
+            filterSettings.contextsActive = contexts.active.join(' ').trim()
+            console.log(filterSettings.projectsActive, projects.active, projects.contextsActive)
         }
     }
 

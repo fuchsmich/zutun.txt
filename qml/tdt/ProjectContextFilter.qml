@@ -25,4 +25,9 @@ QtObject {
         active.sort()
         activeChanged()
     }
+
+    function clearFilter() {
+        active = []
+        activeChanged()
+    }
 }
