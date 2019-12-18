@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../tdt"
 
 Page {
     id: page
@@ -18,7 +19,7 @@ Page {
             enabled: lv.count > 0
             MenuItem {
                 text: lv.btnTxt
-                onClicked: { lv.filter.clearFilter(page.state); }
+                onClicked: { pcf.clearFilter(page.state); }
             }
         }
 
@@ -34,14 +35,32 @@ Page {
             text: qsTr("No entries")
         }
 
+        ProjectContextFilter {
+            id: pcf
+        }
+
+        model: pcf.list
+
+        function numTasksHavingFilterItem(taskList, filterItem, visible) {
+            var num = 0
+            for (var i = 0; i < taskList.count; i++ ) {
+                if (taskList.get(i).fullTxt.indexOf(filterItem) > -1) {
+                    if (visible && filters.visibility(taskList.get(i))) {
+                        num++
+                    } else if (!visible) num++
+                }
+            }
+            return num
+        }
+
         delegate: ListItem {
             id: li
-            property int visibleCount: lv.filter.numTasksHavingItem(modelData, true)
-            property int invisibleCount: lv.filter.numTasksHavingItem(modelData, false)
-            property bool active: lv.filter.itemActive(modelData)
-            enabled: visibleCount > 0
+            property int visibleCount: lv.numTasksHavingFilterItem(taskListModel, modelData, true)
+            property int invisibleCount: lv.numTasksHavingFilterItem(taskListModel, modelData, false)
+            property bool active: pcf.itemActive(modelData)
+            //enabled: visibleCount > 0
             highlighted: active
-            onClicked: lv.filter.toggleFilter(modelData)
+            onClicked: pcf.toggleFilter(modelData)
             Label {
                 color: (li.enabled ? Theme.primaryColor : Theme.secondaryColor)
                 anchors.verticalCenter: parent.verticalCenter
@@ -77,8 +96,13 @@ Page {
             PropertyChanges {
                 target: lv
                 title: qsTr("Filter Projects")
-                model: taskListModel.projects
                 btnTxt: qsTr("Clear Project Filters")
+            }
+            PropertyChanges {
+                target: pcf
+                list: taskListModel.projects
+                active: filters.projects
+                onActiveChanged: filterSettings.projects.value = pcf.active
             }
         }
         , State {
@@ -86,8 +110,13 @@ Page {
             PropertyChanges {
                 target: lv
                 title: qsTr("Filter Contexts")
-                model: taskListModel.contexts
                 btnTxt: qsTr("Clear Context Filters")
+            }
+            PropertyChanges {
+                target: pcf
+                list: taskListModel.contexts
+                active: filters.contexts
+                onActiveChanged: filterSettings.contexts.value = pcf.active
             }
         }
 

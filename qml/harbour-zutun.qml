@@ -34,17 +34,17 @@ ApplicationWindow
         property bool projectFilterLeft: false
         ConfigurationGroup {
             id: filterSettings
-            path: "filters"
+            path: "/filters"
             property bool hideDone: true
             //TODO filters are not stored (anymore?)
-//            property ConfigurationValue projects: ConfigurationValue {
-//                key: "/apps/harbour-zutun/settings/filters/projects"
-//                defaultValue: []
-//            }
-//            property ConfigurationValue contexts: ConfigurationValue {
-//                key: "/apps/harbour-zutun/settings/filters/contexts"
-//                defaultValue: []
-//            }
+            property ConfigurationValue projects: ConfigurationValue {
+                key: filterSettings.path + "/projects"
+                defaultValue: []
+            }
+            property ConfigurationValue contexts: ConfigurationValue {
+                key: filterSettings.path + "/contexts"
+                defaultValue: []
+            }
 
             //store as strings??
             property string projectsActive: ""
@@ -115,36 +115,22 @@ ApplicationWindow
 
     TaskListModel {
         id: taskListModel
-        //section: sorting.grouping
         projectColor: "red"
         contextColor: "blue"
-        //onListChanged: taskDelegateModel.resort()
         onSaveList: todoTxtFile.save(content)
-        //onItemChanged: taskDelegateModel.resortItem(index)
     }
 
-    Filters {
+    Filters_copy {
         id: filters
-        property var pl: projects.active
-        taskList: taskListModel
         hideDone: filterSettings.hideDone
-        projects.active: {
-            console.log(filterSettings.projectsActive, filterSettings.projectsActive.length)
-            if (filterSettings.projectsActive.length > 0)
-                return filterSettings.projectsActive.split(' ')
-            else return []
-        }
-        contexts.active: {
-            if (filterSettings.projectsActive.length > 0)
-                return filterSettings.contextsActive.split(' ')
-            else return []
-        }
+        projects: filterSettings.projects.value
+        contexts: filterSettings.contexts.value
+    }
+
+    Connections {
+        target: filters
         onFiltersChanged: {
-            //taskDelegateModel.resort()
-            filterSettings.projectsActive = projects.active.join(' ').trim()
-            filterSettings.contextsActive = contexts.active.join(' ').trim()
-            console.log(filterSettings.projectsActive, projects.active,
-                        filterSettings.contextsActive, contexts.active)
+            console.log("fc")
         }
     }
 

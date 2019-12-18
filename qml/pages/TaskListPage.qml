@@ -30,9 +30,7 @@ Page {
             MenuItem {
                 visible: todoTxtFile.pathExists && !todoTxtFile.exists
                 text: qsTr("Create file")
-                onClicked: {
-                    todoTxtFile.create()
-                }
+                onClicked: todoTxtFile.create()
             }
         }
 
@@ -40,7 +38,7 @@ Page {
         PushUpMenu {
             MenuItem {
                 text: (filters.hideDone ? qsTr("Show") : qsTr("Hide")) + qsTr(" Completed Tasks")
-                onClicked: filters.hideDone = !filters.hideDone
+                onClicked: filterSettings.hideDone = !filters.hideDone
             }
         }
 
@@ -97,7 +95,7 @@ Page {
             visibilityFunc: filters.visibility
             Connections {
                 target: filters
-                onFiltersChanged:{
+                onFiltersChanged: {
                     console.log("fc")
                     resort("filtersChanged")
                 }
