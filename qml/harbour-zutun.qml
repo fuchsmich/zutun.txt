@@ -128,13 +128,23 @@ ApplicationWindow
         property var pl: projects.active
         taskList: taskListModel
         hideDone: filterSettings.hideDone
-        projects.active: filterSettings.projectsActive.split(' ')
-        contexts.active: filterSettings.contextsActive.split(' ')
+        projects.active: {
+            console.log(filterSettings.projectsActive, filterSettings.projectsActive.length)
+            if (filterSettings.projectsActive.length > 0)
+                return filterSettings.projectsActive.split(' ')
+            else return []
+        }
+        contexts.active: {
+            if (filterSettings.projectsActive.length > 0)
+                return filterSettings.contextsActive.split(' ')
+            else return []
+        }
         onFiltersChanged: {
             //taskDelegateModel.resort()
             filterSettings.projectsActive = projects.active.join(' ').trim()
             filterSettings.contextsActive = contexts.active.join(' ').trim()
-            console.log(filterSettings.projectsActive, projects.active, projects.contextsActive)
+            console.log(filterSettings.projectsActive, projects.active,
+                        filterSettings.contextsActive, contexts.active)
         }
     }
 

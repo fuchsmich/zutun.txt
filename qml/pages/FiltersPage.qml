@@ -34,8 +34,6 @@ Page {
             text: qsTr("No entries")
         }
 
-        property var filter: filters.projects
-        model: filter.list
         delegate: ListItem {
             id: li
             property int visibleCount: lv.filter.numTasksHavingItem(modelData, true)
@@ -77,18 +75,18 @@ Page {
         State {
             name: "projects"
             PropertyChanges {
-                target: lv;
+                target: lv
                 title: qsTr("Filter Projects")
-                filter: filters.projects
+                model: taskListModel.projects
                 btnTxt: qsTr("Clear Project Filters")
             }
         }
         , State {
             name: "contexts"
             PropertyChanges {
-                target: lv;
+                target: lv
                 title: qsTr("Filter Contexts")
-                filter: filters.contexts
+                model: taskListModel.contexts
                 btnTxt: qsTr("Clear Context Filters")
             }
         }

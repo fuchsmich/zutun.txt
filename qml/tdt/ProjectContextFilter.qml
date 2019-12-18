@@ -16,7 +16,7 @@ QtObject {
         //console.log("itemActive", active.indexOf(item) !== -1)
         return active.indexOf(item) !== -1
     }
-    onItemActiveChanged: console.log("itemActive")
+    //onItemActiveChanged: console.log("itemActive")
 
     function toggleFilter(item) {
         //console.log(item, active.indexOf(item))

@@ -8,6 +8,7 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/pages/TaskListPage.qml \
     qml/tdt/FilterModel.qml \
     qml/tdt/Filters.qml \
+    qml/tdt/Filters_copy.qml \
     qml/tdt/Sorting.qml \
     qml/tdt/TaskDelegateModel.qml \
     qml/tdt/TaskListModel.qml \

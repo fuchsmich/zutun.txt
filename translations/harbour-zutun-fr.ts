@@ -78,6 +78,17 @@
     </message>
 </context>
 <context>
+    <name>Filters_copy</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Cacher Compléter</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Aucun</translation>
+    </message>
+</context>
+<context>
     <name>OtherFilters</name>
     <message>
         <source>Context Filters</source>
