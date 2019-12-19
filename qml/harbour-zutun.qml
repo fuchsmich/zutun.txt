@@ -127,13 +127,6 @@ ApplicationWindow
         contexts: filterSettings.contexts.value
     }
 
-    Connections {
-        target: filters
-        onFiltersChanged: {
-            console.log("fc")
-        }
-    }
-
     Sorting {
         id: sorting
     }

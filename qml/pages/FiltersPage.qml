@@ -41,13 +41,13 @@ Page {
 
         model: pcf.list
 
-        function numTasksHavingFilterItem(taskList, filterItem, visible) {
+        function numTasksHavingFilterItem(filterItem, countOnlyVisible) {
             var num = 0
-            for (var i = 0; i < taskList.count; i++ ) {
-                if (taskList.get(i).fullTxt.indexOf(filterItem) > -1) {
-                    if (visible && filters.visibility(taskList.get(i))) {
-                        num++
-                    } else if (!visible) num++
+            for (var i = 0; i < taskListModel.count; i++ ) {
+                if (taskListModel.get(i).fullTxt.indexOf(filterItem) > -1) {
+                    if (countOnlyVisible) {
+                        if (filters.visibility(taskListModel.get(i))) num++ //--> binding loop
+                    } else num++
                 }
             }
             return num
@@ -55,8 +55,8 @@ Page {
 
         delegate: ListItem {
             id: li
-            property int visibleCount: lv.numTasksHavingFilterItem(taskListModel, modelData, true)
-            property int invisibleCount: lv.numTasksHavingFilterItem(taskListModel, modelData, false)
+            property int visibleCount: lv.numTasksHavingFilterItem(modelData, true)
+            property int totalCount: lv.numTasksHavingFilterItem(modelData, false)
             property bool active: pcf.itemActive(modelData)
             //enabled: visibleCount > 0
             highlighted: active
@@ -67,7 +67,7 @@ Page {
                 x: Theme.horizontalPageMargin
                 text: modelData + "(%1/%2)".arg(
                           li.visibleCount).arg(
-                          li.invisibleCount)
+                          li.totalCount)
             }
         }
     }

@@ -14,17 +14,17 @@ DelegateModel {
     property var lessThanFunc: function (left, right) {
         return false
     }
-    onLessThanFuncChanged: resort("lessThan (sorting)")
+    //onLessThanFuncChanged: resort("lessThan (sorting)")
 
     property var visibilityFunc: function (item) {
         return true
     }
-    onVisibilityFuncChanged: resort("visibility (filter)")
+    //onVisibilityFuncChanged: resort("visibility (filter)")
 
     property var getSectionFunc: function (text) {
         return []
     }
-    onGetSectionFuncChanged: resort("section")
+    //onGetSectionFuncChanged: resort("section")
 
     function addTaskItem(data) {
         //console.log("diesdas")

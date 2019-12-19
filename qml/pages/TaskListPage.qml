@@ -93,17 +93,17 @@ Page {
             lessThanFunc: sorting.lessThanFunc //changed too late in sorting ??
             getSectionFunc: sorting.getGroup //changed too late in sorting ??
             visibilityFunc: filters.visibility
-            Connections {
-                target: filters
-                onFiltersChanged: {
-                    console.log("fc")
-                    resort("filtersChanged")
-                }
-            }
-            Connections {
-                target: sorting
-                onSortingChanged: resort("sortingChanged")
-            }
+//            Connections {
+//                target: app
+//                onFiltersChanged: {
+//                    console.log("fc")
+//                    resort("filtersChanged")
+//                }
+//            }
+//            Connections {
+//                target: sorting
+//                onSortingChanged: resort("sortingChanged")
+//            }
             delegate: TaskListItem {
                 id: item
                 width: lv.width
