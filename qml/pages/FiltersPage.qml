@@ -6,6 +6,7 @@ import "../tdt"
 Page {
     id: page
     property bool skip: false
+    property TaskDelegateModel visualModel //TODO
     state: "projects"
 
     SilicaListView {
@@ -73,7 +74,7 @@ Page {
     }
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            if ( pageStack.depth === 1) {
+            if (pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {
                     pageStack.pushAttached(Qt.resolvedUrl("TaskListPage.qml"), {})
                     if (skip) {
