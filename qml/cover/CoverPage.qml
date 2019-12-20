@@ -20,9 +20,6 @@ CoverBackground {
         clip: true
         model: TaskDelegateModel {
             model: taskListModel
-            lessThanFunc: sorting.lessThanFunc //changed too late in sorting ??
-            //getSectionFunc: sorting.getGroup //changed too late in sorting ??
-            visibilityFunc: filters.visibility
             delegate: Label {
                 text: model.formattedSubject
                 width: parent.width - 2*Theme.paddingMedium

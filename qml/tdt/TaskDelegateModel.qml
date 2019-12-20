@@ -80,12 +80,12 @@ DelegateModel {
     }
 
     function sort(lessThan) {
-        //console.log("sorting", unsortedItems.count)
+        console.log("sorting", unsortedItems.count)
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
             //console.log(item.model.index, item.groups, item.isUnresolved)
             //model.get(item.model.index).section = getSectionFunc(item.model.fullTxt).join(', ')
-            model.get(item.model.index).section = sorting.getGroups(item.model.fullTxt)
+            model.get(item.model.index).section = sorting.getGroups(item.model.fullTxt).join(', ')
             if (filters.visibility(item.model)) {
                 if (item.model.priority.charCodeAt(0) > defaultPriority.charCodeAt(0)) defaultPriority = item.model.priority
                 var index = insertPosition(lessThan, item)

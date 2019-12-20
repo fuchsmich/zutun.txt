@@ -19,6 +19,7 @@ QtObject {
     property var projects: []
     onProjectsChanged: filtersChanged()
     property var contexts: []
+    onContextsChanged: filtersChanged()
 
     property string searchString: ""
     onSearchStringChanged: filtersChanged()

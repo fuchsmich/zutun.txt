@@ -6,7 +6,7 @@ import "../tdt"
 Page {
     id: page
     property bool skip: false
-    property TaskDelegateModel visualModel //TODO
+    //property TaskDelegateModel visualModel: app.visualModel
     state: "projects"
 
     SilicaListView {
@@ -20,7 +20,7 @@ Page {
             enabled: lv.count > 0
             MenuItem {
                 text: lv.btnTxt
-                onClicked: { pcf.clearFilter(page.state); }
+                onClicked: { filterModel.clearFilter(page.state); }
             }
         }
 
@@ -28,7 +28,7 @@ Page {
 
         header: PageHeader {
             title: lv.title
-            description: qsTr("Active Filters: %1").arg(filters.text())
+            description: qsTr("Active Filters: %1").arg(app.visualModel.filters.text())
         }
 
         ViewPlaceholder {
@@ -36,11 +36,7 @@ Page {
             text: qsTr("No entries")
         }
 
-        ProjectContextFilter {
-            id: pcf
-        }
-
-        model: pcf.list
+        model: filterModel
 
         function numTasksHavingFilterItem(filterItem, countOnlyVisible) {
             var num = 0
@@ -56,22 +52,30 @@ Page {
 
         delegate: ListItem {
             id: li
-            property int visibleCount: lv.numTasksHavingFilterItem(modelData, true)
-            property int totalCount: lv.numTasksHavingFilterItem(modelData, false)
-            property bool active: pcf.itemActive(modelData)
-            //enabled: visibleCount > 0
-            highlighted: active
-            onClicked: pcf.toggleFilter(modelData)
+            enabled: model.visibleCount > 0
+            highlighted: model.active
+            onClicked: filterModel.toggleFilter(model.name)
             Label {
                 color: (li.enabled ? Theme.primaryColor : Theme.secondaryColor)
                 anchors.verticalCenter: parent.verticalCenter
                 x: Theme.horizontalPageMargin
-                text: modelData + "(%1/%2)".arg(
-                          li.visibleCount).arg(
-                          li.totalCount)
+                text: model.name + "(%1/%2)".arg(
+                          model.visibleCount).arg(
+                          model.totalCount)
             }
         }
     }
+
+    FilterModel {
+        id: filterModel
+        visualModel: app.visualModel
+    }
+
+    Connections {
+        target: app.visualModel
+        onSortFinished: filterModel.parseLists()
+    }
+
     onStatusChanged: {
         if (status === PageStatus.Active) {
             if (pageStack.depth === 1) {
@@ -100,10 +104,10 @@ Page {
                 btnTxt: qsTr("Clear Project Filters")
             }
             PropertyChanges {
-                target: pcf
+                target: filterModel
                 list: taskListModel.projects
-                active: filters.projects
-                onActiveChanged: filterSettings.projects.value = pcf.active
+                active: app.visualModel.filters.projects
+                onActiveChanged: filterSettings.projects.value = filterModel.active
             }
         }
         , State {
@@ -114,10 +118,10 @@ Page {
                 btnTxt: qsTr("Clear Context Filters")
             }
             PropertyChanges {
-                target: pcf
+                target: filterModel
                 list: taskListModel.contexts
-                active: filters.contexts
-                onActiveChanged: filterSettings.contexts.value = pcf.active
+                active: app.visualModel.filters.contexts
+                onActiveChanged: filterSettings.contexts.value = filterModel.active
             }
         }
 

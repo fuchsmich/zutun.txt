@@ -17,6 +17,8 @@ import "tdt/todotxt.js" as JS
 ApplicationWindow
 {
     id: app
+    property TaskDelegateModel visualModel
+
     initialPage: Component { TaskListPage{} }
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
@@ -109,7 +111,7 @@ ApplicationWindow
 
         onIoError: {
             //TODO needs some rework for translation
-            hintText = msg;
+            hintText = msg
         }
     }
 

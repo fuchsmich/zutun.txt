@@ -37,8 +37,8 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                text: (filters.hideDone ? qsTr("Show") : qsTr("Hide")) + qsTr(" Completed Tasks")
-                onClicked: filterSettings.hideDone = !filters.hideDone
+                text: (filterSettings.hideDone ? qsTr("Show") : qsTr("Hide")) + qsTr(" Completed Tasks")
+                onClicked: filterSettings.hideDone = !filterSettings.hideDone
             }
         }
 
@@ -48,7 +48,7 @@ Page {
             PageHeader {
                 id: pgh
                 title: qsTr("Tasklist")
-                description: sorting.groupText + sorting.sortText
+                description: app.visualModel.sorting.groupText + app.visualModel.sorting.sortText
             }
             Label { /*from PageHeaderDescription.qml */
                 id: flbl
@@ -64,7 +64,7 @@ Page {
                 opacity: 0.6
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
-                text: qsTr("Filter") + ": " + filters.text()
+                text: qsTr("Filter: %1").arg(app.visualModel.filters.text())
             }
         }
 
@@ -90,11 +90,9 @@ Page {
 
         model: TaskDelegateModel {
             model: taskListModel
-            filters: Filters {
-                hideDone: filterSettings.hideDone
-                projects: filterSettings.projects.value
-                contexts: filterSettings.contexts.value
-            }
+            filters.hideDone: filterSettings.hideDone
+            filters.projects: filterSettings.projects.value
+            filters.contexts: filterSettings.contexts.value
 
             sorting: Sorting {
                 asc: sortSettings.asc
@@ -102,12 +100,10 @@ Page {
                 grouping: sortSettings.grouping
             }
             delegate: TaskListItem {
-                id: item
                 width: lv.width
-    //            onAddTask: taskListModel.addTask(text)
-    //            defaultPriority: taskDelegateModel.defaultPriority
                 onEditItem: pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: model.index, text: model.fullTxt});
             }
+            Component.onCompleted: app.visualModel = this
         }
     }
 

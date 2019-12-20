@@ -274,15 +274,15 @@
         <translation type="unfinished">Aufgabenliste</translation>
     </message>
     <message>
-        <source>Filter</source>
-        <translation type="unfinished">Filter</translation>
-    </message>
-    <message>
         <source>No Tasks</source>
         <translation type="unfinished">Keine Aufgaben</translation>
     </message>
     <message>
         <source>Pull down to add task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
