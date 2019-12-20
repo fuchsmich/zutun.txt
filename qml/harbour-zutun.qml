@@ -95,10 +95,10 @@ ApplicationWindow
 
     function addTask(text) {
         //safety check text
-        if (typeof text !== "String") text = "";
-        pageStack.pop(pageStack.find(function(p){ return (p.name === "TaskList") }), PageStackAction.Immediate);
-        pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: -1, text: text});
-        app.activate();
+        if (typeof text !== "String") text = ""
+        pageStack.pop(pageStack.find(function(p){ return (p.name === "TaskList") }), PageStackAction.Immediate)
+        pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: -1, text: text})
+        app.activate()
     }
 
     FileIO {
@@ -120,6 +120,7 @@ ApplicationWindow
         projectColor: "red"
         contextColor: "blue"
         onSaveList: todoTxtFile.save(content)
+        onListChanged: app.visualModel.resort("listChanged")
     }
 }
 

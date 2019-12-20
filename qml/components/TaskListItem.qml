@@ -56,7 +56,7 @@ ListItem {
             Label {
                 id:lbl
                 width: listItem.width - doneSw.width - 2*Theme.horizontalPageMargin
-                text: model.formattedSubject
+                text: model.formattedSubject + model.section
                 linkColor: Theme.primaryColor
                 textFormat: Text.StyledText
                 wrapMode: Text.Wrap

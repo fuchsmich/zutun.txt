@@ -16,11 +16,10 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Reset")
-                //                iconsource: "image://theme/icon-m-" + (sorting.asc ? "down" :"up")
                 onClicked:{
-                    sorting.asc = true
-                    sorting.order = 0
-                    sorting.grouping = 0
+                    sortSettings.asc = true
+                    sortSettings.order = 0
+                    sortSettings.grouping = 0
                 }
             }
         }
@@ -36,13 +35,9 @@ Page {
             Button {
                 id: cbtn
                 width: Theme.buttonWidthLarge
-                                    anchors {
-                //                        top: pgh.bottom
-                //                        topMargin: -Theme.paddingMedium
-                                        horizontalCenter: parent.horizontalCenter
-                                    }
-                text: qsTr("Toggle Order (") + (sorting.asc ? "asc" :"desc") + ")"
-                onClicked: sorting.asc = !sorting.asc
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Toggle Order (") + (sortSettings.asc ? "asc" :"desc") + ")"
+                onClicked: sortSettings.asc = !sortSettings.asc
             }
 
             SectionHeader {
@@ -51,16 +46,15 @@ Page {
 
             Repeater {
                 id: rep
-                property var list: sorting.functionList
+                property var list: app.visualModel.sorting.functionList
                 model: list.length
 
                 delegate: TextSwitch {
-                    checked: sorting.order === model.index
+                    checked: sortSettings.order === model.index
                     text: rep.list[model.index][0]
                     automaticCheck: false
                     onClicked:{
-                        sorting.order = model.index
-//                        pageStack.navigateBack();
+                        sortSettings.order = model.index
                     }
                 }
             }
@@ -71,16 +65,15 @@ Page {
 
             Repeater {
                 id: groupRep
-                property var list: sorting.groupFunctionList
+                property var list: app.visualModel.sorting.groupFunctionList
                 model: list.length
 
                 delegate: TextSwitch {
-                    checked: sorting.grouping === model.index
+                    checked: sortSettings.grouping === model.index
                     text: groupRep.list[model.index][0]
                     automaticCheck: false
                     onClicked:{
-                        sorting.grouping = model.index
-//                        pageStack.navigateBack();
+                        sortSettings.grouping = model.index
                     }
                 }
             }

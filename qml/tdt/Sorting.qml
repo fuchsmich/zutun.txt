@@ -13,17 +13,23 @@ QtObject {
     onOrderChanged: sortingChanged()
 
     //group by: 0..none, 1..projects, 2..contexts
-    property int grouping: 0
-    onGroupingChanged: sortingChanged()
+    property int groupBy: 0
+    onGroupByChanged: {
+        console.log(groupBy)
+        sortingChanged()
+    }
 
     property string sortText: qsTr("Sorted by %1").arg(functionList[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc")))
-    property string groupText: (grouping > 0 ? qsTr("Grouped by %1, ").arg(groupFunctionList[grouping][0]) : "")
+    property string groupText: (groupBy > 0 ? qsTr("Grouped by %1, ").arg(groupFunctionList[groupBy][0]) : "")
 
     //returns a function, which compares two items
-    property var lessThanFunc: groupFunctionList[grouping][1]
+    property var lessThanFunc: groupFunctionList[groupBy][1]
 
     //returns a function, which returns a list of groups (=sections)
-    property var getGroups: groupFunctionList[grouping][2]
+    //property var getGroups: groupFunctionList[groupBy][2]
+    function getGroups(task) {
+        return groupFunctionList[groupBy][2](task)
+    }
 
     //list of functions for sorting; *left* and *right* are the items to compare
     property var functionList: [

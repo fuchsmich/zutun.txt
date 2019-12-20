@@ -31,10 +31,10 @@ QtObject {
         if (task.fullTxt.indexOf(searchString) === -1) return false
 
         for (var p in projects) {
-            if (task.subject.indexOf(projects[p]) === -1) return false
+            if (task.fullTxt.indexOf(projects[p]) === -1) return false
         }
         for (var c in contexts) {
-            if (task.subject.indexOf(contexts[c]) === -1) return false
+            if (task.fullTxt.indexOf(contexts[c]) === -1) return false
         }
         return true
     }

@@ -93,6 +93,7 @@ ListModel {
             textList = array.sort()
         }
 
+        clear()
         var i = 0
         for (var a = 0; a < textList.length; a++) {
             var line = textList[a]
@@ -104,7 +105,7 @@ ListModel {
         }
         if (i < count) remove(i, count - i)
 
-        listChanged()
+        //listChanged()
     }
 
     function _saveList() {
@@ -129,7 +130,7 @@ ListModel {
     }
 
     onDataChanged: {
-        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles, roles.size, roles[0], data(topLeft, roles[0]))
+        //console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles, roles.size, roles[0], data(topLeft, roles[0]))
 
 
         //in SFOS kommt kein "roles" an???

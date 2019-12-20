@@ -90,19 +90,23 @@ Page {
 
         model: TaskDelegateModel {
             model: taskListModel
-            filters.hideDone: filterSettings.hideDone
-            filters.projects: filterSettings.projects.value
-            filters.contexts: filterSettings.contexts.value
+            filters {
+                hideDone: filterSettings.hideDone
+                projects: filterSettings.projects.value
+                contexts: filterSettings.contexts.value
+            }
 
-            sorting: Sorting {
+            sorting {
                 asc: sortSettings.asc
                 order: sortSettings.order
-                grouping: sortSettings.grouping
+                groupBy: 1 //sortSettings.grouping
             }
+
             delegate: TaskListItem {
                 width: lv.width
                 onEditItem: pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: model.index, text: model.fullTxt});
             }
+
             Component.onCompleted: app.visualModel = this
         }
     }
