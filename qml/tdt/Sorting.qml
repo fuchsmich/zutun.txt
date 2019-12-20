@@ -23,7 +23,7 @@ QtObject {
     property var lessThanFunc: groupFunctionList[grouping][1]
 
     //returns a function, which returns a list of groups (=sections)
-    property var getGroup: groupFunctionList[grouping][2]
+    property var getGroups: groupFunctionList[grouping][2]
 
     //list of functions for sorting; *left* and *right* are the items to compare
     property var functionList: [

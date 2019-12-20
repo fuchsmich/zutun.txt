@@ -90,20 +90,17 @@ Page {
 
         model: TaskDelegateModel {
             model: taskListModel
-            lessThanFunc: sorting.lessThanFunc //changed too late in sorting ??
-            getSectionFunc: sorting.getGroup //changed too late in sorting ??
-            visibilityFunc: filters.visibility
-//            Connections {
-//                target: app
-//                onFiltersChanged: {
-//                    console.log("fc")
-//                    resort("filtersChanged")
-//                }
-//            }
-//            Connections {
-//                target: sorting
-//                onSortingChanged: resort("sortingChanged")
-//            }
+            filters: Filters {
+                hideDone: filterSettings.hideDone
+                projects: filterSettings.projects.value
+                contexts: filterSettings.contexts.value
+            }
+
+            sorting: Sorting {
+                asc: sortSettings.asc
+                order: sortSettings.order
+                grouping: sortSettings.grouping
+            }
             delegate: TaskListItem {
                 id: item
                 width: lv.width

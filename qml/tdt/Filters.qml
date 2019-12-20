@@ -4,71 +4,37 @@ import "../tdt/todotxt.js" as JS
 QtObject {
     id: filters
     signal filtersChanged()
-
-    property ListModel taskList
+    //onFiltersChanged: console.log("filters changed")
 
     property bool hideDone: true
     onHideDoneChanged: filtersChanged()
 
-
     property var text: function () {
         var ftext = [(hideDone ? qsTr("Hide Complete"): undefined)].concat(
-                    projects.active.concat(
-                        contexts.active)).join(", ")
+                    projects.concat(contexts)).join(", ")
         if (ftext) return ftext
         else return qsTr("None")
     }
 
+    property var projects: []
+    onProjectsChanged: filtersChanged()
+    property var contexts: []
+
     property string searchString: ""
     onSearchStringChanged: filtersChanged()
 
-    property ProjectContextFilter projects: ProjectContextFilter {
-        name: "projects"
-        list: taskListModel.projects
-        //active: filterSettings.projects.value
-        onActiveChanged: filtersChanged()
-        numTasksHavingItem: filters.numTasksHavingItem
-    }
-    property ProjectContextFilter contexts: ProjectContextFilter {
-        name: "contexts"
-        list: taskListModel.contexts
-        //active: filterSettings.contexts.value
-        onActiveChanged: filtersChanged()
-        numTasksHavingItem: filters.numTasksHavingItem
-    }
-
-    function clearFilter(filterName) {
-        switch(filterName) {
-        case "projects": filterSettings.projects.value = []; break;
-        case "contexts": filterSettings.contexts.value = []; break;
-        }
-    }
-
-
-    //return the visibility of a task
+    //return the visibility of a task (object)
     function visibility(task) {
         if ((hideDone && task.done)) return false
 
         if (task.fullTxt.indexOf(searchString) === -1) return false
 
-        for (var p in projects.active) {
-            if (task.subject.indexOf(projects.active[p]) === -1) return false
+        for (var p in projects) {
+            if (task.subject.indexOf(projects[p]) === -1) return false
         }
-        for (var c in contexts.active) {
-            if (task.subject.indexOf(contexts.active[c]) === -1) return false
+        for (var c in contexts) {
+            if (task.subject.indexOf(contexts[c]) === -1) return false
         }
         return true
-    }
-
-    function numTasksHavingItem(item, visible) {
-        var num = 0
-        for (var i = 0; i < taskList.count; i++ ) {
-            if (taskList.get(i).fullTxt.indexOf(item) > -1) {
-                if (visible && visibility(taskList.get(i))) {
-                    num++
-                } else if (!visible) num++
-            }
-        }
-        return num
     }
 }

@@ -54,9 +54,9 @@ ApplicationWindow
         ConfigurationGroup {
             id: sortSettings
             path: "sorting"
-            property alias asc: sorting.asc
-            property alias order: sorting.order
-            property alias grouping: sorting.grouping
+            property bool asc: true
+            property int order: 0
+            property int grouping: 0
         }
     }
 
@@ -118,17 +118,6 @@ ApplicationWindow
         projectColor: "red"
         contextColor: "blue"
         onSaveList: todoTxtFile.save(content)
-    }
-
-    Filters_copy {
-        id: filters
-        hideDone: filterSettings.hideDone
-        projects: filterSettings.projects.value
-        contexts: filterSettings.contexts.value
-    }
-
-    Sorting {
-        id: sorting
     }
 }
 
