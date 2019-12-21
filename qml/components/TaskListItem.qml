@@ -3,7 +3,6 @@ import QtQml.Models 2.2
 import Sailfish.Silica 1.0
 
 import "../tdt/todotxt.js" as JS
-
 ListItem {
     id: listItem
 
@@ -31,7 +30,7 @@ ListItem {
         }, 3000)
     }
 
-    width: ListView.view.width
+    width: ListView.view.width //app.width //ListView.view.width
     contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)
     onClicked: editItem()
 

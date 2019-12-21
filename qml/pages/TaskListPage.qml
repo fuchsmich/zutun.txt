@@ -48,7 +48,7 @@ Page {
             PageHeader {
                 id: pgh
                 title: qsTr("Tasklist")
-                description: app.visualModel.sorting.groupText + app.visualModel.sorting.sortText
+                description: visualModel.sorting.groupText + visualModel.sorting.sortText
             }
             Label { /*from PageHeaderDescription.qml */
                 id: flbl
@@ -64,7 +64,7 @@ Page {
                 opacity: 0.6
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
-                text: qsTr("Filter: %1").arg(app.visualModel.filters.text())
+                text: qsTr("Filter: %1").arg(visualModel.filters.text())
             }
         }
 
@@ -77,7 +77,7 @@ Page {
             property: "section"
             criteria: ViewSection.FullString
             delegate: SectionHeader {
-                text: "Section: %1".arg(section)
+                text: section //"Section: %1".arg(section)
             }
         }
 
@@ -88,27 +88,7 @@ Page {
                                                 : todoTxtFile.hintText)
         }
 
-        model: TaskDelegateModel {
-            model: taskListModel
-            filters {
-                hideDone: filterSettings.hideDone
-                projects: filterSettings.projects.value
-                contexts: filterSettings.contexts.value
-            }
-
-            sorting {
-                asc: sortSettings.asc
-                order: sortSettings.order
-                groupBy: 1 //sortSettings.grouping
-            }
-
-            delegate: TaskListItem {
-                width: lv.width
-                onEditItem: pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: model.index, text: model.fullTxt});
-            }
-
-            Component.onCompleted: app.visualModel = this
-        }
+        model: visualModel.parts.list
     }
 
     onStatusChanged: {

@@ -46,7 +46,7 @@ Page {
 
             Repeater {
                 id: rep
-                property var list: app.visualModel.sorting.functionList
+                property var list: visualModel.sorting.functionList
                 model: list.length
 
                 delegate: TextSwitch {
@@ -65,7 +65,7 @@ Page {
 
             Repeater {
                 id: groupRep
-                property var list: app.visualModel.sorting.groupFunctionList
+                property var list: visualModel.sorting.groupFunctionList
                 model: list.length
 
                 delegate: TextSwitch {

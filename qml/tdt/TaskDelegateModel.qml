@@ -27,11 +27,11 @@ DelegateModel {
 //    }
 
     property Filters filters: Filters {
-        onFiltersChanged: visualModel.resort("filters")
+        onFiltersChanged: resort("filters")
     }
 
     property Sorting sorting: Sorting {
-        onSortingChanged: visualModel.resort("sorting")
+        onSortingChanged: resort("sorting")
     }
 
     //return the positon of the item in the list due to function lessThanFunc
@@ -57,7 +57,7 @@ DelegateModel {
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
             model.get(item.model.index).section = sorting.getGroups(item.model.fullTxt).join(', ')
-            console.log(model.get(item.model.index).section, sorting.groupBy)
+            //console.log(model.get(item.model.index).section, sorting.groupBy)
             if (filters.visibility(item.model)) {
                 if (item.model.priority.charCodeAt(0) > defaultPriority.charCodeAt(0)) defaultPriority = item.model.priority
                 var index = insertPosition(lessThan, item)

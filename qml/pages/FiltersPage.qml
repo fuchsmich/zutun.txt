@@ -6,7 +6,7 @@ import "../tdt"
 Page {
     id: page
     property bool skip: false
-    //property TaskDelegateModel visualModel: app.visualModel
+    property var visualModel1: visualModel
     state: "projects"
 
     SilicaListView {
@@ -28,7 +28,7 @@ Page {
 
         header: PageHeader {
             title: lv.title
-            description: qsTr("Active Filters: %1").arg(app.visualModel.filters.text())
+            description: qsTr("Active Filters: %1").arg(visualModel.filters.text())
         }
 
         ViewPlaceholder {
@@ -68,11 +68,11 @@ Page {
 
     FilterModel {
         id: filterModel
-        visualModel: app.visualModel
+        visualModel: visualModel1
     }
 
     Connections {
-        target: app.visualModel
+        target: visualModel
         onSortFinished: filterModel.parseLists()
     }
 
@@ -106,7 +106,7 @@ Page {
             PropertyChanges {
                 target: filterModel
                 list: taskListModel.projects
-                active: app.visualModel.filters.projects
+                active: visualModel.filters.projects
                 onActiveChanged: filterSettings.projects.value = filterModel.active
             }
         }
@@ -120,7 +120,7 @@ Page {
             PropertyChanges {
                 target: filterModel
                 list: taskListModel.contexts
-                active: app.visualModel.filters.contexts
+                active: visualModel.filters.contexts
                 onActiveChanged: filterSettings.contexts.value = filterModel.active
             }
         }

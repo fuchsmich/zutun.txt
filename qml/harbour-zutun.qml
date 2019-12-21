@@ -17,7 +17,7 @@ import "tdt/todotxt.js" as JS
 ApplicationWindow
 {
     id: app
-    property TaskDelegateModel visualModel
+    //property var visualModel
 
     initialPage: Component { TaskListPage{} }
 
@@ -120,7 +120,28 @@ ApplicationWindow
         projectColor: "red"
         contextColor: "blue"
         onSaveList: todoTxtFile.save(content)
-        onListChanged: app.visualModel.resort("listChanged")
+        onListChanged: visualModel.resort("listChanged")
+    }
+
+    TaskDelegateModel {
+        id: visualModel
+        model: taskListModel
+        filters {
+            hideDone: filterSettings.hideDone
+            projects: filterSettings.projects.value
+            contexts: filterSettings.contexts.value
+        }
+
+        sorting {
+            asc: sortSettings.asc
+            order: sortSettings.order
+            groupBy: sortSettings.grouping
+        }
+
+        delegate: Delegate {
+            //width: ListView.width
+            //onEditItem: pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: model.index, text: model.fullTxt});
+        }
     }
 }
 

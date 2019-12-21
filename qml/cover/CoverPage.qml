@@ -18,14 +18,8 @@ CoverBackground {
         anchors.fill: parent
         anchors.margins: Theme.paddingMedium
         clip: true
-        model: TaskDelegateModel {
-            model: taskListModel
-            delegate: Label {
-                text: model.formattedSubject
-                width: parent.width - 2*Theme.paddingMedium
-                truncationMode: TruncationMode.Elide
-            }
-        }
+        //TODO use package??
+        model: visualModel.parts.cover
     }
 
     CoverActionList {
