@@ -6,7 +6,7 @@ import "../tdt"
 
 Page {
     id: page
-    property string name: "TaskList"
+    //property string name: "TaskList"
 
     SilicaListView {
         id: lv
