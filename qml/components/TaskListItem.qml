@@ -32,7 +32,7 @@ ListItem {
 
     width: ListView.view.width //app.width //ListView.view.width
     contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)
-    onClicked: editItem()
+    onClicked: ListView.view.editTask(model.index, model.fullTxt) //editItem()
 
     Column {
         id: col

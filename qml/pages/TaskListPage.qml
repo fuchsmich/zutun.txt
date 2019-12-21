@@ -88,6 +88,10 @@ Page {
                                                 : todoTxtFile.hintText)
         }
 
+        function editTask(index, taskTxt) {
+            pageStack.push(Qt.resolvedUrl("TaskEditPage.qml"), {taskIndex: index, text: taskTxt});
+        }
+
         model: visualModel.parts.list
     }
 

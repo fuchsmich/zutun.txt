@@ -149,7 +149,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: filters.projects.list
+                    model: taskListModel.projects
                     onListItemSelected: setText("project", text)
                 }
 
@@ -164,7 +164,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: filters.projects.list
+                    model: taskListModel.contexts
                     onListItemSelected: setText("context", text)
                 }
 
@@ -221,7 +221,7 @@ Dialog {
     }
 
     onAccepted: {
-        if (taskIndex > -1) taskListModel.setTaskProperty(taskIndex, "fullTxt", text)
+        if (taskIndex > -1) taskListModel.setTaskProperty(taskIndex, JS.baseFeatures.fullTxt, text)
         if (taskIndex === -1) taskListModel.addTask(text)
     }
 }
