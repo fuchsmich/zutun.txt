@@ -7,6 +7,8 @@ ListItem {
     id: listItem
 
     signal editItem()
+    onEditItem: ListView.view.editTask(model.index, model.fullTxt)
+    signal resortItem()
 
     property string minPriority: "F"
 
@@ -32,7 +34,7 @@ ListItem {
 
     width: ListView.view.width //app.width //ListView.view.width
     contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)
-    onClicked: ListView.view.editTask(model.index, model.fullTxt) //editItem()
+    onClicked: editItem()
 
     Column {
         id: col
@@ -47,15 +49,15 @@ ListItem {
                 automaticCheck: false
                 checked: model.done
                 onClicked: {
-                    //model.done = !checked
+                    //model.done = !checked //geht nicht in 5.6
                     taskListModel.setTaskProperty(model.index, JS.baseFeatures.done, !checked)
-                    listItem.DelegateModel.groups = "unsorted"
+                    listItem.resortItem()
                 }
             }
             Label {
                 id:lbl
                 width: listItem.width - doneSw.width - 2*Theme.horizontalPageMargin
-                text: model.formattedSubject + model.section
+                text: model.formattedSubject
                 linkColor: Theme.primaryColor
                 textFormat: Text.StyledText
                 wrapMode: Text.Wrap
@@ -108,7 +110,7 @@ ListItem {
             onClicked: {
                 taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, true))
                 //model.priority = priorityUpDown(model.priority, true)
-                listItem.DelegateModel.groups = "unsorted"
+                resortItem()
             }
         }
         MenuItem {
@@ -117,7 +119,7 @@ ListItem {
             onClicked: {
                 taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, false))
                 //model.priority = priorityUpDown(model.priority, true)
-                listItem.DelegateModel.groups = "unsorted"
+                resortItem()
             }
         }
         MenuItem {

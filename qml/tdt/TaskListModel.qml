@@ -61,17 +61,9 @@ ListModel {
 
         item["formattedSubject"] = displayText
 
-        item["section"] = ""
-//        switch (section) {
-//        case 1:
-//            item["section"] = JS.projects.listLine(line).sort().join(", ")
-//            break
-//        case 2:
-//            item["section"] = JS.contexts.listLine(line).sort().join(", ")
-//            break
-//        default:
-//            item["section"] = ""
-//        }
+        //item["section"] = ""
+        item["projects"] = JS.projects.listLine(line).sort().join(", ")
+        item["contexts"] = JS.contexts.listLine(line).sort().join(", ")
 
         return  item
     }

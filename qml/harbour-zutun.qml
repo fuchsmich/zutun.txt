@@ -126,6 +126,7 @@ ApplicationWindow
     TaskDelegateModel {
         id: visualModel
         model: taskListModel
+
         filters {
             hideDone: filterSettings.hideDone
             projects: filterSettings.projects.value
@@ -138,10 +139,7 @@ ApplicationWindow
             groupBy: sortSettings.grouping
         }
 
-        delegate: Delegate {
-            //width: ListView.width
-            //onEditItem: pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: model.index, text: model.fullTxt});
-        }
+        delegate: Delegate { }
     }
 }
 

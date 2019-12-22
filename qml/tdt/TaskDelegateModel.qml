@@ -56,8 +56,6 @@ DelegateModel {
         //console.log("sorting", unsortedItems.count)
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
-            model.get(item.model.index).section = sorting.getGroups(item.model.fullTxt).join(', ')
-            //console.log(model.get(item.model.index).section, sorting.groupBy)
             if (filters.visibility(item.model)) {
                 if (item.model.priority.charCodeAt(0) > defaultPriority.charCodeAt(0)) defaultPriority = item.model.priority
                 var index = insertPosition(lessThan, item)
@@ -69,7 +67,7 @@ DelegateModel {
     }
 
     function resort(reason) {
-        console.log("resort called", sorting.groupBy, reason)
+        //console.log("resort called", sorting.groupBy, reason)
         if (items.count > 0) items.setGroups(0, items.count, "unsorted")
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
     }

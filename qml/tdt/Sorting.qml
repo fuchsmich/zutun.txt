@@ -19,17 +19,15 @@ QtObject {
         sortingChanged()
     }
 
+    readonly property var sectionProperty: {
+        return ["None", "projectSection", "contextSection"][groupBy]
+    }
+
     property string sortText: qsTr("Sorted by %1").arg(functionList[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc")))
     property string groupText: (groupBy > 0 ? qsTr("Grouped by %1, ").arg(groupFunctionList[groupBy][0]) : "")
 
     //returns a function, which compares two items
     property var lessThanFunc: groupFunctionList[groupBy][1]
-
-    //returns a function, which returns a list of groups (=sections)
-    //property var getGroups: groupFunctionList[groupBy][2]
-    function getGroups(task) {
-        return groupFunctionList[groupBy][2](task)
-    }
 
     //list of functions for sorting; *left* and *right* are the items to compare
     property var functionList: [
@@ -72,21 +70,19 @@ QtObject {
         ]
         ,[qsTr("Projects"),
           function(left, right) {
-              //console.log(typeof left.section, right.section)
-              return (left.section === right.section ?
+              console.log(typeof left.projectSection, right.projectSection)
+              return (left.projectSection === right.projectSection ?
                           functionList[order][1](left, right) :
-                          (left.section < right.section) ^ !asc
+                          (left.projectSection < right.projectSection) ^ !asc
                       )
-          },
-          function(task) {
-              return JS.projects.getList(task)
           }]
         ,[qsTr("Contexts"),
           function(left, right) {
-              return groupFunctionList[1][1](left,right)
-          },
-          function(task) {
-              return JS.contexts.getList(task)
+              //console.log(typeof left.projectSection, right.projectSection)
+              return (left.contextSection === right.contextSection ?
+                          functionList[order][1](left, right) :
+                          (left.contextSection < right.contextSection) ^ !asc
+                      )
           }]
     ]
 }

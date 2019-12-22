@@ -74,7 +74,7 @@ Page {
         }
 
         section {
-            property: "section"
+            property: visualModel.sorting.sectionProperty//"section"
             criteria: ViewSection.FullString
             delegate: SectionHeader {
                 text: section //"Section: %1".arg(section)
