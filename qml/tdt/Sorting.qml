@@ -20,7 +20,7 @@ QtObject {
     }
 
     readonly property var sectionProperty: {
-        return ["None", "projectSection", "contextSection"][groupBy]
+        return ["none", "projects", "contexts"][groupBy]
     }
 
     property string sortText: qsTr("Sorted by %1").arg(functionList[order][0] + ", " + (asc ? qsTr("asc") : qsTr("desc")))
@@ -70,18 +70,16 @@ QtObject {
         ]
         ,[qsTr("Projects"),
           function(left, right) {
-              console.log(typeof left.projectSection, right.projectSection)
-              return (left.projectSection === right.projectSection ?
+              return (left.projects === right.projects ?
                           functionList[order][1](left, right) :
-                          (left.projectSection < right.projectSection) ^ !asc
+                          (left.projects < right.projects) ^ !asc
                       )
           }]
         ,[qsTr("Contexts"),
           function(left, right) {
-              //console.log(typeof left.projectSection, right.projectSection)
-              return (left.contextSection === right.contextSection ?
+              return (left.contexts === right.contexts ?
                           functionList[order][1](left, right) :
-                          (left.contextSection < right.contextSection) ^ !asc
+                          (left.contexts < right.contexts) ^ !asc
                       )
           }]
     ]
