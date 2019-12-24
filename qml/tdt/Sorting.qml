@@ -57,7 +57,6 @@ QtObject {
         }]
     ]
 
-
     //0..Name, 1..lessThanFunc, 2..return list of groups
     property var groupFunctionList: [
         [qsTr("None"),
