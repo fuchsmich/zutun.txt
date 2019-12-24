@@ -117,8 +117,8 @@ ApplicationWindow
 
     TaskListModel {
         id: taskListModel
-        projectColor: "red"
-        contextColor: "blue"
+        projectColor: Theme.highlightColor
+        contextColor: Theme.secondaryHighlightColor
         onSaveList: todoTxtFile.save(content)
         onListChanged: visualModel.resort("listChanged")
     }
