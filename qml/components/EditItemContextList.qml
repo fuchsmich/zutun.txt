@@ -21,15 +21,15 @@ EditItem {
                 height: parent.height
                 //anchors.fill: parent
                 onClicked: {
-                    console.log(text)
+                    //console.log(modelData)
                     eip.closeMenu()
                     //setText("projects", model.name)
-                    listItemSelected(model.name)
+                    listItemSelected(modelData)
                 }
                 Label {
                     id: lbl
                     anchors.centerIn: parent
-                    text: model.name
+                    text: modelData
                 }
             }
             HorizontalScrollDecorator { }

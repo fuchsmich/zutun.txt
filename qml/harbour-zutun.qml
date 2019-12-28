@@ -3,8 +3,11 @@ import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
 import Nemo.DBus 2.0
 
+import "components"
 import "pages"
 import "tdt"
+
+import "tdt/todotxt.js" as JS
 
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
@@ -14,7 +17,9 @@ import "tdt"
 ApplicationWindow
 {
     id: app
-    initialPage: Component { TaskList{} }
+    //property var visualModel
+
+    initialPage: Component { TaskListPage{} }
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
@@ -26,25 +31,26 @@ ApplicationWindow
         path: "/apps/harbour-zutun/settings"
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
         property string doneTxtLocation: StandardPaths.documents + '/done.txt'
-        property bool autoSave: true
+        //property alias autoSave: file.autoSave
         property int fontSizeTaskList: Theme.fontSizeMedium
         property bool projectFilterLeft: false
         ConfigurationGroup {
             id: filterSettings
-            path: "filters"
+            path: "/filters"
             property bool hideDone: true
             //TODO filters are not stored (anymore?)
             property ConfigurationValue projects: ConfigurationValue {
-                key: "/apps/harbour-zutun/settings/filters/projects"
+                key: filterSettings.path + "/projects"
                 defaultValue: []
             }
             property ConfigurationValue contexts: ConfigurationValue {
-                key: "/apps/harbour-zutun/settings/filters/contexts"
+                key: filterSettings.path + "/contexts"
                 defaultValue: []
             }
 
-//            property var contexts: []
-            onProjectsChanged: console.log(projects.toString())
+            //store as strings??
+            property string projectsActive: ""
+            property string contextsActive: ""
         }
 
         ConfigurationGroup {
@@ -89,15 +95,51 @@ ApplicationWindow
 
     function addTask(text) {
         //safety check text
-        if (typeof text !== "String") text = "";
-        pageStack.pop(pageStack.find(function(p){ return (p.name === "TaskList") }), PageStackAction.Immediate);
-        pageStack.push(Qt.resolvedUrl("./pages/TaskEdit.qml"), {itemIndex: -1, text: text});
-        app.activate();
+        if (typeof text !== "String") text = ""
+        pageStack.pop(pageStack.find(function(p){ return (p.name === "TaskList") }), PageStackAction.Immediate)
+        pageStack.push(Qt.resolvedUrl("./pages/TaskEditPage.qml"), {itemIndex: -1, text: text})
+        app.activate()
     }
 
+    FileIO {
+        id: todoTxtFile
+        property string hintText: ""
+        path: settings.todoTxtLocation
 
-    TodoTxt {
-        id: ttm1
+        onReadSuccess:
+            if (content) taskListModel.setTextList(content)
+
+        onIoError: {
+            //TODO needs some rework for translation
+            hintText = msg
+        }
+    }
+
+    TaskListModel {
+        id: taskListModel
+        projectColor: Theme.highlightColor
+        contextColor: Theme.secondaryHighlightColor
+        onSaveList: todoTxtFile.save(content)
+        onListChanged: visualModel.resort("listChanged")
+    }
+
+    TaskDelegateModel {
+        id: visualModel
+        model: taskListModel
+
+        filters {
+            hideDone: filterSettings.hideDone
+            projects: filterSettings.projects.value
+            contexts: filterSettings.contexts.value
+        }
+
+        sorting {
+            asc: sortSettings.asc
+            order: sortSettings.order
+            groupBy: sortSettings.grouping
+        }
+
+        delegate: Delegate { }
     }
 }
 

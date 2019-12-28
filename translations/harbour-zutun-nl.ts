@@ -40,6 +40,17 @@
     </message>
 </context>
 <context>
+    <name>Filters</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Voltooid verbergen</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Geen</translation>
+    </message>
+</context>
+<context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>
@@ -59,6 +70,10 @@
     </message>
     <message>
         <source>No entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Filters: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -140,80 +155,134 @@
     </message>
 </context>
 <context>
-    <name>TaskEdit</name>
+    <name>Sorting</name>
     <message>
-        <source>Add New Task</source>
-        <translation>Nieuwe taak toevoegen</translation>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Gesorteerd op %1</translation>
     </message>
     <message>
-        <source>Edit Task</source>
-        <translation>Taak bewerken</translation>
+        <source>asc</source>
+        <translation type="unfinished">oplopend</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">aflopend</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Gegroepeerd op %1,</translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">natuurlijk</translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished">Datum van aanmaken</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Einddatum</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Onderwerp</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Geen</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Projecten</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Contexten</translation>
     </message>
 </context>
 <context>
-    <name>TaskList</name>
-    <message>
-        <source>Settings</source>
-        <translation>Instellingen</translation>
-    </message>
+    <name>TaskEditPage</name>
     <message>
         <source>Add New Task</source>
-        <translation>Nieuwe taak toevoegen</translation>
+        <translation type="unfinished">Nieuwe taak toevoegen</translation>
     </message>
     <message>
-        <source>Tasklist</source>
-        <translation>Takenlijst</translation>
+        <source>Edit Task</source>
+        <translation type="unfinished">Taak bewerken</translation>
     </message>
-    <message>
-        <source>Show</source>
-        <translation>Tonen</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation>Verbergen</translation>
-    </message>
-    <message>
-        <source> Completed Tasks</source>
-        <translation>Voltooide taken</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation>Filter</translation>
-    </message>
-    <message>
-        <source>No Tasks</source>
-        <translation>Geen taken</translation>
-    </message>
-    <message>
-        <source>Priority Up</source>
-        <translation>Prioriteit omhoog</translation>
-    </message>
-    <message>
-        <source>Priority Down</source>
-        <translation>Prioriteit omlaag</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <source>Sorting &amp; Grouping</source>
-        <translation>Sorteren &amp; groeperen</translation>
-    </message>
+</context>
+<context>
+    <name>TaskListItem</name>
     <message>
         <source>created:</source>
-        <translation>aangemaakt:</translation>
+        <translation type="unfinished">aangemaakt:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation>verwacht:</translation>
+        <translation type="unfinished">verwacht:</translation>
+    </message>
+    <message>
+        <source>Priority Up</source>
+        <translation type="unfinished">Prioriteit omhoog</translation>
+    </message>
+    <message>
+        <source>Priority Down</source>
+        <translation type="unfinished">Prioriteit omlaag</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Instellingen</translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished">Sorteren &amp; groeperen</translation>
+    </message>
+    <message>
+        <source>Add New Task</source>
+        <translation type="unfinished">Nieuwe taak toevoegen</translation>
     </message>
     <message>
         <source>Create file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Show</source>
+        <translation type="unfinished">Tonen</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished">Verbergen</translation>
+    </message>
+    <message>
+        <source> Completed Tasks</source>
+        <translation type="unfinished">Voltooide taken</translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <translation type="unfinished">Takenlijst</translation>
+    </message>
+    <message>
+        <source>No Tasks</source>
+        <translation type="unfinished">Geen taken</translation>
+    </message>
+    <message>
         <source>Pull down to add task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -234,57 +303,6 @@
     <message>
         <source>Contexts</source>
         <translation>Contexten</translation>
-    </message>
-</context>
-<context>
-    <name>TodoTxt</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation>Voltooid verbergen</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation>oplopend</translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation>aflopend</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>natuurlijk</translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation>Datum van aanmaken</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation>Onderwerp</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Geen</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation>Projecten</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation>Contexten</translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation>Gesorteerd op %1</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation>Gegroepeerd op %1,</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Einddatum</translation>
     </message>
 </context>
 </TS>

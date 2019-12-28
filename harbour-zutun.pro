@@ -3,29 +3,36 @@ TARGET = harbour-zutun
 CONFIG += sailfishapp_qml
 
 DISTFILES += qml/harbour-zutun.qml \
-    qml/cover/CoverPage.qml \
+    harbour-zutun.desktop \
+    qml/components/CoverListItem.qml \
+    qml/components/Delegate.qml \
+    qml/pages/TaskEditPage.qml \
+    qml/pages/TaskListPage.qml \
+    qml/tdt/FilterModel.qml \
+    qml/tdt/FilterModel.qml \
+    qml/tdt/Filters.qml \
+    qml/tdt/Sorting.qml \
+    qml/tdt/TaskDelegateModel.qml \
+    qml/tdt/TaskListModel.qml \
+    translations/*.ts \
     rpm/harbour-zutun.spec \
     rpm/harbour-zutun.yaml \
-    translations/*.ts \
-    harbour-zutun.desktop \
+    rpm/harbour-zutun.changes \
+    qml/cover/CoverPage.qml \
+    qml/cover/zutun.png \
+    qml/tdt/todotxt.js \
+    qml/tdt/FileIO.qml \
+    qml/components/Notification.qml \
     qml/pages/Settings.qml \
-    qml/pages/TaskEdit.qml \
-    qml/pages/TaskList.qml \
     qml/pages/TextSelect.qml \
     qml/pages/OtherFilters.qml \
     qml/pages/FiltersPage.qml \
-    qml/cover/zutun.png \
-    qml/tdt/todotxt.js \
-    rpm/harbour-zutun.changes \
-    qml/tdt/TodoTxt.qml \
     qml/pages/About.qml \
     qml/pages/SortPage.qml \
-    qml/tdt/FileIO.qml \
+    qml/pages/DateSelect.qml \
     qml/python/fileio.py \
-    qml/tdt/Notification.qml \
     icons/harbour-zutun.svg \
     version \
-    qml/pages/DateSelect.qml \
     qml/components/EditItem.qml \
     qml/components/EditContextMenu.qml \
     qml/components/EditItemContextList.qml \

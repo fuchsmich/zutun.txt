@@ -1,0 +1,35 @@
+pkgname=zutuntxt-git
+pkgver=2.0rc
+pkgrel=1
+pkgdesc="ZuTun.txt - todo.txt GUI for SailfishOS and desktop"
+url="https://github.com/fuchsmich/zutun.txt"
+arch=('i686' 'x86_64')
+license=('GPL2')
+depends=('qt5-quickcontrols2')
+makedepends=('git')
+#groups=()
+#install
+#source=('https://github.com/fuchsmich/zutun.txt/archive/v1.7.2.tar.gz')
+source=('git+https://github.com/fuchsmich/zutun.txt.git#desktop')
+md5sums=('SKIP')
+
+
+pkgver() {
+    cd "$srcdir/<repo-name>"
+    printf 'r%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+}
+
+build() {
+    cd "${pkgname}"
+    
+    qmake-qt5 PREFIX=/usr QMAKE_CFLAGS="${CFLAGS}" QMAKE_CXXFLAGS="${CXXFLAGS}" QMAKE_LFLAGS="${LDFLAGS}" desktop-zutuntxt.pro
+    make
+}
+
+package() {
+    cd "${pkgname}"
+    make INSTALL_ROOT="${pkgdir}" install
+}

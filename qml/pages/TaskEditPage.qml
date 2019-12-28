@@ -8,17 +8,17 @@ Dialog {
     id: dialog
 
     //-1 for adding new task
-    property int itemIndex: -1
+    property int taskIndex: -1
     property alias text: ta.text
 
     function setText(type, txt) {
-        console.debug(type, txt)
+        //console.debug(type, txt)
         var cp = ta.cursorPosition
         var l = ta.text.length
         switch (type) {
         case "priority":
             var arg =  (txt ? txt.charAt(1) : false)
-            console.log(arg)
+            //console.log(arg)
             ta.text = JS.baseFeatures.modifyLine(ta.text, JS.baseFeatures.priority, arg)
             ta.cursorPosition = cp + (ta.text.length - l)
             break
@@ -54,7 +54,7 @@ Dialog {
             id: col
             width: dialog.width
             DialogHeader {
-                title: (itemIndex == -1 ? qsTr("Add New Task") : qsTr("Edit Task"))
+                title: (taskIndex == -1 ? qsTr("Add New Task") : qsTr("Edit Task"))
             }
             TextArea {
                 id: ta
@@ -149,7 +149,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: ttm1.filters.projectsModel
+                    model: taskListModel.projects
                     onListItemSelected: setText("project", text)
                 }
 
@@ -164,7 +164,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: ttm1.filters.contextsModel
+                    model: taskListModel.contexts
                     onListItemSelected: setText("context", text)
                 }
 
@@ -221,6 +221,7 @@ Dialog {
     }
 
     onAccepted: {
-        ttm1.tasks.setFullTxt(itemIndex, ta.text);
+        if (taskIndex > -1) taskListModel.setTaskProperty(taskIndex, JS.baseFeatures.fullTxt, text)
+        if (taskIndex === -1) taskListModel.addTask(text)
     }
 }

@@ -40,6 +40,17 @@
     </message>
 </context>
 <context>
+    <name>Filters</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Скрыть завершенные</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Нет</translation>
+    </message>
+</context>
+<context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>
@@ -59,6 +70,10 @@
     </message>
     <message>
         <source>No entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Filters: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -140,49 +155,72 @@
     </message>
 </context>
 <context>
-    <name>TaskEdit</name>
+    <name>Sorting</name>
+    <message>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Сортировано по %1</translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Сгруппировано по %1,</translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Объекты</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Нет</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Проекты</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditPage</name>
     <message>
         <source>Add New Task</source>
         <translation type="unfinished">Добавить новую задачу</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Отредактировать задачу</translation>
+        <translation type="unfinished">Отредактировать задачу</translation>
     </message>
 </context>
 <context>
-    <name>TaskList</name>
+    <name>TaskListItem</name>
     <message>
-        <source>Settings</source>
-        <translation>Настройки</translation>
+        <source>created:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add New Task</source>
-        <translation>Добавить новую задачу</translation>
-    </message>
-    <message>
-        <source>Tasklist</source>
-        <translation>Список задач</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>Показать</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation>Скрыть</translation>
-    </message>
-    <message>
-        <source> Completed Tasks</source>
-        <translation>Завершенные задачи</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation>Фильтр</translation>
-    </message>
-    <message>
-        <source>No Tasks</source>
-        <translation>Нет задач</translation>
+        <source>due:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Priority Up</source>
@@ -194,26 +232,57 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation>Удалить</translation>
+        <translation type="unfinished">Удалить</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Настройки</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>created:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>due:</source>
-        <translation type="unfinished"></translation>
+        <source>Add New Task</source>
+        <translation type="unfinished">Добавить новую задачу</translation>
     </message>
     <message>
         <source>Create file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Show</source>
+        <translation type="unfinished">Показать</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished">Скрыть</translation>
+    </message>
+    <message>
+        <source> Completed Tasks</source>
+        <translation type="unfinished">Завершенные задачи</translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <translation type="unfinished">Список задач</translation>
+    </message>
+    <message>
+        <source>No Tasks</source>
+        <translation type="unfinished">Нет задач</translation>
+    </message>
+    <message>
         <source>Pull down to add task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -233,57 +302,6 @@
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TodoTxt</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation>Скрыть завершенные</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation>Объекты</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Нет</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation>Проекты</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation>Сортировано по %1</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation>Сгруппировано по %1,</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

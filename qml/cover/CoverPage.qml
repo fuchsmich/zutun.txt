@@ -1,6 +1,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../components"
+import "../tdt"
+
 CoverBackground {
     id: cb
     Image {
@@ -15,12 +18,8 @@ CoverBackground {
         anchors.fill: parent
         anchors.margins: Theme.paddingMedium
         clip: true
-        model: ttm1.tasks
-        delegate: Label {
-            text: model.displayText
-            width: parent.width - 2*Theme.paddingMedium
-            truncationMode: TruncationMode.Elide
-        }
+        //TODO use package??
+        model: visualModel.parts.cover
     }
 
     CoverActionList {
@@ -34,7 +33,7 @@ CoverBackground {
 
     onStatusChanged: {
         if (status === Cover.Active ) {
-            ttm1.reloadFile();
+            //taskListModel.readFile();
         }
     }
 }

@@ -1,0 +1,30 @@
+(A) demo file for @todo.txt +zutun.txt
++zutun.txt add support for done.txt
++zutun.txt warn when filter hides all tasks
+asdsada
+asdasdsad
+asdasdsadsad
+sadsa @das
+sad +p1
+asd +p2
+sad +p1 +p2
+asd
+sa
+d
+sf
+asdf
+ds
+fasd
+gfa
+sdga
+q
+we
+qwe
+qf
+a
+sdf
+adsc
+asdf
+asfdew
+qr
+adsfsdf

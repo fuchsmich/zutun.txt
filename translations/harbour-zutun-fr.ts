@@ -40,6 +40,17 @@
     </message>
 </context>
 <context>
+    <name>Filters</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Cacher Compléter</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Aucun</translation>
+    </message>
+</context>
+<context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>
@@ -59,6 +70,10 @@
     </message>
     <message>
         <source>No entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Filters: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -140,80 +155,134 @@
     </message>
 </context>
 <context>
-    <name>TaskEdit</name>
+    <name>Sorting</name>
     <message>
-        <source>Add New Task</source>
-        <translation>Ajouter nouvelle tâche</translation>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Trié par %1</translation>
     </message>
     <message>
-        <source>Edit Task</source>
-        <translation>Éditer tâche</translation>
+        <source>asc</source>
+        <translation type="unfinished">tri croissant</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">par ordre décroissant</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Regroupé par %1, </translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">naturel</translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished">Date de création</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Date d&apos;échéance</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Sujet</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Aucun</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Projets</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Contextes</translation>
     </message>
 </context>
 <context>
-    <name>TaskList</name>
-    <message>
-        <source>Settings</source>
-        <translation>Préférences</translation>
-    </message>
+    <name>TaskEditPage</name>
     <message>
         <source>Add New Task</source>
-        <translation>Ajouter nouvelle tâche</translation>
+        <translation type="unfinished">Ajouter nouvelle tâche</translation>
     </message>
     <message>
-        <source>Tasklist</source>
-        <translation>Liste de tâches</translation>
+        <source>Edit Task</source>
+        <translation type="unfinished">Éditer tâche</translation>
     </message>
-    <message>
-        <source>Show</source>
-        <translation>Montrer</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation>Cacher</translation>
-    </message>
-    <message>
-        <source> Completed Tasks</source>
-        <translation> Tâches accomplies</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation>Filtre</translation>
-    </message>
-    <message>
-        <source>No Tasks</source>
-        <translation>Aucunes tâches</translation>
-    </message>
-    <message>
-        <source>Priority Up</source>
-        <translation>Relever priorité</translation>
-    </message>
-    <message>
-        <source>Priority Down</source>
-        <translation>diminuer priorité</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Effacer</translation>
-    </message>
-    <message>
-        <source>Sorting &amp; Grouping</source>
-        <translation>Trier &amp; Regrouper</translation>
-    </message>
+</context>
+<context>
+    <name>TaskListItem</name>
     <message>
         <source>created:</source>
-        <translation>créé:</translation>
+        <translation type="unfinished">créé:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation>échéance:</translation>
+        <translation type="unfinished">échéance:</translation>
+    </message>
+    <message>
+        <source>Priority Up</source>
+        <translation type="unfinished">Relever priorité</translation>
+    </message>
+    <message>
+        <source>Priority Down</source>
+        <translation type="unfinished">diminuer priorité</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Effacer</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Préférences</translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished">Trier &amp; Regrouper</translation>
+    </message>
+    <message>
+        <source>Add New Task</source>
+        <translation type="unfinished">Ajouter nouvelle tâche</translation>
     </message>
     <message>
         <source>Create file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Show</source>
+        <translation type="unfinished">Montrer</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished">Cacher</translation>
+    </message>
+    <message>
+        <source> Completed Tasks</source>
+        <translation type="unfinished"> Tâches accomplies</translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <translation type="unfinished">Liste de tâches</translation>
+    </message>
+    <message>
+        <source>No Tasks</source>
+        <translation type="unfinished">Aucunes tâches</translation>
+    </message>
+    <message>
         <source>Pull down to add task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -234,57 +303,6 @@
     <message>
         <source>Contexts</source>
         <translation type="unfinished">Contextes</translation>
-    </message>
-</context>
-<context>
-    <name>TodoTxt</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation>Cacher Compléter</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation>tri croissant</translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation>par ordre décroissant</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>naturel</translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation>Date de création</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation>Sujet</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Aucun</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation>Projets</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation>Contextes</translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation>Trié par %1</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation>Regroupé par %1, </translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Date d&apos;échéance</translation>
     </message>
 </context>
 </TS>

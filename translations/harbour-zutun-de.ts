@@ -40,6 +40,17 @@
     </message>
 </context>
 <context>
+    <name>Filters</name>
+    <message>
+        <source>Hide Complete</source>
+        <translation type="unfinished">Verberge fertige</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Keine</translation>
+    </message>
+</context>
+<context>
     <name>FiltersPage</name>
     <message>
         <source>Filter Projects</source>
@@ -59,6 +70,10 @@
     </message>
     <message>
         <source>No entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Filters: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -140,80 +155,134 @@
     </message>
 </context>
 <context>
-    <name>TaskEdit</name>
+    <name>Sorting</name>
     <message>
-        <source>Add New Task</source>
-        <translation>Aufgabe hinzufügen</translation>
+        <source>Sorted by %1</source>
+        <translation type="unfinished">Sortiert nach %1</translation>
     </message>
     <message>
-        <source>Edit Task</source>
-        <translation>Aufgabe editieren</translation>
+        <source>asc</source>
+        <translation type="unfinished">aufsteigend</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">absteigend</translation>
+    </message>
+    <message>
+        <source>Grouped by %1, </source>
+        <translation type="unfinished">Gruppiert nach %1, </translation>
+    </message>
+    <message>
+        <source>natural</source>
+        <translation type="unfinished">natürlich</translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished">Erstelldatum</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Enddatum</translation>
+    </message>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished">Betreff</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Keine</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Projekte</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Kontexte</translation>
     </message>
 </context>
 <context>
-    <name>TaskList</name>
-    <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
-    </message>
+    <name>TaskEditPage</name>
     <message>
         <source>Add New Task</source>
-        <translation>Aufgabe erstellen</translation>
+        <translation type="unfinished">Aufgabe hinzufügen</translation>
     </message>
     <message>
-        <source>Tasklist</source>
-        <translation>Aufgabenliste</translation>
+        <source>Edit Task</source>
+        <translation type="unfinished">Aufgabe editieren</translation>
     </message>
-    <message>
-        <source>Show</source>
-        <translation>Zeige</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation>Verberge</translation>
-    </message>
-    <message>
-        <source> Completed Tasks</source>
-        <translation> fertige Aufgaben</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation>Filter</translation>
-    </message>
-    <message>
-        <source>No Tasks</source>
-        <translation>Keine Aufgaben</translation>
-    </message>
-    <message>
-        <source>Priority Up</source>
-        <translation>Priorität rauf</translation>
-    </message>
-    <message>
-        <source>Priority Down</source>
-        <translation>Priorität runter</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Löschen</translation>
-    </message>
-    <message>
-        <source>Sorting &amp; Grouping</source>
-        <translation>Sortieren &amp; Gruppieren</translation>
-    </message>
+</context>
+<context>
+    <name>TaskListItem</name>
     <message>
         <source>created:</source>
-        <translation>erstellt:</translation>
+        <translation type="unfinished">erstellt:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation>bis:</translation>
+        <translation type="unfinished">bis:</translation>
+    </message>
+    <message>
+        <source>Priority Up</source>
+        <translation type="unfinished">Priorität rauf</translation>
+    </message>
+    <message>
+        <source>Priority Down</source>
+        <translation type="unfinished">Priorität runter</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Löschen</translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Einstellungen</translation>
+    </message>
+    <message>
+        <source>Sorting &amp; Grouping</source>
+        <translation type="unfinished">Sortieren &amp; Gruppieren</translation>
+    </message>
+    <message>
+        <source>Add New Task</source>
+        <translation type="unfinished">Aufgabe hinzufügen</translation>
     </message>
     <message>
         <source>Create file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Show</source>
+        <translation type="unfinished">Zeige</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished">Verberge</translation>
+    </message>
+    <message>
+        <source> Completed Tasks</source>
+        <translation type="unfinished"> fertige Aufgaben</translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <translation type="unfinished">Aufgabenliste</translation>
+    </message>
+    <message>
+        <source>No Tasks</source>
+        <translation type="unfinished">Keine Aufgaben</translation>
+    </message>
+    <message>
         <source>Pull down to add task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -234,57 +303,6 @@
     <message>
         <source>Contexts</source>
         <translation>Kontexte</translation>
-    </message>
-</context>
-<context>
-    <name>TodoTxt</name>
-    <message>
-        <source>Hide Complete</source>
-        <translation>Verberge fertige</translation>
-    </message>
-    <message>
-        <source>asc</source>
-        <translation>aufsteigend</translation>
-    </message>
-    <message>
-        <source>desc</source>
-        <translation>absteigend</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>natürlich</translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation>Erstelldatum</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation>Betreff</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Keine</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation>Projekte</translation>
-    </message>
-    <message>
-        <source>Contexts</source>
-        <translation>Kontext</translation>
-    </message>
-    <message>
-        <source>Sorted by %1</source>
-        <translation>Sortiert nach %1</translation>
-    </message>
-    <message>
-        <source>Grouped by %1, </source>
-        <translation>Gruppiert nach %1, </translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Enddatum</translation>
     </message>
 </context>
 </TS>

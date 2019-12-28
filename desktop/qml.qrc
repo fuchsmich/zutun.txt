@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>TaskListPage.qml</file>
+        <file>TaskListItem.qml</file>
+        <file>SettingsPage.qml</file>
+        <file>Completer.qml</file>
+        <file>Completer_copy.qml</file>
+        <file>FilterPage.qml</file>
+        <file>SearchBar.qml</file>
+        <file>Completer_copy1.qml</file>
+    </qresource>
+</RCC>

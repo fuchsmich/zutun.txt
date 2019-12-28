@@ -16,7 +16,6 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Reset")
-                //                iconsource: "image://theme/icon-m-" + (sortSettings.asc ? "down" :"up")
                 onClicked:{
                     sortSettings.asc = true
                     sortSettings.order = 0
@@ -36,11 +35,7 @@ Page {
             Button {
                 id: cbtn
                 width: Theme.buttonWidthLarge
-                                    anchors {
-                //                        top: pgh.bottom
-                //                        topMargin: -Theme.paddingMedium
-                                        horizontalCenter: parent.horizontalCenter
-                                    }
+                anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Toggle Order (") + (sortSettings.asc ? "asc" :"desc") + ")"
                 onClicked: sortSettings.asc = !sortSettings.asc
             }
@@ -51,7 +46,7 @@ Page {
 
             Repeater {
                 id: rep
-                property var list: ttm1.sorting.functionList
+                property var list: visualModel.sorting.functionList
                 model: list.length
 
                 delegate: TextSwitch {
@@ -60,7 +55,6 @@ Page {
                     automaticCheck: false
                     onClicked:{
                         sortSettings.order = model.index
-//                        pageStack.navigateBack();
                     }
                 }
             }
@@ -71,7 +65,7 @@ Page {
 
             Repeater {
                 id: groupRep
-                property var list: ttm1.sorting.groupFunctionList
+                property var list: visualModel.sorting.groupFunctionList
                 model: list.length
 
                 delegate: TextSwitch {
@@ -80,7 +74,6 @@ Page {
                     automaticCheck: false
                     onClicked:{
                         sortSettings.grouping = model.index
-//                        pageStack.navigateBack();
                     }
                 }
             }

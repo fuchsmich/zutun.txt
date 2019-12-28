@@ -19,7 +19,7 @@ EditItem {
             DatePicker {
                 id: datePicker
                 daysVisible: true
-                onDateChanged: console.log(dateText)
+                //onDateChanged: console.log(dateText)
 
                 delegate: Component {
                     MouseArea {

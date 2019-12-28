@@ -1,62 +1,82 @@
 import QtQuick 2.0
 import io.thp.pyotherside 1.4
 
+//TODO check if file is changed on disk
 Python {
     id: py
 
     property bool pythonReady: false
-    onPythonReadyChanged: read();
+    //onPythonReadyChanged: read()
     property string path
-    onPathChanged: read();
-    property string folder: path.substring(0,path.lastIndexOf("/")+1)
+    //onPathChanged: read()
+    property string folder: path.substring(0, path.lastIndexOf("/")+1)
     property string content: ""
 
     signal ioError(string msg)
-    property bool pathExists: true
-    property bool exists: true
-    property bool writeable: true
+    signal readSuccess(string content)
+
+    property bool pathExists: false
+    property bool exists: false
+    property bool readable: false
+    property bool writeable: false
 
     function read() {
-        console.log("reading", pythonReady, path)
+        console.log("reading", "ready:", pythonReady, "path:", path)
         if (pythonReady && path) {
-            py.call('fileio.read', [path], function(result){
-                //console.log(result);
-                content = result;
+            var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
+            py.call('fileio.read', [pyPath], function(result){
+                //console.log("read result:", result);
+                content = result
+                py.readSuccess(result)
             });
         }
     }
 
     function save(content) {
+        console.log("saving", "ready:", pythonReady, "path:", path)
         if (pythonReady && path) {
-            py.call('fileio.write', [path, content], function(){ });
+            var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
+            py.call('fileio.write', [pyPath, content], function(){ })
         }
-        read();
     }
 
     function create() {
         if (pythonReady && path) {
-            py.call('fileio.create', [path], function(){ });
+            var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
+            py.call('fileio.create', [pyPath], function(){ })
         }
-        read();
     }
 
     Component.onCompleted: {
-        addImportPath(Qt.resolvedUrl('../python'));
-        importModule('fileio', function() {});
-        //console.log("ready")
+        addImportPath(Qt.resolvedUrl('../python'))
+        importModule('fileio', function() {})
         setHandler('ioerror', ioError)
         setHandler('pathExists', function(value) {
             pathExists = value
+            if (!value) {
+                exists = false
+            }
         })
         setHandler('fileExists', function(value) {
             exists = value
+            if (!value) {
+                readable = false
+            }
         })
-        pythonReady = true;
+        setHandler('readable', function(value) {
+            readable = value
+            if (!value) {
+                writeable = false
+            }
+        })
+        setHandler('writeable', function(value) {
+            writeable = value
+        })
+        pythonReady = true
     }
 
     onReceived: {
-        console.log("Event: " + data);
-//        log = data.toString();
+        console.log("Event: " + data)
     }
 
     onError: console.log('Python error: ' + traceback)
