@@ -93,31 +93,31 @@
     <name>Settings</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>About</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Settings</translation>
     </message>
     <message>
         <source>Path to todo.txt</source>
-        <translation type="unfinished"></translation>
+        <translation>Path to todo.txt</translation>
     </message>
     <message>
-        <source>Choose File</source>
-        <translation type="unfinished"></translation>
+        <source>Choose file</source>
+        <translation>Choose file</translation>
     </message>
     <message>
-        <source>Fontsize in Tasklist</source>
-        <translation type="unfinished"></translation>
+        <source>Font size in tasklist</source>
+        <translation>Font size in tasklist</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Files</translation>
     </message>
     <message>
         <source>Attach project filter to the left of tasklist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attach project filter to the left of tasklist.</translation>
     </message>
 </context>
 <context>
@@ -255,7 +255,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>natural</source>
+        <source>Natural</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
