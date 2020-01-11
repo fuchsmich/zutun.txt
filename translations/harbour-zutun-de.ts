@@ -104,31 +104,38 @@
     <name>Settings</name>
     <message>
         <source>About</source>
+        <extracomment>Information on the app: version, author, source code etc.</extracomment>
         <translation>Über</translation>
     </message>
     <message>
         <source>Settings</source>
+        <extracomment>Page Header for the Settings page</extracomment>
         <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Path to todo.txt</source>
+        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
         <translation>Pfad zu todo.txt</translation>
     </message>
     <message>
-        <source>Choose File</source>
-        <translation>Datei wählen</translation>
-    </message>
-    <message>
-        <source>Fontsize in Tasklist</source>
-        <translation>Schriftgröße in Aufgabenliste</translation>
-    </message>
-    <message>
         <source>Files</source>
+        <extracomment>Section Header for the Files section in Settings page</extracomment>
         <translation>Dateien</translation>
     </message>
     <message>
         <source>Attach project filter to the left of tasklist.</source>
+        <extracomment>Toggle button for project filter</extracomment>
         <translation>Projektfilter links der Aufgabenliste plazieren.</translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <extracomment>Button for picking the file</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font size in tasklist</source>
+        <extracomment>Slide control for font size</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -173,10 +180,6 @@
         <translation type="unfinished">Gruppiert nach %1, </translation>
     </message>
     <message>
-        <source>natural</source>
-        <translation type="unfinished">natürlich</translation>
-    </message>
-    <message>
         <source>Creation Date</source>
         <translation type="unfinished">Erstelldatum</translation>
     </message>
@@ -199,6 +202,10 @@
     <message>
         <source>Contexts</source>
         <translation type="unfinished">Kontexte</translation>
+    </message>
+    <message>
+        <source>Natural</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -254,10 +261,6 @@
         <translation type="unfinished">Aufgabe hinzufügen</translation>
     </message>
     <message>
-        <source>Create file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show</source>
         <translation type="unfinished">Zeige</translation>
     </message>
@@ -283,6 +286,10 @@
     </message>
     <message>
         <source>Filter: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

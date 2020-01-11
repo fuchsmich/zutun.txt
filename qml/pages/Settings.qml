@@ -16,6 +16,7 @@ Page {
 
         PullDownMenu {
             MenuItem {
+                //: Information on the app: version, author, source code etc.
                 text: qsTr("About")
                 onClicked: pageStack.push(Qt.resolvedUrl("About.qml"))
             }
@@ -26,21 +27,25 @@ Page {
             spacing: Theme.paddingMedium
             width: parent.width
             PageHeader {
+                //: Page Header for the Settings page
                 title: qsTr("Settings")
             }
             SectionHeader {
+                //: Section Header for the Files section in Settings page
                 text: qsTr("Files")
             }
             TextField {
                 id: todoTxtPath
                 //x: Theme.horizontalPageMargin
+                //: Where - in which folder - is the todo.txt file located?
                 label: qsTr("Path to todo.txt")
                 text: settings.todoTxtLocation
                 width: parent.width - 2*Theme.horizontalPageMargin
             }
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Choose File")
+                //: Button for picking the file
+                text: qsTr("Choose file")
                 onClicked: pageStack.push(filePickerPage)
                 width: Theme.buttonWidthLarge
             }
@@ -49,6 +54,7 @@ Page {
                 id: filePickerPage
                 //TODO how to create new file?
                 FilePickerPage {
+                    //: Page Header for the FilePickerPage (called from Button: Choose File)
                     title: "todo.txt Location"
                     nameFilters: [ '*.txt']
                     onSelectedContentPropertiesChanged: {
@@ -59,13 +65,15 @@ Page {
             }
 
             SectionHeader {
+                //: Section Header for the Task List section in Settings page
                 text: "Task List"
             }
             Label {
                 id: fslbl
                 height: Theme.itemSizeMedium
                 width: page.width
-                text: qsTr("Fontsize in Tasklist")
+                //: Slide control for font size
+                text: qsTr("Font size in tasklist")
                 font.pixelSize: fontSizeSlider.value
                 horizontalAlignment: Text.AlignHCenter
             }
@@ -90,6 +98,7 @@ Page {
                 }
             }
             TextSwitch {
+                //: Toggle button for project filter
                 text: qsTr("Attach project filter to the left of tasklist.")
                 //description: "Restart the app to take effect."
                 checked: settings.projectFilterLeft

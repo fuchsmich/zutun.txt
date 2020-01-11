@@ -104,31 +104,38 @@
     <name>Settings</name>
     <message>
         <source>About</source>
+        <extracomment>Information on the app: version, author, source code etc.</extracomment>
         <translation>À propos de</translation>
     </message>
     <message>
         <source>Settings</source>
+        <extracomment>Page Header for the Settings page</extracomment>
         <translation>Préférences</translation>
     </message>
     <message>
         <source>Path to todo.txt</source>
+        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
         <translation>Sentier vers todo.txt</translation>
     </message>
     <message>
-        <source>Choose File</source>
-        <translation>Choisir fichier</translation>
-    </message>
-    <message>
-        <source>Fontsize in Tasklist</source>
-        <translation>Taille de caractères dans la liste des tâches</translation>
-    </message>
-    <message>
         <source>Files</source>
+        <extracomment>Section Header for the Files section in Settings page</extracomment>
         <translation>Fichiers</translation>
     </message>
     <message>
         <source>Attach project filter to the left of tasklist.</source>
+        <extracomment>Toggle button for project filter</extracomment>
         <translation>Attacher filtre de projets à la gauche de liste des tâches.</translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <extracomment>Button for picking the file</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font size in tasklist</source>
+        <extracomment>Slide control for font size</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -173,10 +180,6 @@
         <translation type="unfinished">Regroupé par %1, </translation>
     </message>
     <message>
-        <source>natural</source>
-        <translation type="unfinished">naturel</translation>
-    </message>
-    <message>
         <source>Creation Date</source>
         <translation type="unfinished">Date de création</translation>
     </message>
@@ -199,6 +202,10 @@
     <message>
         <source>Contexts</source>
         <translation type="unfinished">Contextes</translation>
+    </message>
+    <message>
+        <source>Natural</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

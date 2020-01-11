@@ -51,6 +51,7 @@ TRANSLATIONS += \
     translations/harbour-zutun-nl_BE.ts \
     translations/harbour-zutun-ru.ts \
     translations/harbour-zutun-sv.ts
+#//TODO mf: Swedish version is not included when adding comments for translators
 
 quickaction.path = /usr/share/lipstick/quickactions
 quickaction.files = info.fuxl.zutuntxt.conf

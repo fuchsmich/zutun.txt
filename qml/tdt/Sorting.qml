@@ -31,7 +31,7 @@ QtObject {
 
     //list of functions for sorting; *left* and *right* are the items to compare
     property var functionList: [
-        [qsTr("natural"), function(left, right) {
+        [qsTr("Natural"), function(left, right) {
             return (left.fullTxt === right.fullTxt ?
                         false :
                         (left.fullTxt < right.fullTxt) ^ !asc
