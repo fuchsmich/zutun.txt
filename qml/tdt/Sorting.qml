@@ -31,24 +31,28 @@ QtObject {
 
     //list of functions for sorting; *left* and *right* are the items to compare
     property var functionList: [
+        //: SortPage, sorting by: Natural
         [qsTr("Natural"), function(left, right) {
             return (left.fullTxt === right.fullTxt ?
                         false :
                         (left.fullTxt < right.fullTxt) ^ !asc
                     )
         }],
+        //: SortPage, sorting by: Creation date
         [qsTr("Creation Date"), function(left, right) {
             return (left.creationDate === right.creationDate ?
                         functionList[0][1](left, right) :
                         (left.creationDate < right.creationDate) ^ !asc
                     )
         }],
-        [qsTr("Due Date"), function(left, right) {
+        //: SortPage, sorting by: Due date
+        [qsTr("Due date"), function(left, right) {
             return (left.due === right.due ?
                         functionList[0][1](left, right) :
                         (left.due < right.due) ^ !asc
                     )
         }],
+        //: SortPage, sorting by: Subject
         [qsTr("Subject"), function(left, right) {
             return (left.subject === right.subject ?
                         functionList[0][1](left, right) :
@@ -59,6 +63,7 @@ QtObject {
 
     //0..Name, 1..lessThanFunc, 2..return list of groups
     property var groupFunctionList: [
+        //: SortPage, group by: None
         [qsTr("None"),
          function(left, right) {
              return functionList[order][1](left, right)
@@ -67,6 +72,7 @@ QtObject {
              return []
          }
         ]
+        //: SortPage, group by: Projects
         ,[qsTr("Projects"),
           function(left, right) {
               return (left.projects === right.projects ?
@@ -74,6 +80,7 @@ QtObject {
                           (left.projects < right.projects) ^ !asc
                       )
           }]
+        //: SortPage, group by: Contexts
         ,[qsTr("Contexts"),
           function(left, right) {
               return (left.contexts === right.contexts ?

@@ -15,20 +15,24 @@ Page {
         VerticalScrollDecorator {}
         PullDownMenu {
             MenuItem {
+                //: PullDown menu: go to settings page
                 text: qsTr("Settings")
                 onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
             MenuItem {
+                //: PullDown menu: go to sorting & grouping page
                 text: qsTr("Sorting & Grouping")
                 onClicked: pageStack.push(Qt.resolvedUrl("SortPage.qml"))
             }
             MenuItem {
                 visible: todoTxtFile.writeable
-                text: qsTr("Add New Task")
+                //: PullDown menu: add new task
+                text: qsTr("Add new task")
                 onClicked: app.addTask()
             }
             MenuItem {
                 visible: todoTxtFile.pathExists && !todoTxtFile.exists
+                //: PullDown menu: create todo.txt file. Entry only visible if a) path to todo.txt file exists and b) file was NOT created yet
                 text: qsTr("Create file")
                 onClicked: todoTxtFile.create()
             }
@@ -37,7 +41,8 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                text: (filterSettings.hideDone ? qsTr("Show") : qsTr("Hide")) + qsTr(" Completed Tasks")
+                //: PushUp menu: show / hide completed tasks
+                text: (filterSettings.hideDone ? qsTr("Show") : qsTr("Hide")) + qsTr(" completed tasks")
                 onClicked: filterSettings.hideDone = !filterSettings.hideDone
             }
         }
@@ -47,6 +52,7 @@ Page {
             height: pgh.height + flbl.height
             PageHeader {
                 id: pgh
+                //: PageHeader for tasklist main page
                 title: qsTr("Tasklist")
                 description: visualModel.sorting.groupText + visualModel.sorting.sortText
             }
@@ -64,6 +70,7 @@ Page {
                 opacity: 0.6
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
+                //: Information about filter settings at the top of main page
                 text: qsTr("Filter: %1").arg(visualModel.filters.text())
             }
         }
@@ -83,7 +90,8 @@ Page {
 
         ViewPlaceholder {
             enabled: lv.count === 0
-            text: qsTr("No Tasks")
+            //: Placeholder if todo.txt file does not contain any unfinished tasks
+            text: qsTr("No tasks")
             hintText: (todoTxtFile.hintText === ""? qsTr("Pull down to add task.")
                                                 : todoTxtFile.hintText)
         }

@@ -16,6 +16,7 @@ Page {
 
         ViewPlaceholder {
             enabled: lv.count == 0
+            //: Placeholder
             text: qsTr("No entries")
         }
 

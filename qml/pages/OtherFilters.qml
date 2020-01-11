@@ -11,15 +11,18 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: qsTr("Context Filters")
+                //: PullDown menu: go to filter contexts page
+                text: qsTr("Filter contexts")
                 onClicked: pageStack.pop();
             }
             MenuItem {
-                text: qsTr("Project Filters")
+                //: PullDown menu: go to filter projects page
+                text: qsTr("Filter projects")
                 onClicked: pageStack.pop();
             }
             MenuItem {
-                text: qsTr("Back To Tasklist")
+                //: PullDown menu: go to task list
+                text: qsTr("Back to Tasklist")
                 onClicked: {
                     pageStack.pop(pageStack.find(function(p){ return (p._depth === 0)}))
                 }
@@ -33,12 +36,14 @@ Page {
             id: column
             width: parent.width
             PageHeader {
-                title: qsTr("Other Filters");
+                //: PageHeader for other filters
+                title: qsTr("Other filters");
             }
 
             TextSwitch {
                 x: Theme.horizontalPageMargin
-                text: qsTr("Hide Completed Tasks")
+                //: TextSwitch for handling of completed task visibility
+                text: qsTr("Hide completed tasks")
                 checked: filterSettings.hideDone
                 onClicked: filterSettings.hideDone = checked
             }

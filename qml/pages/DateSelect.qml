@@ -12,6 +12,7 @@ Dialog {
             id: col
             width: parent.width
             DialogHeader {
+                //: Calendar is shown below text to pick a date
                 title: qsTr("Select due date")
             }
             Label {

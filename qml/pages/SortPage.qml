@@ -15,6 +15,7 @@ Page {
 
         PullDownMenu {
             MenuItem {
+                //: PullDown menu: reset SortPage
                 text: qsTr("Reset")
                 onClicked:{
                     sortSettings.asc = true
@@ -30,17 +31,20 @@ Page {
             width: parent.width
             PageHeader {
                 id: pgh
+                //: Title of SortPage
                 title: qsTr("Sorting & Grouping")
             }
             Button {
                 id: cbtn
                 width: Theme.buttonWidthLarge
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Toggle Order (") + (sortSettings.asc ? "asc" :"desc") + ")"
+                //: Button to toggle order
+                text: qsTr("Toggle order (") + (sortSettings.asc ? "asc" : "desc") + ")"
                 onClicked: sortSettings.asc = !sortSettings.asc
             }
 
             SectionHeader {
+                //: SectionHeader for sorting
                 text: qsTr("Sorting")
             }
 
@@ -60,6 +64,7 @@ Page {
             }
 
             SectionHeader {
+                //: SectionHeader for grouping
                 text: qsTr("Grouping")
             }
 

@@ -54,7 +54,8 @@ Dialog {
             id: col
             width: dialog.width
             DialogHeader {
-                title: (taskIndex == -1 ? qsTr("Add New Task") : qsTr("Edit Task"))
+                //: DialogHeader for new task / edit task
+                title: (taskIndex == -1 ? qsTr("Add new task") : qsTr("Edit task"))
             }
             TextArea {
                 id: ta
