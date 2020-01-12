@@ -5,11 +5,12 @@
     <name>About</name>
     <message>
         <source>Source</source>
-        <extracomment>Location of Sourcecode</extracomment>
+        <extracomment>Location of Sourcecode, followed by the button to GitHub</extracomment>
         <translation>Quellcode</translation>
     </message>
     <message>
         <source>Packages</source>
+        <extracomment>Where to get this app, followed by the button to OpenRepos</extracomment>
         <translation>Pakete</translation>
     </message>
     <message>
@@ -28,75 +29,87 @@
     </message>
     <message>
         <source>Translation</source>
-        <extracomment>Where to get the app</extracomment>
-        <translation type="unfinished"></translation>
+        <extracomment>SectionHeader for the names of the translators - you ;-)</extracomment>
+        <translation>Übersetzung</translation>
     </message>
 </context>
 <context>
     <name>DateSelect</name>
     <message>
         <source>Select due date</source>
+        <extracomment>Calendar is shown below text to pick a date</extracomment>
         <translation>Wähle Enddatum</translation>
     </message>
 </context>
 <context>
     <name>Filters</name>
     <message>
-        <source>Hide Complete</source>
-        <translation type="unfinished">Verberge fertige</translation>
+        <source>Hide complete</source>
+        <translation>Verberge fertige</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Keine</translation>
+        <translation>Keine</translation>
     </message>
 </context>
 <context>
     <name>FiltersPage</name>
     <message>
-        <source>Filter Projects</source>
-        <translation>Projektfilter</translation>
-    </message>
-    <message>
-        <source>Clear Project Filters</source>
-        <translation>Projektfilter löschen</translation>
-    </message>
-    <message>
-        <source>Filter Contexts</source>
-        <translation>Kontextfilter</translation>
-    </message>
-    <message>
-        <source>Clear Context Filters</source>
-        <translation>Kontextfilter löschen</translation>
-    </message>
-    <message>
         <source>No entries</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Placeholder if empty</extracomment>
+        <translation>Keine Einträge</translation>
     </message>
     <message>
         <source>Active Filters: %1</source>
-        <translation type="unfinished"></translation>
+        <extracomment>PageHeader for currently set filters</extracomment>
+        <translation>Aktive Filter: %1</translation>
+    </message>
+    <message>
+        <source>Filter projects</source>
+        <extracomment>Title for project + filters</extracomment>
+        <translation>Projektfilter</translation>
+    </message>
+    <message>
+        <source>Clear project filters</source>
+        <extracomment>Button for clearing project + filters</extracomment>
+        <translation>Projektfilter löschen</translation>
+    </message>
+    <message>
+        <source>Filter contexts</source>
+        <extracomment>Title for context @ filters</extracomment>
+        <translation>Kontextfilter</translation>
+    </message>
+    <message>
+        <source>Clear context filters</source>
+        <extracomment>Button for clearing context @ filters</extracomment>
+        <translation>Kontextfilter löschen</translation>
     </message>
 </context>
 <context>
     <name>OtherFilters</name>
     <message>
-        <source>Context Filters</source>
+        <source>Filter contexts</source>
+        <extracomment>PullDown menu: go to filter contexts page</extracomment>
         <translation>Kontextfilter</translation>
     </message>
     <message>
-        <source>Project Filters</source>
+        <source>Filter projects</source>
+        <extracomment>PullDown menu: go to filter projects page</extracomment>
         <translation>Projektfilter</translation>
     </message>
     <message>
-        <source>Back To Tasklist</source>
+        <source>Back to Tasklist</source>
+        <extracomment>PullDown menu: go to task list</extracomment>
         <translation>Zurück zur Aufgabenliste</translation>
     </message>
     <message>
-        <source>Other Filters</source>
+        <source>Other filters</source>
+        <extracomment>PageHeader for other filters</extracomment>
         <translation>Andere Filter</translation>
     </message>
     <message>
-        <source>Hide Completed Tasks</source>
+        <source>Hide completed tasks</source>
+        <extracomment>TextSwitch for handling of completed task visibility</extracomment>
         <translation>Verberge fertige Aufgaben</translation>
     </message>
 </context>
@@ -124,180 +137,202 @@
     </message>
     <message>
         <source>Attach project filter to the left of tasklist.</source>
-        <extracomment>Toggle button for project filter</extracomment>
+        <extracomment>TextSwitch for project filter</extracomment>
         <translation>Projektfilter links der Aufgabenliste plazieren.</translation>
     </message>
     <message>
         <source>Choose file</source>
         <extracomment>Button for picking the file</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Datei wählen</translation>
     </message>
     <message>
         <source>Font size in tasklist</source>
         <extracomment>Slide control for font size</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Schriftgröße in Aufgabenliste</translation>
     </message>
 </context>
 <context>
     <name>SortPage</name>
     <message>
-        <source>Toggle Order (</source>
-        <translation>Reihenfolge umschalten (</translation>
-    </message>
-    <message>
         <source>Reset</source>
+        <extracomment>PullDown menu: reset SortPage</extracomment>
         <translation>Zurücksetzen</translation>
     </message>
     <message>
         <source>Sorting</source>
+        <extracomment>SectionHeader for sorting</extracomment>
         <translation>Sortieren</translation>
     </message>
     <message>
         <source>Grouping</source>
+        <extracomment>SectionHeader for grouping</extracomment>
         <translation>Gruppieren</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
+        <extracomment>Title of SortPage</extracomment>
         <translation>Sortieren &amp; Gruppieren</translation>
+    </message>
+    <message>
+        <source>Toggle order (</source>
+        <extracomment>Button to toggle order</extracomment>
+        <translation>Reihenfolge umschalten </translation>
     </message>
 </context>
 <context>
     <name>Sorting</name>
     <message>
         <source>Sorted by %1</source>
-        <translation type="unfinished">Sortiert nach %1</translation>
+        <translation>Sortiert nach %1</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation type="unfinished">aufsteigend</translation>
+        <translation>aufsteigend</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation type="unfinished">absteigend</translation>
+        <translation>absteigend</translation>
     </message>
     <message>
         <source>Grouped by %1, </source>
-        <translation type="unfinished">Gruppiert nach %1, </translation>
+        <translation>Gruppiert nach %1, </translation>
     </message>
     <message>
         <source>Creation Date</source>
-        <translation type="unfinished">Erstelldatum</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation type="unfinished">Enddatum</translation>
+        <extracomment>SortPage, sorting by: Creation date</extracomment>
+        <translation>Erstelldatum</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished">Betreff</translation>
+        <extracomment>SortPage, sorting by: Subject</extracomment>
+        <translation>Betreff</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Keine</translation>
+        <extracomment>SortPage, group by: None</extracomment>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation type="unfinished">Projekte</translation>
+        <extracomment>SortPage, group by: Projects</extracomment>
+        <translation>Projekte</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished">Kontexte</translation>
+        <extracomment>SortPage, group by: Contexts</extracomment>
+        <translation>Kontexte</translation>
     </message>
     <message>
         <source>Natural</source>
-        <translation type="unfinished"></translation>
+        <extracomment>SortPage, sorting by: Natural</extracomment>
+        <translation>Natürlich</translation>
+    </message>
+    <message>
+        <source>Due date</source>
+        <extracomment>SortPage, sorting by: Due date</extracomment>
+        <translation>Enddatum</translation>
     </message>
 </context>
 <context>
     <name>TaskEditPage</name>
     <message>
-        <source>Add New Task</source>
-        <translation type="unfinished">Aufgabe hinzufügen</translation>
+        <source>Add new task</source>
+        <extracomment>DialogHeader for new task / edit task</extracomment>
+        <translation>Aufgabe hinzufügen</translation>
     </message>
     <message>
-        <source>Edit Task</source>
-        <translation type="unfinished">Aufgabe editieren</translation>
+        <source>Edit task</source>
+        <translation>Aufgabe bearbeiten</translation>
     </message>
 </context>
 <context>
     <name>TaskListItem</name>
     <message>
         <source>created:</source>
-        <translation type="unfinished">erstellt:</translation>
+        <translation>erstellt:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation type="unfinished">bis:</translation>
+        <translation>fällig:</translation>
     </message>
     <message>
         <source>Priority Up</source>
-        <translation type="unfinished">Priorität rauf</translation>
+        <translation>Priorität erhöhen</translation>
     </message>
     <message>
         <source>Priority Down</source>
-        <translation type="unfinished">Priorität runter</translation>
+        <translation>Priorität erniedrigen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche</translation>
     </message>
 </context>
 <context>
     <name>TaskListPage</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <extracomment>PullDown menu: go to settings page</extracomment>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished">Sortieren &amp; Gruppieren</translation>
-    </message>
-    <message>
-        <source>Add New Task</source>
-        <translation type="unfinished">Aufgabe hinzufügen</translation>
+        <extracomment>PullDown menu: go to sorting &amp; grouping page</extracomment>
+        <translation>Sortieren &amp; Gruppieren</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished">Zeige</translation>
+        <extracomment>PushUp menu: show / hide completed tasks</extracomment>
+        <translation>Zeige</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished">Verberge</translation>
-    </message>
-    <message>
-        <source> Completed Tasks</source>
-        <translation type="unfinished"> fertige Aufgaben</translation>
+        <translation>Verberge</translation>
     </message>
     <message>
         <source>Tasklist</source>
-        <translation type="unfinished">Aufgabenliste</translation>
-    </message>
-    <message>
-        <source>No Tasks</source>
-        <translation type="unfinished">Keine Aufgaben</translation>
+        <extracomment>PageHeader for tasklist main page</extracomment>
+        <translation>Aufgabenliste</translation>
     </message>
     <message>
         <source>Pull down to add task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach unten ziehen, um eine Aufgabe hinzuzufügen.</translation>
     </message>
     <message>
         <source>Filter: %1</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Information about filter settings at the top of main page</extracomment>
+        <translation>Filter: %1</translation>
     </message>
     <message>
         <source>Create file</source>
-        <translation type="unfinished"></translation>
+        <extracomment>PullDown menu: create todo.txt file. Entry only visible if a) path to todo.txt file exists and b) file was NOT created yet</extracomment>
+        <translation>Erstelle Datei</translation>
+    </message>
+    <message>
+        <source>Add new task</source>
+        <extracomment>PullDown menu: add new task</extracomment>
+        <translation>Füge neue Aufgabe hinzu</translation>
+    </message>
+    <message>
+        <source> completed tasks</source>
+        <translation> fertige Aufgaben</translation>
+    </message>
+    <message>
+        <source>No tasks</source>
+        <extracomment>Placeholder if todo.txt file does not contain any unfinished tasks</extracomment>
+        <translation>Keine Aufgaben</translation>
     </message>
 </context>
 <context>
     <name>TextSelect</name>
     <message>
         <source>No entries</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Placeholder</extracomment>
+        <translation>Keine Einträge</translation>
     </message>
     <message>
         <source>Priorities</source>

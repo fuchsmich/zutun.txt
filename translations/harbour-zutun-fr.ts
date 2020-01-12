@@ -5,11 +5,12 @@
     <name>About</name>
     <message>
         <source>Source</source>
-        <extracomment>Location of Sourcecode</extracomment>
+        <extracomment>Location of Sourcecode, followed by the button to GitHub</extracomment>
         <translation>Source</translation>
     </message>
     <message>
         <source>Packages</source>
+        <extracomment>Where to get this app, followed by the button to OpenRepos</extracomment>
         <translation>Paquets de logiciels</translation>
     </message>
     <message>
@@ -28,7 +29,7 @@
     </message>
     <message>
         <source>Translation</source>
-        <extracomment>Where to get the app</extracomment>
+        <extracomment>SectionHeader for the names of the translators - you ;-)</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -36,6 +37,7 @@
     <name>DateSelect</name>
     <message>
         <source>Select due date</source>
+        <extracomment>Calendar is shown below text to pick a date</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -53,51 +55,62 @@
 <context>
     <name>FiltersPage</name>
     <message>
-        <source>Filter Projects</source>
-        <translation>Filtre de projets</translation>
-    </message>
-    <message>
-        <source>Clear Project Filters</source>
-        <translation>Effacer filtre de projets</translation>
-    </message>
-    <message>
-        <source>Filter Contexts</source>
-        <translation>Filtre de contextes</translation>
-    </message>
-    <message>
-        <source>Clear Context Filters</source>
-        <translation>Effacer filtre de contextes</translation>
-    </message>
-    <message>
         <source>No entries</source>
+        <extracomment>Placeholder if empty</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Active Filters: %1</source>
+        <extracomment>PageHeader for currently set filters</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter projects</source>
+        <extracomment>Title for project + filters</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear project filters</source>
+        <extracomment>Button for clearing project + filters</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter contexts</source>
+        <extracomment>Title for context @ filters</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear context filters</source>
+        <extracomment>Button for clearing context @ filters</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>OtherFilters</name>
     <message>
-        <source>Context Filters</source>
-        <translation>Filtre de contextes</translation>
+        <source>Filter contexts</source>
+        <extracomment>PullDown menu: go to filter contexts page</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Project Filters</source>
-        <translation>Filtre de projets</translation>
+        <source>Filter projects</source>
+        <extracomment>PullDown menu: go to filter projects page</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Back To Tasklist</source>
-        <translation>Retour à la liste de tâches</translation>
+        <source>Back to Tasklist</source>
+        <extracomment>PullDown menu: go to task list</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Other Filters</source>
-        <translation>Autres filtres</translation>
+        <source>Other filters</source>
+        <extracomment>PageHeader for other filters</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hide Completed Tasks</source>
-        <translation>Cacher tâches accomplies</translation>
+        <source>Hide completed tasks</source>
+        <extracomment>TextSwitch for handling of completed task visibility</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -124,7 +137,7 @@
     </message>
     <message>
         <source>Attach project filter to the left of tasklist.</source>
-        <extracomment>Toggle button for project filter</extracomment>
+        <extracomment>TextSwitch for project filter</extracomment>
         <translation>Attacher filtre de projets à la gauche de liste des tâches.</translation>
     </message>
     <message>
@@ -141,24 +154,29 @@
 <context>
     <name>SortPage</name>
     <message>
-        <source>Toggle Order (</source>
-        <translation>Basculer ordre (</translation>
-    </message>
-    <message>
         <source>Reset</source>
+        <extracomment>PullDown menu: reset SortPage</extracomment>
         <translation>Réinitialiser</translation>
     </message>
     <message>
         <source>Sorting</source>
+        <extracomment>SectionHeader for sorting</extracomment>
         <translation>Trier</translation>
     </message>
     <message>
         <source>Grouping</source>
+        <extracomment>SectionHeader for grouping</extracomment>
         <translation>Regrouper</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
+        <extracomment>Title of SortPage</extracomment>
         <translation>Trier &amp; Regrouper</translation>
+    </message>
+    <message>
+        <source>Toggle order (</source>
+        <extracomment>Button to toggle order</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -181,42 +199,50 @@
     </message>
     <message>
         <source>Creation Date</source>
+        <extracomment>SortPage, sorting by: Creation date</extracomment>
         <translation type="unfinished">Date de création</translation>
     </message>
     <message>
-        <source>Due Date</source>
-        <translation type="unfinished">Date d&apos;échéance</translation>
-    </message>
-    <message>
         <source>Subject</source>
+        <extracomment>SortPage, sorting by: Subject</extracomment>
         <translation type="unfinished">Sujet</translation>
     </message>
     <message>
         <source>None</source>
+        <extracomment>SortPage, group by: None</extracomment>
         <translation type="unfinished">Aucun</translation>
     </message>
     <message>
         <source>Projects</source>
+        <extracomment>SortPage, group by: Projects</extracomment>
         <translation type="unfinished">Projets</translation>
     </message>
     <message>
         <source>Contexts</source>
+        <extracomment>SortPage, group by: Contexts</extracomment>
         <translation type="unfinished">Contextes</translation>
     </message>
     <message>
         <source>Natural</source>
+        <extracomment>SortPage, sorting by: Natural</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Due date</source>
+        <extracomment>SortPage, sorting by: Due date</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TaskEditPage</name>
     <message>
-        <source>Add New Task</source>
-        <translation type="unfinished">Ajouter nouvelle tâche</translation>
+        <source>Add new task</source>
+        <extracomment>DialogHeader for new task / edit task</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Task</source>
-        <translation type="unfinished">Éditer tâche</translation>
+        <source>Edit task</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -250,22 +276,22 @@
     <name>TaskListPage</name>
     <message>
         <source>Settings</source>
+        <extracomment>PullDown menu: go to settings page</extracomment>
         <translation type="unfinished">Préférences</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
+        <extracomment>PullDown menu: go to sorting &amp; grouping page</extracomment>
         <translation type="unfinished">Trier &amp; Regrouper</translation>
     </message>
     <message>
-        <source>Add New Task</source>
-        <translation type="unfinished">Ajouter nouvelle tâche</translation>
-    </message>
-    <message>
         <source>Create file</source>
+        <extracomment>PullDown menu: create todo.txt file. Entry only visible if a) path to todo.txt file exists and b) file was NOT created yet</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show</source>
+        <extracomment>PushUp menu: show / hide completed tasks</extracomment>
         <translation type="unfinished">Montrer</translation>
     </message>
     <message>
@@ -273,16 +299,9 @@
         <translation type="unfinished">Cacher</translation>
     </message>
     <message>
-        <source> Completed Tasks</source>
-        <translation type="unfinished"> Tâches accomplies</translation>
-    </message>
-    <message>
         <source>Tasklist</source>
+        <extracomment>PageHeader for tasklist main page</extracomment>
         <translation type="unfinished">Liste de tâches</translation>
-    </message>
-    <message>
-        <source>No Tasks</source>
-        <translation type="unfinished">Aucunes tâches</translation>
     </message>
     <message>
         <source>Pull down to add task.</source>
@@ -290,6 +309,21 @@
     </message>
     <message>
         <source>Filter: %1</source>
+        <extracomment>Information about filter settings at the top of main page</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add new task</source>
+        <extracomment>PullDown menu: add new task</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No tasks</source>
+        <extracomment>Placeholder if todo.txt file does not contain any unfinished tasks</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -297,6 +331,7 @@
     <name>TextSelect</name>
     <message>
         <source>No entries</source>
+        <extracomment>Placeholder</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>

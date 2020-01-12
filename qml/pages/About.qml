@@ -58,7 +58,7 @@ Page {
             }
 
             SectionHeader {
-                //: Location of Sourcecode
+                //: Location of Sourcecode, followed by the button to GitHub
                 text: qsTr("Source")
             }
             Button {
@@ -69,7 +69,7 @@ Page {
                 onClicked: Qt.openUrlExternally('https://github.com/fuchsmich/zutun.txt/')
             }
             SectionHeader {
-                //: Where to get the app
+                //: SectionHeader for the names of the translators - you ;-)
                 text: qsTr("Translation")
             }
             Label {
@@ -82,7 +82,7 @@ ru: Алексей Дедун'
             }
 
             SectionHeader {
-                //% Where to get this app
+                //: Where to get this app, followed by the button to OpenRepos
                 text: qsTr("Packages")
             }
             Button {

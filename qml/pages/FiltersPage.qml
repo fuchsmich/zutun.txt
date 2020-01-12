@@ -28,11 +28,13 @@ Page {
 
         header: PageHeader {
             title: lv.title
+            //: PageHeader for currently set filters
             description: qsTr("Active Filters: %1").arg(visualModel.filters.text())
         }
 
         ViewPlaceholder {
             enabled: lv.count == 0
+            //: Placeholder if empty
             text: qsTr("No entries")
         }
 
@@ -100,8 +102,10 @@ Page {
             name: "projects"
             PropertyChanges {
                 target: lv
-                title: qsTr("Filter Projects")
-                btnTxt: qsTr("Clear Project Filters")
+                //: Title for project + filters
+                title: qsTr("Filter projects")
+                //: Button for clearing project + filters
+                btnTxt: qsTr("Clear project filters")
             }
             PropertyChanges {
                 target: filterModel
@@ -114,8 +118,10 @@ Page {
             name: "contexts"
             PropertyChanges {
                 target: lv
-                title: qsTr("Filter Contexts")
-                btnTxt: qsTr("Clear Context Filters")
+                //: Title for context @ filters
+                title: qsTr("Filter contexts")
+                //: Button for clearing context @ filters
+                btnTxt: qsTr("Clear context filters")
             }
             PropertyChanges {
                 target: filterModel

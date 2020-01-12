@@ -10,7 +10,7 @@ QtObject {
     onHideDoneChanged: filtersChanged()
 
     property var text: function () {
-        var ftext = [(hideDone ? qsTr("Hide Complete"): undefined)].concat(
+        var ftext = [(hideDone ? qsTr("Hide complete"): undefined)].concat(
                     projects.concat(contexts)).join(", ")
         if (ftext) return ftext
         else return qsTr("None")

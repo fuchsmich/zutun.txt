@@ -7,33 +7,33 @@
 <<<<<<< HEAD
         <source>Source</source>
         <extracomment>Location of Sourcecode</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Source</translation>
     </message>
     <message>
 =======
 >>>>>>> 0d0cf69... grid
         <source>Packages</source>
         <extracomment>Where to get this app</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Where to get this app</translation>
     </message>
     <message>
         <source>About %1</source>
         <extracomment>About Zutun.txt</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>About %1</translation>
     </message>
     <message>
         <source>Author</source>
         <extracomment>Author of the app</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Author</translation>
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Version %1</translation>
     </message>
     <message>
         <source>Translation</source>
-        <extracomment>Where to get the app</extracomment>
-        <translation type="unfinished"></translation>
+        <extracomment>SectionHeader for the names of the translators - you ;-)</extracomment>
+        <translation>Translation</translation>
     </message>
 </context>
 <context>
@@ -123,172 +123,172 @@
 <context>
     <name>SortPage</name>
     <message>
-        <source>Toggle Order (</source>
-        <translation type="unfinished"></translation>
+        <source>Toggle order (</source>
+        <translation>Toggle order (</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
     <message>
         <source>Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorting</translation>
     </message>
     <message>
         <source>Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Grouping</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorting &amp; Grouping</translation>
     </message>
 </context>
 <context>
     <name>TaskEdit</name>
     <message>
-        <source>Add New Task</source>
-        <translation type="unfinished"></translation>
+        <source>Add new task</source>
+        <translation>Add new task</translation>
     </message>
     <message>
-        <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <source>Edit task</source>
+        <translation>Edit task</translation>
     </message>
 </context>
 <context>
     <name>TaskList</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Settings</translation>
     </message>
     <message>
-        <source>Add New Task</source>
-        <translation type="unfinished"></translation>
+        <source>Add new task</source>
+        <translation>Add new task</translation>
     </message>
     <message>
         <source>Tasklist</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasklist</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Show</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Hide</translation>
     </message>
     <message>
-        <source> Completed Tasks</source>
-        <translation type="unfinished"></translation>
+        <source> completed tasks</source>
+        <translation> completed tasks</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
-        <source>No Tasks</source>
-        <translation type="unfinished"></translation>
+        <source>No tasks</source>
+        <translation>No tasks</translation>
     </message>
     <message>
-        <source>Priority Up</source>
-        <translation type="unfinished"></translation>
+        <source>Priority up</source>
+        <translation>Priority up</translation>
     </message>
     <message>
-        <source>Priority Down</source>
-        <translation type="unfinished"></translation>
+        <source>Priority down</source>
+        <translation>Priority down</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Remove</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorting &amp; Grouping</translation>
     </message>
     <message>
         <source>created:</source>
-        <translation type="unfinished"></translation>
+        <translation>created:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation type="unfinished"></translation>
+        <translation>due:</translation>
     </message>
     <message>
         <source>Create file</source>
-        <translation type="unfinished"></translation>
+        <translation>Create file</translation>
     </message>
     <message>
         <source>Pull down to add task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pull down to add task.</translation>
     </message>
 </context>
 <context>
     <name>TextSelect</name>
     <message>
         <source>No entries</source>
-        <translation type="unfinished"></translation>
+        <translation>No entries</translation>
     </message>
     <message>
         <source>Priorities</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorities</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Projects</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished"></translation>
+        <translation>Contexts</translation>
     </message>
 </context>
 <context>
     <name>TodoTxt</name>
     <message>
-        <source>Hide Complete</source>
-        <translation type="unfinished"></translation>
+        <source>Hide complete</source>
+        <translation>Hide complete</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation type="unfinished"></translation>
+        <translation>asc</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation type="unfinished"></translation>
+        <translation>desc</translation>
     </message>
     <message>
         <source>Natural</source>
-        <translation type="unfinished"></translation>
+        <translation>Natural</translation>
     </message>
     <message>
-        <source>Creation Date</source>
-        <translation type="unfinished"></translation>
+        <source>Creation date</source>
+        <translation>Creation date</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Subject</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>None</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Projects</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished"></translation>
+        <translation>Contexts</translation>
     </message>
     <message>
         <source>Sorted by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorted by %1</translation>
     </message>
     <message>
         <source>Grouped by %1, </source>
-        <translation type="unfinished"></translation>
+        <translation>Grouped by %1, </translation>
     </message>
     <message>
-        <source>Due Date</source>
-        <translation type="unfinished"></translation>
+        <source>Due date</source>
+        <translation>Due date</translation>
     </message>
 </context>
 </TS>
