@@ -4,13 +4,14 @@ var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var urlPattern =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
 var mailPattern= /([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)/ig
 
-// fullTxt, complete, priority, (completionDate or creationDate), creationDate, subject
 var baseFeatures = {
+    //see https://github.com/todotxt/todo.txt
+
+    // fullTxt, complete, priority, (completionDate or creationDate), creationDate, subject
     pattern: /^(x\s)?(\([A-Z]\)\s)?(\d{4}-\d{2}-\d{2}\s)?(\d{4}-\d{2}-\d{2}\s)?(.*)/ ,
     datePattern: /^\d{4}-\d{2}-\d{2}$/,
 
-
-    //indices
+    //indices of matches in pattern
     fullTxt: 0,
     done: 1,
     priority: 2,
@@ -20,7 +21,7 @@ var baseFeatures = {
 
     getMatches: function(line) {
         var matches = line.match(this.pattern)
-        if (matches[this.creationDate] === undefined)
+        if (matches[this.done] === undefined && matches[this.creationDate] === undefined)
             //swap creationDate, completionDate
             matches[this.creationDate] = matches.splice(this.completionDate, 1, matches[this.creationDate])[0]
         return matches
