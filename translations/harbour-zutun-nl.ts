@@ -44,12 +44,12 @@
 <context>
     <name>Filters</name>
     <message>
-        <source>Hide Complete</source>
-        <translation type="unfinished">Voltooid verbergen</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation type="unfinished">Geen</translation>
+    </message>
+    <message>
+        <source>Hide complete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

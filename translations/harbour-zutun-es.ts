@@ -44,12 +44,12 @@
 <context>
     <name>Filters</name>
     <message>
-        <source>Hide Complete</source>
-        <translation type="unfinished">Ocultar completadas</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation type="unfinished">Ninguno</translation>
+    </message>
+    <message>
+        <source>Hide complete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

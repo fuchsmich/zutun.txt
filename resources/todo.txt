@@ -1,0 +1,8 @@
+(A) a very important task
+(B) less important and belonging to a +project
+this has some @context
+2020-01-15 this one was created on 2020-01-15
+this one should be done by due:2050-01-16 ...hurry up
+this one links to https://github.com/fuchsmich/zutun.txt
+another one with mail link mailto:michfu@gmx.at
+x 1977-03-11 congrats this task is complete since 1977-03-11
