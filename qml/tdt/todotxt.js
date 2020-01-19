@@ -70,8 +70,7 @@ var baseFeatures = {
                 fields[this.completionDate] = undefined
             } else {
                 fields[feature] = "x "
-                //nur setzen, wenn creationDate auch gesetzt
-                fields[this.completionDate] = (fields[this.creationDate] !== undefined ? today() + " " : undefined)
+                fields[this.completionDate] = today() + " " //(fields[this.creationDate] !== undefined ? today() + " " : undefined)
             }
             break
         case this.priority:

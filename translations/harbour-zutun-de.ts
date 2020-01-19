@@ -271,6 +271,10 @@
         <source>Deleting</source>
         <translation>Lösche</translation>
     </message>
+    <message>
+        <source>completed:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TaskListPage</name>

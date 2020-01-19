@@ -271,6 +271,10 @@
         <source>Remove</source>
         <translation type="unfinished">Ta bort</translation>
     </message>
+    <message>
+        <source>completed:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TaskListPage</name>
