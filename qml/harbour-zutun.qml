@@ -34,6 +34,7 @@ ApplicationWindow
         //property alias autoSave: file.autoSave
         property int fontSizeTaskList: Theme.fontSizeMedium
         property bool projectFilterLeft: false
+        property bool creationDateOnAddTask: false
         ConfigurationGroup {
             id: filterSettings
             path: "/filters"
