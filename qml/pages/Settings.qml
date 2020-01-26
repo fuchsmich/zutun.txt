@@ -105,9 +105,9 @@ Page {
                 text: "Edit Task"
             }
             TextSwitch {
-                //: TextSwitch for project filter
-                text: qsTr("Insert creation date on adding date.")
-                //description: "Restart the app to take effect."
+                //: TextSwitch for adding creation date
+                text: qsTr("Auto add creation date.")
+                description: "Automatically add creation date to newly added tasks."
                 checked: settings.creationDateOnAddTask
                 onClicked: settings.creationDateOnAddTask = checked
             }
