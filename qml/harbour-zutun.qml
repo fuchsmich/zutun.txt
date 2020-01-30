@@ -34,6 +34,7 @@ ApplicationWindow
         //property alias autoSave: file.autoSave
         property int fontSizeTaskList: Theme.fontSizeMedium
         property bool projectFilterLeft: false
+        property bool creationDateOnAddTask: false
         ConfigurationGroup {
             id: filterSettings
             path: "/filters"
@@ -77,20 +78,6 @@ ApplicationWindow
             app.activate()
             ttm1.readArray()
         }
-    }
-
-    DBusInterface {
-        //just for testing DBusAdaptor
-        id: dbi
-
-        service: 'info.fuxl.zutuntxt'
-        iface: 'info.fuxl.zutuntxt'
-        path: '/info/fuxl/zutuntxt'
-
-        function addTask() {
-            call('addTask', undefined)
-        }
-
     }
 
     function addTask(text) {

@@ -65,17 +65,8 @@ Page {
             }
 
             SectionHeader {
-                //: Section Header for the Task List section in Settings page
-                text: "Task List"
-            }
-            Label {
-                id: fslbl
-                height: Theme.itemSizeMedium
-                width: page.width
-                //: Slide control for font size
-                text: qsTr("Font size in tasklist")
-                font.pixelSize: fontSizeSlider.value
-                horizontalAlignment: Text.AlignHCenter
+                //: Section Header for the Tasklist section in Settings page
+                text: "Tasklist"
             }
             Row {
                 width: parent.width
@@ -88,7 +79,8 @@ Page {
                     value: settings.fontSizeTaskList
                     valueText: value
                     stepSize: 1
-//                    label: qsTr("Fontsize in Tasklist")
+                    //: Slide control for font size
+                    label: qsTr("Fontsize in Tasklist")
                 }
                 IconButton {
                     anchors.verticalCenter: fontSizeSlider.verticalCenter
@@ -97,12 +89,27 @@ Page {
                     onClicked: fontSizeSlider.value = Theme.fontSizeMedium
                 }
             }
+            SectionHeader {
+                //: Section Header for the Filter section in Settings page
+                text: "Filter"
+            }
             TextSwitch {
                 //: TextSwitch for project filter
                 text: qsTr("Attach project filter to the left of tasklist.")
                 //description: "Restart the app to take effect."
                 checked: settings.projectFilterLeft
                 onClicked: settings.projectFilterLeft = checked
+            }
+            SectionHeader {
+                //: Section Header for the Edit section in Settings page
+                text: "Edit Task"
+            }
+            TextSwitch {
+                //: TextSwitch for adding creation date
+                text: qsTr("Auto add creation date.")
+                description: "Automatically add creation date to newly added tasks."
+                checked: settings.creationDateOnAddTask
+                onClicked: settings.creationDateOnAddTask = checked
             }
         }
         Component.onDestruction: {

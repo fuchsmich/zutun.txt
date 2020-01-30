@@ -11,6 +11,7 @@ Page {
     SilicaListView {
         id: lv
         anchors.fill: parent
+        spacing: Theme.paddingSmall
 
         VerticalScrollDecorator {}
         PullDownMenu {

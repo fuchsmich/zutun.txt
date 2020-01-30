@@ -100,6 +100,18 @@ ListItem {
                 text: model.due
                 font.pixelSize: parent.fontSize
             }
+            Label {
+                visible: model.completionDate !== ""
+                text: qsTr("completed:")
+                font.pixelSize: parent.fontSize
+                color: Theme.highlightColor
+            }
+            Label {
+                //id: compLbl
+                visible: model.completionDate !== ""
+                text: model.completionDate
+                font.pixelSize: parent.fontSize
+            }
         }
     }
 

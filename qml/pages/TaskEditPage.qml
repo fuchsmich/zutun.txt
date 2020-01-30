@@ -223,6 +223,11 @@ Dialog {
 
     onAccepted: {
         if (taskIndex > -1) taskListModel.setTaskProperty(taskIndex, JS.baseFeatures.fullTxt, text)
-        if (taskIndex === -1) taskListModel.addTask(text)
+        if (taskIndex === -1) {
+            if (settings.creationDateOnAddTask) {
+                text = JS.baseFeatures.modifyLine(text, JS.baseFeatures.creationDate, JS.today())
+            }
+            taskListModel.addTask(text)
+        }
     }
 }
