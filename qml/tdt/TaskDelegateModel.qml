@@ -26,6 +26,9 @@ DelegateModel {
 //        items.remove(0, 1)
 //    }
 
+    property int itemsCount: items.count
+    onSortFinished: itemsCount = items.count
+
     property Filters filters: Filters {
         onFiltersChanged: resort("filters")
     }

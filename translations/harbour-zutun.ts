@@ -136,11 +136,6 @@
         <translation>Choose file</translation>
     </message>
     <message>
-        <source>Font size in tasklist</source>
-        <extracomment>Slide control for font size</extracomment>
-        <translation>Font size in tasklist</translation>
-    </message>
-    <message>
         <source>Files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
         <translation>Files</translation>
@@ -149,6 +144,16 @@
         <source>Attach project filter to the left of tasklist.</source>
         <extracomment>TextSwitch for project filter</extracomment>
         <translation>Attach project filter to the left of tasklist.</translation>
+    </message>
+    <message>
+        <source>Fontsize in Tasklist</source>
+        <extracomment>Slide control for font size</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto add creation date.</source>
+        <extracomment>TextSwitch for adding creation date</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

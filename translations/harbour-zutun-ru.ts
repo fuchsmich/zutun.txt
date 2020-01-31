@@ -146,8 +146,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Font size in tasklist</source>
+        <source>Fontsize in Tasklist</source>
         <extracomment>Slide control for font size</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto add creation date.</source>
+        <extracomment>TextSwitch for adding creation date</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
