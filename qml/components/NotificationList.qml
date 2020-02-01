@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+
 Item {
     id: notificationList
     property var ids: []
@@ -13,10 +14,7 @@ Item {
             if (item.due !== "" && item.done === false) {
                 var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
-                var notification = notificationComp.createObject(notificationList) //parent needed?
-                notification.timestamp = Date.fromLocaleString(Qt.locale(), item.due, "yyyy-MM-dd")
-                notification.body = item.subject
-                notification.summary = Date.fromLocaleString(Qt.locale(), item.due, "yyyy-MM-dd")
+                var notification = notificationComp.createObject(null, {task: item}) //parent needed?
                 notification.publish()
                 ids.push(notification.replacesId)
                 //console.log(notification.replacesId, notifications.idList);
@@ -28,11 +26,16 @@ Item {
         for (var i = 0; i < ids.length; i++) {
             var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
-            var notification = notificationComp.createObject(app)
-            notification.replacesId =  ids[i]
-            notification.close()
+            var notification = notificationComp.createObject(null, {task: taskListModel.lineToJSON("")})
+            notification.replacesId = ids[i]
             notification.publish()
+            notification.close()
         }
         ids = []
+    }
+
+
+    Component.onDestruction: {
+            removeAll()
     }
 }
