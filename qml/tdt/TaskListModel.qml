@@ -27,10 +27,16 @@ ListModel {
     property color projectColor
     property color contextColor
 
-    //TODO move back to delegateModel
-    //group by: 0..None, 1..projects, 2..contexts
-    //property int section: 1
-    //onSectionChanged: populateTextList()
+    function _saveList() {
+        var list = []
+        for (var i = 0; i < count; i++) {
+            list.push(get(i).fullTxt)
+        }
+        list.sort()
+        textList = list
+        //console.log("Saving:", list.join("\n"))
+        saveList(list.join("\n"))
+    }
 
     function prioColor(prio) {
         return prioColors[JS.alphabet.search(prio) % prioColors.length]
@@ -71,11 +77,13 @@ ListModel {
     function addTask(text) {
         //console.log("adding", text)
         append(lineToJSON(text))
+        listChanged()
         _saveList()
     }
 
     function removeTask(index) {
         remove(index)
+        listChanged()
         _saveList()
     }
 
@@ -96,19 +104,7 @@ ListModel {
             i++
         }
         if (i < count) remove(i, count - i)
-
-        //listChanged()
-    }
-
-    function _saveList() {
-        var list = []
-        for (var i = 0; i < count; i++) {
-            list.push(get(i).fullTxt)
-        }
-        list.sort()
-        textList = list
-        //console.log("Saving:", list.join("\n"))
-        saveList(list.join("\n"))
+        listChanged()
     }
 
     function setTaskProperty(index, role, value) {
@@ -118,6 +114,7 @@ ListModel {
             console.log(index, newLine)
             set(index, lineToJSON(newLine))
         }
+        listChanged()
         _saveList()
     }
 
