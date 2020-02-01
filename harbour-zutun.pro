@@ -6,6 +6,7 @@ DISTFILES += qml/harbour-zutun.qml \
     harbour-zutun.desktop \
     qml/components/CoverListItem.qml \
     qml/components/Delegate.qml \
+    qml/components/NotificationList.qml \
     qml/pages/TaskEditPage.qml \
     qml/pages/TaskListPage.qml \
     qml/tdt/FilterModel.qml \

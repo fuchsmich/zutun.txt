@@ -19,7 +19,7 @@ ListModel {
         return JS.contexts.getList(textList)
     }
 
-    // aus ColorPicker.qml:
+    // colors for priorities: aus ColorPicker.qml:
     property var prioColors: ["#e60003", "#e6007c", "#e700cc", "#9d00e7",
         "#7b00e6", "#5d00e5", "#0077e7", "#01a9e7",
         "#00cce7", "#00e696", "#00e600", "#99e600",
@@ -107,7 +107,7 @@ ListModel {
         }
         list.sort()
         textList = list
-        console.log("Saving:", list.join("\n"))
+        //console.log("Saving:", list.join("\n"))
         saveList(list.join("\n"))
     }
 
@@ -122,7 +122,7 @@ ListModel {
     }
 
     onDataChanged: {
-        //console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles, roles.size, roles[0], data(topLeft, roles[0]))
+        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles, roles.size, roles[0], data(topLeft, roles[0]))
 
 
         //in SFOS kommt kein "roles" an???

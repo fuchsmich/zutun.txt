@@ -26,6 +26,7 @@ DelegateModel {
 //        items.remove(0, 1)
 //    }
 
+    //workaround: items.count doesnt seem to have a signal
     property int itemsCount: items.count
     onSortFinished: itemsCount = items.count
 

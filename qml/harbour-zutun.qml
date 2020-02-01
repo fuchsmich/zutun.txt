@@ -76,7 +76,6 @@ ApplicationWindow
 
         function showApp() {
             app.activate()
-            ttm1.readArray()
         }
     }
 
@@ -102,12 +101,19 @@ ApplicationWindow
         }
     }
 
+    NotificationList {
+        id: notificationList
+    }
+
     TaskListModel {
         id: taskListModel
         projectColor: Theme.highlightColor
         contextColor: Theme.secondaryHighlightColor
         onSaveList: todoTxtFile.save(content)
-        onListChanged: visualModel.resort("listChanged")
+//        onListChanged: {
+//            visualModel.resort("listChanged")
+//            notificationList.publishNotifications(this)
+//        }
     }
 
     TaskDelegateModel {
@@ -127,6 +133,8 @@ ApplicationWindow
         }
 
         delegate: Delegate { }
+
+        onSortFinished: notificationList.publishNotifications(taskListModel)
     }
 }
 
