@@ -96,6 +96,13 @@ Page {
                                                 : todoTxtFile.hintText)
         }
 
+        BusyIndicator {
+            size: BusyIndicatorSize.Large
+            anchors.centerIn: parent
+            //enabled: lv.count === 0
+            running: visualModel.unsortedItems.count > 0
+        }
+
         function editTask(index, taskTxt) {
             pageStack.push(Qt.resolvedUrl("TaskEditPage.qml"), {taskIndex: index, text: taskTxt});
         }
