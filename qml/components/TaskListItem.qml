@@ -88,12 +88,30 @@ ListItem {
                 text: model.creationDate
                 font.pixelSize: parent.fontSize
             }
-            Label {
-                visible: model.due !== ""
-                text: qsTr("due:")
-                font.pixelSize: parent.fontSize
-                color: Theme.highlightColor
-            }
+            //fm color due date if exceeded
+                        Label {
+            //                property var today: new Date()
+            //                property date currentDate: new Date()
+                            property date currentDate: Qt.formatDateTime(new Date(), "yyyy-MM-dd")
+            //                QDateTime currentTime: QDateTime::currentDateTime()
+            //                QDate dnow: (QDate::currentDate())
+                            visible: model.due !== ""
+                            text: qsTr("due:")
+                            font.pixelSize: parent.fontSize
+            //                color: if (1 === 1) "#ff0000" : Theme.highlightColor
+            //                console.log("today: ", today)
+            //                console.log("due: ", model.due)
+            //                property var dueday: model.due
+            //                property date duedate: new Date(model.due)
+                              property date dueDate: Qt.formatDateTime(model.due, "yyyy-MM-dd")
+            //                property date dueDate: Qt.formatDateTime(model.due)
+            //                property date dueDate: new Date()
+                            property date datestring: new Date()
+            //                datestring: dueDate.setDate(dueDate.getDate())
+                            color: (dueDate.getDay() !== currentDate.getDay()) ? "#ff0000" : Theme.highlightColor
+            //                color: (1 !== 2) ? "#ff0000" : Theme.highlightColor
+                        }
+
             Label {
                 id: dueLbl
                 visible: model.due !== ""
