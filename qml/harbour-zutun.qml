@@ -14,17 +14,14 @@ import "tdt/todotxt.js" as JS
 //TODO Search field??
 //TODO more verbose placeholder in tasklist
 
-ApplicationWindow
-{
+ApplicationWindow {
     id: app
-    //property var visualModel
 
     initialPage: Component { TaskListPage{} }
 
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
-
 
     ConfigurationGroup {
         id: settings
@@ -76,7 +73,6 @@ ApplicationWindow
 
         function showApp() {
             app.activate()
-            ttm1.readArray()
         }
     }
 
@@ -102,12 +98,22 @@ ApplicationWindow
         }
     }
 
+    NotificationList {
+        id: notificationList
+    }
+
     TaskListModel {
         id: taskListModel
         projectColor: Theme.highlightColor
         contextColor: Theme.secondaryHighlightColor
-        onSaveList: todoTxtFile.save(content)
-        onListChanged: visualModel.resort("listChanged")
+        onSaveList: {
+            todoTxtFile.save(content)
+        }
+
+        onListChanged: {
+            visualModel.resort("listChanged")
+            notificationList.publishNotifications(this)
+        }
     }
 
     TaskDelegateModel {

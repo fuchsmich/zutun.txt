@@ -6,7 +6,6 @@ import "../tdt"
 
 Page {
     id: page
-    //property string name: "TaskList"
 
     SilicaListView {
         id: lv
@@ -72,7 +71,7 @@ Page {
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
                 //: Information about filter settings at the top of main page
-                text: qsTr("Filter: %1").arg(visualModel.filters.text())
+                text: qsTr("Filter: %1").arg(visualModel.filters.text()) + " (%1/%2)".arg(visualModel.itemsCount).arg(taskListModel.count)
             }
         }
 
@@ -95,6 +94,13 @@ Page {
             text: qsTr("No tasks")
             hintText: (todoTxtFile.hintText === ""? qsTr("Pull down to add task.")
                                                 : todoTxtFile.hintText)
+        }
+
+        BusyIndicator {
+            size: BusyIndicatorSize.Large
+            anchors.centerIn: parent
+            //enabled: lv.count === 0
+            running: visualModel.unsortedItems.count > 0
         }
 
         function editTask(index, taskTxt) {

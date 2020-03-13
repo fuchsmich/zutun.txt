@@ -14,12 +14,12 @@ ListModel {
     property var projects: {
         return JS.projects.getList(textList)
     }
-    onProjectsChanged: console.log("projects", projects)
+    //onProjectsChanged: console.log("projects", projects)
     property var contexts: {
         return JS.contexts.getList(textList)
     }
 
-    // aus ColorPicker.qml:
+    // colors for priorities: aus ColorPicker.qml:
     property var prioColors: ["#e60003", "#e6007c", "#e700cc", "#9d00e7",
         "#7b00e6", "#5d00e5", "#0077e7", "#01a9e7",
         "#00cce7", "#00e696", "#00e600", "#99e600",
@@ -27,10 +27,16 @@ ListModel {
     property color projectColor
     property color contextColor
 
-    //TODO move back to delegateModel
-    //group by: 0..None, 1..projects, 2..contexts
-    //property int section: 1
-    //onSectionChanged: populateTextList()
+    function _saveList() {
+        var list = []
+        for (var i = 0; i < count; i++) {
+            list.push(get(i).fullTxt)
+        }
+        list.sort()
+        textList = list
+        //console.log("Saving:", list.join("\n"))
+        saveList(list.join("\n"))
+    }
 
     function prioColor(prio) {
         return prioColors[JS.alphabet.search(prio) % prioColors.length]
@@ -71,11 +77,13 @@ ListModel {
     function addTask(text) {
         //console.log("adding", text)
         append(lineToJSON(text))
+        listChanged()
         _saveList()
     }
 
     function removeTask(index) {
         remove(index)
+        listChanged()
         _saveList()
     }
 
@@ -96,19 +104,7 @@ ListModel {
             i++
         }
         if (i < count) remove(i, count - i)
-
-        //listChanged()
-    }
-
-    function _saveList() {
-        var list = []
-        for (var i = 0; i < count; i++) {
-            list.push(get(i).fullTxt)
-        }
-        list.sort()
-        textList = list
-        console.log("Saving:", list.join("\n"))
-        saveList(list.join("\n"))
+        listChanged()
     }
 
     function setTaskProperty(index, role, value) {
@@ -118,11 +114,12 @@ ListModel {
             console.log(index, newLine)
             set(index, lineToJSON(newLine))
         }
+        listChanged()
         _saveList()
     }
 
     onDataChanged: {
-        //console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles, roles.size, roles[0], data(topLeft, roles[0]))
+        console.log('Data Changed', topLeft.row, get(topLeft.row).done, roles, roles.size, roles[0], data(topLeft, roles[0]))
 
 
         //in SFOS kommt kein "roles" an???
