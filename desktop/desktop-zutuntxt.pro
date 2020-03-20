@@ -16,17 +16,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        desktop/main.cpp
+        main.cpp
 
 RESOURCES += \
-        desktop.qrc \
-        desktop/qml.qrc
+        qml.qrc \
+        tdt.qrc
 
 HEADERS += \
-    desktop/fileio.hpp
+    fileio.hpp
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH += qml/tdt/
+QML_IMPORT_PATH += tdt/
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =

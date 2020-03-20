@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/tdt">
+        <file>tdt/TaskListModel.qml</file>
+        <file>tdt/TaskDelegateModel.qml</file>
+        <file>tdt/Sorting.qml</file>
+        <file>tdt/Filters.qml</file>
+        <file>tdt/FilterModel.qml</file>
+        <file>tdt/todotxt.js</file>
+    </qresource>
+</RCC>

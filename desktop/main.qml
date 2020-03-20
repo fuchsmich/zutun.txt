@@ -7,8 +7,8 @@ import QtQuick.Layouts 1.1
 
 import QtQml.Models 2.2
 
-import "qrc:/tdt/qml/tdt/"
-import "qrc:/tdt/qml/tdt/todotxt.js" as JS
+import "qrc:/tdt/tdt/"
+import "qrc:/tdt/tdt/todotxt.js" as JS
 
 import FileIO 1.0
 
