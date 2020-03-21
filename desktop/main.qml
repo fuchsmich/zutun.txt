@@ -47,21 +47,21 @@ ApplicationWindow {
         property alias height: app.height
     }
 
-    Settings {
-        category: "Filters"
-        property alias hideDone: filters.hideDone
-        //kann kein array speichern??
-        //property alias projectsActive: filters.projects.active
-        //property alias contextsActive: filters.contexts.active
-        property alias showSearchBar: showSearchBarAction.checked
-    }
+//    Settings {
+//        category: "Filters"
+//        property alias hideDone: filters.hideDone
+//        //kann kein array speichern??
+//        //property alias projectsActive: filters.projects.active
+//        //property alias contextsActive: filters.contexts.active
+//        property alias showSearchBar: showSearchBarAction.checked
+//    }
 
-    Settings {
-        category: "Sorting"
-        property alias asc: sorting.asc
-        property alias key: sorting.order
-        property alias grouping: sorting.grouping
-    }
+//    Settings {
+//        category: "Sorting"
+//        property alias asc: sorting.asc
+//        property alias key: sorting.order
+//        property alias grouping: sorting.grouping
+//    }
 
 
     //// Actions
@@ -72,7 +72,7 @@ ApplicationWindow {
         icon.source: "icons/list-add.svg"
         text: qsTr("&Add Task")
         onTriggered: {
-            taskDelegateModel.addTaskItem(taskListModel.lineToJSON(""))
+            visualModel.addTaskItem(taskListModel.lineToJSON(""))
         }
     }
 
@@ -150,34 +150,23 @@ ApplicationWindow {
         //section: sorting.grouping
         projectColor: "red"
         contextColor: "blue"
-        onListChanged: taskDelegateModel.resort()
-        //onItemChanged: taskDelegateModel.resortItem(index)
-    }
+        onSaveList: {
+            todoTxtFile.save(content)
+        }
 
-    Filters {
-        id: filters
-        onFiltersChanged: taskDelegateModel.resort()
-        taskList: taskListModel
-    }
-
-    Sorting {
-        id: sorting
-        onSortingChanged: {
-            taskDelegateModel.resort()
+        onListChanged: {
+            visualModel.resort("listChanged")
         }
     }
 
     TaskDelegateModel {
-        id: taskDelegateModel
+        id: visualModel
         model: taskListModel
-        lessThanFunc: sorting.lessThanFunc //changed too late in sorting ??
-        getSectionFunc: sorting.getGroup //changed too late in sorting ??
-        visibility: filters.visibility
         delegate: TaskListItem {
             id: item
             width: app.width
             onAddTask: taskListModel.addTask(text)
-            defaultPriority: taskDelegateModel.defaultPriority
+            defaultPriority: visualModel.defaultPriority
         }
     }
 

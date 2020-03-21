@@ -12,7 +12,7 @@ Page {
         anchors.fill: parent
         //clip: true
 
-        model: taskDelegateModel
+        model: visualModel
 
         section.delegate: Rectangle {
             width: page.width
