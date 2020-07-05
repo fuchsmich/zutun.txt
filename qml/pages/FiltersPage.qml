@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 import "../tdt"
+import "../tdt/todotxt.js" as JS
 
 Page {
     id: page
@@ -42,13 +43,20 @@ Page {
 
         function numTasksHavingFilterItem(filterItem, countOnlyVisible) {
             var num = 0
-            for (var i = 0; i < taskListModel.count; i++ ) {
-                if (taskListModel.get(i).fullTxt.indexOf(filterItem) > -1) {
-                    if (countOnlyVisible) {
-                        if (filters.visibility(taskListModel.get(i))) num++ //--> binding loop
+            JS.taskList.textList.forEach(function(task){
+                if (task.indexOf(filterItem) > -1) {
+                    if (countOnlyVisible && filters.visibility(task)) {
+                        num++ //--> binding loop
                     } else num++
                 }
-            }
+            })
+//            for (var i = 0; i < taskListModel.count; i++ ) {
+//                if (taskListModel.get(i).fullTxt.indexOf(filterItem) > -1) {
+//                    if (countOnlyVisible) {
+//                        if (filters.visibility(taskListModel.get(i))) num++ //--> binding loop
+//                    } else num++
+//                }
+//            }
             return num
         }
 
@@ -109,7 +117,7 @@ Page {
             }
             PropertyChanges {
                 target: filterModel
-                list: taskListModel.projects
+                list: JS.projects.getList()
                 active: visualModel.filters.projects
                 onActiveChanged: filterSettings.projects.value = filterModel.active
             }
@@ -125,7 +133,7 @@ Page {
             }
             PropertyChanges {
                 target: filterModel
-                list: taskListModel.contexts
+                list: JS.contexts.getList()
                 active: visualModel.filters.contexts
                 onActiveChanged: filterSettings.contexts.value = filterModel.active
             }

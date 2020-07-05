@@ -23,6 +23,12 @@ ApplicationWindow {
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
 
+    Component.onCompleted: {
+        JS.tools.projectColor = Theme.highlightColor
+        JS.tools.contextColor = Theme.secondaryHighlightColor
+        JS.taskList.save = todoTxtFile.save
+    }
+
     ConfigurationGroup {
         id: settings
         path: "/apps/harbour-zutun/settings"
@@ -91,9 +97,12 @@ ApplicationWindow {
 
         onReadSuccess:
             if (content) {
-                taskListModel.setTextList(content)
                 JS.taskList.setTextList(content)
-                console.log(JS.taskList.list)
+                taskListModel.clear()
+                JS.taskList.itemList.forEach(function(t){taskListModel.append(t)})
+                visualModel.resort("read file")
+                notificationList.publishNotifications()
+                //console.log(JS.taskList.list[0].fullTxt)
             }
 
         onIoError: {
@@ -106,18 +115,8 @@ ApplicationWindow {
         id: notificationList
     }
 
-    TaskListModel {
+    ListModel {
         id: taskListModel
-        projectColor: Theme.highlightColor
-        contextColor: Theme.secondaryHighlightColor
-        onSaveList: {
-            todoTxtFile.save(content)
-        }
-
-        onListChanged: {
-            visualModel.resort("listChanged")
-            notificationList.publishNotifications(this)
-        }
     }
 
     TaskDelegateModel {

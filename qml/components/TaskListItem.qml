@@ -3,6 +3,7 @@ import QtQml.Models 2.2
 import Sailfish.Silica 1.0
 
 import "../tdt/todotxt.js" as JS
+
 ListItem {
     id: listItem
 
@@ -28,7 +29,7 @@ ListItem {
 
     function remove() {
         remorseAction(qsTr("Deleting"), function() {
-            taskListModel.removeTask(model.index)
+            JS.taskList.removeTask(model.index)
         }, 3000)
     }
 
@@ -50,7 +51,7 @@ ListItem {
                 checked: model.done
                 onClicked: {
                     //model.done = !checked //geht nicht in 5.6
-                    taskListModel.setTaskProperty(model.index, JS.baseFeatures.done, !checked)
+                    JS.taskList.modifyTask(model.index, JS.baseFeatures.done, !checked)
                     listItem.resortItem()
                 }
             }
@@ -120,7 +121,7 @@ ListItem {
             visible: !(model.done || model.priority === "A")
             text: qsTr("Priority Up")
             onClicked: {
-                taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, true))
+                JS.taskList.modifyTask(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, true))
                 //model.priority = priorityUpDown(model.priority, true)
                 resortItem()
             }
@@ -129,7 +130,7 @@ ListItem {
             visible: !(model.done || model.priority === "")
             text: qsTr("Priority Down")
             onClicked: {
-                taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, false))
+                JS.taskList.modifyTask(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, false))
                 //model.priority = priorityUpDown(model.priority, true)
                 resortItem()
             }

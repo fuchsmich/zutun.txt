@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+import "../tdt/todotxt.js" as JS
 
 Item {
     id: notificationList
@@ -26,7 +27,7 @@ Item {
         for (var i = 0; i < ids.length; i++) {
             var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
-            var notification = notificationComp.createObject(null, {task: taskListModel.lineToJSON("")})
+            var notification = notificationComp.createObject(null, {task: JS.tools.lineToJSON("")})
             notification.replacesId = ids[i]
             notification.publish()
             notification.close()

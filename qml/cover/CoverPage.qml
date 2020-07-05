@@ -30,12 +30,6 @@ CoverBackground {
             }
         }
     }
-
-    onStatusChanged: {
-        if (status === Cover.Active ) {
-            //taskListModel.readFile();
-        }
-    }
 }
 
 

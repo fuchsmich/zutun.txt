@@ -19,14 +19,6 @@ ListModel {
         return JS.contexts.getList(textList)
     }
 
-    // colors for priorities: aus ColorPicker.qml:
-    property var prioColors: ["#e60003", "#e6007c", "#e700cc", "#9d00e7",
-        "#7b00e6", "#5d00e5", "#0077e7", "#01a9e7",
-        "#00cce7", "#00e696", "#00e600", "#99e600",
-        "#e3e601", "#e5bc00", "#e78601"]
-    property color projectColor
-    property color contextColor
-
     function _saveList() {
         var list = []
         for (var i = 0; i < count; i++) {
@@ -36,42 +28,6 @@ ListModel {
         textList = list
         //console.log("Saving:", list.join("\n"))
         saveList(list.join("\n"))
-    }
-
-    function prioColor(prio) {
-        return prioColors[JS.alphabet.search(prio) % prioColors.length]
-    }
-
-    function linkify(text) {
-        text = text.replace(JS.mailPattern, function(url) {
-            return '<a href="mailto:' + url + '">' + url + '</a>'
-        });
-        return text.replace(JS.urlPattern, function(url) {
-            return '<a href="' + url + '">' + url + '</a>'
-        });
-    }
-
-    function lineToJSON(line) {
-        var item = JS.baseFeatures.parseLine(line)
-
-        var displayText = linkify(item.subject)
-        displayText = displayText.replace(
-                    JS.projects.pattern,
-                    function(x) { return ' <font color="' + projectColor + '">' + x + ' </font>'})
-        displayText = displayText.replace(
-                    JS.contexts.pattern,
-                    function(x) { return ' <font color="' + contextColor + '">' + x + ' </font>'})
-        displayText = (item.priority !== "" ?
-                           '<font color="' + prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
-                + displayText //item.subject //+ '<br/>' +item.creationDate
-
-        item["formattedSubject"] = displayText
-
-        //item["section"] = ""
-        item["projects"] = JS.projects.listLine(line).sort().join(", ")
-        item["contexts"] = JS.contexts.listLine(line).sort().join(", ")
-
-        return  item
     }
 
     function addTask(text) {
@@ -87,32 +43,12 @@ ListModel {
         _saveList()
     }
 
-    function setTextList(newList) {
-        var array = JS.splitLines(newList)
-        if (array.join() !== textList.join()) {
-            textList = array.sort()
-        }
-
-        clear()
-        var i = 0
-        for (var a = 0; a < textList.length; a++) {
-            var line = textList[a]
-            var json = lineToJSON(line)
-
-            if (i < count) set(i, json)
-            else append(json)
-            i++
-        }
-        if (i < count) remove(i, count - i)
-        listChanged()
-    }
-
     function setTaskProperty(index, role, value) {
         if (role >= JS.baseFeatures.fullTxt && role <= JS.baseFeatures.creationDate) {
             var oldLine = get(index).fullTxt
             var newLine = JS.baseFeatures.modifyLine(oldLine, role, value)
             console.log(index, newLine)
-            set(index, lineToJSON(newLine))
+            set(index, JS.tools.lineToJSON(newLine))
         }
         listChanged()
         _saveList()

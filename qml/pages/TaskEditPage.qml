@@ -102,8 +102,8 @@ Dialog {
                     model: ListModel {
                         id: prioritiesModel
                         Component.onCompleted: {
-                            for (var a in JS.alphabet) {
-                                append({"name": "(" + JS.alphabet[a] + ") "});
+                            for (var a in JS.tools.alphabet) {
+                                append({"name": "(" + JS.tools.alphabet[a] + ") "});
                             }
                         }
                     }
@@ -121,7 +121,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
                     onClicked: {
-                        setText("priority", false)
+                        dialog.setText("priority", false)
                     }
                 }
 
@@ -132,10 +132,10 @@ Dialog {
                         height: width
                         source: "image://theme/icon-l-date"
                     }
-                    onClicked: setText("creationDate", JS.today())
+                    onClicked: dialog.setText("creationDate", JS.tools.today())
                     onPressAndHold: ta.focus = false
                     onDateClicked: {
-                        setText("creationDate", date)
+                        dialog.setText("creationDate", date)
                         closeMenu()
                     }
                 }
@@ -150,8 +150,8 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: taskListModel.projects
-                    onListItemSelected: setText("project", text)
+                    model: JS.projects.getList()
+                    onListItemSelected: dialog.setText("project", text)
                 }
 
                 EditItemContextList {
@@ -165,8 +165,8 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: taskListModel.contexts
-                    onListItemSelected: setText("context", text)
+                    model: JS.contexts.getList()
+                    onListItemSelected: dialog.setText("context", text)
                 }
 
                 EditItemDatePicker {
@@ -187,7 +187,7 @@ Dialog {
                     }
                     openMenuOnPressAndHold: false
                     onDateClicked: {
-                        setText("due", date)
+                        dialog.setText("due", date)
                         closeMenu()
                     }
                 }
@@ -204,11 +204,10 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
                     onClicked: {
-                        setText("due", "")
+                        dialog.setText("due", "")
                     }
                 }
             }
-
 
             Loader {
                 id: bottomLoader
@@ -222,12 +221,12 @@ Dialog {
     }
 
     onAccepted: {
-        if (taskIndex > -1) taskListModel.setTaskProperty(taskIndex, JS.baseFeatures.fullTxt, text)
+        if (taskIndex > -1) JS.taskList.modifyTask(taskIndex, JS.baseFeatures.fullTxt, text)
         if (taskIndex === -1) {
             if (settings.creationDateOnAddTask) {
-                text = JS.baseFeatures.modifyLine(text, JS.baseFeatures.creationDate, JS.today())
+                text = JS.baseFeatures.modifyLine(text, JS.baseFeatures.creationDate, JS.tools.today())
             }
-            taskListModel.addTask(text)
+            JS.taskList.addTask(text)
         }
     }
 }

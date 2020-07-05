@@ -71,7 +71,7 @@ DelegateModel {
     }
 
     function resort(reason) {
-        //console.log("resort called", sorting.groupBy, reason)
+        console.log("resort called", unsortedItems.count, sorting.groupBy, reason)
         if (items.count > 0) items.setGroups(0, items.count, "unsorted")
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
     }

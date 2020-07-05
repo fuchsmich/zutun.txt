@@ -64,14 +64,33 @@ var tools = {
 }
 
 var taskList = {
-    list: [],
+    textList: [],
+    itemList: [],
     setTextList: function (newList) {
         var array = tools.splitLines(newList)
-        this.list = []
+        this.textList = array
+        this.itemList = []
         array.forEach(function(item){
-            taskList.list.push(lineToJSON(item))
+            taskList.itemList.push(tools.lineToJSON(item))
         })
         //console.log(this.list[0].fullTxt)
+    },
+    //return add task string to tasklist
+    addTask: function(text){
+        this.textList.push(text)
+        this.textList.sort()
+        this.save(this.textList.join("\n"))
+    },
+    removeTask: function(index){
+        this.textList.splice(index)
+        this.save(this.textList.join("\n"))
+    },
+    modifyTask: function(index, feature, value) {
+        this.textList[index] = baseFeatures.modifyLine(this.textList[index], feature, value)
+        this.save(this.textList.join("\n"))
+    },
+    save: function(txt){
+        console.log(txt.toString())
     }
 }
 
@@ -144,7 +163,7 @@ var baseFeatures = {
                 fields[this.completionDate] = undefined
             } else {
                 fields[feature] = "x "
-                fields[this.completionDate] = today() + " " //(fields[this.creationDate] !== undefined ? today() + " " : undefined)
+                fields[this.completionDate] = tools.today() + " "
             }
             break
         case this.priority:
@@ -228,8 +247,8 @@ var projects = {
         return getMatchesLine(task, this.pattern)
     },
     /* get list of contexts for text*/
-    getList: function(text) {
-        return getMatchesList2(text, this.pattern)
+    getList: function() {
+        return getMatchesList2(taskList.textList, this.pattern)
     }
 }
 
@@ -244,8 +263,8 @@ var contexts = {
         return getMatchesLine(task, this.pattern)
     },
     /* get list of contexts for text*/
-    getList: function(text) {
-        return getMatchesList2(text, this.pattern)
+    getList: function() {
+        return getMatchesList2(taskList.textList, this.pattern)
     }
 }
 

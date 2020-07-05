@@ -38,6 +38,7 @@ Python {
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.write', [pyPath, content], function(){ })
         }
+        read()
     }
 
     function create() {
