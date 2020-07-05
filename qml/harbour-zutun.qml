@@ -90,7 +90,11 @@ ApplicationWindow {
         path: settings.todoTxtLocation
 
         onReadSuccess:
-            if (content) taskListModel.setTextList(content)
+            if (content) {
+                taskListModel.setTextList(content)
+                JS.taskList.setTextList(content)
+                console.log(JS.taskList.list)
+            }
 
         onIoError: {
             //TODO needs some rework for translation

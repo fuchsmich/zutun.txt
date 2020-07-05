@@ -1,8 +1,80 @@
 .pragma library
 
-var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var urlPattern =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
-var mailPattern= /([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)/ig
+var tools = {
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    urlPattern: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
+    mailPattern: /([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)/ig,
+    // colors for priorities: aus ColorPicker.qml:
+    prioColors: ["#e60003", "#e6007c", "#e700cc", "#9d00e7",
+        "#7b00e6", "#5d00e5", "#0077e7", "#01a9e7",
+        "#00cce7", "#00e696", "#00e600", "#99e600",
+        "#e3e601", "#e5bc00", "#e78601"],
+    //return color for given priority A,B,C...
+    prioColor: function(prio) {
+        return tools.prioColors[tools.alphabet.search(prio) % tools.prioColors.length]
+    },
+    projectColor: "red",
+    contextColor: "blue",
+    //return text with html tags around email addresses
+    linkify: function(text) {
+        text = text.replace(tools.mailPattern, function(url) {
+            return '<a href="mailto:' + url + '">' + url + '</a>'
+        });
+        return text.replace(tools.urlPattern, function(url) {
+            return '<a href="' + url + '">' + url + '</a>'
+        });
+    },
+    today: function() {
+        return Qt.formatDate(new Date(),"yyyy-MM-dd")
+    },
+    //return JSON item for textline
+    lineToJSON: function(line) {
+        var item = baseFeatures.parseLine(line)
+
+        var displayText = tools.linkify(item.subject)
+        displayText = displayText.replace(
+                    projects.pattern,
+                    function(x) { return ' <font color="' + tools.projectColor + '">' + x + ' </font>'})
+        displayText = displayText.replace(
+                    contexts.pattern,
+                    function(x) { return ' <font color="' + tools.contextColor + '">' + x + ' </font>'})
+        displayText = (item.priority !== "" ?
+                           '<font color="' + tools.prioColor(item.priority) + '">(' + item.priority + ') </font>' : "")
+                + displayText //item.subject //+ '<br/>' +item.creationDate
+
+        item["formattedSubject"] = displayText
+
+        //item["section"] = ""
+        item["projects"] = projects.listLine(line).sort().join(", ")
+        item["contexts"] = contexts.listLine(line).sort().join(", ")
+
+        return item
+    },
+    //return array of tasks
+    splitLines: function(fileContent) {
+        var tasks = []
+        var lines = fileContent.split("\n")
+        var txt = ""
+        for (var t = 0; t < lines.length; t++) {
+            txt = lines[t].trim()
+            if (txt.length !== 0) tasks.push(txt)
+        }
+        return tasks
+    }
+}
+
+var taskList = {
+    list: [],
+    setTextList: function (newList) {
+        var array = tools.splitLines(newList)
+        this.list = []
+        array.forEach(function(item){
+            taskList.list.push(lineToJSON(item))
+        })
+        //console.log(this.list[0].fullTxt)
+    }
+}
+
 
 var baseFeatures = {
     //see https://github.com/todotxt/todo.txt
@@ -19,6 +91,7 @@ var baseFeatures = {
     creationDate: 4,
     subject: 5,
 
+    //returns array of matches
     getMatches: function(line) {
         var matches = line.match(this.pattern)
         if (matches[this.done] === undefined && matches[this.creationDate] === undefined)
@@ -27,6 +100,7 @@ var baseFeatures = {
         return matches
     },
 
+    //returns JSON object of a task
     parseLine: function(line) {
         //baseFeatures
         var fields = this.getMatches(line)
@@ -75,7 +149,7 @@ var baseFeatures = {
             break
         case this.priority:
             if (value === false || value === "") { fields[feature] = undefined; break }
-            else if (alphabet.indexOf(value) > -1) { fields[feature] = "(" + value + ") "; break }
+            else if (tools.alphabet.indexOf(value) > -1) { fields[feature] = "(" + value + ") "; break }
             break
         case this.creationDate:
             if (value === false) fields[feature] = undefined
@@ -109,16 +183,6 @@ function getMatchesList(tasks, pattern) {
     return list;
 }
 
-function getMatchesLine(task, pattern) {
-    var matches, trimmedMatches
-    if (matches = task.match(pattern))
-        trimmedMatches = matches.map(function (item, index, array) {
-            return item.trim()
-        })
-
-    return (trimmedMatches ? trimmedMatches : [])
-}
-
 function getMatchesList2(text, pattern) {
     //console.log("isarray", Array.isArray(text))
     //console.log("typeof", typeof text)
@@ -139,6 +203,18 @@ function getMatchesList2(text, pattern) {
     //console.log("matcheslist", matchesList)
     return matchesList;
 }
+
+function getMatchesLine(task, pattern) {
+    var matches, trimmedMatches
+    if (matches = task.match(pattern))
+        trimmedMatches = matches.map(function (item, index, array) {
+            return item.trim()
+        })
+
+    return (trimmedMatches ? trimmedMatches : [])
+}
+
+
 
 var projects = {
     pattern: /(^|\s)(\+\S+)/g ,
@@ -208,19 +284,3 @@ var due = {
         return [dueDate, subject]
     }
 }
-
-function splitLines(fileContent) {
-    var tasks = []
-    var lines = fileContent.split("\n")
-    var txt = ""
-    for (var t = 0; t < lines.length; t++) {
-        txt = lines[t].trim();
-        if (txt.length !== 0) tasks.push(txt)
-    }
-    return tasks
-}
-
-function today() {
-    return Qt.formatDate(new Date(),"yyyy-MM-dd");
-}
-
