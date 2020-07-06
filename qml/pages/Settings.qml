@@ -53,6 +53,7 @@ Page {
             Component {
                 id: filePickerPage
                 //TODO how to create new file?
+                //TODO start in current folder
                 FilePickerPage {
                     //: Page Header for the FilePickerPage (called from Button: Choose File)
                     title: "todo.txt Location"

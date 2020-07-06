@@ -6,6 +6,7 @@ QtObject {
     signal filtersChanged()
     //onFiltersChanged: console.log("filters changed")
 
+
     property bool hideDone: true
     onHideDoneChanged: filtersChanged()
 

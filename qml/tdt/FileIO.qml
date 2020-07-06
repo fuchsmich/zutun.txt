@@ -8,7 +8,7 @@ Python {
     property bool pythonReady: false
     //onPythonReadyChanged: read()
     property string path
-    //onPathChanged: read()
+    onPathChanged: read()
     property string folder: path.substring(0, path.lastIndexOf("/")+1)
     property string content: ""
 
