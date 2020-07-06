@@ -117,7 +117,7 @@ Page {
             }
             PropertyChanges {
                 target: filterModel
-                list: JS.projects.getList()
+                list: visualModel.filters.projectList
                 active: visualModel.filters.projects
                 onActiveChanged: filterSettings.projects.value = filterModel.active
             }
@@ -133,7 +133,7 @@ Page {
             }
             PropertyChanges {
                 target: filterModel
-                list: JS.contexts.getList()
+                list: visualModel.filters.contextList
                 active: visualModel.filters.contexts
                 onActiveChanged: filterSettings.contexts.value = filterModel.active
             }

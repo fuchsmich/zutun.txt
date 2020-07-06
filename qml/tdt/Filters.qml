@@ -17,8 +17,10 @@ QtObject {
         else return qsTr("None")
     }
 
+    property var projectList: []
     property var projects: []
     onProjectsChanged: filtersChanged()
+    property var contextList: []
     property var contexts: []
     onContextsChanged: filtersChanged()
 

@@ -100,6 +100,8 @@ ApplicationWindow {
                 JS.taskList.setTextList(content)
                 taskListModel.clear()
                 JS.taskList.itemList.forEach(function(t){taskListModel.append(t)})
+                visualModel.filters.projectList = JS.projects.getList()
+                visualModel.filters.contextList = JS.contexts.getList()
                 visualModel.resort("read file")
                 notificationList.publishNotifications()
                 //console.log(JS.taskList.list[0].fullTxt)
@@ -117,6 +119,7 @@ ApplicationWindow {
 
     ListModel {
         id: taskListModel
+
     }
 
     TaskDelegateModel {
@@ -125,7 +128,9 @@ ApplicationWindow {
 
         filters {
             hideDone: filterSettings.hideDone
+            projectList: JS.projects.getList()
             projects: filterSettings.projects.value
+            contextList: JS.contexts.getList()
             contexts: filterSettings.contexts.value
         }
 
