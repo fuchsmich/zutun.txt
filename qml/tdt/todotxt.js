@@ -28,7 +28,7 @@ var tools = {
         return Qt.formatDate(new Date(),"yyyy-MM-dd")
     },
     //return JSON item for textline
-    lineToJSON: function(line) {
+    lineToJSON: function(line, lineNumber) {
         var item = baseFeatures.parseLine(line)
 
         var displayText = tools.linkify(item.subject)
@@ -48,6 +48,8 @@ var tools = {
         item["projects"] = projects.listLine(line).sort().join(", ")
         item["contexts"] = contexts.listLine(line).sort().join(", ")
 
+        if (lineNumber !== undefined) item["lineNumber"] = lineNumber
+
         return item
     },
     //return array of tasks
@@ -55,10 +57,10 @@ var tools = {
         var tasks = []
         var lines = fileContent.split("\n")
         var txt = ""
-        for (var t = 0; t < lines.length; t++) {
-            txt = lines[t].trim()
+        lines.forEach(function(line){
+            txt = line.trim()
             if (txt.length !== 0) tasks.push(txt)
-        }
+        })
         return tasks
     }
 }
@@ -66,14 +68,15 @@ var tools = {
 var taskList = {
     textList: [],
     itemList: [],
+    //set new text list and parse it
     setTextList: function (newList) {
         var array = tools.splitLines(newList)
         this.textList = array
         this.itemList = []
-        array.forEach(function(item){
-            taskList.itemList.push(tools.lineToJSON(item))
+        array.forEach(function(item, i){
+            //console.debug(item, i)
+            taskList.itemList.push(tools.lineToJSON(item, i))
         })
-        //console.log(this.list[0].fullTxt)
     },
     //return add task string to tasklist
     addTask: function(text){
@@ -86,11 +89,13 @@ var taskList = {
         this.save(this.textList.join("\n"))
     },
     modifyTask: function(index, feature, value) {
+        //console.debug(index, feature, value)
         this.textList[index] = baseFeatures.modifyLine(this.textList[index], feature, value)
+        this.textList.sort()
         this.save(this.textList.join("\n"))
     },
     save: function(txt){
-        console.log(txt.toString())
+        console.log("replace with actual save function", txt.toString())
     }
 }
 
@@ -152,6 +157,7 @@ var baseFeatures = {
 
     modifyLine: function(line, feature, value) {
         //TODO validierung von value???
+        console.debug(line, feature, value)
         var fields = this.getMatches(line)
         //        console.log(fields)
         switch (feature) {

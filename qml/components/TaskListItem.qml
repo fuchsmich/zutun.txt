@@ -4,7 +4,6 @@ import Sailfish.Silica 1.0
 
 import "../tdt/todotxt.js" as JS
 
-//TODO model.index not working anymore with this apporach
 
 ListItem {
     id: listItem
@@ -12,7 +11,7 @@ ListItem {
     signal editItem()
     onEditItem: {
         ListView.view.lastIndex = model.index
-        ListView.view.editTask(model.index, model.fullTxt)
+        ListView.view.editTask(model.lineNumber, model.fullTxt)
     }
     signal resortItem()
     onResortItem: ListView.view.lastIndex = model.index
@@ -36,7 +35,7 @@ ListItem {
     function remove() {
         ListView.view.lastIndex = model.index
         remorseAction(qsTr("Deleting"), function() {
-            JS.taskList.removeTask(model.index)
+            JS.taskList.removeTask(model.lineNumber)
         }, 3000)
     }
 
@@ -57,7 +56,7 @@ ListItem {
                 automaticCheck: false
                 checked: model.done
                 onClicked: {
-                    JS.taskList.modifyTask(model.index, JS.baseFeatures.done, !checked)
+                    JS.taskList.modifyTask(model.lineNumber, JS.baseFeatures.done, !checked)
                     listItem.resortItem()
                 }
             }
@@ -127,7 +126,7 @@ ListItem {
             visible: !(model.done || model.priority === "A")
             text: qsTr("Priority Up")
             onClicked: {
-                JS.taskList.modifyTask(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, true))
+                JS.taskList.modifyTask(model.lineNumber, JS.baseFeatures.priority, priorityUpDown(model.priority, true))
                 resortItem()
             }
         }
@@ -135,7 +134,7 @@ ListItem {
             visible: !(model.done || model.priority === "")
             text: qsTr("Priority Down")
             onClicked: {
-                JS.taskList.modifyTask(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, false))
+                JS.taskList.modifyTask(model.lineNumber, JS.baseFeatures.priority, priorityUpDown(model.priority, false))
                 resortItem()
             }
         }

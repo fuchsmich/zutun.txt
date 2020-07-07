@@ -119,10 +119,8 @@ Page {
         highlightFollowsCurrentItem: true
         Connections {
             target: visualModel
-            onSortFinished: lv.currentIndex = lv.lastIndex//lv.positionViewAtIndex(lv.currentIndex, ListView.Contain)
+            onSortFinished: lv.positionViewAtIndex(lv.lastIndex, ListView.Center)
         }
-        onLastIndexChanged: console.debug(lastIndex)
-        onCurrentIndexChanged: console.debug(currentIndex)
     }
 
     onStatusChanged: {
