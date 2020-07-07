@@ -98,8 +98,9 @@ ApplicationWindow {
         onReadSuccess:
             if (content) {
                 JS.taskList.setTextList(content)
-                taskListModel.clear()
-                JS.taskList.itemList.forEach(function(t){taskListModel.append(t)})
+                //taskListModel.clear()
+                //JS.taskList.itemList.forEach(function(t){taskListModel.append(t)})
+                visualModel.sourceModel = JS.taskList.itemList
                 visualModel.filters.projectList = JS.projects.getList()
                 visualModel.filters.contextList = JS.contexts.getList()
                 visualModel.resort("read file")
@@ -117,14 +118,12 @@ ApplicationWindow {
         id: notificationList
     }
 
-    ListModel {
-        id: taskListModel
+//    ListModel {
+//        id: taskListModel
+//    }
 
-    }
-
-    TaskDelegateModel {
+    TaskListModel {
         id: visualModel
-        model: taskListModel
 
         filters {
             hideDone: filterSettings.hideDone
@@ -139,8 +138,6 @@ ApplicationWindow {
             order: sortSettings.order
             groupBy: sortSettings.grouping
         }
-
-        delegate: Delegate { }
     }
 }
 

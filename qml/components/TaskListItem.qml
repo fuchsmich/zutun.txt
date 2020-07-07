@@ -4,12 +4,18 @@ import Sailfish.Silica 1.0
 
 import "../tdt/todotxt.js" as JS
 
+//TODO model.index not working anymore with this apporach
+
 ListItem {
     id: listItem
 
     signal editItem()
-    onEditItem: ListView.view.editTask(model.index, model.fullTxt)
+    onEditItem: {
+        ListView.view.lastIndex = model.index
+        ListView.view.editTask(model.index, model.fullTxt)
+    }
     signal resortItem()
+    onResortItem: ListView.view.lastIndex = model.index
 
     property string minPriority: "F"
 
@@ -28,6 +34,7 @@ ListItem {
     }
 
     function remove() {
+        ListView.view.lastIndex = model.index
         remorseAction(qsTr("Deleting"), function() {
             JS.taskList.removeTask(model.index)
         }, 3000)
@@ -50,7 +57,6 @@ ListItem {
                 automaticCheck: false
                 checked: model.done
                 onClicked: {
-                    //model.done = !checked //geht nicht in 5.6
                     JS.taskList.modifyTask(model.index, JS.baseFeatures.done, !checked)
                     listItem.resortItem()
                 }
@@ -65,7 +71,7 @@ ListItem {
                 font.strikeout: model.done
                 font.pixelSize: settings.fontSizeTaskList
                 onLinkActivated: {
-                    console.log("link activated", link)
+                    console.debug("link activated", link)
                     Qt.openUrlExternally(link)
                 }
             }
@@ -122,7 +128,6 @@ ListItem {
             text: qsTr("Priority Up")
             onClicked: {
                 JS.taskList.modifyTask(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, true))
-                //model.priority = priorityUpDown(model.priority, true)
                 resortItem()
             }
         }
@@ -131,7 +136,6 @@ ListItem {
             text: qsTr("Priority Down")
             onClicked: {
                 JS.taskList.modifyTask(model.index, JS.baseFeatures.priority, priorityUpDown(model.priority, false))
-                //model.priority = priorityUpDown(model.priority, true)
                 resortItem()
             }
         }

@@ -71,7 +71,8 @@ Page {
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
                 //: Information about filter settings at the top of main page
-                text: qsTr("Filter: %1").arg(visualModel.filters.text()) + " (%1/%2)".arg(visualModel.itemsCount).arg(taskListModel.count)
+                text: qsTr("Filter: %1").arg(visualModel.filters.text()) +
+                      " (%1/%2)".arg(visualModel.count).arg(visualModel.sourceModel.length)
             }
         }
 
@@ -100,14 +101,28 @@ Page {
             size: BusyIndicatorSize.Large
             anchors.centerIn: parent
             //enabled: lv.count === 0
-            running: visualModel.unsortedItems.count > 0
+            //running: visualModel.unsortedItems.count > 0
         }
 
         function editTask(index, taskTxt) {
             pageStack.push(Qt.resolvedUrl("TaskEditPage.qml"), {taskIndex: index, text: taskTxt});
         }
 
-        model: visualModel.parts.list
+        model: visualModel
+        delegate: TaskListItem {
+            //onResortItem: visualModel.resort("resort item %1".arg(model.index))
+        }
+
+
+
+        property int lastIndex: currentIndex
+        highlightFollowsCurrentItem: true
+        Connections {
+            target: visualModel
+            onSortFinished: lv.currentIndex = lv.lastIndex//lv.positionViewAtIndex(lv.currentIndex, ListView.Contain)
+        }
+        onLastIndexChanged: console.debug(lastIndex)
+        onCurrentIndexChanged: console.debug(currentIndex)
     }
 
     onStatusChanged: {

@@ -82,7 +82,7 @@ var taskList = {
         this.save(this.textList.join("\n"))
     },
     removeTask: function(index){
-        this.textList.splice(index)
+        this.textList.splice(index, 1)
         this.save(this.textList.join("\n"))
     },
     modifyTask: function(index, feature, value) {

@@ -57,7 +57,7 @@ DelegateModel {
     }
 
     function sort(lessThan) {
-        console.log("sorting", unsortedItems.count)
+        //console.debug("sorting", unsortedItems.count)
         while (unsortedItems.count > 0) {
             var item = unsortedItems.get(0)
             if (filters.visibility(item.model)) {
@@ -68,11 +68,10 @@ DelegateModel {
             } else item.groups = "invisible"
         }
         sortFinished()
-        console.debug("was dauert da so lang....")
     }
 
     function resort(reason) {
-        console.log("resort called", unsortedItems.count, sorting.groupBy, reason)
+        //console.debug("resort called", unsortedItems.count, sorting.groupBy, reason)
         if (items.count > 0) items.setGroups(0, items.count, "unsorted")
         if (populatingItems.count > 0) populatingItems.setGroups(0, populatingItems.count, "unsorted")
         if (invisibleItems.count > 0) invisibleItems.setGroups(0, invisibleItems.count, "unsorted")
