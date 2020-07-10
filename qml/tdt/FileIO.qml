@@ -25,24 +25,27 @@ Python {
 
     function read() {
         //console.debug("reading", "ready:", pythonReady, "path:", path)
-        status = 1
         if (pythonReady && path) {
+            status = 1
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.read', [pyPath], function(result){
                 //console.log("read result:", result);
                 content = result
-                console.log("read", "path:", path)
                 py.readSuccess(result)
-                status = 2
             });
+            console.log("read", "path:", path)
+            status = 2
         }
     }
 
     function save(content) {
-        console.log("saving", "ready:", pythonReady, "path:", path)
+        //console.log("saving", "ready:", pythonReady, "path:", path)
         if (pythonReady && path) {
+            status = 1
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.write', [pyPath, content], function(){ })
+            console.log("saved", "path:", path)
+            status = 2
         }
     }
 
@@ -50,6 +53,7 @@ Python {
         if (pythonReady && path) {
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.create', [pyPath], function(){ })
+            console.log("created", "path:", path)
         }
     }
 
