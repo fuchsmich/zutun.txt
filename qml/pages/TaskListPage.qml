@@ -4,6 +4,8 @@ import Sailfish.Silica 1.0
 import "../components"
 import "../tdt"
 
+import "../tdt/todotxt.js" as JS
+
 Page {
     id: page
 
@@ -101,7 +103,7 @@ Page {
             size: BusyIndicatorSize.Large
             anchors.centerIn: parent
             //enabled: lv.count === 0
-            //running: visualModel.unsortedItems.count > 0
+            running: todoTxtFile.status == 1 || visualModel.status == 1 || JS.taskList.busy
         }
 
         function editTask(index, taskTxt) {

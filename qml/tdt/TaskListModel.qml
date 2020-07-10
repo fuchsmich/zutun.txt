@@ -7,6 +7,9 @@ import "todotxt.js" as JS
 ListModel {
     signal sortFinished()
 
+    //0..init, 1..sorting, 2..ready
+    property int status: 0
+
     property var sourceModel: []
     onSourceModelChanged: sort(sorting.lessThanFunc)
     property var projects: {
@@ -45,6 +48,7 @@ ListModel {
     }
 
     function sort(lessThan) {
+        status = 1
         sourceModel.forEach(function(item){
             if (filters.visibility(item)) {
                 if (item.priority.charCodeAt(0) > defaultPriority.charCodeAt(0))
@@ -54,10 +58,12 @@ ListModel {
             }
         })
         sortFinished()
+        status = 2
     }
 
 
     function resort(reason) {
+        status = 1
         console.debug(reason)
         clear()
         sort(sorting.lessThanFunc)

@@ -53,10 +53,11 @@ ListItem {
             Switch {
                 id: doneSw
                 height: parent.height
-                automaticCheck: false
+                automaticCheck: true
                 checked: model.done
                 onClicked: {
-                    JS.taskList.modifyTask(model.lineNumber, JS.baseFeatures.done, !checked)
+                    //model.done = !checked
+                    JS.taskList.modifyTask(model.lineNumber, JS.baseFeatures.done, checked)
                     listItem.resortItem()
                 }
             }

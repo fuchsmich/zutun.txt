@@ -10,29 +10,28 @@ Item {
     function publishNotifications(taskList) {
         console.log("notificationList")
         removeAll()
-//        for (var i = 0; i < taskList.count; i++) {
-//            var item = taskList.get(i)
-//            if (item.due !== "" && item.done === false) {
-//                var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
+        JS.taskList.itemList.forEach(function(task){
+            if (task.due !== "" && task.done === false) {
+                var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
-//                var notification = notificationComp.createObject(null, {task: item}) //parent needed?
-//                notification.publish()
-//                ids.push(notification.replacesId)
-//                //console.log(notification.replacesId, notifications.idList);
-//            }
-//        }
+                var notification = notificationComp.createObject(null, {task: task}) //parent needed?
+                notification.publish()
+                settings.notificationIDs.value.push(notification.replacesId)
+                //console.log(notification.replacesId, notifications.idList);
+            }
+        })
     }
 
     function removeAll() {
-        for (var i = 0; i < ids.length; i++) {
+        ids.forEach(function(_id, index){
             var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
             var notification = notificationComp.createObject(null, {task: JS.tools.lineToJSON("")})
-            notification.replacesId = ids[i]
+            notification.replacesId = _id
             notification.publish()
             notification.close()
-        }
-        ids = []
+            settings.notificationIDs.value.splice(index, 1)
+        })
     }
 
 

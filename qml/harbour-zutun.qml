@@ -38,6 +38,10 @@ ApplicationWindow {
         property int fontSizeTaskList: Theme.fontSizeMedium
         property bool projectFilterLeft: false
         property bool creationDateOnAddTask: false
+        property ConfigurationValue notificationIDs: ConfigurationValue {
+            key: settings.path + "/notificationIDs"
+            defaultValue: []
+        }
         ConfigurationGroup {
             id: filterSettings
             path: "/filters"
@@ -79,6 +83,7 @@ ApplicationWindow {
 
         function showApp() {
             app.activate()
+            notificationList.publishNotifications()
         }
     }
 
@@ -116,6 +121,7 @@ ApplicationWindow {
 
     NotificationList {
         id: notificationList
+        ids: settings.notificationIDs.value
     }
 
 //    ListModel {

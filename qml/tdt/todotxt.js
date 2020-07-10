@@ -66,6 +66,7 @@ var tools = {
 }
 
 var taskList = {
+    busy: false,
     textList: [],
     itemList: [],
     //set new text list and parse it
@@ -89,10 +90,12 @@ var taskList = {
         this.save(this.textList.join("\n"))
     },
     modifyTask: function(index, feature, value) {
+        this.busy = true
         //console.debug(index, feature, value)
         this.textList[index] = baseFeatures.modifyLine(this.textList[index], feature, value)
         this.textList.sort()
         this.save(this.textList.join("\n"))
+        this.busy = false
     },
     save: function(txt){
         console.log("replace with actual save function", txt.toString())

@@ -20,14 +20,19 @@ Python {
     property bool readable: false
     property bool writeable: false
 
+    //0..init, 1..reading, 2..ready, 3..error
+    property int status: 0
+
     function read() {
         console.log("reading", "ready:", pythonReady, "path:", path)
+        status = 1
         if (pythonReady && path) {
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.read', [pyPath], function(result){
                 //console.log("read result:", result);
                 content = result
                 py.readSuccess(result)
+                status = 2
             });
         }
     }
