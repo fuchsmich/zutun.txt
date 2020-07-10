@@ -71,33 +71,46 @@ var taskList = {
     itemList: [],
     //set new text list and parse it
     setTextList: function (newList) {
-        var array = tools.splitLines(newList)
-        this.textList = array
+        this.busy = true
+        this.textList = tools.splitLines(newList)
+        this.textList.sort()
+        this.populateItemList()
+        this.textListChanged(true)
+        this.busy = false
+    },
+    //return add task string to tasklist
+    populateItemList: function(){
         this.itemList = []
-        array.forEach(function(item, i){
+        this.textList.forEach(function(item, i){
             //console.debug(item, i)
             taskList.itemList.push(tools.lineToJSON(item, i))
         })
     },
-    //return add task string to tasklist
     addTask: function(text){
+        this.busy = true
         this.textList.push(text)
         this.textList.sort()
-        this.save(this.textList.join("\n"))
+        this.populateItemList()
+        this.textListChanged()
+        this.busy = false
     },
     removeTask: function(index){
+        this.busy = true
         this.textList.splice(index, 1)
-        this.save(this.textList.join("\n"))
+        this.populateItemList()
+        this.textListChanged()
+        this.busy = false
     },
     modifyTask: function(index, feature, value) {
         this.busy = true
         //console.debug(index, feature, value)
         this.textList[index] = baseFeatures.modifyLine(this.textList[index], feature, value)
         this.textList.sort()
-        this.save(this.textList.join("\n"))
+        this.populateItemList()
+        this.textListChanged()
         this.busy = false
     },
-    save: function(txt){
+    textListChanged: function(save){
         console.log("replace with actual save function", txt.toString())
     }
 }

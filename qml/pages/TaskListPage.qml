@@ -127,7 +127,7 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            todoTxtFile.read()
+            //todoTxtFile.read()
             /* attach filter page: */
             if ( pageStack.depth === 1) {
                 if (settings.projectFilterLeft) {

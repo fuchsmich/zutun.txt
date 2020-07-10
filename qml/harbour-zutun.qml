@@ -26,7 +26,7 @@ ApplicationWindow {
     Component.onCompleted: {
         JS.tools.projectColor = Theme.highlightColor
         JS.tools.contextColor = Theme.secondaryHighlightColor
-        JS.taskList.save = todoTxtFile.save
+        JS.taskList.textListChanged = app.textListChanged
     }
 
     ConfigurationGroup {
@@ -95,6 +95,11 @@ ApplicationWindow {
         app.activate()
     }
 
+    function textListChanged(dontsave) {
+        visualModel.sourceModel = JS.taskList.itemList
+        if (!dontsave) todoTxtFile.save(JS.taskList.textList.join("\n"))
+    }
+
     FileIO {
         id: todoTxtFile
         property string hintText: ""
@@ -103,20 +108,13 @@ ApplicationWindow {
         onReadSuccess:
             if (content) {
                 JS.taskList.setTextList(content)
-                //taskListModel.clear()
-                //JS.taskList.itemList.forEach(function(t){taskListModel.append(t)})
-                visualModel.sourceModel = JS.taskList.itemList
-                visualModel.filters.projectList = JS.projects.getList()
-                visualModel.filters.contextList = JS.contexts.getList()
-                visualModel.resort("read file")
-                notificationList.publishNotifications()
-                //console.log(JS.taskList.list[0].fullTxt)
             }
 
         onIoError: {
             //TODO needs some rework for translation
             hintText = msg
         }
+        onPythonReadyChanged: if (pythonReady) read()
     }
 
     NotificationList {
@@ -130,6 +128,13 @@ ApplicationWindow {
 
     TaskListModel {
         id: visualModel
+
+        onSourceModelChanged: {
+            visualModel.filters.projectList = JS.projects.getList()
+            visualModel.filters.contextList = JS.contexts.getList()
+            visualModel.resort()
+            //notificationList.publishNotifications()
+        }
 
         filters {
             hideDone: filterSettings.hideDone
