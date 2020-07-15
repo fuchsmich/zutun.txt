@@ -247,7 +247,8 @@ function getMatchesList2(text, pattern) {
 
 function getMatchesLine(task, pattern) {
     var matches, trimmedMatches
-    if (matches = task.match(pattern))
+    matches = task.match(pattern)
+    if (matches)
         trimmedMatches = matches.map(function (item, index, array) {
             return item.trim()
         })
