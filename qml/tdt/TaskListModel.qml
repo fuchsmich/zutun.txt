@@ -9,6 +9,7 @@ ListModel {
 
     //0..init, 1..sorting, 2..ready
     property int status: 0
+    property bool busy: status === 0 || status === 1
 
     property var sourceModel: []
     onSourceModelChanged: sort(sorting.lessThanFunc)

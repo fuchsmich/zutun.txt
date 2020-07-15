@@ -5,10 +5,8 @@ import io.thp.pyotherside 1.4
 Python {
     id: py
 
-    property bool pythonReady: false
-    //onPythonReadyChanged: read()
     property string path
-    onPathChanged: read()
+    onPathChanged: if (pythonReady) status = 1
     property string folder: path.substring(0, path.lastIndexOf("/")+1)
     property string content: ""
 
@@ -20,13 +18,21 @@ Python {
     property bool readable: false
     property bool writeable: false
 
-    //0..init, 1..reading, 2..ready, 3..error
+    /* 0..init
+    1..ready
+    2..reading
+    3..writing
+    10..error
+    */
     property int status: 0
+    property bool busy: status === 0 ||status === 2 || status === 3
+    property bool pythonReady: false
+    onPythonReadyChanged: if (path) status = 1
 
     function read() {
         //console.debug("reading", "ready:", pythonReady, "path:", path)
-        if (pythonReady && path) {
-            status = 1
+        if (status === 1) {
+            status = 2
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.read', [pyPath], function(result){
                 //console.log("read result:", result);
@@ -34,23 +40,23 @@ Python {
                 py.readSuccess(result)
             });
             console.log("read", "path:", path)
-            status = 2
+            status = 1
         }
     }
 
     function save(content) {
         //console.log("saving", "ready:", pythonReady, "path:", path)
-        if (pythonReady && path) {
-            status = 1
+        if (status === 1) {
+            status = 3
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.write', [pyPath, content], function(){ })
             console.log("saved", "path:", path)
-            status = 2
+            status = 1
         }
     }
 
     function create() {
-        if (pythonReady && path) {
+        if (status === 1) {
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.create', [pyPath], function(){ })
             console.log("created", "path:", path)

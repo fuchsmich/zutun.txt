@@ -100,10 +100,13 @@ ApplicationWindow {
         if (!dontsave) todoTxtFile.save(JS.taskList.textList.join("\n"))
     }
 
+    property bool busy: todoTxtFile.busy || visualModel.busy
+
     FileIO {
         id: todoTxtFile
         property string hintText: ""
         path: settings.todoTxtLocation
+        onPathChanged: read()
 
         onReadSuccess:
             if (content) {
@@ -121,10 +124,6 @@ ApplicationWindow {
         id: notificationList
         ids: settings.notificationIDs.value
     }
-
-//    ListModel {
-//        id: taskListModel
-//    }
 
     TaskListModel {
         id: visualModel

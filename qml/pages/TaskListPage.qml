@@ -102,8 +102,8 @@ Page {
         BusyIndicator {
             size: BusyIndicatorSize.Large
             anchors.centerIn: parent
-            //enabled: lv.count === 0
-            running: todoTxtFile.status == 1 || visualModel.status == 1 || JS.taskList.busy
+            enabled: false
+            running: app.busy
         }
 
         function editTask(index, taskTxt) {
