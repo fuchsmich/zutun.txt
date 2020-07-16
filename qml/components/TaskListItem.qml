@@ -9,37 +9,14 @@ ListItem {
     id: listItem
 
     signal editItem()
-    onEditItem: {
-        ListView.view.lastIndex = model.index
-        ListView.view.editTask(model.lineNumber, model.fullTxt)
-    }
-    signal resortItem()
-    onResortItem: ListView.view.lastIndex = model.index
-
-    property string minPriority: "F"
-
-    function priorityUpDown(priority, up) {
-        //console.log("A"++)
-        if (up) {
-            if (priority === "") return String.fromCharCode(minPriority.charCodeAt(0));
-            else if (priority > "A") return String.fromCharCode(priority.charCodeAt(0) - 1);
-        } else  {
-            if (priority !== "") {
-                if (priority < "Z") return String.fromCharCode(priority.charCodeAt(0) + 1);
-                return ""
-            }
-        }
-        return priority
-    }
 
     function remove() {
-        ListView.view.lastIndex = model.index
         remorseAction(qsTr("Deleting"), function() {
-            JS.taskList.removeTask(model.lineNumber)
+            visualModel.removeTask(model.lineNumber)
         }, 3000)
     }
 
-    width: ListView.view.width //app.width //ListView.view.width
+    width: ListView.view.width
     contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)
     onClicked: editItem()
 
@@ -56,9 +33,7 @@ ListItem {
                 automaticCheck: true
                 checked: model.done
                 onClicked: {
-                    //model.done = !checked
-                    JS.taskList.modifyTask(model.lineNumber, JS.baseFeatures.done, checked)
-                    listItem.resortItem()
+                    visualModel.setTaskProperty(model.lineNumber, JS.baseFeatures.done, checked)
                 }
             }
             Label {
@@ -127,16 +102,14 @@ ListItem {
             visible: !(model.done || model.priority === "A")
             text: qsTr("Priority Up")
             onClicked: {
-                JS.taskList.modifyTask(model.lineNumber, JS.baseFeatures.priority, priorityUpDown(model.priority, true))
-                resortItem()
+                visualModel.alterPriority(model.lineNumber, "inc")
             }
         }
         MenuItem {
             visible: !(model.done || model.priority === "")
             text: qsTr("Priority Down")
             onClicked: {
-                JS.taskList.modifyTask(model.lineNumber, JS.baseFeatures.priority, priorityUpDown(model.priority, false))
-                resortItem()
+                visualModel.alterPriority(model.lineNumber, "dec")
             }
         }
         MenuItem {

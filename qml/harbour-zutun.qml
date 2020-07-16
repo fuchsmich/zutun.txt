@@ -23,12 +23,6 @@ ApplicationWindow {
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
 
-    Component.onCompleted: {
-        JS.tools.projectColor = Theme.highlightColor
-        JS.tools.contextColor = Theme.secondaryHighlightColor
-        JS.taskList.textListChanged = app.textListChanged
-    }
-
     ConfigurationGroup {
         id: settings
         path: "/apps/harbour-zutun/settings"
@@ -95,11 +89,6 @@ ApplicationWindow {
         app.activate()
     }
 
-    function textListChanged(dontsave) {
-        visualModel.sourceModel = JS.taskList.itemList
-        if (!dontsave) todoTxtFile.save(JS.taskList.textList.join("\n"))
-    }
-
     property bool busy: todoTxtFile.busy || visualModel.busy
 
     FileIO {
@@ -110,7 +99,7 @@ ApplicationWindow {
 
         onReadSuccess:
             if (content) {
-                JS.taskList.setTextList(content)
+                visualModel.setFileContent(content)
             }
 
         onIoError: {
@@ -128,11 +117,11 @@ ApplicationWindow {
     TaskListModel {
         id: visualModel
 
-        onSourceModelChanged: {
-            visualModel.filters.projectList = JS.projects.getList()
-            visualModel.filters.contextList = JS.contexts.getList()
-            visualModel.resort()
-            //notificationList.publishNotifications()
+        onSaveList: todoTxtFile.save(JS.taskList.textList.join("\n"))
+
+        Component.onCompleted: {
+            JS.tools.projectColor = Theme.highlightColor
+            JS.tools.contextColor = Theme.secondaryHighlightColor
         }
 
         filters {

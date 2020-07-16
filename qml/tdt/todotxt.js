@@ -66,52 +66,30 @@ var tools = {
 }
 
 var taskList = {
-    busy: false,
     textList: [],
-    itemList: [],
     //set new text list and parse it
-    setTextList: function (newList) {
-        this.busy = true
-        this.textList = tools.splitLines(newList)
+    setTextList: function (newtext) {
+        this.textList = tools.splitLines(newtext)
         this.textList.sort()
-        this.populateItemList()
-        this.textListChanged(true)
-        this.busy = false
     },
     //return add task string to tasklist
-    populateItemList: function(){
-        this.itemList = []
+    itemList: function(){
+        var il = []
         this.textList.forEach(function(item, i){
-            //console.debug(item, i)
-            taskList.itemList.push(tools.lineToJSON(item, i))
+            il.push(tools.lineToJSON(item, i))
         })
+        return il
     },
     addTask: function(text){
-        this.busy = true
         this.textList.push(text)
         this.textList.sort()
-        this.populateItemList()
-        this.textListChanged()
-        this.busy = false
     },
     removeTask: function(index){
-        this.busy = true
         this.textList.splice(index, 1)
-        this.populateItemList()
-        this.textListChanged()
-        this.busy = false
     },
     modifyTask: function(index, feature, value) {
-        this.busy = true
-        //console.debug(index, feature, value)
         this.textList[index] = baseFeatures.modifyLine(this.textList[index], feature, value)
         this.textList.sort()
-        this.populateItemList()
-        this.textListChanged()
-        this.busy = false
-    },
-    textListChanged: function(save){
-        console.log("replace with actual save function", txt.toString())
     }
 }
 

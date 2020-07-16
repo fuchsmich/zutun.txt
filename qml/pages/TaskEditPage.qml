@@ -221,12 +221,12 @@ Dialog {
     }
 
     onAccepted: {
-        if (taskIndex > -1) JS.taskList.modifyTask(taskIndex, JS.baseFeatures.fullTxt, text)
+        if (taskIndex > -1) visualModel.setTaskProperty(taskIndex, JS.baseFeatures.fullTxt, text)
         if (taskIndex === -1) {
             if (settings.creationDateOnAddTask) {
                 text = JS.baseFeatures.modifyLine(text, JS.baseFeatures.creationDate, JS.tools.today())
             }
-            JS.taskList.addTask(text)
+            visualModel.addTask(text)
         }
     }
 }
