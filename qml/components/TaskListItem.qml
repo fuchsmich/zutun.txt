@@ -32,7 +32,7 @@ ListItem {
             Switch {
                 id: doneSw
                 height: parent.height
-                automaticCheck: true
+                //automaticCheck: true
                 checked: model.done
                 onClicked: {
                     visualModel.setTaskProperty(model.index, JS.baseFeatures.done, checked)

@@ -5,8 +5,6 @@ ListModel {
     onListChanged: parseLists()
     property var active: []
     onActiveChanged: parseLists()
-    property var visualModel
-    onVisualModelChanged: parseLists()
 
     function parseLists() {
         clear()
@@ -16,7 +14,7 @@ ListModel {
             json["active"] = (active.indexOf(list[i]) !== -1)
             json["visibleCount"] = visibleCount(list[i])
             json["totalCount"] = totalCount(list[i])
-            //console.log(JSON.stringify(json))
+            //console.debug(JSON.stringify(json))
             append(json)
         }
     }

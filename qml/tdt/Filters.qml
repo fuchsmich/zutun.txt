@@ -29,6 +29,7 @@ QtObject {
 
     //return the visibility of a task (object)
     function visibility(task) {
+        if (!task) return false
         if ((hideDone && task.done)) return false
 
         if (task.fullTxt.indexOf(searchString) === -1) return false

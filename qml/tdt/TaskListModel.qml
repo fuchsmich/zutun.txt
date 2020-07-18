@@ -19,34 +19,26 @@ ListModel {
     property string defaultPriority: "F"
 
     signal saveTodoTxtFile(string content)
-    function saveList() {
-        console.debug(textList.join("\n"))
-        saveTodoTxtFile(textList.join("\n"))
-    }
 
-    property var textList: {
-        var list = new Array(count)
-        for (var i = 0; i < count; i++ ) {
-            list[i] = get(i).fullTxt
-        }
-        list.sort() //TODO locale??
-        return list
-    }
-
-    property var visibleTextList: {
-        var list = []
-        for (var i = 0; i < count; i++ ) {
-            if (filters.visibility(get(i))) list.push(get(i).fullTxt)
-        }
-        list.sort() //TODO locale??
-        return list
-    }
+    property var textList: []
+    property var visibleTextList: []
 
     signal taskListDataChanged(string reason)
     onTaskListDataChanged: {
         resort(reason)
+
+        var tl = []; var vl = []
+        for (var i = 0; i < count; i++ ) {
+            var item = get(i)
+            tl.push(item.fullTxt)
+            if (filters.visibility(item)) vl.push(item.fullTxt)
+        }
+        tl.sort(); vl.sort()
+        textList = tl; visibleTextList = vl
         filters.projectList = JS.projects.getList(textList)
         filters.contextList = JS.contexts.getList(textList)
+
+        if (reason !== "read file") saveTodoTxtFile(textList.join("\n"))
     }
 
     function setFileContent(content) {
@@ -62,20 +54,17 @@ ListModel {
     function setTaskProperty(index, feature, value) {
         var txt = JS.baseFeatures.modifyLine(get(index).fullTxt, feature, value)
         set(index, JS.tools.lineToJSON(txt))
-        resort(index, "set task property")
-        saveList()
+        taskListDataChanged("set task property")
     }
 
     function removeTask(index) {
         remove(index)
-        saveList()
-        resort("remove task")
+        taskListDataChanged("remove task")
     }
 
     function addTask(text) {
         append(JS.tools.lineToJSON(text))
-        saveList()
-        resort("add task")
+        taskListDataChanged("add task")
     }
 
     /*
@@ -100,15 +89,15 @@ ListModel {
     function listModelSort(compareFunc) {
         var indexes = new Array(count)
         for (var i = 0; i < count; i++) indexes[i] = i
-        console.log(JSON.stringify(indexes))
+        //console.debug(JSON.stringify(indexes))
         indexes.sort(function (a, b) {
             return compareFunc(get(a), get(b))
         } )
-        console.log(JSON.stringify(indexes))
+        //console.debug(JSON.stringify(indexes))
         var sorted = 0
         while (sorted < indexes.length && sorted === indexes[sorted])
             sorted++
-        console.log(sorted)
+        //console.debug(sorted)
         if (sorted === indexes.length) return;
         for (i = sorted; i < indexes.length; i++) {
             var index = indexes[i]
@@ -128,6 +117,6 @@ ListModel {
     }
 
     onDataChanged: {
-        console.debug(topLeft)
+        //console.debug(topLeft, topLeft.model.get(topLeft.row).fullTxt, topLeft.column)
     }
 }

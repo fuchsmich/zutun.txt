@@ -43,20 +43,13 @@ Page {
 
         function numTasksHavingFilterItem(filterItem, countOnlyVisible) {
             var num = 0
-            JS.taskList.textList.forEach(function(task){
+            visualModel.textList.forEach(function(task){
                 if (task.indexOf(filterItem) > -1) {
                     if (countOnlyVisible && filters.visibility(task)) {
                         num++ //--> binding loop
                     } else num++
                 }
             })
-//            for (var i = 0; i < taskListModel.count; i++ ) {
-//                if (taskListModel.get(i).fullTxt.indexOf(filterItem) > -1) {
-//                    if (countOnlyVisible) {
-//                        if (filters.visibility(taskListModel.get(i))) num++ //--> binding loop
-//                    } else num++
-//                }
-//            }
             return num
         }
 
@@ -78,7 +71,6 @@ Page {
 
     FilterModel {
         id: filterModel
-        visualModel: visualModel1
     }
 
     Connections {

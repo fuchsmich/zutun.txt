@@ -193,7 +193,7 @@ function getMatchesList2(text, pattern) {
         if (matchesList.indexOf(match) === -1) matchesList.push(match)
     })
     matchesList.sort()
-    console.debug("matcheslist", matchesList)
+    //console.debug("matcheslist", matchesList)
     return matchesList;
 }
 

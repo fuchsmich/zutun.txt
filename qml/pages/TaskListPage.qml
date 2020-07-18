@@ -115,20 +115,6 @@ Page {
             //onResortItem: visualModel.resort("resort item %1".arg(model.index))
             onEditItem: lv.editTask(model.index, model.fullTxt)
         }
-
-
-
-//        property int lastIndex: -1
-//        onLastIndexChanged: console.debug("lastIndex", lastIndex)
-//        Connections {
-//            target: visualModel
-//            onAboutToClearModel: lv.lastIndex = lv.currentIndex //lv.indexAt(10,10)
-//        }
-//        Connections {
-//            target: visualModel
-//            onSortFinished: if (lv.lastIndex > -1)
-//                                lv.positionViewAtIndex(lv.lastIndex, ListView.Beginning)
-//        }
     }
 
     onStatusChanged: {

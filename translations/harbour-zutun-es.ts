@@ -219,12 +219,12 @@
     </message>
     <message>
         <source>Projects</source>
-        <extracomment>SortPage, group by: Projects</extracomment>
+        <extracomment>SortPage, group by: projects</extracomment>
         <translation type="unfinished">Proyectos</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <extracomment>SortPage, group by: Contexts</extracomment>
+        <extracomment>SortPage, group by: contexts</extracomment>
         <translation type="unfinished">Contextos</translation>
     </message>
     <message>
