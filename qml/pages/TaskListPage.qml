@@ -118,12 +118,17 @@ Page {
 
 
 
-        property int lastIndex: currentIndex
-        highlightFollowsCurrentItem: true
-        Connections {
-            target: visualModel
-            onSortFinished: lv.positionViewAtIndex(lv.lastIndex, ListView.Center)
-        }
+//        property int lastIndex: -1
+//        onLastIndexChanged: console.debug("lastIndex", lastIndex)
+//        Connections {
+//            target: visualModel
+//            onAboutToClearModel: lv.lastIndex = lv.currentIndex //lv.indexAt(10,10)
+//        }
+//        Connections {
+//            target: visualModel
+//            onSortFinished: if (lv.lastIndex > -1)
+//                                lv.positionViewAtIndex(lv.lastIndex, ListView.Beginning)
+//        }
     }
 
     onStatusChanged: {

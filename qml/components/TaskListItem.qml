@@ -12,13 +12,15 @@ ListItem {
 
     function remove() {
         remorseAction(qsTr("Deleting"), function() {
-            visualModel.removeTask(model.lineNumber)
+            visualModel.removeTask(model.index)
         }, 3000)
     }
 
     width: ListView.view.width
-    contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall)
+    contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall) * visible
     onClicked: editItem()
+    visible: visualModel.filters.visibility(model)
+    //Component.onCompleted: console.debug(model)
 
     Column {
         id: col
@@ -33,7 +35,7 @@ ListItem {
                 automaticCheck: true
                 checked: model.done
                 onClicked: {
-                    visualModel.setTaskProperty(model.lineNumber, JS.baseFeatures.done, checked)
+                    visualModel.setTaskProperty(model.index, JS.baseFeatures.done, checked)
                 }
             }
             Label {
@@ -102,14 +104,18 @@ ListItem {
             visible: !(model.done || model.priority === "A")
             text: qsTr("Priority Up")
             onClicked: {
-                visualModel.alterPriority(model.lineNumber, "inc")
+                var prio = visualModel.alterPriority(model.priority, true)
+                console.debug(prio)
+                visualModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
             }
         }
         MenuItem {
             visible: !(model.done || model.priority === "")
             text: qsTr("Priority Down")
             onClicked: {
-                visualModel.alterPriority(model.lineNumber, "dec")
+                var prio = visualModel.alterPriority(model.priority, false)
+                console.debug(prio)
+                visualModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
             }
         }
         MenuItem {

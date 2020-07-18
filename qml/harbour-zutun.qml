@@ -117,7 +117,7 @@ ApplicationWindow {
     TaskListModel {
         id: visualModel
 
-        onSaveList: todoTxtFile.save(JS.taskList.textList.join("\n"))
+        onSaveTodoTxtFile: todoTxtFile.save(content)
 
         Component.onCompleted: {
             JS.tools.projectColor = Theme.highlightColor
