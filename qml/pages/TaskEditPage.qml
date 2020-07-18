@@ -150,7 +150,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: JS.projects.getList()
+                    model: visualModel.filters.projectList
                     onListItemSelected: dialog.setText("project", text)
                 }
 
@@ -165,7 +165,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: JS.contexts.getList()
+                    model: visualModel.filters.contextList
                     onListItemSelected: dialog.setText("context", text)
                 }
 

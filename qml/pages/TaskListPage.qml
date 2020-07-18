@@ -74,7 +74,7 @@ Page {
                 truncationMode: TruncationMode.Fade
                 //: Information about filter settings at the top of main page
                 text: qsTr("Filter: %1").arg(visualModel.filters.text()) +
-                      " (%1/%2)".arg(visualModel.count).arg(visualModel.totalNumberOfTasks)
+                      " (%1/%2)".arg(visualModel.visibleTextList.length).arg(visualModel.count)
             }
         }
 
@@ -113,7 +113,7 @@ Page {
         model: visualModel
         delegate: TaskListItem {
             //onResortItem: visualModel.resort("resort item %1".arg(model.index))
-            onEditItem: lv.editTask(model.lineNumber, model.fullTxt)
+            onEditItem: lv.editTask(model.index, model.fullTxt)
         }
 
 

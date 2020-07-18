@@ -28,7 +28,7 @@ var tools = {
         return Qt.formatDate(new Date(),"yyyy-MM-dd")
     },
     //return JSON item for textline
-    lineToJSON: function(line, lineNumber) {
+    lineToJSON: function(line) {
         var item = baseFeatures.parseLine(line)
 
         var displayText = tools.linkify(item.subject)
@@ -45,10 +45,8 @@ var tools = {
         item["formattedSubject"] = displayText
 
         //item["section"] = ""
-        item["projects"] = projects.listLine(line).sort().join(", ")
-        item["contexts"] = contexts.listLine(line).sort().join(", ")
-
-        if (lineNumber !== undefined) item["lineNumber"] = lineNumber
+        item["projects"] = projects.getList(line).join(", ")
+        item["contexts"] = contexts.getList(line).join(", ")
 
         return item
     },
@@ -182,90 +180,36 @@ var baseFeatures = {
     }
 }
 
-/* get list of matches*/
-function getMatchesList(tasks, pattern) {
-    var task = ""
-    var list = []
-
-    for (var t = 0; t < tasks.length; t++) {
-        task = tasks[t];
-        var matches = task.match(pattern);
-
-        var match = "";
-        for (var i in matches) {
-            match = matches[i].trim();
-            if (typeof list[match] === 'undefined') list[match] = [];
-            if (list[match].indexOf(t) === -1) list[match].push(t);
-        }
-    }
-    list.sort();
-    return list;
-}
-
 function getMatchesList2(text, pattern) {
-    //console.log("isarray", Array.isArray(text))
-    //console.log("typeof", typeof text)
-    //console.log("matches", text.match(pattern))
-    //var taskList = []
-    var matchesList = []
-
     if (Array.isArray(text)) text = text.join("\n")
 
+    var matchesList = []
     var matches = text.match(pattern)
+    //console.debug("matches", matches)
 
-    var match = "";
-    for (var i in matches) {
-        match = matches[i].trim()
+    if (!matches) return []
+    matches.forEach(function(match){
+        match = match.trim()
         if (matchesList.indexOf(match) === -1) matchesList.push(match)
-    }
+    })
     matchesList.sort()
-    //console.log("matcheslist", matchesList)
+    console.debug("matcheslist", matchesList)
     return matchesList;
 }
 
-function getMatchesLine(task, pattern) {
-    var matches, trimmedMatches
-    matches = task.match(pattern)
-    if (matches)
-        trimmedMatches = matches.map(function (item, index, array) {
-            return item.trim()
-        })
-
-    return (trimmedMatches ? trimmedMatches : [])
-}
-
-
-
 var projects = {
     pattern: /(^|\s)(\+\S+)/g ,
-    /* get list of projects for tasklist*/
-    listAll: function(tasks) {
-        return getMatchesList(tasks, this.pattern)
-    },
-    /* get list of contexts for task*/
-    listLine: function(task) {
-        //console.log(getMatchesLine(task, projects.pattern))
-        return getMatchesLine(task, this.pattern)
-    },
     /* get list of contexts for text*/
-    getList: function() {
-        return getMatchesList2(taskList.textList, this.pattern)
+    getList: function(text) {
+        return getMatchesList2(text, this.pattern)
     }
 }
 
 var contexts = {
     pattern: /(^|\s)\@\S+/g ,
-    /* get list of contexts for tasklist*/
-    listAll: function(tasks) {
-        return getMatchesList(tasks, this.pattern);
-    },
-    /* get list of contexts for task*/
-    listLine: function(task) {
-        return getMatchesLine(task, this.pattern)
-    },
     /* get list of contexts for text*/
-    getList: function() {
-        return getMatchesList2(taskList.textList, this.pattern)
+    getList: function(text) {
+        return getMatchesList2(text, this.pattern)
     }
 }
 

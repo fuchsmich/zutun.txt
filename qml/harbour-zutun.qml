@@ -126,9 +126,7 @@ ApplicationWindow {
 
         filters {
             hideDone: filterSettings.hideDone
-            projectList: JS.projects.getList()
             projects: filterSettings.projects.value
-            contextList: JS.contexts.getList()
             contexts: filterSettings.contexts.value
         }
 

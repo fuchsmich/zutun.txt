@@ -15,7 +15,6 @@ QtObject {
     //group by: 0..none, 1..projects, 2..contexts
     property int groupBy: 0
     onGroupByChanged: {
-        console.log(groupBy)
         sortingChanged()
     }
 
@@ -73,20 +72,20 @@ QtObject {
              return []
          }
         ]
-        //: SortPage, group by: Projects
+        //: SortPage, group by: projects
         ,[qsTr("Projects"),
           function(left, right) {
               return (left.projects === right.projects ?
                           functionList[order][1](left, right) :
-                          (left.projects < right.projects) ^ !asc
+                          ((left.projects < right.projects) ^ asc) * -1
                       )
           }]
-        //: SortPage, group by: Contexts
+        //: SortPage, group by: contexts
         ,[qsTr("Contexts"),
           function(left, right) {
               return (left.contexts === right.contexts ?
                           functionList[order][1](left, right) :
-                          (left.contexts < right.contexts) ^ !asc
+                          ((left.contexts < right.contexts) ^ asc) * -1
                       )
           }]
     ]

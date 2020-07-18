@@ -23,16 +23,16 @@ ListModel {
 
     function visibleCount(filterItem) {
         var num = 0
-        for (var i = 0; i < visualModel.count; i++) {
-            if (visualModel.get(i).fullTxt.indexOf(filterItem) !== -1) num++
-        }
+        visualModel.visibleTextList.forEach(function(item){
+            if (item.indexOf(filterItem) !== -1) num++
+        })
         return num
     }
 
     function totalCount(filterItem) {
         var num = 0
-        visualModel.sourceModel.forEach(function(item){
-            if (item.fullTxt.indexOf(filterItem) !== -1) num++
+        visualModel.textList.forEach(function(item){
+            if (item.indexOf(filterItem) !== -1) num++
         })
         return num
     }

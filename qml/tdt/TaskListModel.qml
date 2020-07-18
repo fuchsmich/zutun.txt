@@ -20,12 +20,33 @@ ListModel {
 
     signal saveTodoTxtFile(string content)
     function saveList() {
+        console.debug(textList.join("\n"))
+        saveTodoTxtFile(textList.join("\n"))
+    }
+
+    property var textList: {
         var list = new Array(count)
         for (var i = 0; i < count; i++ ) {
             list[i] = get(i).fullTxt
         }
-        console.debug(list.join("\n"))
-        saveTodoTxtFile(list.join("\n"))
+        list.sort() //TODO locale??
+        return list
+    }
+
+    property var visibleTextList: {
+        var list = []
+        for (var i = 0; i < count; i++ ) {
+            if (filters.visibility(get(i))) list.push(get(i).fullTxt)
+        }
+        list.sort() //TODO locale??
+        return list
+    }
+
+    signal taskListDataChanged(string reason)
+    onTaskListDataChanged: {
+        resort(reason)
+        filters.projectList = JS.projects.getList(textList)
+        filters.contextList = JS.contexts.getList(textList)
     }
 
     function setFileContent(content) {
@@ -35,7 +56,7 @@ ListModel {
         json.forEach(function(item) {
             append(item)
         })
-        resort("file content")
+        taskListDataChanged("read file")
     }
 
     function setTaskProperty(index, feature, value) {
@@ -75,6 +96,7 @@ ListModel {
         return priority
     }
 
+    //sorts listmodel due to compareFunc
     function listModelSort(compareFunc) {
         var indexes = new Array(count)
         for (var i = 0; i < count; i++) indexes[i] = i
@@ -103,5 +125,9 @@ ListModel {
         listModelSort(sorting.lessThanFunc)
         sortFinished()
         status = 2
+    }
+
+    onDataChanged: {
+        console.debug(topLeft)
     }
 }
