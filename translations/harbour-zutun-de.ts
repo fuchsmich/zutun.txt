@@ -55,46 +55,33 @@
 <context>
     <name>FiltersPage</name>
     <message>
-        <source>No entries</source>
-        <extracomment>Placeholder if empty</extracomment>
-        <translation>Keine Einträge</translation>
-    </message>
-    <message>
         <source>Active Filters: %1</source>
         <extracomment>PageHeader for currently set filters</extracomment>
         <translation>Aktive Filter: %1</translation>
     </message>
     <message>
-        <source>Filter projects</source>
-        <extracomment>Title for project + filters</extracomment>
-        <translation>Projektfilter</translation>
+        <source>Clear Filters</source>
+        <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Clear project filters</source>
-        <extracomment>Button for clearing project + filters</extracomment>
-        <translation>Projektfilter löschen</translation>
-    </message>
-    <message>
-        <source>Filter contexts</source>
-        <extracomment>Title for context @ filters</extracomment>
-        <translation>Kontextfilter</translation>
-    </message>
-    <message>
-        <source>Clear context filters</source>
-        <extracomment>Button for clearing context @ filters</extracomment>
-        <translation>Kontextfilter löschen</translation>
-    </message>
-</context>
-<context>
-    <name>FiltersPage_copy</name>
     <message>
         <source>Filters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Active Filters: %1</source>
-        <extracomment>PageHeader for currently set filters</extracomment>
-        <translation type="unfinished">Aktive Filter: %1</translation>
+        <source>Projects</source>
+        <translation type="unfinished">Projekte</translation>
+    </message>
+    <message>
+        <source>Contexts</source>
+        <translation type="unfinished">Kontexte</translation>
+    </message>
+    <message>
+        <source>Other Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide complete tasks</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

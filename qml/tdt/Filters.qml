@@ -11,9 +11,11 @@ QtObject {
 
     property var text: {
         var a = []
+        //: text about active filters
         if (hideDone) a.push(qsTr("Hide complete"))
         var ftext = a.concat(projects.concat(contexts)).join(", ")
         if (ftext) return ftext
+        //: text about active filters
         else return qsTr("None")
     }
 

@@ -81,7 +81,7 @@ ListItem {
             Label {
                 id: dueLbl
                 visible: model.due !== ""
-                text: model.due
+                text: (Date.fromLocaleString(Qt.locale(), model.due, "yyyy-MM-dd")).toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
                 font.pixelSize: parent.fontSize
             }
             Label {
@@ -93,7 +93,7 @@ ListItem {
             Label {
                 //id: compLbl
                 visible: model.completionDate !== ""
-                text: model.completionDate
+                text: (Date.fromLocaleString(Qt.locale(), model.completionDate, "yyyy-MM-dd")).toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
                 font.pixelSize: parent.fontSize
             }
         }

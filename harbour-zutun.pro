@@ -10,8 +10,6 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/pages/FiltersPage.qml \
     qml/pages/TaskEditPage.qml \
     qml/pages/TaskListPage.qml \
-    qml/tdt/FilterModel.qml \
-    qml/tdt/FilterModel.qml \
     qml/tdt/Filters.qml \
     qml/tdt/Sorting.qml \
     qml/tdt/TaskDelegateModel.qml \

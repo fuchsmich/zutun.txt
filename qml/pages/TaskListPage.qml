@@ -121,7 +121,7 @@ Page {
         if (status === PageStatus.Active) {
             //todoTxtFile.read()
             /* attach filter page: */
-            pageStack.pushAttached(Qt.resolvedUrl("FiltersPage_copy.qml"))
+            pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"))
 //            if ( pageStack.depth === 1) {
 //                if (settings.projectFilterLeft) {
 //                    //                    console.log("replacing tl")
