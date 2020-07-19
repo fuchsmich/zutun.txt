@@ -7,6 +7,7 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/components/CoverListItem.qml \
     qml/components/Delegate.qml \
     qml/components/NotificationList.qml \
+    qml/pages/FiltersPage.qml \
     qml/pages/TaskEditPage.qml \
     qml/pages/TaskListPage.qml \
     qml/tdt/FilterModel.qml \
@@ -27,7 +28,6 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/pages/Settings.qml \
     qml/pages/TextSelect.qml \
     qml/pages/OtherFilters.qml \
-    qml/pages/FiltersPage.qml \
     qml/pages/About.qml \
     qml/pages/SortPage.qml \
     qml/pages/DateSelect.qml \

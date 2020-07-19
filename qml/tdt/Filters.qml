@@ -4,15 +4,15 @@ import "../tdt/todotxt.js" as JS
 QtObject {
     id: filters
     signal filtersChanged()
-    //onFiltersChanged: console.log("filters changed")
 
 
     property bool hideDone: true
     onHideDoneChanged: filtersChanged()
 
-    property var text: function () {
-        var ftext = [(hideDone ? qsTr("Hide complete"): undefined)].concat(
-                    projects.concat(contexts)).join(", ")
+    property var text: {
+        var a = []
+        if (hideDone) a.push(qsTr("Hide complete"))
+        var ftext = a.concat(projects.concat(contexts)).join(", ")
         if (ftext) return ftext
         else return qsTr("None")
     }

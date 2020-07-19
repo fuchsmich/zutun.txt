@@ -9,7 +9,7 @@ ListModel {
     property bool busy: status === 0 || status === 1
 
     property Filters filters: Filters {
-        onFiltersChanged: resort("filters")
+        onFiltersChanged: _setVisibleList()
     }
 
     property Sorting sorting: Sorting {
@@ -39,6 +39,16 @@ ListModel {
         filters.contextList = JS.contexts.getList(textList)
 
         if (reason !== "read file") saveTodoTxtFile(textList.join("\n"))
+    }
+
+    function _setVisibleList() {
+        var vl = []
+        for (var i = 0; i < count; i++ ) {
+            var item = get(i)
+            if (filters.visibility(item)) vl.push(item.fullTxt)
+        }
+        vl.sort()
+        visibleTextList = vl
     }
 
     function setFileContent(content) {

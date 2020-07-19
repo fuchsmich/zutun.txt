@@ -6,4 +6,5 @@ Label {
     text: model.formattedSubject
     truncationMode: TruncationMode.Elide
     font.strikeout: model.done
+    visible: visualModel.filters.visibility(model)
 }

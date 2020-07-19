@@ -73,7 +73,7 @@ Page {
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
                 //: Information about filter settings at the top of main page
-                text: qsTr("Filter: %1").arg(visualModel.filters.text()) +
+                text: qsTr("Filter: %1").arg(visualModel.filters.text) +
                       " (%1/%2)".arg(visualModel.visibleTextList.length).arg(visualModel.count)
             }
         }
@@ -92,7 +92,7 @@ Page {
         }
 
         ViewPlaceholder {
-            enabled: lv.count === 0
+            enabled: visualModel.visibleTextList.length === 0
             //: Placeholder if todo.txt file does not contain any unfinished tasks
             text: qsTr("No tasks")
             hintText: (todoTxtFile.hintText === ""? qsTr("Pull down to add task.")
@@ -121,22 +121,23 @@ Page {
         if (status === PageStatus.Active) {
             //todoTxtFile.read()
             /* attach filter page: */
-            if ( pageStack.depth === 1) {
-                if (settings.projectFilterLeft) {
-                    //                    console.log("replacing tl")
-                    pageStack.replace(Qt.resolvedUrl("FiltersPage.qml"),
-                                      {state: "projects", skip: true}, PageStackAction.Immediate);
-                } else {
-                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "projects"})
-                }
-            } else {
-                if (!settings.projectFilterLeft){
-                    pageStack.replaceAbove(null, Qt.resolvedUrl("TaskListPage.qml"),
-                                           {}, PageStackAction.Immediate);
-                } else {
-                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"})
-                }
-            }
+            pageStack.pushAttached(Qt.resolvedUrl("FiltersPage_copy.qml"))
+//            if ( pageStack.depth === 1) {
+//                if (settings.projectFilterLeft) {
+//                    //                    console.log("replacing tl")
+//                    pageStack.replace(Qt.resolvedUrl("FiltersPage.qml"),
+//                                      {state: "projects", skip: true}, PageStackAction.Immediate);
+//                } else {
+//                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage_copy.qml"))
+//                }
+//            } else {
+//                if (!settings.projectFilterLeft){
+//                    pageStack.replaceAbove(null, Qt.resolvedUrl("TaskListPage.qml"),
+//                                           {}, PageStackAction.Immediate);
+//                } else {
+//                    pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"), {state: "contexts"})
+//                }
+//            }
         }
     }
 }

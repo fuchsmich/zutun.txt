@@ -86,6 +86,18 @@
     </message>
 </context>
 <context>
+    <name>FiltersPage_copy</name>
+    <message>
+        <source>Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Filters: %1</source>
+        <extracomment>PageHeader for currently set filters</extracomment>
+        <translation type="unfinished">Aktive Filter: %1</translation>
+    </message>
+</context>
+<context>
     <name>OtherFilters</name>
     <message>
         <source>Filter contexts</source>

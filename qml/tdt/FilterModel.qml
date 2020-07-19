@@ -2,49 +2,43 @@ import QtQuick 2.0
 
 ListModel {
     property var list: []
-    onListChanged: parseLists()
+    onListChanged: parseList()
     property var active: []
-    onActiveChanged: parseLists()
+    onActiveChanged: parseList()
 
-    function parseLists() {
+    function parseList() {
         clear()
-        for (var i = 0; i < list.length; i++) {
+        list.forEach(function(item){
             var json = {}
-            json["name"] = list[i]
-            json["active"] = (active.indexOf(list[i]) !== -1)
-            json["visibleCount"] = visibleCount(list[i])
-            json["totalCount"] = totalCount(list[i])
-            //console.debug(JSON.stringify(json))
+            json["name"] = item
+            json["active"] = (active.indexOf(item) !== -1)
+            json["totalCount"] = visualModel.textList.join("\n").split(item).length - 1
+            json["visibleCount"] = visualModel.visibleTextList.join("\n").split(item).length - 1
             append(json)
+        })
+    }
+
+    function parseActive() {
+        for (var i = 0; i < count; i++){
+            setProperty(i, "active", (active.indexOf(get(i).name) !== -1))
         }
     }
 
-    function visibleCount(filterItem) {
-        var num = 0
-        visualModel.visibleTextList.forEach(function(item){
-            if (item.indexOf(filterItem) !== -1) num++
-        })
-        return num
-    }
-
-    function totalCount(filterItem) {
-        var num = 0
-        visualModel.textList.forEach(function(item){
-            if (item.indexOf(filterItem) !== -1) num++
-        })
-        return num
-    }
-
-    function toggleFilter(item) {
-        //console.log(item, active.indexOf(item))
-        if (active.indexOf(item) === -1) active.push(item)
-        else active.splice(active.indexOf(item), 1)
-        active.sort()
-        activeChanged()
+    function toggleFilter(index) {
+        var item = get(index)
+        var a = active
+        console.log(item.name, a.indexOf(item.name))
+        if (a.indexOf(item.name) === -1){
+            a.push(item.name)
+        }
+        else {
+            a.splice(a.indexOf(item.name), 1)
+        }
+        a.sort()
+        active = a
     }
 
     function clearFilter() {
         active = []
-        activeChanged()
     }
 }
