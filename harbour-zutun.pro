@@ -12,7 +12,6 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/pages/TaskListPage.qml \
     qml/tdt/Filters.qml \
     qml/tdt/Sorting.qml \
-    qml/tdt/TaskDelegateModel.qml \
     qml/tdt/TaskListModel.qml \
     translations/*.ts \
     rpm/harbour-zutun.spec \
