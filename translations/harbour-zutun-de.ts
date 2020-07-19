@@ -42,13 +42,26 @@
     </message>
 </context>
 <context>
+    <name>FileBrowser</name>
+    <message>
+        <source>Save here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No subdirectories</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Filters</name>
     <message>
         <source>Hide complete</source>
+        <extracomment>text about active filters</extracomment>
         <translation>Verberge fertige</translation>
     </message>
     <message>
         <source>None</source>
+        <extracomment>text about active filters</extracomment>
         <translation>Keine</translation>
     </message>
 </context>

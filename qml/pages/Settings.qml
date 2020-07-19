@@ -1,7 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
-//TODO Setting for automatically add creation date
+
+import "../components"
 
 Page {
     id: page
@@ -46,7 +47,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 //: Button for picking the file
                 text: qsTr("Choose file")
-                onClicked: pageStack.push(filePickerPage)
+                onClicked: pageStack.push(fileBrowser)
                 width: Theme.buttonWidthLarge
             }
 
@@ -62,6 +63,22 @@ Page {
                         //settings.todoTxtLocation = selectedContentProperties.filePath
                         todoTxtPath.text = selectedContentProperties.filePath
                     }
+                }
+            }
+
+            Component {
+                id: fileBrowser
+                FileBrowser {
+                    function dirname(path) {
+                         return path.match(/.*\//);
+                    }
+                    title: "todo.txt Location"
+                    //path: dirname(settings.todoTxtLocation)
+                    nameFilters: [ '*.txt']
+                    callback: function(path) {
+                        todoTxtPath.text = path
+                    }
+                    Component.onCompleted: console.debug(dirname(settings.todoTxtLocation))
                 }
             }
 
