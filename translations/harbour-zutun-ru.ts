@@ -45,10 +45,12 @@
     <name>Filters</name>
     <message>
         <source>None</source>
+        <extracomment>text about active filters</extracomment>
         <translation type="unfinished">Нет</translation>
     </message>
     <message>
         <source>Hide complete</source>
+        <extracomment>text about active filters</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -178,8 +180,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Toggle order (</source>
+        <source>Toggle order (%1)</source>
         <extracomment>Button to toggle order</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>desc</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

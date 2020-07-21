@@ -45,10 +45,12 @@
     <name>Filters</name>
     <message>
         <source>Hide complete</source>
+        <extracomment>text about active filters</extracomment>
         <translation>Verberge fertige</translation>
     </message>
     <message>
         <source>None</source>
+        <extracomment>text about active filters</extracomment>
         <translation>Keine</translation>
     </message>
 </context>
@@ -178,9 +180,17 @@
         <translation>Sortieren &amp; Gruppieren</translation>
     </message>
     <message>
-        <source>Toggle order (</source>
+        <source>Toggle order (%1)</source>
         <extracomment>Button to toggle order</extracomment>
-        <translation>Reihenfolge umschalten </translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished">aufsteigend</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">absteigend</translation>
     </message>
 </context>
 <context>

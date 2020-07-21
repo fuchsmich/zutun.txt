@@ -45,10 +45,12 @@
     <name>Filters</name>
     <message>
         <source>Hide complete</source>
+        <extracomment>text about active filters</extracomment>
         <translation type="unfinished">Hide complete</translation>
     </message>
     <message>
         <source>None</source>
+        <extracomment>text about active filters</extracomment>
         <translation type="unfinished">None</translation>
     </message>
 </context>
@@ -158,11 +160,6 @@
 <context>
     <name>SortPage</name>
     <message>
-        <source>Toggle order (</source>
-        <extracomment>Button to toggle order</extracomment>
-        <translation>Toggle order (</translation>
-    </message>
-    <message>
         <source>Reset</source>
         <extracomment>PullDown menu: reset SortPage</extracomment>
         <translation>Reset</translation>
@@ -181,6 +178,19 @@
         <source>Sorting &amp; Grouping</source>
         <extracomment>Title of SortPage</extracomment>
         <translation>Sorting &amp; Grouping</translation>
+    </message>
+    <message>
+        <source>Toggle order (%1)</source>
+        <extracomment>Button to toggle order</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished">asc</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">desc</translation>
     </message>
 </context>
 <context>

@@ -58,7 +58,7 @@ ApplicationWindow {
         ConfigurationGroup {
             id: sortSettings
             path: "sorting"
-            property bool asc: true
+            property bool asc: false
             property int order: 0
             property int grouping: 0
         }

@@ -12,7 +12,7 @@ Page {
     SilicaListView {
         id: lv
         anchors.fill: parent
-        spacing: Theme.paddingSmall
+        //spacing: Theme.paddingSmall
 
         VerticalScrollDecorator {}
         PullDownMenu {

@@ -45,10 +45,12 @@
     <name>Filters</name>
     <message>
         <source>None</source>
+        <extracomment>text about active filters</extracomment>
         <translation type="unfinished">Aucun</translation>
     </message>
     <message>
         <source>Hide complete</source>
+        <extracomment>text about active filters</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -178,9 +180,17 @@
         <translation>Trier &amp; Regrouper</translation>
     </message>
     <message>
-        <source>Toggle order (</source>
+        <source>Toggle order (%1)</source>
         <extracomment>Button to toggle order</extracomment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>asc</source>
+        <translation type="unfinished">tri croissant</translation>
+    </message>
+    <message>
+        <source>desc</source>
+        <translation type="unfinished">par ordre décroissant</translation>
     </message>
 </context>
 <context>

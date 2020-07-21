@@ -39,7 +39,8 @@ Page {
                 width: Theme.buttonWidthLarge
                 anchors.horizontalCenter: parent.horizontalCenter
                 //: Button to toggle order
-                text: qsTr("Toggle order (") + (sortSettings.asc ? "asc" : "desc") + ")"
+                text: qsTr("Toggle order (%1)").arg(
+                          sortSettings.asc ? qsTr("asc") : qsTr("desc"))
                 onClicked: sortSettings.asc = !sortSettings.asc
             }
 
@@ -84,5 +85,4 @@ Page {
             }
         }
     }
-
 }

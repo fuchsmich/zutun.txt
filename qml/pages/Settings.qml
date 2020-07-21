@@ -90,17 +90,17 @@ Page {
                     onClicked: fontSizeSlider.value = Theme.fontSizeMedium
                 }
             }
-            SectionHeader {
-                //: Section Header for the Filter section in Settings page
-                text: "Filter"
-            }
-            TextSwitch {
-                //: TextSwitch for project filter
-                text: qsTr("Attach project filter to the left of tasklist.")
-                //description: "Restart the app to take effect."
-                checked: settings.projectFilterLeft
-                onClicked: settings.projectFilterLeft = checked
-            }
+//            SectionHeader {
+//                //: Section Header for the Filter section in Settings page
+//                text: "Filter"
+//            }
+//            TextSwitch {
+//                //: TextSwitch for project filter
+//                text: qsTr("Attach project filter to the left of tasklist.")
+//                //description: "Restart the app to take effect."
+//                checked: settings.projectFilterLeft
+//                onClicked: settings.projectFilterLeft = checked
+//            }
             SectionHeader {
                 //: Section Header for the Edit section in Settings page
                 text: "Edit Task"

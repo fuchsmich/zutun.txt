@@ -1,6 +1,7 @@
 import QtQuick 2.6
 import QtQml.Models 2.2
 import Sailfish.Silica 1.0
+import QtQml 2.2
 
 import "../tdt/todotxt.js" as JS
 
@@ -17,7 +18,7 @@ ListItem {
     }
 
     width: ListView.view.width
-    contentHeight: Math.max(col.height, Theme.itemSizeExtraSmall) * visible
+    contentHeight: (Math.max(col.height, Theme.itemSizeExtraSmall) + Theme.paddingSmall) * visible
     onClicked: editItem()
     visible: visualModel.filters.visibility(model)
     //Component.onCompleted: console.debug(model)
@@ -81,7 +82,7 @@ ListItem {
             Label {
                 id: dueLbl
                 visible: model.due !== ""
-                text: (Date.fromLocaleString(Qt.locale(), model.due, "yyyy-MM-dd")).toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
+                text: JS.tools.isoToDate(model.due, Locale.NarrowFormat)
                 font.pixelSize: parent.fontSize
             }
             Label {
@@ -93,7 +94,7 @@ ListItem {
             Label {
                 //id: compLbl
                 visible: model.completionDate !== ""
-                text: (Date.fromLocaleString(Qt.locale(), model.completionDate, "yyyy-MM-dd")).toLocaleDateString(Qt.locale(), Locale.NarrowFormat)
+                text: JS.tools.isoToDate(model.completionDate, Locale.NarrowFormat)
                 font.pixelSize: parent.fontSize
             }
         }

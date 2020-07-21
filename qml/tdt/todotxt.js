@@ -24,8 +24,13 @@ var tools = {
             return '<a href="' + url + '">' + url + '</a>'
         });
     },
+    //get today's date in iso format
     today: function() {
         return Qt.formatDate(new Date(),"yyyy-MM-dd")
+    },
+    //iso formatted date to Date object
+    isoToDate: function(text, format) {
+        return (Date.fromLocaleString(Qt.locale("en_US"), text, "yyyy-MM-dd")).toLocaleDateString(Qt.locale(), format)
     },
     //return JSON item for textline
     lineToJSON: function(line) {
