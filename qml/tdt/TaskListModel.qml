@@ -112,9 +112,9 @@ ListModel {
         for (i = sorted; i < indexes.length; i++) {
             var index = indexes[i]
             move(index, count - 1, 1)
-            insert(index, { } ) //??
+            insert(index, { })
         }
-        remove(sorted, indexes.length - sorted);
+        remove(sorted, indexes.length - sorted)
     }
 
     signal sortFinished()

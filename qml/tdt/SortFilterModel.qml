@@ -33,14 +33,16 @@ DelegateModel {
         var sorted = 0
         while (sorted < indexes.length && sorted === indexes[sorted])
             sorted++
-        console.debug(sorted, indexes)
+        console.debug(sorted, indexes, items.count)
         if (sorted === indexes.length) return
         for (i = sorted; i < indexes.length; i++) {
             var index = indexes[i]
             items.move(index, items.count - 1, 1)
-            items.insert(index, { } ) //??
+            items.create(index, "items")
         }
-        items.remove(sorted, indexes.length - sorted)
+        persistedItems.setGroups(0, persistedItems.count, [])
+        //items.setGroups(sorted, indexes.length - sorted, [])
+        //items.remove(sorted, indexes.length - sorted)
     }
 
     items.includeByDefault: false
