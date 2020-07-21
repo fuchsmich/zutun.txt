@@ -5,15 +5,15 @@ import "todotxt.js" as JS
 ListModel {
 
     //0..init, 1..sorting, 2..ready
-    property int status: 0
-    property bool busy: status === 0 || status === 1
+    //property int status: 0
+    //property bool busy: status === 0 || status === 1
 
     property Filters filters: Filters {
         onFiltersChanged: _setVisibleList()
     }
 
     property Sorting sorting: Sorting {
-        onSortingChanged: resort("sorting")
+        //onSortingChanged: resort("sorting")
     }
 
     property string defaultPriority: "F"
@@ -25,7 +25,7 @@ ListModel {
 
     signal taskListDataChanged(string reason)
     onTaskListDataChanged: {
-        resort(reason)
+        //resort(reason)
 
         var tl = []; var vl = []
         for (var i = 0; i < count; i++ ) {
@@ -51,7 +51,7 @@ ListModel {
         visibleTextList = vl
     }
 
-    function setFileContent(content) {
+    function setFileContent(content) {        
         JS.taskList.setTextList(content)
         clear()
         var json = JS.taskList.itemList()
@@ -96,12 +96,12 @@ ListModel {
     }
 
     //sorts listmodel due to compareFunc
-    function listModelSort(compareFunc) {
+    function listModelSort(lessThanFunc) {
         var indexes = new Array(count)
         for (var i = 0; i < count; i++) indexes[i] = i
         //console.debug(JSON.stringify(indexes))
         indexes.sort(function (a, b) {
-            return compareFunc(get(a), get(b))
+            return (lessThanFunc(get(a), get(b)) ? -1 : 1)
         } )
         //console.debug(JSON.stringify(indexes))
         var sorted = 0
@@ -119,14 +119,14 @@ ListModel {
 
     signal sortFinished()
     function resort(reason) {
-        status = 1
+        //status = 1
         console.debug(reason)
-        //listModelSort(sorting.lessThanFunc)
+        listModelSort(sorting.lessThanFunc)
         sortFinished()
-        status = 2
+        //status = 2
     }
 
-    onDataChanged: {
-        //console.debug(topLeft, topLeft.model.get(topLeft.row).fullTxt, topLeft.column)
-    }
+//    onDataChanged: {
+//        //console.debug(topLeft, topLeft.model.get(topLeft.row).fullTxt, topLeft.column)
+//    }
 }

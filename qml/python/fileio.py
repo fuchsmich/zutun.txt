@@ -3,6 +3,7 @@
 
 import os
 import pyotherside
+import locale
 
 
 
@@ -16,6 +17,7 @@ def checkPath(path, perm):
     return True
 
 def checkFile(path, perm):
+    pyotherside.send('log',locale.getlocale())
     if checkPath(path, perm):
         pyotherside.send('pathExists', True)
     else:

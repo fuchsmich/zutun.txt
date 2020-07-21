@@ -34,29 +34,28 @@ QtObject {
         [qsTr("Natural"), function(left, right) {
             //TODO ä wird nach x gereiht! locale?
             return (left.fullTxt === right.fullTxt ?
-                        0 :
-                        ((left.fullTxt < right.fullTxt) ^ asc) * -1
+                        false : (left.fullTxt < right.fullTxt) ^ asc
                     )
         }],
         //: SortPage, sorting by: Creation date
         [qsTr("Creation Date"), function(left, right) {
             return (left.creationDate === right.creationDate ?
                         functionList[0][1](left, right) :
-                        ((left.creationDate < right.creationDate) ^ asc) * -1
+                        (left.creationDate < right.creationDate) ^ asc
                     )
         }],
         //: SortPage, sorting by: Due date
         [qsTr("Due date"), function(left, right) {
             return (left.due === right.due ?
                         functionList[0][1](left, right) :
-                        ((left.due < right.due) ^ asc) * -1
+                        (left.due < right.due) ^ asc
                     )
         }],
         //: SortPage, sorting by: Subject
         [qsTr("Subject"), function(left, right) {
             return (left.subject === right.subject ?
                         functionList[0][1](left, right) :
-                        ((left.subject < right.subject) ^ asc) *  -1
+                        (left.subject < right.subject) ^ asc
                     )
         }]
     ]

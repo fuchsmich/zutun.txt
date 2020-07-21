@@ -7,42 +7,30 @@ import "../tdt/todotxt.js" as JS
 DelegateModel {
     id: vm
 
-    property var compareFunc: function(a,b){return true}
+    property var lessThanFunc: function(a,b){return true}
     property var visibilityFunc: function(item){return true}
     onVisibilityFuncChanged: update()
 
 
     function update() {
-        for (var i = 0; i < allItems.count; i++) {
-            var item = allItems.get(i)
-            item.inItems = visibilityFunc(item.model)
-            //console.log(item.model.fullTxt, visibilityFunc(item.model), item.groups)
-        }
-        sort()
+        items.setGroups(0, items.count, ["unsorted"])
+        invisible.setGroups(0, invisible.count, ["unsorted"])
     }
 
-    //sort visible items
-    function sort(compareFunc) {
-        var indexes = []
-        for (var i = 0; i < items.count; i++) indexes[i] = i
-        console.debug(JSON.stringify(indexes))
-        indexes.sort(function (a, b) {
-            return vm.compareFunc(items.get(a).model, items.get(b).model)
-        } )
-        //console.debug(JSON.stringify(indexes))
-        var sorted = 0
-        while (sorted < indexes.length && sorted === indexes[sorted])
-            sorted++
-        console.debug(sorted, indexes, items.count)
-        if (sorted === indexes.length) return
-        for (i = sorted; i < indexes.length; i++) {
-            var index = indexes[i]
-            items.move(index, items.count - 1, 1)
-            items.create(index, "items")
+    function insertPosition(item) {
+        var lower = 0
+        var upper = items.count
+        while (lower < upper) {
+            var middle = Math.floor(lower + (upper - lower)/2)
+            var result =
+                    lessThanFunc(item.model, items.get(middle).model)
+            if (result) {
+                upper = middle
+            } else {
+                lower = middle + 1
+            }
         }
-        persistedItems.setGroups(0, persistedItems.count, [])
-        //items.setGroups(sorted, indexes.length - sorted, [])
-        //items.remove(sorted, indexes.length - sorted)
+        return lower
     }
 
     items.includeByDefault: false
@@ -50,10 +38,27 @@ DelegateModel {
 
     groups: [
         DelegateModelGroup {
-            id: allItems
-            name: "all"
+            id: unsorted
+            name: "unsorted"
             includeByDefault: true
-            onChanged: update()
+            onChanged: {
+                console.debug(count)
+                while (count > 0) {
+                    var item = get(0)
+                    console.debug(item.model.fullTxt, visibilityFunc(item.model))
+                    if (visibilityFunc(item.model)) {
+                        var index = insertPosition(item)
+                        item.groups = ["items"]
+                        items.move(item.itemsIndex, index)
+
+                    } else item.groups = ["invisible"]
+                }
+            }
+        },
+        DelegateModelGroup {
+            id: invisible
+            name: "invisible"
+            includeByDefault: false
         }
     ]
 }

@@ -10,6 +10,15 @@ ListItem {
     id: listItem
 
     signal editItem()
+    onEditItem: {
+        //ListView.view.editTaskc(model.index, model.fullTxt)
+        var editDialog = pageStack.push(Qt.resolvedUrl("../pages/TaskEditPage.qml"),
+                                        {taskIndex: model.index, text: model.fullTxt})
+        editDialog.accepted.connect(function() {
+            resortItem()
+        })
+    }
+    signal resortItem()
 
     function remove() {
         remorseAction(qsTr("Deleting"), function() {
@@ -37,6 +46,7 @@ ListItem {
                 checked: model.done
                 onClicked: {
                     taskListModel.setTaskProperty(model.index, JS.baseFeatures.done, checked)
+                    resortItem()
                 }
             }
             Label {
@@ -70,7 +80,7 @@ ListItem {
             Label {
                 id: cdLbl
                 visible: model.creationDate !== ""
-                text: model.creationDate
+                text: JS.tools.isoToDate(model.creationDate, Locale.NarrowFormat)
                 font.pixelSize: parent.fontSize
             }
             Label {
@@ -106,8 +116,8 @@ ListItem {
             text: qsTr("Priority Up")
             onClicked: {
                 var prio = taskListModel.alterPriority(model.priority, true)
-                console.debug(prio)
                 taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
+                resortItem()
             }
         }
         MenuItem {
@@ -117,6 +127,7 @@ ListItem {
                 var prio = taskListModel.alterPriority(model.priority, false)
                 console.debug(prio)
                 taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
+                resortItem()
             }
         }
         MenuItem {

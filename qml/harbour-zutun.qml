@@ -89,7 +89,7 @@ ApplicationWindow {
         app.activate()
     }
 
-    property bool busy: todoTxtFile.busy || taskListModel.busy
+    property bool busy: todoTxtFile.busy //|| taskListModel.busy
 
     FileIO {
         id: todoTxtFile
@@ -118,6 +118,7 @@ ApplicationWindow {
         id: visualModel
         model: taskListModel
         visibilityFunc: taskListModel.filters.visibility
+        lessThanFunc: taskListModel.sorting.lessThanFunc
         delegate: Delegate {}
     }
 
@@ -142,6 +143,7 @@ ApplicationWindow {
             asc: sortSettings.asc
             order: sortSettings.order
             groupBy: sortSettings.grouping
+            onSortingChanged: visualModel.update()
         }
     }
 }
