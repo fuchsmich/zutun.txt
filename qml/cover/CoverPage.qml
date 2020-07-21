@@ -18,9 +18,7 @@ CoverBackground {
         anchors.fill: parent
         anchors.margins: Theme.paddingMedium
         clip: true
-        //TODO use package??
-        model: taskListModel
-        delegate: CoverListItem { }
+        model: visualModel.parts.cover
     }
 
     CoverActionList {

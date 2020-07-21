@@ -111,10 +111,6 @@ Page {
         }
 
         model: visualModel.parts.list
-//        delegate: TaskListItem {
-//            //onResortItem: taskListModel.resort("resort item %1".arg(model.index))
-//            onEditItem: lv.editTask(model.index, model.fullTxt)
-//        }
     }
 
     onStatusChanged: {
