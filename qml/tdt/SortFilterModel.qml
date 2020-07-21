@@ -35,7 +35,6 @@ DelegateModel {
     }
 
     items.includeByDefault: false
-    persistedItems.onChanged: console.debug(persistedItems.count)
 
     groups: [
         DelegateModelGroup {
@@ -43,10 +42,10 @@ DelegateModel {
             name: "unsorted"
             includeByDefault: true
             onChanged: {
-                console.debug(count)
+                //console.debug(count)
                 while (count > 0) {
                     var item = get(0)
-                    console.debug(item.model.fullTxt, visibilityFunc(item.model))
+                    //console.debug(item.model.fullTxt, visibilityFunc(item.model))
                     if (visibilityFunc(item.model)) {
                         var index = insertPosition(item)
                         item.groups = ["items"]

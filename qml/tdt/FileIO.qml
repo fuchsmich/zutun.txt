@@ -18,6 +18,8 @@ Python {
     property bool readable: false
     property bool writeable: false
 
+    property var lastChange
+
     /* 0..init
     1..ready
     2..reading
@@ -34,11 +36,12 @@ Python {
         if (status === 1) {
             status = 2
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
-            py.call('fileio.read', [pyPath], function(result){
+            py.call('fileio.read', [pyPath, lastChange], function(result){
                 //console.log("read result:", result);
                 content = result
                 py.readSuccess(result)
-            });
+                lastChange = new Date()
+            })
             console.log("read", "path:", path)
             status = 1
         }
@@ -51,6 +54,7 @@ Python {
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.write', [pyPath, content], function(){ })
             console.log("saved", "path:", path)
+            lastChange = new Date()
             status = 1
         }
     }

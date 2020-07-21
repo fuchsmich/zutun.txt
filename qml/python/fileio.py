@@ -48,9 +48,12 @@ def checkFile(path, perm):
             return False
     return True
 
-def read(path):
+def read(path, lastChange):
     if (checkFile(path, "r")):
         #pyotherside.send('log', "File for read checked")
+        if (lastChange and os.path.getmtime(path) <= lastChange):
+            pyotherside.send('log', os.path.getmtime(path))
+            return ""
         with open(path, 'rt') as f:
             read_data = f.read()
             #f.close()

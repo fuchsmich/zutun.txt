@@ -140,9 +140,10 @@ ApplicationWindow {
             asc: sortSettings.asc
             order: sortSettings.order
             groupBy: sortSettings.grouping
-            //onSortingChanged: visualModel.update()
+            onSortingChanged: visualModel.update()
         }
     }
+
 }
 
 
