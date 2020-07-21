@@ -121,7 +121,7 @@ ListModel {
     function resort(reason) {
         status = 1
         console.debug(reason)
-        listModelSort(sorting.lessThanFunc)
+        //listModelSort(sorting.lessThanFunc)
         sortFinished()
         status = 2
     }

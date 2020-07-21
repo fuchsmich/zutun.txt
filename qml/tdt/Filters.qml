@@ -30,7 +30,7 @@ QtObject {
     onSearchStringChanged: filtersChanged()
 
     //return the visibility of a task (object)
-    function visibility(task) {
+    property var visibility: function(task) {
         if (!task) return false
         if ((hideDone && task.done)) return false
 

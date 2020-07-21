@@ -12,15 +12,16 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/pages/TaskListPage.qml \
     qml/tdt/Filters.qml \
     qml/tdt/Sorting.qml \
+    qml/tdt/SortFilterModel.qml \
     qml/tdt/TaskListModel.qml \
+    qml/tdt/todotxt.js \
+    qml/tdt/FileIO.qml \
     translations/*.ts \
     rpm/harbour-zutun.spec \
     rpm/harbour-zutun.yaml \
     rpm/harbour-zutun.changes \
     qml/cover/CoverPage.qml \
     qml/cover/zutun.png \
-    qml/tdt/todotxt.js \
-    qml/tdt/FileIO.qml \
     qml/components/Notification.qml \
     qml/pages/Settings.qml \
     qml/pages/TextSelect.qml \

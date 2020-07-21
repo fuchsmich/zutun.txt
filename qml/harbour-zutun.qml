@@ -114,9 +114,10 @@ ApplicationWindow {
         ids: settings.notificationIDs.value
     }
 
-    TaskListVisualModel {
+    SortFilterModel {
         id: visualModel
         model: taskListModel
+        visibilityFunc: taskListModel.filters.visibility
         delegate: Delegate {}
     }
 
@@ -134,6 +135,7 @@ ApplicationWindow {
             hideDone: filterSettings.hideDone
             projects: filterSettings.projects.value
             contexts: filterSettings.contexts.value
+            onFiltersChanged: visualModel.update()
         }
 
         sorting {
