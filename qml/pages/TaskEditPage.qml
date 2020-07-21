@@ -150,7 +150,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: visualModel.filters.projectList
+                    model: taskListModel.filters.projectList
                     onListItemSelected: dialog.setText("project", text)
                 }
 
@@ -165,7 +165,7 @@ Dialog {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    model: visualModel.filters.contextList
+                    model: taskListModel.filters.contextList
                     onListItemSelected: dialog.setText("context", text)
                 }
 
@@ -221,12 +221,12 @@ Dialog {
     }
 
     onAccepted: {
-        if (taskIndex > -1) visualModel.setTaskProperty(taskIndex, JS.baseFeatures.fullTxt, text)
+        if (taskIndex > -1) taskListModel.setTaskProperty(taskIndex, JS.baseFeatures.fullTxt, text)
         if (taskIndex === -1) {
             if (settings.creationDateOnAddTask) {
                 text = JS.baseFeatures.modifyLine(text, JS.baseFeatures.creationDate, JS.tools.today())
             }
-            visualModel.addTask(text)
+            taskListModel.addTask(text)
         }
     }
 }

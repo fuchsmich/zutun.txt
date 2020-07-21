@@ -56,7 +56,7 @@ Page {
                 id: pgh
                 //: PageHeader for tasklist main page
                 title: qsTr("Tasklist")
-                description: visualModel.sorting.groupText + visualModel.sorting.sortText
+                description: taskListModel.sorting.groupText + taskListModel.sorting.sortText
             }
             Label { /*from PageHeaderDescription.qml */
                 id: flbl
@@ -73,8 +73,8 @@ Page {
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
                 //: Information about filter settings at the top of main page
-                text: qsTr("Filter: %1").arg(visualModel.filters.text) +
-                      " (%1/%2)".arg(visualModel.visibleTextList.length).arg(visualModel.count)
+                text: qsTr("Filter: %1").arg(taskListModel.filters.text) +
+                      " (%1/%2)".arg(taskListModel.visibleTextList.length).arg(taskListModel.count)
             }
         }
 
@@ -84,7 +84,7 @@ Page {
         }
 
         section {
-            property: visualModel.sorting.sectionProperty//"section"
+            property: taskListModel.sorting.sectionProperty//"section"
             criteria: ViewSection.FullString
             delegate: SectionHeader {
                 text: section //"Section: %1".arg(section)
@@ -92,7 +92,7 @@ Page {
         }
 
         ViewPlaceholder {
-            enabled: visualModel.visibleTextList.length === 0
+            enabled: taskListModel.visibleTextList.length === 0
             //: Placeholder if todo.txt file does not contain any unfinished tasks
             text: qsTr("No tasks")
             hintText: (todoTxtFile.hintText === ""? qsTr("Pull down to add task.")
@@ -110,11 +110,11 @@ Page {
             pageStack.push(Qt.resolvedUrl("TaskEditPage.qml"), {taskIndex: index, text: taskTxt});
         }
 
-        model: visualModel
-        delegate: TaskListItem {
-            //onResortItem: visualModel.resort("resort item %1".arg(model.index))
-            onEditItem: lv.editTask(model.index, model.fullTxt)
-        }
+        model: visualModel.parts.list
+//        delegate: TaskListItem {
+//            //onResortItem: taskListModel.resort("resort item %1".arg(model.index))
+//            onEditItem: lv.editTask(model.index, model.fullTxt)
+//        }
     }
 
     onStatusChanged: {

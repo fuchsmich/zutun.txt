@@ -89,7 +89,7 @@ ApplicationWindow {
         app.activate()
     }
 
-    property bool busy: todoTxtFile.busy || visualModel.busy
+    property bool busy: todoTxtFile.busy || taskListModel.busy
 
     FileIO {
         id: todoTxtFile
@@ -99,7 +99,7 @@ ApplicationWindow {
 
         onReadSuccess:
             if (content) {
-                visualModel.setFileContent(content)
+                taskListModel.setFileContent(content)
             }
 
         onIoError: {
@@ -114,8 +114,14 @@ ApplicationWindow {
         ids: settings.notificationIDs.value
     }
 
-    TaskListModel {
+    TaskListVisualModel {
         id: visualModel
+        model: taskListModel
+        delegate: Delegate {}
+    }
+
+    TaskListModel {
+        id: taskListModel
 
         onSaveTodoTxtFile: todoTxtFile.save(content)
 

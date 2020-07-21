@@ -137,11 +137,6 @@
         <translation>Filer</translation>
     </message>
     <message>
-        <source>Attach project filter to the left of tasklist.</source>
-        <extracomment>TextSwitch for project filter</extracomment>
-        <translation>Bifoga projektfilter till vänster om uppgiftslistan.</translation>
-    </message>
-    <message>
         <source>Choose file</source>
         <extracomment>Button for picking the file</extracomment>
         <translation type="unfinished"></translation>

@@ -5,7 +5,7 @@ Package {
     id: pkg
     TaskListItem {
         Package.name: "list"
-        onResortItem: pkg.DelegateModel.groups = "unsorted"
+        //onResortItem: pkg.DelegateModel.groups = "unsorted"
     }
     CoverListItem { Package.name: "cover" }
 }

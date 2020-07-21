@@ -13,14 +13,14 @@ ListItem {
 
     function remove() {
         remorseAction(qsTr("Deleting"), function() {
-            visualModel.removeTask(model.index)
+            taskListModel.removeTask(model.index)
         }, 3000)
     }
 
     width: ListView.view.width
-    contentHeight: (Math.max(col.height, Theme.itemSizeExtraSmall) + Theme.paddingSmall) * visible
+    contentHeight: (Math.max(col.height, Theme.itemSizeExtraSmall) + Theme.paddingSmall)// * visible
     onClicked: editItem()
-    visible: visualModel.filters.visibility(model)
+    //visible: taskListModel.filters.visibility(model)
     //Component.onCompleted: console.debug(model)
 
     Column {
@@ -36,7 +36,7 @@ ListItem {
                 //automaticCheck: true
                 checked: model.done
                 onClicked: {
-                    visualModel.setTaskProperty(model.index, JS.baseFeatures.done, checked)
+                    taskListModel.setTaskProperty(model.index, JS.baseFeatures.done, checked)
                 }
             }
             Label {
@@ -105,18 +105,18 @@ ListItem {
             visible: !(model.done || model.priority === "A")
             text: qsTr("Priority Up")
             onClicked: {
-                var prio = visualModel.alterPriority(model.priority, true)
+                var prio = taskListModel.alterPriority(model.priority, true)
                 console.debug(prio)
-                visualModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
+                taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
             }
         }
         MenuItem {
             visible: !(model.done || model.priority === "")
             text: qsTr("Priority Down")
             onClicked: {
-                var prio = visualModel.alterPriority(model.priority, false)
+                var prio = taskListModel.alterPriority(model.priority, false)
                 console.debug(prio)
-                visualModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
+                taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
             }
         }
         MenuItem {

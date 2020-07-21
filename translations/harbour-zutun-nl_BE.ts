@@ -137,11 +137,6 @@
         <translation>Bestanden</translation>
     </message>
     <message>
-        <source>Attach project filter to the left of tasklist.</source>
-        <extracomment>TextSwitch for project filter</extracomment>
-        <translation>Voeg projectfilter links aan de takenlijst toe.</translation>
-    </message>
-    <message>
         <source>Choose file</source>
         <extracomment>Button for picking the file</extracomment>
         <translation type="unfinished"></translation>

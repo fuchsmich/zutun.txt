@@ -137,11 +137,6 @@
         <translation>Dateien</translation>
     </message>
     <message>
-        <source>Attach project filter to the left of tasklist.</source>
-        <extracomment>TextSwitch for project filter</extracomment>
-        <translation>Projektfilter links der Aufgabenliste plazieren.</translation>
-    </message>
-    <message>
         <source>Choose file</source>
         <extracomment>Button for picking the file</extracomment>
         <translation>Datei wählen</translation>

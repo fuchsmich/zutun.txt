@@ -13,7 +13,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Clear Filters")
-                onClicked: visualModel.filters.clearFilters()
+                onClicked: taskListModel.filters.clearFilters()
             }
         }
 
@@ -27,7 +27,7 @@ Page {
             PageHeader {
                 title: qsTr("Filters")
                 //: PageHeader for currently set filters
-                description: qsTr("Active Filters: %1").arg(visualModel.filters.text)
+                description: qsTr("Active Filters: %1").arg(taskListModel.filters.text)
             }
 
             SectionHeader {
@@ -35,16 +35,16 @@ Page {
             }
 
             Repeater {
-                model: visualModel.filters.projectList
+                model: taskListModel.filters.projectList
                 delegate: TextSwitch {
                     x: Theme.horizontalPageMargin
                     text: modelData + " (%1/%2)".arg(
-                              visualModel.visibleTextList.join("\n").split(modelData).length - 1).arg(
-                              visualModel.textList.join("\n").split(modelData).length - 1)
+                              taskListModel.visibleTextList.join("\n").split(modelData).length - 1).arg(
+                              taskListModel.textList.join("\n").split(modelData).length - 1)
                     automaticCheck: false
-                    checked: visualModel.filters.projects.indexOf(modelData) !== -1
+                    checked: taskListModel.filters.projects.indexOf(modelData) !== -1
                     onClicked: {
-                        var a = visualModel.filters.projects
+                        var a = taskListModel.filters.projects
                         if (a.indexOf(modelData) === -1) {
                             a.push(modelData)
                             a.sort()
@@ -61,16 +61,16 @@ Page {
             }
 
             Repeater {
-                model: visualModel.filters.contextList
+                model: taskListModel.filters.contextList
                 delegate: TextSwitch {
                     x: Theme.horizontalPageMargin
                     text: modelData + " (%1/%2)".arg(
-                              visualModel.visibleTextList.join("\n").split(modelData).length - 1).arg(
-                              visualModel.textList.join("\n").split(modelData).length - 1)
+                              taskListModel.visibleTextList.join("\n").split(modelData).length - 1).arg(
+                              taskListModel.textList.join("\n").split(modelData).length - 1)
                     automaticCheck: false
-                    checked: visualModel.filters.contexts.indexOf(modelData) !== -1
+                    checked: taskListModel.filters.contexts.indexOf(modelData) !== -1
                     onClicked: {
-                        var a = visualModel.filters.contexts
+                        var a = taskListModel.filters.contexts
                         if (a.indexOf(modelData) === -1) {
                             a.push(modelData)
                             a.sort()

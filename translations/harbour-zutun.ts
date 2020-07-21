@@ -142,11 +142,6 @@
         <translation>Files</translation>
     </message>
     <message>
-        <source>Attach project filter to the left of tasklist.</source>
-        <extracomment>TextSwitch for project filter</extracomment>
-        <translation>Attach project filter to the left of tasklist.</translation>
-    </message>
-    <message>
         <source>Fontsize in Tasklist</source>
         <extracomment>Slide control for font size</extracomment>
         <translation type="unfinished"></translation>

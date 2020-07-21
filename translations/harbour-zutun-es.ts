@@ -137,11 +137,6 @@
         <translation>Archivos</translation>
     </message>
     <message>
-        <source>Attach project filter to the left of tasklist.</source>
-        <extracomment>TextSwitch for project filter</extracomment>
-        <translation>Añadir filtro de proyecto a la izquierda de la lista de tareas.</translation>
-    </message>
-    <message>
         <source>Choose file</source>
         <extracomment>Button for picking the file</extracomment>
         <translation type="unfinished"></translation>
