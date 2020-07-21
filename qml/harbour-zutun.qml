@@ -40,7 +40,6 @@ ApplicationWindow {
             id: filterSettings
             path: "/filters"
             property bool hideDone: true
-            //TODO filters are not stored (anymore?)
             property ConfigurationValue projects: ConfigurationValue {
                 key: filterSettings.path + "/projects"
                 defaultValue: []
@@ -49,10 +48,6 @@ ApplicationWindow {
                 key: filterSettings.path + "/contexts"
                 defaultValue: []
             }
-
-            //store as strings??
-            property string projectsActive: ""
-            property string contextsActive: ""
         }
 
         ConfigurationGroup {
@@ -112,6 +107,7 @@ ApplicationWindow {
     NotificationList {
         id: notificationList
         ids: settings.notificationIDs.value
+        taskList: taskListModel
     }
 
     SortFilterModel {
@@ -126,6 +122,7 @@ ApplicationWindow {
         id: taskListModel
 
         onSaveTodoTxtFile: todoTxtFile.save(content)
+        onTaskListDataChanged: notificationList.publishNotifications()
 
         Component.onCompleted: {
             JS.tools.projectColor = Theme.highlightColor
@@ -143,7 +140,7 @@ ApplicationWindow {
             asc: sortSettings.asc
             order: sortSettings.order
             groupBy: sortSettings.grouping
-            onSortingChanged: visualModel.update()
+            //onSortingChanged: visualModel.update()
         }
     }
 }

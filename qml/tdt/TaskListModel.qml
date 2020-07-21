@@ -13,7 +13,6 @@ ListModel {
     }
 
     property Sorting sorting: Sorting {
-        //onSortingChanged: resort("sorting")
     }
 
     property string defaultPriority: "F"
@@ -25,8 +24,6 @@ ListModel {
 
     signal taskListDataChanged(string reason)
     onTaskListDataChanged: {
-        //resort(reason)
-
         var tl = []; var vl = []
         for (var i = 0; i < count; i++ ) {
             var item = get(i)

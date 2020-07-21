@@ -8,6 +8,7 @@ DelegateModel {
     id: vm
 
     property var lessThanFunc: function(a,b){return true}
+    onLessThanFuncChanged: update()
     property var visibilityFunc: function(item){return true}
     onVisibilityFuncChanged: update()
 

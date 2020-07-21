@@ -5,21 +5,22 @@ import "../tdt/todotxt.js" as JS
 Item {
     id: notificationList
     property var ids: []
-    //property var taskList
+    property var taskList: ListModel {}
 
-    function publishNotifications(taskList) {
+    function publishNotifications() {
         console.log("notificationList")
         removeAll()
-        JS.taskList.itemList.forEach(function(task){
+        for (var i = 0; i < taskList.count; i++){
+            var task = taskList.get(i)
             if (task.due !== "" && task.done === false) {
                 var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
-                var notification = notificationComp.createObject(null, {task: task}) //parent needed?
+                var notification = notificationComp.createObject(null , {task: task}) //parent needed?
                 notification.publish()
                 settings.notificationIDs.value.push(notification.replacesId)
                 //console.log(notification.replacesId, notifications.idList);
             }
-        })
+        }
     }
 
     function removeAll() {
