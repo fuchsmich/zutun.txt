@@ -146,7 +146,7 @@ ApplicationWindow {
 
     onActiveFocusChanged: {
         if (activeFocus) {
-            console.log("app", activeFocus)
+            //console.log("app", activeFocus)
             todoTxtFile.read()
         }
     }

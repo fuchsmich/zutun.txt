@@ -3,6 +3,7 @@
 # Separate entries from eachother with a blank line.
 
 * Tue Apr 02 2019 Michael Fuchs <michfu@gmx.at> 1.8
+- filter with search field
 - read file only if there are changes
 - option to autoadd creationDate on task creation
 - locale formatted dates for due and completion dates

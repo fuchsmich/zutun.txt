@@ -91,15 +91,6 @@ Page {
                 onHideClicked: settings.showSearch = ! searchField.active
                 onTextChanged: {
                     taskListModel.filters.searchString = text
-                    //if (active) focusTimer.start()
-                }
-                Timer {
-                    id: focusTimer
-                    interval: 300
-                    repeat: false
-                    onTriggered: {
-                        searchField.forceActiveFocus()
-                    }
                 }
             }
 
