@@ -14,8 +14,8 @@ DelegateModel {
 
 
     function update() {
-        items.setGroups(0, items.count, ["unsorted"])
-        invisible.setGroups(0, invisible.count, ["unsorted"])
+        if (items.count > 0) items.setGroups(0, items.count, ["unsorted"])
+        if (invisible.count > 0) invisible.setGroups(0, invisible.count, ["unsorted"])
     }
 
     function insertPosition(item) {
