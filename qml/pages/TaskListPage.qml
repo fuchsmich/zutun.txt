@@ -8,12 +8,12 @@ import "../tdt/todotxt.js" as JS
 
 Page {
     id: page
+    property bool keepSearchFieldFocus
 
     SilicaListView {
         id: lv
         anchors.fill: parent
         //spacing: Theme.paddingSmall
-
         VerticalScrollDecorator {}
         PullDownMenu {
             MenuItem {
@@ -51,7 +51,7 @@ Page {
 
         header: Item {
             width: page.width
-            height: pgh.height + flbl.height + searchFld.height
+            height: pgh.height + flbl.height + searchField.height
 //            Behavior on height {
 //                NumberAnimation { duration: 100 }
 //            }
@@ -72,7 +72,7 @@ Page {
                 }
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
-                opacity: 0.6
+                opacity: 0.8
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
                 //: Information about filter settings at the top of main page
@@ -80,7 +80,7 @@ Page {
                       " (%1/%2)".arg(taskListModel.visibleTextList.length).arg(taskListModel.count)
             }
             SearchField {
-                id: searchFld
+                id: searchField
                 anchors {
                     top: flbl.bottom
                     left: parent.left
@@ -88,21 +88,32 @@ Page {
                 }
                 canHide: true
                 active: settings.showSearch
-                onHideClicked: settings.showSearch = ! searchFld.active
-                onTextChanged: taskListModel.filters.searchString = text
+                onHideClicked: settings.showSearch = ! searchField.active
+                onTextChanged: {
+                    taskListModel.filters.searchString = text
+                    //if (active) focusTimer.start()
+                }
+                Timer {
+                    id: focusTimer
+                    interval: 300
+                    repeat: false
+                    onTriggered: {
+                        searchField.forceActiveFocus()
+                    }
+                }
             }
 
             IconButton {
                 anchors {
                     bottom: flbl.bottom
                     left: parent.left
-                    leftMargin: searchFld.textLeftMargin - width - Theme.paddingSmall
+                    leftMargin: searchField.textLeftMargin - width - Theme.paddingSmall
                 }
-                //x: searchFld.textLeftMargin - width - Theme.paddingSmall
+                //x: searchField.textLeftMargin - width - Theme.paddingSmall
                 icon.source: "image://theme/icon-m-search"
-                opacity: 1*!searchFld.active
-                onClicked: settings.showSearch = ! searchFld.active
-                NumberAnimation on opacity { easing.type: Easing.InOutQuad; duration: searchFld.transitionDuration }
+                opacity: 1*!searchField.active
+                onClicked: settings.showSearch = ! searchField.active
+                NumberAnimation on opacity { easing.type: Easing.InOutQuad; duration: searchField.transitionDuration }
              }
         }
 
@@ -139,6 +150,13 @@ Page {
         }
 
         model: visualModel.parts.list
+
+        Component.onCompleted: {
+            if (keepSearchFieldFocus) {
+                searchField.forceActiveFocus()
+            }
+            keepSearchFieldFocus = false
+        }
     }
 
     onStatusChanged: {
