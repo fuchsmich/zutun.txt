@@ -15,6 +15,7 @@ Page {
         anchors.fill: parent
         //spacing: Theme.paddingSmall
         VerticalScrollDecorator {}
+        currentIndex: -1 // otherwise currentItem will steal focus
         PullDownMenu {
             MenuItem {
                 //: PullDown menu: go to settings page
@@ -52,9 +53,6 @@ Page {
         header: Item {
             width: page.width
             height: pgh.height + flbl.height + searchField.height
-//            Behavior on height {
-//                NumberAnimation { duration: 100 }
-//            }
             PageHeader {
                 id: pgh
                 //: PageHeader for tasklist main page
@@ -89,8 +87,13 @@ Page {
                 canHide: true
                 active: settings.showSearch
                 onHideClicked: settings.showSearch = ! searchField.active
-                onTextChanged: {
-                    taskListModel.filters.searchString = text
+//                onTextChanged: {
+//                    taskListModel.filters.searchString = text
+//                }
+                Binding {
+                    target: taskListModel.filters
+                    property: "searchString"
+                    value: searchField.text.toLowerCase().trim()
                 }
             }
 
@@ -103,7 +106,10 @@ Page {
                 //x: searchField.textLeftMargin - width - Theme.paddingSmall
                 icon.source: "image://theme/icon-m-search"
                 opacity: 1*!searchField.active
-                onClicked: settings.showSearch = ! searchField.active
+                onClicked: {
+                    settings.showSearch = ! searchField.active
+                    keepSearchFieldFocus = true
+                }
                 NumberAnimation on opacity { easing.type: Easing.InOutQuad; duration: searchField.transitionDuration }
              }
         }
