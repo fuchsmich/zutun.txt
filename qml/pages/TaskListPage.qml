@@ -51,7 +51,7 @@ Page {
 
         header: Item {
             width: page.width
-            height: pgh.height + flbl.height
+            height: pgh.height + flbl.height + searchLoader.height
             PageHeader {
                 id: pgh
                 //: PageHeader for tasklist main page
@@ -64,7 +64,7 @@ Page {
                 anchors {
                     top: pgh.bottom
                     topMargin: -Theme.paddingMedium
-                    right: pgh.right
+                    right: parent.right
                     rightMargin: pgh.rightMargin
                 }
                 font.pixelSize: Theme.fontSizeSmall
@@ -76,6 +76,40 @@ Page {
                 text: qsTr("Filter: %1").arg(taskListModel.filters.text) +
                       " (%1/%2)".arg(taskListModel.visibleTextList.length).arg(taskListModel.count)
             }
+            Component {
+                id: searchComp
+                SearchField {
+                    id: searchFld
+                    //visible: true
+//                    anchors {
+//                        top: flbl.bottom
+//                        //topMargin: -Theme.paddingMedium
+//                        left: parent.left
+//                        right: parent.right
+//                        //rightMargin: pgh.rightMargin
+//                    }
+                }
+            }
+
+            Loader {
+                id: searchLoader
+                anchors {
+                    top: flbl.bottom
+                    left: parent.left
+                    right: parent.right
+                }
+                //sourceComponent: searchComp
+            }
+
+            IconButton {
+                anchors {
+                    bottom: flbl.bottom
+                    left: parent.left
+                }
+                icon.source: "image://theme/icon-m-search"
+                highlighted: searchLoader.status == Loader.Ready
+                onClicked: searchLoader.sourceComponent = (highlighted ? null : searchComp)
+             }
         }
 
         footer: Item {

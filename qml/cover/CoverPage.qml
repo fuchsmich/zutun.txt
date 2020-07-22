@@ -29,6 +29,13 @@ CoverBackground {
             }
         }
     }
+
+    onStatusChanged: {
+        if (status === Cover.active) {
+            console.log("cover", Cover.active)
+            todoTxtFile.read()
+        }
+    }
 }
 
 

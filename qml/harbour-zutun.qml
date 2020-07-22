@@ -145,9 +145,11 @@ ApplicationWindow {
     }
 
     onActiveFocusChanged: {
-        todoTxtFile.read()
+        if (activeFocus) {
+            console.log("app", activeFocus)
+            todoTxtFile.read()
+        }
     }
-
 }
 
 
