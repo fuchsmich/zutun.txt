@@ -36,14 +36,16 @@ Python {
         if (status === 1) {
             status = 2
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
-            py.call('fileio.read', [pyPath, lastChange], function(result){
-                //console.log("read result:", result);
-                content = result
-                py.readSuccess(result)
-                lastChange = new Date()
+            py.call('fileio.read', [pyPath], function(result){
+                var _mtime = new Date(result[1]*1000)
+                if (lastChange === undefined || lastChange < _mtime) {
+                    lastChange = _mtime
+                    content = result[0]
+                    py.readSuccess(content)
+                    console.log("read", "path:", path, "file mdate", lastChange)
+                } else console.log("nothing new", path, _mtime)
+                status = 1
             })
-            console.log("read", "path:", path)
-            status = 1
         }
     }
 
@@ -52,10 +54,11 @@ Python {
         if (status === 1) {
             status = 3
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
-            py.call('fileio.write', [pyPath, content], function(){ })
-            console.log("saved", "path:", path)
-            lastChange = new Date()
-            status = 1
+            py.call('fileio.write', [pyPath, content], function(result){
+                lastChange = new Date(result*1000)
+                console.log("saved", "path:", path, "file mdate", lastChange)
+                status = 1
+            })
         }
     }
 

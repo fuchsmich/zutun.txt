@@ -144,6 +144,10 @@ ApplicationWindow {
         }
     }
 
+    onActiveFocusChanged: {
+        todoTxtFile.read()
+    }
+
 }
 
 

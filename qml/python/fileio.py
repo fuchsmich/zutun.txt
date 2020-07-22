@@ -17,7 +17,7 @@ def checkPath(path, perm):
     return True
 
 def checkFile(path, perm):
-    pyotherside.send('log',locale.getlocale())
+    #pyotherside.send('log',locale.getlocale())
     if checkPath(path, perm):
         pyotherside.send('pathExists', True)
     else:
@@ -48,17 +48,14 @@ def checkFile(path, perm):
             return False
     return True
 
-def read(path, lastChange):
+def read(path):
     if (checkFile(path, "r")):
         #pyotherside.send('log', "File for read checked")
-        if (lastChange and os.path.getmtime(path) <= lastChange):
-            pyotherside.send('log', os.path.getmtime(path))
-            return ""
         with open(path, 'rt') as f:
             read_data = f.read()
             #f.close()
             #pyotherside.send('log', "Content read {0}".format(path))
-            return read_data
+            return read_data, os.path.getmtime(path)
     else:
         return ""
 
@@ -70,7 +67,7 @@ def write(path, content):
             f.write(content)
             f.close()
             pyotherside.send('log', "Content saved to {0}".format(path))
-
+            return os.path.getmtime(path)
 
 def create(path):
     try:
