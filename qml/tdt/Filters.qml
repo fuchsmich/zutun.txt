@@ -5,16 +5,67 @@ QtObject {
     id: filters
 
     signal filtersChanged()
+    onFiltersChanged: {
+        filterSettings.and.value = and
+        filterSettings.or.value = or
+        filterSettings.not.value = not
+        text = parseText()
+    }
 
     property bool hideDone: true
     onHideDoneChanged: filtersChanged()
 
-    //property var projectList: []
-    property var projects: []
-    onProjectsChanged: filtersChanged()
-    //property var contextList: []
-    property var contexts: []
-    onContextsChanged: filtersChanged()
+    property var and: []
+    property var inAnd: function(filterItem){
+        return and.indexOf(filterItem) !== -1
+    }
+
+    property var or: []
+    property var inOr: function(filterItem){
+        return or.indexOf(filterItem) !== -1
+    }
+    function toggleOr(filterItem) {
+        if (inOr(filterItem)) {
+            or.splice(or.indexOf(filterItem), 1)
+        } else {
+            or.push(filterItem)
+            or.sort()
+        }
+        orChanged()
+        filtersChanged()
+    }
+
+    property var not: []
+    property var inNot: function(filterItem){
+        return not.indexOf(filterItem) !== -1
+    }
+    function toggleNot(filterItem) {
+        if (inNot(filterItem)) {
+            not.splice(not.indexOf(filterItem), 1)
+        } else {
+            not.push(filterItem)
+            not.sort()
+        }
+        notChanged()
+        filtersChanged()
+    }
+
+    function toggleFilterItem(filterItem) {
+        if (inAnd(filterItem)) {
+            and.splice(and.indexOf(filterItem), 1)
+            andChanged()
+            if (inOr(filterItem)) {
+                or.splice(or.indexOf(filterItem), 1)
+                orChanged()
+            }
+        }
+        else {
+            and.push(filterItem)
+            and.sort()
+            andChanged()
+        }
+        filtersChanged()
+    }
 
     property string searchString: ""
     onSearchStringChanged: filtersChanged()
@@ -26,26 +77,42 @@ QtObject {
 
         if (task.fullTxt.indexOf(searchString) === -1) return false
 
-        for (var p in projects) {
-            if (task.fullTxt.indexOf(projects[p]) === -1) return false
-        }
-        for (var c in contexts) {
-            if (task.fullTxt.indexOf(contexts[c]) === -1) return false
-        }
-        return true
+        if (and.length == 0) return true
+
+        var andResult = (and.length > 0)
+        and.forEach(function(i){
+            if (!inOr(i)) andResult &= (task.fullTxt.indexOf(i) !== -1) ^ inNot(i)
+        })
+
+        var orResult = or.length === 0
+        or.forEach(function(i){
+            orResult |= (task.fullTxt.indexOf(i) !== -1) ^ inNot(i)
+        })
+
+        console.log(task.fullTxt, and, andResult, or, orResult)
+        return andResult | orResult
     }
 
     function clearFilters() {
-        filterSettings.projects.value = []
-        filterSettings.contexts.value = []
+        and = []
+        or = []
+        not = []
         searchString = ""
     }
 
-    property var text: {
+    property string text: parseText()
+
+    function parseText(){
         var a = []
         //: text about active filters
         if (hideDone) a.push(qsTr("Hide complete"))
-        var ftext = a.concat(projects.concat(contexts)).join(", ")
+        and.forEach(function(i){
+            if (!inOr(i)) a.push("&%2%1".arg(i).arg((inNot(i)?"!":"")))
+        })
+        or.forEach(function(i){
+            a.push("|%2%1".arg(i).arg((inNot(i)?"!":"")))
+        })
+        var ftext = a.join(", ")
         if (ftext) return ftext
         //: text about active filters
         else return qsTr("None")

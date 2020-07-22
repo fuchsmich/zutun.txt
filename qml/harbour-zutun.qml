@@ -39,12 +39,16 @@ ApplicationWindow {
             id: filterSettings
             path: "/filters"
             property bool hideDone: true
-            property ConfigurationValue projects: ConfigurationValue {
-                key: filterSettings.path + "/projects"
+            property ConfigurationValue and: ConfigurationValue {
+                key: filterSettings.path + "/and"
                 defaultValue: []
             }
-            property ConfigurationValue contexts: ConfigurationValue {
-                key: filterSettings.path + "/contexts"
+            property ConfigurationValue or: ConfigurationValue {
+                key: filterSettings.path + "/or"
+                defaultValue: []
+            }
+            property ConfigurationValue not: ConfigurationValue {
+                key: filterSettings.path + "/not"
                 defaultValue: []
             }
         }
@@ -130,8 +134,9 @@ ApplicationWindow {
 
         filters {
             hideDone: filterSettings.hideDone
-            projects: filterSettings.projects.value
-            contexts: filterSettings.contexts.value
+            and: filterSettings.and.value
+            or: filterSettings.or.value
+            not: filterSettings.not.value
             onFiltersChanged: visualModel.update()
         }
 

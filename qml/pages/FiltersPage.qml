@@ -34,26 +34,45 @@ Page {
                 text: qsTr("Projects")
             }
 
-            Repeater {
-                model: JS.projects.getList(taskListModel.textList) //taskListModel.filters.projectList
-                delegate: TextSwitch {
+            Component {
+                id: pcFilterDelegate
+                Row {
+                    id: row
                     x: Theme.horizontalPageMargin
-                    text: modelData + " (%1/%2)".arg(
-                              taskListModel.visibleTextList.join("\n").split(modelData).length - 1).arg(
-                              taskListModel.textList.join("\n").split(modelData).length - 1)
-                    automaticCheck: false
-                    checked: taskListModel.filters.projects.indexOf(modelData) !== -1
-                    onClicked: {
-                        var a = taskListModel.filters.projects
-                        if (a.indexOf(modelData) === -1) {
-                            a.push(modelData)
-                            a.sort()
-                        } else {
-                            a.splice(a.indexOf(modelData), 1)
-                        }
-                        filterSettings.projects.value = a
+                    height: Math.max(ts.height, bt.height)
+                    TextSwitch {
+                        id: ts
+                        width: page.width - 2*row.x - 2*bt.width
+                        anchors.verticalCenter: parent.verticalCenter
+                        _label.wrapMode: Text.NoWrap
+                        text: modelData + " (%1/%2)".arg(
+                                  taskListModel.visibleTextList.join("\n").split(modelData).length - 1).arg(
+                                  taskListModel.textList.join("\n").split(modelData).length - 1)
+                        automaticCheck: false
+                        checked: taskListModel.filters.inAnd(modelData) //|| taskListModel.filters.inOr(modelData)
+                        onClicked: taskListModel.filters.toggleFilterItem(modelData)
+                    }
+                    TextSwitch {
+                        id: bt
+                        enabled: taskListModel.filters.inAnd(modelData)
+                        text: "!"
+                        width: height
+                        checked: taskListModel.filters.inNot(modelData)
+                        onClicked: taskListModel.filters.toggleNot(modelData)
+                    }
+                    TextSwitch {
+                        text: "|"
+                        enabled: taskListModel.filters.inAnd(modelData)
+                        width: height
+                        checked: taskListModel.filters.inOr(modelData)
+                        onClicked: taskListModel.filters.toggleOr(modelData)
                     }
                 }
+            }
+
+            Repeater {
+                model: JS.projects.getList(taskListModel.textList) //taskListModel.filters.projectList
+                delegate: pcFilterDelegate
             }
 
             SectionHeader {
@@ -62,24 +81,8 @@ Page {
 
             Repeater {
                 model: JS.contexts.getList(taskListModel.textList)
-                delegate: TextSwitch {
-                    x: Theme.horizontalPageMargin
-                    text: modelData + " (%1/%2)".arg(
-                              taskListModel.visibleTextList.join("\n").split(modelData).length - 1).arg(
-                              taskListModel.textList.join("\n").split(modelData).length - 1)
-                    automaticCheck: false
-                    checked: taskListModel.filters.contexts.indexOf(modelData) !== -1
-                    onClicked: {
-                        var a = taskListModel.filters.contexts
-                        if (a.indexOf(modelData) === -1) {
-                            a.push(modelData)
-                            a.sort()
-                        } else {
-                            a.splice(a.indexOf(modelData), 1)
-                        }
-                        filterSettings.contexts.value = a
-                    }
-                }
+                delegate: pcFilterDelegate
+
             }
 
 
