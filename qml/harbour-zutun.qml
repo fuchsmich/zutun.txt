@@ -11,7 +11,6 @@ import "tdt/todotxt.js" as JS
 
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
-//TODO Search field??
 //TODO more verbose placeholder in tasklist
 
 ApplicationWindow {
@@ -32,6 +31,7 @@ ApplicationWindow {
         property int fontSizeTaskList: Theme.fontSizeMedium
         property bool projectFilterLeft: false
         property bool creationDateOnAddTask: false
+        property bool showSearch: false
         property ConfigurationValue notificationIDs: ConfigurationValue {
             key: settings.path + "/notificationIDs"
             defaultValue: []

@@ -51,7 +51,10 @@ Page {
 
         header: Item {
             width: page.width
-            height: pgh.height + flbl.height + searchLoader.height
+            height: pgh.height + flbl.height + searchFld.height
+//            Behavior on height {
+//                NumberAnimation { duration: 100 }
+//            }
             PageHeader {
                 id: pgh
                 //: PageHeader for tasklist main page
@@ -76,39 +79,30 @@ Page {
                 text: qsTr("Filter: %1").arg(taskListModel.filters.text) +
                       " (%1/%2)".arg(taskListModel.visibleTextList.length).arg(taskListModel.count)
             }
-            Component {
-                id: searchComp
-                SearchField {
-                    id: searchFld
-                    //visible: true
-//                    anchors {
-//                        top: flbl.bottom
-//                        //topMargin: -Theme.paddingMedium
-//                        left: parent.left
-//                        right: parent.right
-//                        //rightMargin: pgh.rightMargin
-//                    }
-                }
-            }
-
-            Loader {
-                id: searchLoader
+            SearchField {
+                id: searchFld
                 anchors {
                     top: flbl.bottom
                     left: parent.left
                     right: parent.right
                 }
-                //sourceComponent: searchComp
+                canHide: true
+                active: settings.showSearch
+                onHideClicked: settings.showSearch = ! searchFld.active
+                onTextChanged: taskListModel.filters.searchString = text
             }
 
             IconButton {
                 anchors {
                     bottom: flbl.bottom
                     left: parent.left
+                    leftMargin: searchFld.textLeftMargin - width - Theme.paddingSmall
                 }
+                //x: searchFld.textLeftMargin - width - Theme.paddingSmall
                 icon.source: "image://theme/icon-m-search"
-                highlighted: searchLoader.status == Loader.Ready
-                onClicked: searchLoader.sourceComponent = (highlighted ? null : searchComp)
+                opacity: 1*!searchFld.active
+                onClicked: settings.showSearch = ! searchFld.active
+                NumberAnimation on opacity { easing.type: Easing.InOutQuad; duration: searchFld.transitionDuration }
              }
         }
 
