@@ -3,26 +3,16 @@ import "../tdt/todotxt.js" as JS
 
 QtObject {
     id: filters
-    signal filtersChanged()
 
+    signal filtersChanged()
 
     property bool hideDone: true
     onHideDoneChanged: filtersChanged()
 
-    property var text: {
-        var a = []
-        //: text about active filters
-        if (hideDone) a.push(qsTr("Hide complete"))
-        var ftext = a.concat(projects.concat(contexts)).join(", ")
-        if (ftext) return ftext
-        //: text about active filters
-        else return qsTr("None")
-    }
-
-    property var projectList: []
+    //property var projectList: []
     property var projects: []
     onProjectsChanged: filtersChanged()
-    property var contextList: []
+    //property var contextList: []
     property var contexts: []
     onContextsChanged: filtersChanged()
 
@@ -43,5 +33,21 @@ QtObject {
             if (task.fullTxt.indexOf(contexts[c]) === -1) return false
         }
         return true
+    }
+
+    function clearFilters() {
+        filterSettings.projects.value = []
+        filterSettings.contexts.value = []
+        searchString = ""
+    }
+
+    property var text: {
+        var a = []
+        //: text about active filters
+        if (hideDone) a.push(qsTr("Hide complete"))
+        var ftext = a.concat(projects.concat(contexts)).join(", ")
+        if (ftext) return ftext
+        //: text about active filters
+        else return qsTr("None")
     }
 }

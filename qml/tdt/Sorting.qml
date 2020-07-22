@@ -34,28 +34,28 @@ QtObject {
         [qsTr("Natural"), function(left, right) {
             //TODO ä wird nach x gereiht! locale?
             return (left.fullTxt === right.fullTxt ?
-                        false : (left.fullTxt < right.fullTxt) ^ asc
+                        false : (left.fullTxt < right.fullTxt) ^ !asc
                     )
         }],
         //: SortPage, sorting by: Creation date
         [qsTr("Creation Date"), function(left, right) {
             return (left.creationDate === right.creationDate ?
                         functionList[0][1](left, right) :
-                        (left.creationDate < right.creationDate) ^ asc
+                        (left.creationDate < right.creationDate) ^ !asc
                     )
         }],
         //: SortPage, sorting by: Due date
         [qsTr("Due date"), function(left, right) {
             return (left.due === right.due ?
                         functionList[0][1](left, right) :
-                        (left.due < right.due) ^ asc
+                        (left.due < right.due) ^ !asc
                     )
         }],
         //: SortPage, sorting by: Subject
         [qsTr("Subject"), function(left, right) {
             return (left.subject === right.subject ?
                         functionList[0][1](left, right) :
-                        (left.subject < right.subject) ^ asc
+                        (left.subject < right.subject) ^ !asc
                     )
         }]
     ]
@@ -76,7 +76,7 @@ QtObject {
           function(left, right) {
               return (left.projects === right.projects ?
                           functionList[order][1](left, right) :
-                          ((left.projects < right.projects) ^ asc) * -1
+                          (left.projects < right.projects) ^ !asc
                       )
           }]
         //: SortPage, group by: contexts
@@ -84,7 +84,7 @@ QtObject {
           function(left, right) {
               return (left.contexts === right.contexts ?
                           functionList[order][1](left, right) :
-                          ((left.contexts < right.contexts) ^ asc) * -1
+                          (left.contexts < right.contexts) ^ !asc
                       )
           }]
     ]

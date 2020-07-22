@@ -27,7 +27,6 @@ ApplicationWindow {
         path: "/apps/harbour-zutun/settings"
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
         property string doneTxtLocation: StandardPaths.documents + '/done.txt'
-        //property alias autoSave: file.autoSave
         property int fontSizeTaskList: Theme.fontSizeMedium
         property bool projectFilterLeft: false
         property bool creationDateOnAddTask: false

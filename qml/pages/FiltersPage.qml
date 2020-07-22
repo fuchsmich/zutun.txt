@@ -35,7 +35,7 @@ Page {
             }
 
             Repeater {
-                model: taskListModel.filters.projectList
+                model: JS.projects.getList(taskListModel.textList) //taskListModel.filters.projectList
                 delegate: TextSwitch {
                     x: Theme.horizontalPageMargin
                     text: modelData + " (%1/%2)".arg(
@@ -61,7 +61,7 @@ Page {
             }
 
             Repeater {
-                model: taskListModel.filters.contextList
+                model: JS.contexts.getList(taskListModel.textList)
                 delegate: TextSwitch {
                     x: Theme.horizontalPageMargin
                     text: modelData + " (%1/%2)".arg(
