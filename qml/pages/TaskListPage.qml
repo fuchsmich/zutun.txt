@@ -8,7 +8,7 @@ import "../tdt/todotxt.js" as JS
 
 Page {
     id: page
-    property bool keepSearchFieldFocus
+    //property bool keepSearchFieldFocus
 
     SilicaListView {
         id: lv
@@ -107,8 +107,8 @@ Page {
                 icon.source: "image://theme/icon-m-search"
                 opacity: 1*!searchField.active
                 onClicked: {
-                    settings.showSearch = ! searchField.active
-                    keepSearchFieldFocus = true
+                    settings.showSearch = !searchField.active
+                    //keepSearchFieldFocus = true
                 }
                 NumberAnimation on opacity { easing.type: Easing.InOutQuad; duration: searchField.transitionDuration }
              }
@@ -148,12 +148,12 @@ Page {
 
         model: visualModel.parts.list
 
-        Component.onCompleted: {
-            if (keepSearchFieldFocus) {
-                searchField.forceActiveFocus()
-            }
-            keepSearchFieldFocus = false
-        }
+//        Component.onCompleted: {
+//            if (keepSearchFieldFocus) {
+//                searchField.forceActiveFocus()
+//            }
+//            keepSearchFieldFocus = false
+//        }
     }
 
     onStatusChanged: {
