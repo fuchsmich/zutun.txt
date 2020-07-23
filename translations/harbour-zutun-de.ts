@@ -115,31 +115,31 @@
     </message>
 </context>
 <context>
-    <name>Settings</name>
+    <name>SettingsPage</name>
     <message>
         <source>About</source>
         <extracomment>Information on the app: version, author, source code etc.</extracomment>
-        <translation>Über</translation>
+        <translation type="unfinished">Über</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Page Header for the Settings page</extracomment>
-        <translation>Einstellungen</translation>
-    </message>
-    <message>
-        <source>Path to todo.txt</source>
-        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
-        <translation>Pfad zu todo.txt</translation>
+        <translation type="unfinished">Einstellungen</translation>
     </message>
     <message>
         <source>Files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation>Dateien</translation>
+        <translation type="unfinished">Dateien</translation>
+    </message>
+    <message>
+        <source>Path to todo.txt</source>
+        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
+        <translation type="unfinished">Pfad zu todo.txt</translation>
     </message>
     <message>
         <source>Choose file</source>
         <extracomment>Button for picking the file</extracomment>
-        <translation>Datei wählen</translation>
+        <translation type="unfinished">Datei wählen</translation>
     </message>
     <message>
         <source>Fontsize in Tasklist</source>
@@ -312,10 +312,6 @@
         <translation>Aufgabenliste</translation>
     </message>
     <message>
-        <source>Pull down to add task.</source>
-        <translation>Nach unten ziehen, um eine Aufgabe hinzuzufügen.</translation>
-    </message>
-    <message>
         <source>Filter: %1</source>
         <extracomment>Information about filter settings at the top of main page</extracomment>
         <translation>Filter: %1</translation>
@@ -336,7 +332,7 @@
     </message>
     <message>
         <source>No tasks</source>
-        <extracomment>Placeholder if todo.txt file does not contain any unfinished tasks</extracomment>
+        <extracomment>Placeholder no visible tasks for various reasons (file error, empty file, filters)</extracomment>
         <translation>Keine Aufgaben</translation>
     </message>
 </context>
@@ -358,6 +354,25 @@
     <message>
         <source>Contexts</source>
         <translation>Kontexte</translation>
+    </message>
+</context>
+<context>
+    <name>harbour-zutun</name>
+    <message>
+        <source>file reading error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file seems to be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no tasks found in file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all tasks are hidden by filters</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

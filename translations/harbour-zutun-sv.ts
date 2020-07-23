@@ -115,26 +115,26 @@
     </message>
 </context>
 <context>
-    <name>Settings</name>
+    <name>SettingsPage</name>
     <message>
         <source>About</source>
         <extracomment>Information on the app: version, author, source code etc.</extracomment>
-        <translation>Om</translation>
+        <translation type="unfinished">Om</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Page Header for the Settings page</extracomment>
-        <translation>Inställningar</translation>
-    </message>
-    <message>
-        <source>Path to todo.txt</source>
-        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
-        <translation>Sökväg till todo.txt</translation>
+        <translation type="unfinished">Inställningar</translation>
     </message>
     <message>
         <source>Files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation>Filer</translation>
+        <translation type="unfinished">Filer</translation>
+    </message>
+    <message>
+        <source>Path to todo.txt</source>
+        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
+        <translation type="unfinished">Sökväg till todo.txt</translation>
     </message>
     <message>
         <source>Choose file</source>
@@ -332,11 +332,7 @@
     </message>
     <message>
         <source>No tasks</source>
-        <extracomment>Placeholder if todo.txt file does not contain any unfinished tasks</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pull down to add task.</source>
+        <extracomment>Placeholder no visible tasks for various reasons (file error, empty file, filters)</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -358,6 +354,25 @@
     <message>
         <source>Contexts</source>
         <translation>Sammanhang</translation>
+    </message>
+</context>
+<context>
+    <name>harbour-zutun</name>
+    <message>
+        <source>file reading error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file seems to be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no tasks found in file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all tasks are hidden by filters</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

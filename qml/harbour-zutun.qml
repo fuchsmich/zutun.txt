@@ -88,10 +88,16 @@ ApplicationWindow {
     }
 
     property bool busy: todoTxtFile.busy //|| taskListModel.busy
+    property string placeholderText: {
+        if (todoTxtFile.error !== "") return qsTr("file reading error")
+        if (todoTxtFile.content === "") return qsTr("file seems to be empty")
+        if (taskListModel.textList.length === 0) return qsTr("no tasks found in file")
+        if (taskListModel.visibleTextList.length === 0) return qsTr("all tasks are hidden by filters")
+        return ""
+    }
 
     FileIO {
         id: todoTxtFile
-        property string hintText: ""
         path: settings.todoTxtLocation
         onPathChanged: read()
 
@@ -100,10 +106,6 @@ ApplicationWindow {
                 taskListModel.setFileContent(content)
             }
 
-        onIoError: {
-            //TODO needs some rework for translation
-            hintText = msg
-        }
         onPythonReadyChanged: if (pythonReady) read()
     }
 

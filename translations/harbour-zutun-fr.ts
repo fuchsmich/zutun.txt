@@ -115,26 +115,26 @@
     </message>
 </context>
 <context>
-    <name>Settings</name>
+    <name>SettingsPage</name>
     <message>
         <source>About</source>
         <extracomment>Information on the app: version, author, source code etc.</extracomment>
-        <translation>À propos de</translation>
+        <translation type="unfinished">À propos de</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Page Header for the Settings page</extracomment>
-        <translation>Préférences</translation>
-    </message>
-    <message>
-        <source>Path to todo.txt</source>
-        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
-        <translation>Sentier vers todo.txt</translation>
+        <translation type="unfinished">Préférences</translation>
     </message>
     <message>
         <source>Files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation>Fichiers</translation>
+        <translation type="unfinished">Fichiers</translation>
+    </message>
+    <message>
+        <source>Path to todo.txt</source>
+        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
+        <translation type="unfinished">Sentier vers todo.txt</translation>
     </message>
     <message>
         <source>Choose file</source>
@@ -317,10 +317,6 @@
         <translation type="unfinished">Liste de tâches</translation>
     </message>
     <message>
-        <source>Pull down to add task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Filter: %1</source>
         <extracomment>Information about filter settings at the top of main page</extracomment>
         <translation type="unfinished"></translation>
@@ -336,7 +332,7 @@
     </message>
     <message>
         <source>No tasks</source>
-        <extracomment>Placeholder if todo.txt file does not contain any unfinished tasks</extracomment>
+        <extracomment>Placeholder no visible tasks for various reasons (file error, empty file, filters)</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -358,6 +354,25 @@
     <message>
         <source>Contexts</source>
         <translation type="unfinished">Contextes</translation>
+    </message>
+</context>
+<context>
+    <name>harbour-zutun</name>
+    <message>
+        <source>file reading error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file seems to be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no tasks found in file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all tasks are hidden by filters</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

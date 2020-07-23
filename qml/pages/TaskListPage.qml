@@ -19,7 +19,7 @@ Page {
             MenuItem {
                 //: PullDown menu: go to settings page
                 text: qsTr("Settings")
-                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
             }
             MenuItem {
                 //: PullDown menu: go to sorting & grouping page
@@ -128,10 +128,9 @@ Page {
 
         ViewPlaceholder {
             enabled: taskListModel.visibleTextList.length === 0
-            //: Placeholder if todo.txt file does not contain any unfinished tasks
+            //: Placeholder no visible tasks for various reasons (file error, empty file, filters)
             text: qsTr("No tasks")
-            hintText: (todoTxtFile.hintText === ""? qsTr("Pull down to add task.")
-                                                : todoTxtFile.hintText)
+            hintText: app.placeholderText
         }
 
         BusyIndicator {

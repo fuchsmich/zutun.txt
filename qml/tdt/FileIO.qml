@@ -10,8 +10,14 @@ Python {
     property string folder: path.substring(0, path.lastIndexOf("/")+1)
     property string content: ""
 
+    property string error: ""
     signal ioError(string msg)
+    onIoError: error = msg
     signal readSuccess(string content)
+    onReadSuccess: {
+        error = ""
+        py.content = content
+    }
 
     property bool pathExists: false
     property bool exists: false
@@ -40,8 +46,7 @@ Python {
                 var _mtime = new Date(result[1]*1000)
                 if (lastChange === undefined || lastChange < _mtime) {
                     lastChange = _mtime
-                    content = result[0]
-                    py.readSuccess(content)
+                    py.readSuccess(result[0])
                     console.log("read", "path:", path, "file mdate", lastChange)
                 } else console.log("nothing new", path, _mtime)
                 status = 1
