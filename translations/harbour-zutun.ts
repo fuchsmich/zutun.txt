@@ -332,7 +332,7 @@
     </message>
     <message>
         <source>No tasks</source>
-        <extracomment>Placeholder no visible tasks for various reasons (file error, empty file, filters)</extracomment>
+        <extracomment>Placeholder when no visible tasks for various reasons (file error, empty file, filters)</extracomment>
         <translation type="unfinished">No tasks</translation>
     </message>
 </context>

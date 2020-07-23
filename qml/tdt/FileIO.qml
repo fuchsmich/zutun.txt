@@ -6,7 +6,11 @@ Python {
     id: py
 
     property string path
-    onPathChanged: if (pythonReady) status = 1
+    onPathChanged: {
+        if (pythonReady) status = 1
+        content = ""
+        lastChange = undefined
+    }
     property string folder: path.substring(0, path.lastIndexOf("/")+1)
     property string content: ""
 

@@ -11,7 +11,6 @@ import "tdt/todotxt.js" as JS
 
 //TODO archive to done.txt
 //TODO fehler über notifiactions ausgeben
-//TODO more verbose placeholder in tasklist
 
 ApplicationWindow {
     id: app
@@ -89,17 +88,21 @@ ApplicationWindow {
 
     property bool busy: todoTxtFile.busy //|| taskListModel.busy
     property string placeholderText: {
-        if (todoTxtFile.error !== "") return qsTr("file reading error")
-        if (todoTxtFile.content === "") return qsTr("file seems to be empty")
-        if (taskListModel.textList.length === 0) return qsTr("no tasks found in file")
-        if (taskListModel.visibleTextList.length === 0) return qsTr("all tasks are hidden by filters")
+        if (todoTxtFile.error !== "") return qsTr("File reading error")
+        if (todoTxtFile.pathExists && !todoTxtFile.exists) return qsTr("File doesn't exist.\n Pull down to create it.")
+        if (todoTxtFile.content === "") return qsTr("File seems to be empty.\n Pull down to create one.")
+        if (taskListModel.textList.length === 0) return qsTr("No tasks found in file.\n Pull down to create one.")
+        if (taskListModel.visibleTextList.length === 0) return qsTr("All tasks are hidden by filters")
         return ""
     }
 
     FileIO {
         id: todoTxtFile
         path: settings.todoTxtLocation
-        onPathChanged: read()
+        onPathChanged: {
+            taskListModel.setFileContent("")
+            read()
+        }
 
         onReadSuccess:
             if (content) {

@@ -69,7 +69,7 @@ Page {
                 }
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
-                opacity: 0.8
+                opacity: 0.6
                 horizontalAlignment: Text.AlignRight
                 truncationMode: TruncationMode.Fade
                 //: Information about filter settings at the top of main page
@@ -86,13 +86,13 @@ Page {
                 canHide: true
                 active: settings.showSearch
                 onHideClicked: settings.showSearch = ! searchField.active
-//                onTextChanged: {
-//                    taskListModel.filters.searchString = text
-//                }
                 Binding {
                     target: taskListModel.filters
                     property: "searchString"
-                    value: searchField.text.toLowerCase().trim()
+                    value: searchField.text.trim()
+                }
+                onActiveFocusChanged: {
+                    if (!active) _editor.focus = false
                 }
             }
 
@@ -107,7 +107,8 @@ Page {
                 opacity: 1*!searchField.active
                 onClicked: {
                     settings.showSearch = !searchField.active
-                    searchField.forceActiveFocus()
+                    searchField._editor.focus = true
+                    searchField._editor.forceActiveFocus()
                 }
                 NumberAnimation on opacity { easing.type: Easing.InOutQuad; duration: searchField.transitionDuration }
              }
@@ -128,7 +129,7 @@ Page {
 
         ViewPlaceholder {
             enabled: taskListModel.visibleTextList.length === 0
-            //: Placeholder no visible tasks for various reasons (file error, empty file, filters)
+            //: Placeholder when no visible tasks for various reasons (file error, empty file, filters)
             text: qsTr("No tasks")
             hintText: app.placeholderText
         }

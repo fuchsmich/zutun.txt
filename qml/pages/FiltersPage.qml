@@ -27,7 +27,8 @@ Page {
             PageHeader {
                 title: qsTr("Filters")
                 //: PageHeader for currently set filters
-                description: qsTr("Active Filters: %1").arg(taskListModel.filters.text)
+                description: qsTr("Active Filters: %1").arg(taskListModel.filters.text) +
+                             " (%1/%2)".arg(taskListModel.visibleTextList.length).arg(taskListModel.count)
             }
 
             SectionHeader {
@@ -49,7 +50,7 @@ Page {
                                   taskListModel.visibleTextList.join("\n").split(modelData).length - 1).arg(
                                   taskListModel.textList.join("\n").split(modelData).length - 1)
                         automaticCheck: false
-                        checked: taskListModel.filters.inAnd(modelData) //|| taskListModel.filters.inOr(modelData)
+                        checked: taskListModel.filters.inAnd(modelData)
                         onClicked: taskListModel.filters.toggleFilterItem(modelData)
                     }
                     TextSwitch {
@@ -71,7 +72,7 @@ Page {
             }
 
             Repeater {
-                model: JS.projects.getList(taskListModel.textList) //taskListModel.filters.projectList
+                model: JS.projects.getList(taskListModel.textList)
                 delegate: pcFilterDelegate
             }
 

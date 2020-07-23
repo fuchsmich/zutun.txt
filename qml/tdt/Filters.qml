@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import "../tdt/todotxt.js" as JS
 
+
+//TODO save filter arrangments
 QtObject {
     id: filters
 
@@ -75,7 +77,7 @@ QtObject {
         if (!task) return false
         if ((hideDone && task.done)) return false
 
-        if (task.fullTxt.indexOf(searchString) === -1) return false
+        if (task.fullTxt.search(new RegExp(searchString, "i")) === -1) return false
 
         if (and.length == 0) return true
 
