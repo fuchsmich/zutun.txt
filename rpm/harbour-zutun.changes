@@ -3,6 +3,7 @@
 # Separate entries from eachother with a blank line.
 
 * Tue Apr 02 2019 Michael Fuchs <michfu@gmx.at> 1.8
+- advanced filters (or, not)
 - filter with search field
 - read file only if there are changes
 - option to autoadd creationDate on task creation
