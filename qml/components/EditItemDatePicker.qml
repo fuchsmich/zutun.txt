@@ -3,11 +3,15 @@ import Sailfish.Silica 1.0
 
 EditItem {
     id: editItem
+    property alias datePickerWidth: datePicker.width
+    property alias cmparent: cm.parent
     signal dateClicked(var date)
     signal datePressed(var date)
     property alias date: datePicker.date
 
     menu: EditContextMenu {
+        id: cm
+        width: datePicker.width
         Column {
             width: parent.width
             Label {

@@ -115,31 +115,31 @@
     </message>
 </context>
 <context>
-    <name>Settings</name>
+    <name>SettingsPage</name>
     <message>
         <source>About</source>
         <extracomment>Information on the app: version, author, source code etc.</extracomment>
-        <translation>About</translation>
+        <translation type="unfinished">About</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Page Header for the Settings page</extracomment>
-        <translation>Settings</translation>
-    </message>
-    <message>
-        <source>Path to todo.txt</source>
-        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
-        <translation>Path to todo.txt</translation>
-    </message>
-    <message>
-        <source>Choose file</source>
-        <extracomment>Button for picking the file</extracomment>
-        <translation>Choose file</translation>
+        <translation type="unfinished">Settings</translation>
     </message>
     <message>
         <source>Files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation>Files</translation>
+        <translation type="unfinished">Files</translation>
+    </message>
+    <message>
+        <source>Path to todo.txt</source>
+        <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
+        <translation type="unfinished">Path to todo.txt</translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <extracomment>Button for picking the file</extracomment>
+        <translation type="unfinished">Choose file</translation>
     </message>
     <message>
         <source>Fontsize in Tasklist</source>

@@ -1,5 +1,6 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
+import QtQml.Models 2.2
 
 import "../components"
 import "../tdt/todotxt.js" as JS
@@ -46,174 +47,175 @@ Dialog {
     acceptDestinationAction: PageStackAction.Pop
     canAccept: text.length > 0
 
-    SilicaFlickable {
+    SilicaGridView {
+        id: gv
         anchors.fill: parent
-        contentHeight: col.height
+        //contentHeight: col.height
         VerticalScrollDecorator {}
-        Column {
-            id: col
-            width: dialog.width
-            DialogHeader {
-                //: DialogHeader for new task / edit task
-                title: (taskIndex == -1 ? qsTr("Add new task") : qsTr("Edit task"))
-            }
-            TextArea {
-                id: ta
-                width: parent.width
-                autoScrollEnabled: true
-
-                focus: true
-                property Timer focusTimer: Timer {
-                    interval: 200
-                    repeat: false
-                    onTriggered: {
-                        ta.forceActiveFocus();
-                    }
-                }
-                text: dialog.text
-                EnterKey.enabled: text.length > 0
-                EnterKey.iconSource: "image://theme/icon-m-enter-accept"
-                EnterKey.onClicked: dialog.accept()
-                Component.onCompleted: cursorPosition = ta.text.length
-            }
-
-            Grid {
-                id: grid
-                width: parent.width - 2*x
-                horizontalItemAlignment: Grid.AlignHCenter
-                verticalItemAlignment: Grid.AlignTop
-                columns: Math.floor(width/Theme.itemSizeMedium)
-                property real itemWidth: width/columns
-
-                EditItemContextList {
-                    //set priority
-                    Label {
+        cellWidth: (dialog.isPortrait ? dialog.width : dialog.width/2)
+        header: DialogHeader {
+            //: DialogHeader for new task / edit task
+            title: (taskIndex == -1 ? qsTr("Add new task") : qsTr("Edit task"))
+        }
+        model: ObjectModel {
+                Column {
+                    id: textContainer
+                    width: gv.cellWidth
+                    TextArea {
+                        id: ta
                         width: parent.width
-                        height: width
-                        text: "(A)"
-                        font.pixelSize: Theme.fontSizeLarge
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-//                    onClicked: {
-//                        openMenu()
-//                    }
+                        autoScrollEnabled: true
 
-                    model: ListModel {
-                        id: prioritiesModel
-                        Component.onCompleted: {
-                            for (var a in JS.tools.alphabet) {
-                                append({"name": "(" + JS.tools.alphabet[a] + ") "});
+                        focus: true
+                        property Timer focusTimer: Timer {
+                            interval: 200
+                            repeat: false
+                            onTriggered: {
+                                ta.forceActiveFocus();
                             }
                         }
-                    }
-                    onListItemSelected: setText("priority", text)
-                }
-                EditItem {
-                    //remove priority
-                    Label {
-                        width: parent.width
-                        height: width
-                        text: "(A)"
-                        font.pixelSize: Theme.fontSizeLarge
-                        font.strikeout: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                    onClicked: {
-                        dialog.setText("priority", false)
+                        text: dialog.text
+                        EnterKey.enabled: text.length > 0
+                        EnterKey.iconSource: "image://theme/icon-m-enter-accept"
+                        EnterKey.onClicked: dialog.accept()
+                        Component.onCompleted: cursorPosition = ta.text.length
                     }
                 }
 
-                EditItemDatePicker {
-                    //creation date
-                    Image {
-                        width: parent.width
-                        height: width
-                        source: "image://theme/icon-l-date"
+                Grid {
+                    id: buttonContainer
+                    width: gv.cellWidth
+                    horizontalItemAlignment: Grid.AlignHCenter
+                    verticalItemAlignment: Grid.AlignTop
+                    columns: Math.floor(width/Theme.itemSizeMedium)
+                    property real itemWidth: width/columns
+
+                    EditItemContextList {
+                        // set priority
+                        Label {
+                            width: parent.width
+                            height: width
+                            text: "(A)"
+                            font.pixelSize: Theme.fontSizeLarge
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        //                    onClicked: {
+                        //                        openMenu()
+                        //                    }
+
+                        model: ListModel {
+                            id: prioritiesModel
+                            Component.onCompleted: {
+                                for (var a in JS.tools.alphabet) {
+                                    append({"name": "(" + JS.tools.alphabet[a] + ") "});
+                                }
+                            }
+                        }
+                        onListItemSelected: setText("priority", text)
                     }
-                    onClicked: dialog.setText("creationDate", JS.tools.today())
-                    onPressAndHold: ta.focus = false
-                    onDateClicked: {
-                        dialog.setText("creationDate", date)
-                        closeMenu()
-                    }
-                }
-                EditItemContextList {
-                    //projects
-                    Label {
-                        width: parent.width
-                        height: width
-                        text: "+"
-                        font.pixelSize: Theme.fontSizeLarge
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                    EditItem {
+                        //remove priority
+                        Label {
+                            width: parent.width
+                            height: width
+                            text: "(A)"
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.strikeout: true
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        onClicked: {
+                            dialog.setText("priority", false)
+                        }
                     }
 
-                    model: JS.projects.getList(taskListModel.textList)
-                    onListItemSelected: dialog.setText("project", text)
-                }
+                    EditItemDatePicker {
+                        //creation date
+                        Image {
+                            width: parent.width
+                            height: width
+                            source: "image://theme/icon-l-date"
+                        }
+                        onClicked: dialog.setText("creationDate", JS.tools.today())
+                        onPressAndHold: ta.focus = false
+                        onDateClicked: {
+                            dialog.setText("creationDate", date)
+                            closeMenu()
+                        }
+                    }
+                    EditItemContextList {
+                        //projects
+                        Label {
+                            width: parent.width
+                            height: width
+                            text: "+"
+                            font.pixelSize: Theme.fontSizeLarge
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
 
-                EditItemContextList {
-                    //contexts
-                    Label {
-                        width: parent.width
-                        height: width
-                        text: "@"
-                        font.pixelSize: Theme.fontSizeLarge
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        model: JS.projects.getList(taskListModel.textList)
+                        onListItemSelected: dialog.setText("project", text)
                     }
 
-                    model: JS.contexts.getList(taskListModel.textList)
-                    onListItemSelected: dialog.setText("context", text)
-                }
+                    EditItemContextList {
+                        //contexts
+                        Label {
+                            width: parent.width
+                            height: width
+                            text: "@"
+                            font.pixelSize: Theme.fontSizeLarge
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
 
-                EditItemDatePicker {
-                    //due date
-                    Label {
-                        width: parent.width
-                        height: width
-                        text: "due:"
-                        font.pixelSize: Theme.fontSizeLarge
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        model: JS.contexts.getList(taskListModel.textList)
+                        onListItemSelected: dialog.setText("context", text)
                     }
-                    onClicked: {
-                        ta.focus = false
-                        var dueDate = JS.due.get(ta.text)[0]
-                        date = (dueDate === "" ? new Date() : new Date(dueDate))
-                        openMenu()
-                    }
-                    openMenuOnPressAndHold: false
-                    onDateClicked: {
-                        dialog.setText("due", date)
-                        closeMenu()
-                    }
-                }
 
-                EditItem {
-                    //remove due date
-                    Label {
-                        width: parent.width
-                        height: width
-                        text: "due:"
-                        font.pixelSize: Theme.fontSizeLarge
-                        font.strikeout: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                    EditItemDatePicker {
+                        /** due date */
+                        datePickerWidth: gv.cellWidth
+                        cmparent: gv
+                        Label {
+                            width: parent.width
+                            height: width
+                            text: "due:"
+                            font.pixelSize: Theme.fontSizeLarge
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        onClicked: {
+                            ta.focus = false
+                            var dueDate = JS.due.get(ta.text)[0]
+                            date = (dueDate === "" ? new Date() : new Date(dueDate))
+                            openMenu()
+                        }
+                        openMenuOnPressAndHold: false
+                        onDateClicked: {
+                            dialog.setText("due", date)
+                            closeMenu()
+                        }
                     }
-                    onClicked: {
-                        dialog.setText("due", "")
+
+                    EditItem {
+                        //remove due date
+                        Label {
+                            width: parent.width
+                            height: width
+                            text: "due:"
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.strikeout: true
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        onClicked: {
+                            dialog.setText("due", "")
+                        }
                     }
                 }
             }
-
-            Loader {
-                id: bottomLoader
-                width: parent.width
-            }
-        }
     }
 
     Component.onCompleted: {

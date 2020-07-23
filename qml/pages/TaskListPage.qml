@@ -19,7 +19,7 @@ Page {
             MenuItem {
                 //: PullDown menu: go to settings page
                 text: qsTr("Settings")
-                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
             }
             MenuItem {
                 //: PullDown menu: go to sorting & grouping page
