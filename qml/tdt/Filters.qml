@@ -9,7 +9,7 @@ QtObject {
         filterSettings.and.value = and
         filterSettings.or.value = or
         filterSettings.not.value = not
-        text = parseText()
+        //text = parseText()
     }
 
     property bool hideDone: true
@@ -81,15 +81,23 @@ QtObject {
 
         var andResult = (and.length > 0)
         and.forEach(function(i){
-            if (!inOr(i)) andResult &= (task.fullTxt.indexOf(i) !== -1) ^ inNot(i)
+            /**  inTask inNot result
+                 0      0     0
+                 1      0     1
+                 0      1     1
+                 1      1     0 */
+            //console.log (andResult)
+            if (!inOr(i)) andResult &= ((task.fullTxt.indexOf(i) !== -1) ^ inNot(i))
         })
+        andResult = (andResult === 1)
 
         var orResult = or.length === 0
         or.forEach(function(i){
             orResult |= (task.fullTxt.indexOf(i) !== -1) ^ inNot(i)
         })
+        orResult = (orResult === 1)
 
-        console.log(task.fullTxt, and, andResult, or, orResult)
+        //console.log(task.fullTxt, and, andResult, or, orResult, andResult | orResult)
         return andResult | orResult
     }
 
