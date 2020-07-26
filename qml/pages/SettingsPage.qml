@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
-//TODO Setting for automatically add creation date
 
 Page {
     id: page
@@ -52,7 +51,6 @@ Page {
 
             Component {
                 id: filePickerPage
-                //TODO how to create new file?
                 //TODO start in current folder
                 FilePickerPage {
                     //: Page Header for the FilePickerPage (called from Button: Choose File)

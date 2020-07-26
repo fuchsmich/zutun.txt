@@ -41,9 +41,7 @@ Page {
                 sourceSize.width: Math.max(page.width, page.height)
                 smooth: true
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: (orientation === Orientation.Portrait ?
-                            page.width - Theme.paddingLarge * 5:
-                            page.height - Theme.paddingLarge * 10)
+                width: Math.min(page.width/3, page.height/3)
                 height: width
                 cache: false
             }

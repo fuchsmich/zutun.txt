@@ -46,7 +46,7 @@
     <message>
         <source>Hide complete</source>
         <extracomment>text about active filters</extracomment>
-        <translation>Verberge fertige</translation>
+        <translation>Verberge erledigte</translation>
     </message>
     <message>
         <source>None</source>
@@ -63,27 +63,27 @@
     </message>
     <message>
         <source>Clear Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter entfernen</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation type="unfinished">Projekte</translation>
+        <translation>Projekte</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished">Kontexte</translation>
+        <translation>Kontexte</translation>
     </message>
     <message>
         <source>Other Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere Filter</translation>
     </message>
     <message>
         <source>Hide complete tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge erledigte Aufgaben</translation>
     </message>
 </context>
 <context>
@@ -144,12 +144,12 @@
     <message>
         <source>Fontsize in Tasklist</source>
         <extracomment>Slide control for font size</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Zeichengröße in Aufgabenliste</translation>
     </message>
     <message>
         <source>Auto add creation date.</source>
         <extracomment>TextSwitch for adding creation date</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Füge automatisch Erstelldatum hinzu.</translation>
     </message>
 </context>
 <context>
@@ -177,15 +177,15 @@
     <message>
         <source>Toggle order (%1)</source>
         <extracomment>Button to toggle order</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Schalte Reihenfolge um (%1)</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation type="unfinished">aufsteigend</translation>
+        <translation>auf</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation type="unfinished">absteigend</translation>
+        <translation>ab</translation>
     </message>
 </context>
 <context>
@@ -196,11 +196,11 @@
     </message>
     <message>
         <source>asc</source>
-        <translation>aufsteigend</translation>
+        <translation>auf</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation>absteigend</translation>
+        <translation>ab</translation>
     </message>
     <message>
         <source>Grouped by %1, </source>
@@ -282,7 +282,7 @@
     </message>
     <message>
         <source>completed:</source>
-        <translation type="unfinished"></translation>
+        <translation>erledigt:</translation>
     </message>
 </context>
 <context>

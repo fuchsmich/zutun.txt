@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import io.thp.pyotherside 1.4
 
-//TODO check if file is changed on disk
 Python {
     id: py
 
