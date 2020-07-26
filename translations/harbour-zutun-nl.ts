@@ -359,19 +359,26 @@
 <context>
     <name>harbour-zutun</name>
     <message>
-        <source>file reading error</source>
+        <source>File reading error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>file seems to be empty</source>
+        <source>File doesn&apos;t exist.
+ Pull down to create it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>no tasks found in file</source>
+        <source>File seems to be empty.
+ Pull down to create one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>all tasks are hidden by filters</source>
+        <source>No tasks found in file.
+ Pull down to create one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All tasks are hidden by filters</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -119,27 +119,27 @@
     <message>
         <source>About</source>
         <extracomment>Information on the app: version, author, source code etc.</extracomment>
-        <translation type="unfinished">Über</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Page Header for the Settings page</extracomment>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation type="unfinished">Dateien</translation>
+        <translation>Dateien</translation>
     </message>
     <message>
         <source>Path to todo.txt</source>
         <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
-        <translation type="unfinished">Pfad zu todo.txt</translation>
+        <translation>Pfad zu todo.txt</translation>
     </message>
     <message>
         <source>Choose file</source>
         <extracomment>Button for picking the file</extracomment>
-        <translation type="unfinished">Datei wählen</translation>
+        <translation>Datei wählen</translation>
     </message>
     <message>
         <source>Fontsize in Tasklist</source>
@@ -359,20 +359,27 @@
 <context>
     <name>harbour-zutun</name>
     <message>
-        <source>file reading error</source>
-        <translation type="unfinished"></translation>
+        <source>File reading error</source>
+        <translation>Dateilesefehler</translation>
     </message>
     <message>
-        <source>file seems to be empty</source>
-        <translation type="unfinished"></translation>
+        <source>File doesn&apos;t exist.
+ Pull down to create it.</source>
+        <translation>Datei existiert nicht.\nRunterziehen, um Datei zu erzeugen.</translation>
     </message>
     <message>
-        <source>no tasks found in file</source>
-        <translation type="unfinished"></translation>
+        <source>File seems to be empty.
+ Pull down to create one.</source>
+        <translation>Datei scheint leer zu sein.\nRunterziehen, um sie zu erstellen.</translation>
     </message>
     <message>
-        <source>all tasks are hidden by filters</source>
-        <translation type="unfinished"></translation>
+        <source>No tasks found in file.
+ Pull down to create one.</source>
+        <translation>Keine Aufgaben in Datei gefunden.\nRunterziehn, um eine zu erstellen.</translation>
+    </message>
+    <message>
+        <source>All tasks are hidden by filters</source>
+        <translation>Alle Aufgaben sind druch Filter verborgen.</translation>
     </message>
 </context>
 </TS>
