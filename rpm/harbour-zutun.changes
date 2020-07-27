@@ -2,7 +2,7 @@
 # Add newest entries to the top of the list.
 # Separate entries from eachother with a blank line.
 
-* Tue Apr 02 2019 Michael Fuchs <michfu@gmx.at> 1.8
+* Mon Jul 27 2020 Michael Fuchs <michfu@gmx.at> 2.0
 - advanced filters (or, not)
 - filter with search field
 - read file only if there are changes
