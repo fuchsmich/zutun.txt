@@ -30,7 +30,7 @@
     <message>
         <source>Translation</source>
         <extracomment>SectionHeader for the names of the translators - you ;-)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Översättning</translation>
     </message>
 </context>
 <context>
@@ -46,12 +46,12 @@
     <message>
         <source>Hide complete</source>
         <extracomment>text about active filters</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Dölj slutförda</translation>
     </message>
     <message>
         <source>None</source>
         <extracomment>text about active filters</extracomment>
-        <translation type="unfinished">Ingen</translation>
+        <translation>Ingen</translation>
     </message>
 </context>
 <context>
@@ -59,31 +59,31 @@
     <message>
         <source>Active Filters: %1</source>
         <extracomment>PageHeader for currently set filters</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Aktiva filter: %1</translation>
     </message>
     <message>
         <source>Clear Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Rensa filter</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation type="unfinished">Projekt</translation>
+        <translation>Projekt</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation type="unfinished">Sammanhang</translation>
+        <translation>Sammanhang</translation>
     </message>
     <message>
         <source>Other Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Andra filter</translation>
     </message>
     <message>
         <source>Hide complete tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Dölj slutförda aktiviteter</translation>
     </message>
 </context>
 <context>
@@ -91,27 +91,27 @@
     <message>
         <source>Filter contexts</source>
         <extracomment>PullDown menu: go to filter contexts page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Filterinnehåll</translation>
     </message>
     <message>
         <source>Filter projects</source>
         <extracomment>PullDown menu: go to filter projects page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Filterprojekt</translation>
     </message>
     <message>
         <source>Back to Tasklist</source>
         <extracomment>PullDown menu: go to task list</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Tillbaka till aktivitetslistan</translation>
     </message>
     <message>
         <source>Other filters</source>
         <extracomment>PageHeader for other filters</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Andra filter</translation>
     </message>
     <message>
         <source>Hide completed tasks</source>
         <extracomment>TextSwitch for handling of completed task visibility</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Dölj slutförda aktiviteter</translation>
     </message>
 </context>
 <context>
@@ -119,37 +119,37 @@
     <message>
         <source>About</source>
         <extracomment>Information on the app: version, author, source code etc.</extracomment>
-        <translation type="unfinished">Om</translation>
+        <translation>Om</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Page Header for the Settings page</extracomment>
-        <translation type="unfinished">Inställningar</translation>
+        <translation>Inställningar</translation>
     </message>
     <message>
         <source>Files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation type="unfinished">Filer</translation>
+        <translation>Filer</translation>
     </message>
     <message>
         <source>Path to todo.txt</source>
         <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
-        <translation type="unfinished">Sökväg till todo.txt</translation>
+        <translation>Sökväg till todo.txt</translation>
     </message>
     <message>
         <source>Choose file</source>
         <extracomment>Button for picking the file</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Välj fil</translation>
     </message>
     <message>
         <source>Fontsize in Tasklist</source>
         <extracomment>Slide control for font size</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Teckenstorlek i aktivitetslistan</translation>
     </message>
     <message>
         <source>Auto add creation date.</source>
         <extracomment>TextSwitch for adding creation date</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till tidsstämpel automatiskt.</translation>
     </message>
 </context>
 <context>
@@ -177,69 +177,69 @@
     <message>
         <source>Toggle order (%1)</source>
         <extracomment>Button to toggle order</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Byt ordning (%1)</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation type="unfinished">stigande</translation>
+        <translation>Stigande</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation type="unfinished">sjunkande</translation>
+        <translation>Fallande</translation>
     </message>
 </context>
 <context>
     <name>Sorting</name>
     <message>
         <source>Sorted by %1</source>
-        <translation type="unfinished">Sorterat %1</translation>
+        <translation>Sorterat efter %1</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation type="unfinished">stigande</translation>
+        <translation>Stigande</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation type="unfinished">sjunkande</translation>
+        <translation>Fallande</translation>
     </message>
     <message>
         <source>Grouped by %1, </source>
-        <translation type="unfinished">Grupperat %1, </translation>
+        <translation>Grupperat efter %1, </translation>
     </message>
     <message>
         <source>Natural</source>
         <extracomment>SortPage, sorting by: Natural</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Naturligt</translation>
     </message>
     <message>
         <source>Creation Date</source>
         <extracomment>SortPage, sorting by: Creation date</extracomment>
-        <translation type="unfinished">Skapad</translation>
+        <translation>Skapad</translation>
     </message>
     <message>
         <source>Due date</source>
         <extracomment>SortPage, sorting by: Due date</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Förfallodatum</translation>
     </message>
     <message>
         <source>Subject</source>
         <extracomment>SortPage, sorting by: Subject</extracomment>
-        <translation type="unfinished">Ämne</translation>
+        <translation>Ämne</translation>
     </message>
     <message>
         <source>None</source>
         <extracomment>SortPage, group by: None</extracomment>
-        <translation type="unfinished">Ingen</translation>
+        <translation>Ingen</translation>
     </message>
     <message>
         <source>Projects</source>
         <extracomment>SortPage, group by: projects</extracomment>
-        <translation type="unfinished">Projekt</translation>
+        <translation>Projekt</translation>
     </message>
     <message>
         <source>Contexts</source>
         <extracomment>SortPage, group by: contexts</extracomment>
-        <translation type="unfinished">Sammanhang</translation>
+        <translation>Sammanhang</translation>
     </message>
 </context>
 <context>
@@ -247,42 +247,42 @@
     <message>
         <source>Add new task</source>
         <extracomment>DialogHeader for new task / edit task</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till ny aktivitet</translation>
     </message>
     <message>
         <source>Edit task</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigera aktivitet</translation>
     </message>
 </context>
 <context>
     <name>TaskListItem</name>
     <message>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Tar bort</translation>
     </message>
     <message>
         <source>created:</source>
-        <translation type="unfinished">skapad:</translation>
+        <translation>Skapad:</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation type="unfinished">koppling:</translation>
+        <translation>Förfaller:</translation>
     </message>
     <message>
         <source>Priority Up</source>
-        <translation type="unfinished">Prioritet upp</translation>
+        <translation>Prioritet upp</translation>
     </message>
     <message>
         <source>Priority Down</source>
-        <translation type="unfinished">Prioritet ner</translation>
+        <translation>Prioritet ner</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Ta bort</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <source>completed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Slutfört:</translation>
     </message>
 </context>
 <context>
@@ -290,50 +290,50 @@
     <message>
         <source>Settings</source>
         <extracomment>PullDown menu: go to settings page</extracomment>
-        <translation type="unfinished">Inställningar</translation>
+        <translation>Inställningar</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
         <extracomment>PullDown menu: go to sorting &amp; grouping page</extracomment>
-        <translation type="unfinished">Sortering &amp; Gruppering</translation>
+        <translation>Sortering &amp; Gruppering</translation>
     </message>
     <message>
         <source>Add new task</source>
         <extracomment>PullDown menu: add new task</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till ny aktivitet</translation>
     </message>
     <message>
         <source>Create file</source>
         <extracomment>PullDown menu: create todo.txt file. Entry only visible if a) path to todo.txt file exists and b) file was NOT created yet</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Skapa fil</translation>
     </message>
     <message>
         <source>Show</source>
         <extracomment>PushUp menu: show / hide completed tasks</extracomment>
-        <translation type="unfinished">Visa</translation>
+        <translation>Visa</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished">Dölj</translation>
+        <translation>Dölj</translation>
     </message>
     <message>
         <source> completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Slutförda aktiviteter</translation>
     </message>
     <message>
         <source>Tasklist</source>
         <extracomment>PageHeader for tasklist main page</extracomment>
-        <translation type="unfinished">Uppgiftslista</translation>
+        <translation>Aktivitetslista</translation>
     </message>
     <message>
         <source>Filter: %1</source>
         <extracomment>Information about filter settings at the top of main page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Filter: %1</translation>
     </message>
     <message>
         <source>No tasks</source>
         <extracomment>Placeholder when no visible tasks for various reasons (file error, empty file, filters)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Inga aktiviteter</translation>
     </message>
 </context>
 <context>
@@ -341,7 +341,7 @@
     <message>
         <source>No entries</source>
         <extracomment>Placeholder</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Inga poster</translation>
     </message>
     <message>
         <source>Priorities</source>
@@ -360,26 +360,29 @@
     <name>harbour-zutun</name>
     <message>
         <source>File reading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Läsfel</translation>
     </message>
     <message>
         <source>File doesn&apos;t exist.
  Pull down to create it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen finns inte.
+ Dra neråt för att skapa den.</translation>
     </message>
     <message>
         <source>File seems to be empty.
  Pull down to create one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen verkar tom.
+ Dra neråt för att skapa en.</translation>
     </message>
     <message>
         <source>No tasks found in file.
  Pull down to create one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga aktiviteter hittades i filen.
+ Dra neråt för att skapa en.</translation>
     </message>
     <message>
         <source>All tasks are hidden by filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla aktiviteter är dolda av filter</translation>
     </message>
 </context>
 </TS>
