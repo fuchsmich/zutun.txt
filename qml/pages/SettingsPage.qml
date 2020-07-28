@@ -64,6 +64,53 @@ Page {
             }
 
             SectionHeader {
+                //: Section Header for the Files section in Settings page
+                text: qsTr("Recent files")
+                color: palette.secondaryColor
+            }
+            Column {
+                Repeater {
+                    model: settings.recentFiles.value
+                    ListItem {
+                        id: recentItem
+                        width: page.width
+
+                        function remove() {
+                            remorseAction(qsTr("Deleting"), function() {
+                                var rf = settings.recentFiles.value
+                                rf.splice(model.index, 1)
+                                settings.recentFiles.value = rf
+                            }, 3000)
+                        }
+
+                        Label {
+                            text: settings.recentFiles.value[model.index]
+                            anchors.centerIn: parent
+                        }
+                        menu: ContextMenu {
+                            MenuItem {
+                                property var pinned: settings.pinnedRecentFiles.value
+                                text: pinned.indexOf(model.index) !== -1 ?
+                                          qsTr("unpin") : qsTr("pin")
+                                onClicked: {
+                                    var p = pinned
+                                    if (p.indexOf(model.index) !== -1)
+                                        p.splice(p.indexOf(model.index), 1)
+                                    else p.push(model.index)
+                                    settings.pinnedRecentFiles.value = p
+                                }
+                            }
+                            MenuItem {
+                                text: qsTr("remove")
+                                onClicked: recentItem.remove()
+                            }
+                        }
+                    }
+                    Component.onCompleted: console.log(settings.recentFiles.value)
+                }
+            }
+
+            SectionHeader {
                 //: Section Header for the Tasklist section in Settings page
                 text: "Tasklist"
             }
@@ -114,6 +161,12 @@ Page {
         Component.onDestruction: {
             // write back settings and save
             settings.todoTxtLocation = todoTxtPath.text
+            var rf = settings.recentFiles.value
+            if (rf.indexOf(todoTxtPath.text) === -1) {
+                rf.push(todoTxtPath.text)
+                settings.recentFiles.value = rf
+            }
+            console.log(settings.recentFiles.value)
             settings.fontSizeTaskList = fontSizeSlider.sliderValue;
             settings.sync();
         }

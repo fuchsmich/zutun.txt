@@ -151,6 +151,22 @@
         <extracomment>TextSwitch for adding creation date</extracomment>
         <translation>Füge automatisch Erstelldatum hinzu.</translation>
     </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished">Lösche</translation>
+    </message>
+    <message>
+        <source>unpin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SortPage</name>
@@ -335,6 +351,11 @@
         <extracomment>Placeholder when no visible tasks for various reasons (file error, empty file, filters)</extracomment>
         <translation>Keine Aufgaben</translation>
     </message>
+    <message>
+        <source>Clear filters</source>
+        <extracomment>PullDown menu: clear filters</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextSelect</name>
@@ -378,8 +399,9 @@
         <translation>Keine Aufgaben in Datei gefunden.\nRunterziehn, um eine zu erstellen.</translation>
     </message>
     <message>
-        <source>All tasks are hidden by filters</source>
-        <translation>Alle Aufgaben sind druch Filter verborgen.</translation>
+        <source>All tasks are hidden by filters.
+ Pull down to clear filters.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

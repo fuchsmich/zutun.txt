@@ -25,6 +25,14 @@ ApplicationWindow {
         id: settings
         path: "/apps/harbour-zutun/settings"
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
+        property ConfigurationValue recentFiles: ConfigurationValue {
+            key: settings.path + "/recentFiles"
+            defaultValue: []
+        }
+        property ConfigurationValue pinnedRecentFiles: ConfigurationValue {
+            key: settings.path + "/pinnedRecentFiles"
+            defaultValue: []
+        }
         property string doneTxtLocation: StandardPaths.documents + '/done.txt'
         property int fontSizeTaskList: Theme.fontSizeMedium
         property bool projectFilterLeft: false
