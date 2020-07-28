@@ -7,6 +7,7 @@ DISTFILES += qml/harbour-zutun.qml \
     qml/components/CoverListItem.qml \
     qml/components/Delegate.qml \
     qml/components/NotificationList.qml \
+    qml/components/RecentFiles.qml \
     qml/pages/FiltersPage.qml \
     qml/pages/SettingsPage.qml \
     qml/pages/TaskEditPage.qml \
@@ -20,7 +21,6 @@ DISTFILES += qml/harbour-zutun.qml \
     translations/*.ts \
     rpm/harbour-zutun.spec \
     rpm/harbour-zutun.yaml \
-    rpm/harbour-zutun.changes \
     qml/cover/CoverPage.qml \
     qml/cover/zutun.png \
     qml/components/Notification.qml \

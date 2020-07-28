@@ -2,6 +2,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 
+import "../components"
+
 Page {
     id: page
     property string name: "settings"
@@ -69,44 +71,17 @@ Page {
                 color: palette.secondaryColor
             }
             Column {
-                Repeater {
-                    model: settings.recentFiles.value
-                    ListItem {
-                        id: recentItem
-                        width: page.width
+                RecentFiles {
+                    files: settings.pinnedRecentFiles.value
+                    pinned: true
+                    onFilesChanged: settings.pinnedRecentFiles.value = files
+                    onTogglePinned:  {
 
-                        function remove() {
-                            remorseAction(qsTr("Deleting"), function() {
-                                var rf = settings.recentFiles.value
-                                rf.splice(model.index, 1)
-                                settings.recentFiles.value = rf
-                            }, 3000)
-                        }
-
-                        Label {
-                            text: settings.recentFiles.value[model.index]
-                            anchors.centerIn: parent
-                        }
-                        menu: ContextMenu {
-                            MenuItem {
-                                property var pinned: settings.pinnedRecentFiles.value
-                                text: pinned.indexOf(model.index) !== -1 ?
-                                          qsTr("unpin") : qsTr("pin")
-                                onClicked: {
-                                    var p = pinned
-                                    if (p.indexOf(model.index) !== -1)
-                                        p.splice(p.indexOf(model.index), 1)
-                                    else p.push(model.index)
-                                    settings.pinnedRecentFiles.value = p
-                                }
-                            }
-                            MenuItem {
-                                text: qsTr("remove")
-                                onClicked: recentItem.remove()
-                            }
-                        }
                     }
-                    Component.onCompleted: console.log(settings.recentFiles.value)
+                }
+                RecentFiles {
+                    pinned: false
+                    files: settings.recentFiles.value
                 }
             }
 
