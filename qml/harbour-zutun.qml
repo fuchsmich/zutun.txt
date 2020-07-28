@@ -92,7 +92,7 @@ ApplicationWindow {
         if (todoTxtFile.pathExists && !todoTxtFile.exists) return qsTr("File doesn't exist.\n Pull down to create it.")
         if (todoTxtFile.content === "") return qsTr("File seems to be empty.\n Pull down to create one.")
         if (taskListModel.textList.length === 0) return qsTr("No tasks found in file.\n Pull down to create one.")
-        if (taskListModel.visibleTextList.length === 0) return qsTr("All tasks are hidden by filters")
+        if (taskListModel.visibleTextList.length === 0) return qsTr("All tasks are hidden by filters.\n Pull down to clear filters.")
         return ""
     }
 
