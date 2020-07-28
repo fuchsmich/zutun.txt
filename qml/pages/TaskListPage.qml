@@ -38,6 +38,12 @@ Page {
                 text: qsTr("Create file")
                 onClicked: todoTxtFile.create()
             }
+            MenuItem {
+                visible: taskListModel.count > 0 && taskListModel.visibleTextList.length === 0
+                //: PullDown menu: clear filters
+                text: qsTr("Clear filters")
+                onClicked: taskListModel.filters.clearFilters()
+            }
         }
 
 
