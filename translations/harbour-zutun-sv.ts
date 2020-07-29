@@ -115,6 +115,25 @@
     </message>
 </context>
 <context>
+    <name>RecentFiles</name>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished">Tar bort</translation>
+    </message>
+    <message>
+        <source>unpin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
     <message>
         <source>About</source>
@@ -152,19 +171,8 @@
         <translation>Lägg till tidsstämpel automatiskt.</translation>
     </message>
     <message>
-        <source>Deleting</source>
-        <translation type="unfinished">Tar bort</translation>
-    </message>
-    <message>
-        <source>unpin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>remove</source>
+        <source>Recent files</source>
+        <extracomment>Section Header for the Files section in Settings page</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -6,23 +6,45 @@ Repeater {
     id: repeater
     property var files: []
     property bool pinned: false
+    signal setFiles(var files)
     signal togglePinned(int index)
     model: files
+
+    function remove(index) {
+        var rf = files
+        var item = rf.splice(index, 1)
+        setFiles(rf)
+        return item[0]
+    }
+
+    function add(item) {
+        if (files.indexOf(item) === -1) {
+            var rf = files
+            if (pinned) {
+                rf.push(item)
+                rf.sort()
+            } else {
+                var l = rf.unshift(item)
+                if (l > 3) rf.splice(3)
+            }
+            setFiles(rf)
+        }
+    }
+
     ListItem {
         id: recentItem
-        width: page.width
+        width: parent.width
 
         function remove() {
             remorseAction(qsTr("Deleting"), function() {
-                var rf = files
-                rf.splice(model.index, 1)
-                files = rf
+                repeater.remove(model.index)
             }, 3000)
         }
 
         Label {
             text: files[model.index]
             anchors.centerIn: parent
+            highlighted: pinned
         }
         menu: ContextMenu {
             MenuItem {
@@ -35,5 +57,4 @@ Repeater {
             }
         }
     }
-    Component.onCompleted: console.log(settings.recentFiles.value)
 }

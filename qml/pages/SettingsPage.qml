@@ -71,17 +71,30 @@ Page {
                 color: palette.secondaryColor
             }
             Column {
+                width: page.width
                 RecentFiles {
+                    id: pinnedRF
                     files: settings.pinnedRecentFiles.value
                     pinned: true
-                    onFilesChanged: settings.pinnedRecentFiles.value = files
+                    onSetFiles: {
+                        settings.pinnedRecentFiles.value = files
+                    }
                     onTogglePinned:  {
-
+                        var item = this.remove(index)
+                        recentFiles.add(item)
                     }
                 }
                 RecentFiles {
+                    id: recentFiles
                     pinned: false
                     files: settings.recentFiles.value
+                    onSetFiles:{
+                        settings.recentFiles.value = files
+                    }
+                    onTogglePinned:  {
+                        var item = this.remove(index)
+                        pinnedRF.add(item)
+                    }
                 }
             }
 
@@ -136,11 +149,8 @@ Page {
         Component.onDestruction: {
             // write back settings and save
             settings.todoTxtLocation = todoTxtPath.text
-            var rf = settings.recentFiles.value
-            if (rf.indexOf(todoTxtPath.text) === -1) {
-                rf.push(todoTxtPath.text)
-                settings.recentFiles.value = rf
-            }
+            if (settings.pinnedRecentFiles.value.indexOf(todoTxtPath.text) === -1)
+                recentFiles.add(todoTxtPath.text)
             console.log(settings.recentFiles.value)
             settings.fontSizeTaskList = fontSizeSlider.sliderValue;
             settings.sync();
