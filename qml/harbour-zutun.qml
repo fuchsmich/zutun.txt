@@ -25,6 +25,14 @@ ApplicationWindow {
         id: settings
         path: "/apps/harbour-zutun/settings"
         property string todoTxtLocation: StandardPaths.documents + '/todo.txt'
+        property ConfigurationValue recentFiles: ConfigurationValue {
+            key: settings.path + "/recentFiles"
+            defaultValue: []
+        }
+        property ConfigurationValue pinnedRecentFiles: ConfigurationValue {
+            key: settings.path + "/pinnedRecentFiles"
+            defaultValue: []
+        }
         property string doneTxtLocation: StandardPaths.documents + '/done.txt'
         property int fontSizeTaskList: Theme.fontSizeMedium
         property bool projectFilterLeft: false
@@ -92,7 +100,7 @@ ApplicationWindow {
         if (todoTxtFile.pathExists && !todoTxtFile.exists) return qsTr("File doesn't exist.\n Pull down to create it.")
         if (todoTxtFile.content === "") return qsTr("File seems to be empty.\n Pull down to create one.")
         if (taskListModel.textList.length === 0) return qsTr("No tasks found in file.\n Pull down to create one.")
-        if (taskListModel.visibleTextList.length === 0) return qsTr("All tasks are hidden by filters")
+        if (taskListModel.visibleTextList.length === 0) return qsTr("All tasks are hidden by filters.\n Pull down to clear filters.")
         return ""
     }
 
@@ -101,15 +109,15 @@ ApplicationWindow {
         path: settings.todoTxtLocation
         onPathChanged: {
             taskListModel.setFileContent("")
-            read()
+            read("path changed")
         }
 
-        onReadSuccess:
-            if (content) {
-                taskListModel.setFileContent(content)
-            }
+        onReadSuccess:{
+            //console.debug(content)
+            taskListModel.setFileContent(content)
+        }
 
-        onPythonReadyChanged: if (pythonReady) read()
+        onPythonReadyChanged: if (pythonReady) read("python ready")
     }
 
     NotificationList {
@@ -150,13 +158,6 @@ ApplicationWindow {
             order: sortSettings.order
             groupBy: sortSettings.grouping
             onSortingChanged: visualModel.update()
-        }
-    }
-
-    onActiveFocusChanged: {
-        if (activeFocus) {
-            //console.log("app", activeFocus)
-            todoTxtFile.read()
         }
     }
 }

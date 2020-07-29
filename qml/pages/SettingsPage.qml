@@ -2,6 +2,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 
+import "../components"
+
 Page {
     id: page
     property string name: "settings"
@@ -64,6 +66,41 @@ Page {
             }
 
             SectionHeader {
+                //: Section Header for the Files section in Settings page
+                text: qsTr("Recent files")
+                color: palette.secondaryColor
+            }
+            Column {
+                width: page.width
+                RecentFiles {
+                    id: pinnedRF
+                    files: settings.pinnedRecentFiles.value
+                    pinned: true
+                    onSetFiles: {
+                        settings.pinnedRecentFiles.value = files
+                    }
+                    onTogglePinned:  {
+                        var item = this.remove(index)
+                        recentFiles.add(item)
+                    }
+                    onFileClicked: todoTxtPath.text = path
+                }
+                RecentFiles {
+                    id: recentFiles
+                    pinned: false
+                    files: settings.recentFiles.value
+                    onSetFiles:{
+                        settings.recentFiles.value = files
+                    }
+                    onTogglePinned:  {
+                        var item = this.remove(index)
+                        pinnedRF.add(item)
+                    }
+                    onFileClicked: todoTxtPath.text = path
+                }
+            }
+
+            SectionHeader {
                 //: Section Header for the Tasklist section in Settings page
                 text: "Tasklist"
             }
@@ -114,6 +151,8 @@ Page {
         Component.onDestruction: {
             // write back settings and save
             settings.todoTxtLocation = todoTxtPath.text
+            if (settings.pinnedRecentFiles.value.indexOf(todoTxtPath.text) === -1)
+                recentFiles.add(todoTxtPath.text)
             settings.fontSizeTaskList = fontSizeSlider.sliderValue;
             settings.sync();
         }

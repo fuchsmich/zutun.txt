@@ -38,6 +38,12 @@ Page {
                 text: qsTr("Create file")
                 onClicked: todoTxtFile.create()
             }
+            MenuItem {
+                visible: taskListModel.count > 0 && taskListModel.visibleTextList.length === 0
+                //: PullDown menu: clear filters
+                text: qsTr("Clear filters")
+                onClicked: taskListModel.filters.clearFilters()
+            }
         }
 
 
@@ -150,7 +156,7 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            todoTxtFile.read()
+            todoTxtFile.read("tasklist active")
             /* attach filter page: */
             pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"))
 //            if ( pageStack.depth === 1) {

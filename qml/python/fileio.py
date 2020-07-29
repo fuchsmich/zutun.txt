@@ -54,10 +54,10 @@ def read(path):
         with open(path, 'rt') as f:
             read_data = f.read()
             #f.close()
-            #pyotherside.send('log', "Content read {0}".format(path))
+            pyotherside.send('log', "Content read {0}".format(path))
             return read_data, os.path.getmtime(path)
     else:
-        return ""
+        return False
 
 
 def write(path, content):

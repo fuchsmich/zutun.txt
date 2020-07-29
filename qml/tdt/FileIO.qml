@@ -6,12 +6,18 @@ Python {
 
     property string path
     onPathChanged: {
+        reset()
         if (pythonReady) status = 1
-        content = ""
-        lastChange = undefined
     }
-    property string folder: path.substring(0, path.lastIndexOf("/")+1)
-    property string content: ""
+
+    function reset() {
+        lastChange = undefined
+        error = ""
+        pathExists = false
+        exists = false
+        readable = false
+        writeable = false
+    }
 
     property string error: ""
     signal ioError(string msg)
@@ -19,7 +25,6 @@ Python {
     signal readSuccess(string content)
     onReadSuccess: {
         error = ""
-        py.content = content
     }
 
     property bool pathExists: false
@@ -40,18 +45,37 @@ Python {
     property bool pythonReady: false
     onPythonReadyChanged: if (path) status = 1
 
-    function read() {
-        //console.debug("reading", "ready:", pythonReady, "path:", path)
+    function pyPath() {
+        return (path.substring(0,7) == "file://" ? path.substring(7) : path)
+    }
+
+    function read(reason) {
+        console.debug(reason)
         if (status === 1) {
             status = 2
-            var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
-            py.call('fileio.read', [pyPath], function(result){
+            var _pyPath = py.pyPath()
+            py.call('fileio.read', [_pyPath], function(result){
+                if (_pyPath !== py.pyPath()) {
+                    console.log("path changed, trying to read again")
+                    status = 1
+                    read("path changed")
+                    return
+                }
+                if (!result) {
+                    console.log("no reading result")
+                    status = 1
+                    return
+                }
                 var _mtime = new Date(result[1]*1000)
-                if (lastChange === undefined || lastChange < _mtime) {
+                if (lastChange instanceof Date && !isNaN(lastChange.valueOf()) && lastChange >= _mtime) {
+                    console.log("nothing new", path, _mtime, lastChange)
+                    status = 1
+                    return
+                }
+                if (_mtime instanceof Date && !isNaN(_mtime.valueOf()))
                     lastChange = _mtime
-                    py.readSuccess(result[0])
-                    console.log("read", "path:", path, "file mdate", lastChange)
-                } else console.log("nothing new", path, _mtime)
+                py.readSuccess(result[0])
+                console.log("read", "path:", path, "file mdate", lastChange)
                 status = 1
             })
         }
@@ -107,7 +131,7 @@ Python {
     }
 
     onReceived: {
-        console.log("Event: " + data)
+        console.debug("Event: " + data)
     }
 
     onError: console.log('Python error: ' + traceback)

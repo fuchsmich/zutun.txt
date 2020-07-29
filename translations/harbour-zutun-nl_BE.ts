@@ -115,6 +115,25 @@
     </message>
 </context>
 <context>
+    <name>RecentFiles</name>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unpin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
     <message>
         <source>About</source>
@@ -149,6 +168,11 @@
     <message>
         <source>Auto add creation date.</source>
         <extracomment>TextSwitch for adding creation date</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recent files</source>
+        <extracomment>Section Header for the Files section in Settings page</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -335,6 +359,11 @@
         <extracomment>Placeholder when no visible tasks for various reasons (file error, empty file, filters)</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clear filters</source>
+        <extracomment>PullDown menu: clear filters</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextSelect</name>
@@ -378,7 +407,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All tasks are hidden by filters</source>
+        <source>All tasks are hidden by filters.
+ Pull down to clear filters.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
