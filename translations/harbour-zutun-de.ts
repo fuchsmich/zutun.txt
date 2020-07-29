@@ -118,19 +118,19 @@
     <name>RecentFiles</name>
     <message>
         <source>Deleting</source>
-        <translation type="unfinished">Lösche</translation>
+        <translation>Lösche</translation>
     </message>
     <message>
         <source>unpin</source>
-        <translation type="unfinished"></translation>
+        <translation>Loslösen</translation>
     </message>
     <message>
         <source>pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Anheften</translation>
     </message>
     <message>
         <source>remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <source>Recent files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelle Dateien</translation>
     </message>
 </context>
 <context>
@@ -362,7 +362,7 @@
     <message>
         <source>Clear filters</source>
         <extracomment>PullDown menu: clear filters</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Filter entfernen</translation>
     </message>
 </context>
 <context>
@@ -409,7 +409,7 @@
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Aufgaben sind gefiltert.\nRunterziehen, um Filter zu entfernen.</translation>
     </message>
 </context>
 </TS>
