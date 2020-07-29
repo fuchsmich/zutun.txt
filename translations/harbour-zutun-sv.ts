@@ -118,19 +118,19 @@
     <name>RecentFiles</name>
     <message>
         <source>Deleting</source>
-        <translation type="unfinished">Tar bort</translation>
+        <translation>Tar bort</translation>
     </message>
     <message>
         <source>unpin</source>
-        <translation type="unfinished"></translation>
+        <translation>lösgör</translation>
     </message>
     <message>
         <source>pin</source>
-        <translation type="unfinished"></translation>
+        <translation>fäst</translation>
     </message>
     <message>
         <source>remove</source>
-        <translation type="unfinished"></translation>
+        <translation>ta bort</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <source>Recent files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Tidigare filer</translation>
     </message>
 </context>
 <context>
@@ -362,7 +362,7 @@
     <message>
         <source>Clear filters</source>
         <extracomment>PullDown menu: clear filters</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Rensa filter</translation>
     </message>
 </context>
 <context>
@@ -412,7 +412,8 @@
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla ktiviteter är dolda av filter.
+ Dra neråt för att rensa filter.</translation>
     </message>
 </context>
 </TS>
