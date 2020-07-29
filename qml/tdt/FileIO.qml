@@ -6,7 +6,6 @@ Python {
 
     property string path
     onPathChanged: {
-        //console.debug("path changed inside")
         reset()
         if (pythonReady) status = 1
     }
@@ -46,20 +45,34 @@ Python {
     property bool pythonReady: false
     onPythonReadyChanged: if (path) status = 1
 
+    function pyPath() {
+        return (path.substring(0,7) == "file://" ? path.substring(7) : path)
+    }
+
     function read(reason) {
         console.debug(reason)
         if (status === 1) {
             status = 2
-            var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
-            py.call('fileio.read', [pyPath], function(result){
-                //console.log("result", result)
+            var _pyPath = py.pyPath()
+            py.call('fileio.read', [_pyPath], function(result){
+                if (_pyPath !== py.pyPath()) {
+                    console.log("path changed, trying to read again")
+                    status = 1
+                    read("path changed")
+                    return
+                }
+                if (!result) {
+                    console.log("no reading result")
+                }
                 var _mtime = new Date(result[1]*1000)
-                console.log(lastChange, _mtime)
-                if (lastChange === undefined || lastChange < _mtime) {
-                    if (_mtime instanceof Date && !isNaN(_mtime.valueOf())) lastChange = _mtime
-                    py.readSuccess(result[0])
-                    console.log("read", "path:", path, "file mdate", lastChange)
-                } else console.log("nothing new", path, _mtime, lastChange)
+                if (lastChange instanceof Date && !isNaN(lastChange.valueOf()) && lastChange < _mtime) {
+                    console.log("nothing new", path, _mtime, lastChange)
+                    status = 1
+                    return
+                }
+                if (_mtime instanceof Date && !isNaN(_mtime.valueOf())) lastChange = _mtime
+                py.readSuccess(result[0])
+                console.log("read", "path:", path, "file mdate", lastChange)
                 status = 1
             })
         }
