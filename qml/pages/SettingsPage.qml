@@ -83,6 +83,7 @@ Page {
                         var item = this.remove(index)
                         recentFiles.add(item)
                     }
+                    onFileClicked: todoTxtPath.text = path
                 }
                 RecentFiles {
                     id: recentFiles
@@ -95,6 +96,7 @@ Page {
                         var item = this.remove(index)
                         pinnedRF.add(item)
                     }
+                    onFileClicked: todoTxtPath.text = path
                 }
             }
 
@@ -151,7 +153,6 @@ Page {
             settings.todoTxtLocation = todoTxtPath.text
             if (settings.pinnedRecentFiles.value.indexOf(todoTxtPath.text) === -1)
                 recentFiles.add(todoTxtPath.text)
-            console.log(settings.recentFiles.value)
             settings.fontSizeTaskList = fontSizeSlider.sliderValue;
             settings.sync();
         }

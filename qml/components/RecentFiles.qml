@@ -8,6 +8,7 @@ Repeater {
     property bool pinned: false
     signal setFiles(var files)
     signal togglePinned(int index)
+    signal fileClicked(string path)
     model: files
 
     function remove(index) {
@@ -46,6 +47,7 @@ Repeater {
             anchors.centerIn: parent
             highlighted: pinned
         }
+        onClicked: fileClicked(files[model.index])
         menu: ContextMenu {
             MenuItem {
                 text: pinned ? qsTr("unpin") : qsTr("pin")
