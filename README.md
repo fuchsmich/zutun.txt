@@ -28,7 +28,10 @@ Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) b
 
 ### 2.1
   - update languages: sv
-  
+  - recent files in settings
+  - fixed some bugs when changing from one file to another
+  - better hint when all tasks filtered
+  - clear multiple spaces when adding task
 
 ### 2.0
   - advanced filters (or, not)
