@@ -113,7 +113,7 @@ ApplicationWindow {
         }
 
         onReadSuccess:{
-            console.debug(content)
+            //console.debug(content)
             taskListModel.setFileContent(content)
         }
 

@@ -72,7 +72,8 @@ Python {
                     status = 1
                     return
                 }
-                if (_mtime instanceof Date && !isNaN(_mtime.valueOf())) lastChange = _mtime
+                if (_mtime instanceof Date && !isNaN(_mtime.valueOf()))
+                    lastChange = _mtime
                 py.readSuccess(result[0])
                 console.log("read", "path:", path, "file mdate", lastChange)
                 status = 1
