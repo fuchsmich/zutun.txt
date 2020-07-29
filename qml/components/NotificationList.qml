@@ -8,7 +8,6 @@ Item {
     property var taskList: ListModel {}
 
     function publishNotifications() {
-        console.log("notificationList")
         removeAll()
         for (var i = 0; i < taskList.count; i++){
             var task = taskList.get(i)
@@ -24,15 +23,17 @@ Item {
     }
 
     function removeAll() {
-        ids.forEach(function(_id, index){
-            var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
+        if (ids) {
+            ids.forEach(function(_id, index){
+                var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
-            var notification = notificationComp.createObject(null, {task: JS.tools.lineToJSON("")})
-            notification.replacesId = _id
-            notification.publish()
-            notification.close()
-            settings.notificationIDs.value.splice(index, 1)
-        })
+                var notification = notificationComp.createObject(null, {task: JS.tools.lineToJSON("")})
+                notification.replacesId = _id
+                notification.publish()
+                notification.close()
+                settings.notificationIDs.value.splice(index, 1)
+            })
+        }
     }
 
 
