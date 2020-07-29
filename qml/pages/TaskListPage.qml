@@ -156,7 +156,7 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            todoTxtFile.read()
+            todoTxtFile.read("tasklist active")
             /* attach filter page: */
             pageStack.pushAttached(Qt.resolvedUrl("FiltersPage.qml"))
 //            if ( pageStack.depth === 1) {

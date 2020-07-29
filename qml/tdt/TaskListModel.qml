@@ -3,7 +3,7 @@ import QtQuick 2.0
 import "todotxt.js" as JS
 
 ListModel {
-
+    id: tlm
     //0..init, 1..sorting, 2..ready
     //property int status: 0
     //property bool busy: status === 0 || status === 1
@@ -49,11 +49,11 @@ ListModel {
     }
 
     function setFileContent(content) {        
-        JS.taskList.setTextList(content)
+        //JS.taskList.setTextList(content)
         clear()
-        var json = JS.taskList.itemList()
-        json.forEach(function(item) {
-            append(item)
+        var tl = JS.tools.splitLines(content)
+        tl.forEach(function(item, i){
+            tlm.append(JS.tools.lineToJSON(item, i))
         })
         taskListDataChanged("read file")
     }

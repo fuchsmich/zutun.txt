@@ -108,17 +108,17 @@ ApplicationWindow {
         id: todoTxtFile
         path: settings.todoTxtLocation
         onPathChanged: {
-            console.log("path changed")
-            taskListModel.setFileContent("")
-            read()
+            //console.log("path changed")
+            //taskListModel.setFileContent("")
+            read("path changed")
         }
 
-        onReadSuccess:
-            if (content) {
-                taskListModel.setFileContent(content)
-            }
+        onReadSuccess:{
+            console.debug(content)
+            taskListModel.setFileContent(content)
+        }
 
-        onPythonReadyChanged: if (pythonReady) read()
+        onPythonReadyChanged: if (pythonReady) read("python ready")
     }
 
     NotificationList {
@@ -159,13 +159,6 @@ ApplicationWindow {
             order: sortSettings.order
             groupBy: sortSettings.grouping
             onSortingChanged: visualModel.update()
-        }
-    }
-
-    onActiveFocusChanged: {
-        if (activeFocus) {
-            //console.log("app", activeFocus)
-            todoTxtFile.read()
         }
     }
 }

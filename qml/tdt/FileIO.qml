@@ -6,12 +6,19 @@ Python {
 
     property string path
     onPathChanged: {
+        //console.debug("path changed inside")
+        reset()
         if (pythonReady) status = 1
-        content = ""
-        lastChange = undefined
     }
-    property string folder: path.substring(0, path.lastIndexOf("/")+1)
-    property string content: ""
+
+    function reset() {
+        lastChange = undefined
+        error = ""
+        pathExists = false
+        exists = false
+        readable = false
+        writeable = false
+    }
 
     property string error: ""
     signal ioError(string msg)
@@ -19,7 +26,6 @@ Python {
     signal readSuccess(string content)
     onReadSuccess: {
         error = ""
-        py.content = content
     }
 
     property bool pathExists: false
@@ -40,18 +46,20 @@ Python {
     property bool pythonReady: false
     onPythonReadyChanged: if (path) status = 1
 
-    function read() {
-        //console.debug("reading", "ready:", pythonReady, "path:", path)
+    function read(reason) {
+        console.debug(reason)
         if (status === 1) {
             status = 2
             var pyPath = (path.substring(0,7) == "file://" ? path.substring(7) : path)
             py.call('fileio.read', [pyPath], function(result){
+                //console.log("result", result)
                 var _mtime = new Date(result[1]*1000)
+                console.log(lastChange, _mtime)
                 if (lastChange === undefined || lastChange < _mtime) {
-                    lastChange = _mtime
+                    if (_mtime instanceof Date && !isNaN(_mtime.valueOf())) lastChange = _mtime
                     py.readSuccess(result[0])
                     console.log("read", "path:", path, "file mdate", lastChange)
-                } else console.log("nothing new", path, _mtime)
+                } else console.log("nothing new", path, _mtime, lastChange)
                 status = 1
             })
         }
@@ -107,7 +115,7 @@ Python {
     }
 
     onReceived: {
-        console.log("Event: " + data)
+        console.debug("Event: " + data)
     }
 
     onError: console.log('Python error: ' + traceback)

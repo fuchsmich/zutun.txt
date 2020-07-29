@@ -56,9 +56,9 @@ var tools = {
         return item
     },
     //return array of tasks
-    splitLines: function(fileContent) {
+    splitLines: function(text) {
         var tasks = []
-        var lines = fileContent.split("\n")
+        var lines = text.split("\n")
         var txt = ""
         lines.forEach(function(line){
             txt = line.trim()
@@ -67,35 +67,6 @@ var tools = {
         return tasks
     }
 }
-
-var taskList = {
-    textList: [],
-    //set new text list and parse it
-    setTextList: function (newtext) {
-        this.textList = tools.splitLines(newtext)
-        this.textList.sort()
-    },
-    //return add task string to tasklist
-    itemList: function(){
-        var il = []
-        this.textList.forEach(function(item, i){
-            il.push(tools.lineToJSON(item, i))
-        })
-        return il
-    },
-    addTask: function(text){
-        this.textList.push(text)
-        this.textList.sort()
-    },
-    removeTask: function(index){
-        this.textList.splice(index, 1)
-    },
-    modifyTask: function(index, feature, value) {
-        this.textList[index] = baseFeatures.modifyLine(this.textList[index], feature, value)
-        this.textList.sort()
-    }
-}
-
 
 var baseFeatures = {
     //see https://github.com/todotxt/todo.txt
