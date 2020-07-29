@@ -43,9 +43,12 @@ Repeater {
         }
 
         Label {
+            width: parent.width
             text: files[model.index]
             anchors.centerIn: parent
             highlighted: pinned
+            horizontalAlignment: Text.AlignHCenter
+            truncationMode: TruncationMode.Elide
         }
         onClicked: fileClicked(files[model.index])
         menu: ContextMenu {
