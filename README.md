@@ -10,7 +10,7 @@ Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) b
 
 ## Features
 
-  - sort/Group Tasks:
+  - sort/group Tasks:
     - as in textfile ("natural")
     - by creation date
     - by contexts
