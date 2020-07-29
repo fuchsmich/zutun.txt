@@ -12,17 +12,17 @@ Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) b
 
   - sort/Group Tasks:
     - as in textfile ("natural")
-  - by creation date
-  - by contexts
-  - by projects
+    - by creation date
+    - by contexts
+    - by projects
   - filter tasks
     - hide completed tasks
-  - by project or context
+    - by project or context
   - edit tasks
     - datepicker for due date
-  - auto-add creation date when adding new task
-  - show tasks with due date in notifications
-  - add task from top menu (app must be running)
+    - auto-add creation date when adding new task
+    - show tasks with due date in notifications
+    - add task from top menu (app must be running)
   
 ## Changes
 
