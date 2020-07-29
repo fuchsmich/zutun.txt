@@ -108,7 +108,6 @@ ApplicationWindow {
         id: todoTxtFile
         path: settings.todoTxtLocation
         onPathChanged: {
-            //console.log("path changed")
             taskListModel.setFileContent("")
             read("path changed")
         }

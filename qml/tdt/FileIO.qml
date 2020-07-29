@@ -63,9 +63,11 @@ Python {
                 }
                 if (!result) {
                     console.log("no reading result")
+                    status = 1
+                    return
                 }
                 var _mtime = new Date(result[1]*1000)
-                if (lastChange instanceof Date && !isNaN(lastChange.valueOf()) && lastChange < _mtime) {
+                if (lastChange instanceof Date && !isNaN(lastChange.valueOf()) && lastChange >= _mtime) {
                     console.log("nothing new", path, _mtime, lastChange)
                     status = 1
                     return
