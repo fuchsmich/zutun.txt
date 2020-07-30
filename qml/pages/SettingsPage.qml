@@ -102,10 +102,11 @@ Page {
 
             SectionHeader {
                 //: Section Header for the Tasklist section in Settings page
-                text: "Tasklist"
+                text: qsTr("Tasklist")
             }
             Row {
                 width: parent.width
+                //TODO convert to pulldown
                 Slider {
                     id: fontSizeSlider
                     //x: Theme.horizontalPageMargin
@@ -127,7 +128,7 @@ Page {
             }
 //            SectionHeader {
 //                //: Section Header for the Filter section in Settings page
-//                text: "Filter"
+//                text: qsTr("Filter")
 //            }
 //            TextSwitch {
 //                //: TextSwitch for project filter
@@ -138,12 +139,13 @@ Page {
 //            }
             SectionHeader {
                 //: Section Header for the Edit section in Settings page
-                text: "Edit Task"
+                text: qsTr("Edit Task")
             }
             TextSwitch {
                 //: TextSwitch for adding creation date
                 text: qsTr("Auto add creation date.")
-                description: "Automatically add creation date to newly added tasks."
+                //: TextSwitch for adding creation date
+                description: qsTr("Automatically add creation date to newly added tasks.")
                 checked: settings.creationDateOnAddTask
                 onClicked: settings.creationDateOnAddTask = checked
             }
