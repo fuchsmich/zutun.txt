@@ -51,7 +51,7 @@
     <message>
         <source>None</source>
         <extracomment>text about active filters</extracomment>
-        <translation>Ingen</translation>
+        <translation>Inget</translation>
     </message>
 </context>
 <context>
@@ -205,11 +205,11 @@
     </message>
     <message>
         <source>asc</source>
-        <translation>Stigande</translation>
+        <translation>stigande</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation>Fallande</translation>
+        <translation>fallande</translation>
     </message>
 </context>
 <context>
@@ -233,7 +233,7 @@
     <message>
         <source>Natural</source>
         <extracomment>SortPage, sorting by: Natural</extracomment>
-        <translation>Naturligt</translation>
+        <translation>Naturlig</translation>
     </message>
     <message>
         <source>Creation Date</source>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source> completed tasks</source>
-        <translation>Slutförda aktiviteter</translation>
+        <translation> slutförda aktiviteter</translation>
     </message>
     <message>
         <source>Tasklist</source>
