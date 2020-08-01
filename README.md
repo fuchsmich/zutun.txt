@@ -26,6 +26,10 @@ Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) b
   
 ## Changes
 
+### 2.2
+  - update languages: fr
+  - trim (new) tasks after editing
+
 ### 2.1
   - update languages: sv
   - recent files in settings
