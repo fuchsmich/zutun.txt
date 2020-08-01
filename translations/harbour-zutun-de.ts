@@ -348,7 +348,7 @@
     <message>
         <source>Add new task</source>
         <extracomment>PullDown menu: add new task</extracomment>
-        <translation>Füge neue Aufgabe hinzu</translation>
+        <translation>Aufgabe hinzufügen</translation>
     </message>
     <message>
         <source> completed tasks</source>
@@ -394,22 +394,22 @@
     <message>
         <source>File doesn&apos;t exist.
  Pull down to create it.</source>
-        <translation>Datei existiert nicht.\nRunterziehen, um Datei zu erzeugen.</translation>
+        <translation>Datei existiert nicht.\n Runterziehen, um Datei zu erzeugen.</translation>
     </message>
     <message>
         <source>File seems to be empty.
  Pull down to create one.</source>
-        <translation>Datei scheint leer zu sein.\nRunterziehen, um sie zu erstellen.</translation>
+        <translation>Datei scheint leer zu sein.\n Runterziehen, um sie zu erstellen.</translation>
     </message>
     <message>
         <source>No tasks found in file.
  Pull down to create one.</source>
-        <translation>Keine Aufgaben in Datei gefunden.\nRunterziehn, um eine zu erstellen.</translation>
+        <translation>Keine Aufgaben in Datei gefunden.\n Runterziehn, um eine zu erstellen.</translation>
     </message>
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation>Alle Aufgaben sind gefiltert.\nRunterziehen, um Filter zu entfernen.</translation>
+        <translation>Alle Aufgaben sind gefiltert.\n Runterziehen, um Filter zu entfernen.</translation>
     </message>
 </context>
 </TS>
