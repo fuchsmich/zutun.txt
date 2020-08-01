@@ -222,6 +222,7 @@ Dialog {
 
     onAccepted: {
         text = text.replace(/\s{2,}/g, ' ') // cleanup multiple whitespaces
+        text = text.trim()
         if (taskIndex > -1) taskListModel.setTaskProperty(taskIndex, JS.baseFeatures.fullTxt, text)
         if (taskIndex === -1) {
             if (settings.creationDateOnAddTask) {
