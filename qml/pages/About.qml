@@ -74,7 +74,7 @@ Page {
                 x: Theme.horizontalPageMargin
                 text:'es: Carmen Fernández B.
 nl, nl_BE: Nathan Follens
-fr: my brother
+fr: Geoffroy Arnaux
 sv: Åke Engelbrektson
 ru: Алексей Дедун'
             }
