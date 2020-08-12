@@ -1,34 +1,34 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh" version="2.1">
 <context>
     <name>About</name>
     <message>
         <source>Source</source>
         <extracomment>Location of Sourcecode, followed by the button to GitHub</extracomment>
-        <translation>Fuente</translation>
+        <translation>源</translation>
     </message>
     <message>
         <source>Packages</source>
         <extracomment>Where to get this app, followed by the button to OpenRepos</extracomment>
-        <translation>Dónde conseguir esta aplicación</translation>
+        <translation>从此处获取该软件</translation>
     </message>
     <message>
         <source>About %1</source>
         <extracomment>About Zutun.txt</extracomment>
-        <translation>Acerca de %1</translation>
+        <translation>关于 %1</translation>
     </message>
     <message>
         <source>Author</source>
         <extracomment>Author of the app</extracomment>
-        <translation>Autor</translation>
+        <translation>作者</translation>
     </message>
     <message>
         <source>Version %1</source>
-        <translation>Versión %1</translation>
+        <translation>版本 %1</translation>
     </message>
     <message>
         <source>Translation</source>
         <extracomment>SectionHeader for the names of the translators - you ;-)</extracomment>
-        <translation>Traducción</translation>
+        <translation>翻译</translation>
     </message>
 </context>
 <context>
@@ -36,7 +36,7 @@
     <message>
         <source>Select due date</source>
         <extracomment>Calendar is shown below text to pick a date</extracomment>
-        <translation>Seleccionar fecha límite</translation>
+        <translation>选择到期日</translation>
     </message>
 </context>
 <context>
@@ -44,12 +44,12 @@
     <message>
         <source>Hide complete</source>
         <extracomment>text about active filters</extracomment>
-        <translation>Ocultar completadas</translation>
+        <translation>隐藏已完成事件</translation>
     </message>
     <message>
         <source>None</source>
         <extracomment>text about active filters</extracomment>
-        <translation>Ninguno</translation>
+        <translation>暂无</translation>
     </message>
 </context>
 <context>
@@ -57,31 +57,31 @@
     <message>
         <source>Active Filters: %1</source>
         <extracomment>PageHeader for currently set filters</extracomment>
-        <translation>Filtros activos: %1</translation>
+        <translation>活动筛选: %1</translation>
     </message>
     <message>
         <source>Clear Filters</source>
-        <translation>Borrar filtros</translation>
+        <translation>清除筛选</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation>Filtros</translation>
+        <translation>筛选</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation>Proyectos</translation>
+        <translation>项目</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation>Contextos</translation>
+        <translation>文本</translation>
     </message>
     <message>
         <source>Other Filters</source>
-        <translation>Otros filtros</translation>
+        <translation>其它筛选</translation>
     </message>
     <message>
         <source>Hide complete tasks</source>
-        <translation>Ocultar tareas completadas</translation>
+        <translation>隐藏已完成任务</translation>
     </message>
 </context>
 <context>
@@ -89,46 +89,46 @@
     <message>
         <source>Filter contexts</source>
         <extracomment>PullDown menu: go to filter contexts page</extracomment>
-        <translation>Filtrar contextos</translation>
+        <translation>筛选文本</translation>
     </message>
     <message>
         <source>Filter projects</source>
         <extracomment>PullDown menu: go to filter projects page</extracomment>
-        <translation>Filtrar proyectos</translation>
+        <translation>筛选项目</translation>
     </message>
     <message>
         <source>Back to Tasklist</source>
         <extracomment>PullDown menu: go to task list</extracomment>
-        <translation>Volver a lista de tareas</translation>
+        <translation>返回任务清单</translation>
     </message>
     <message>
         <source>Other filters</source>
         <extracomment>PageHeader for other filters</extracomment>
-        <translation>Otros filtros</translation>
+        <translation>其它筛选</translation>
     </message>
     <message>
         <source>Hide completed tasks</source>
         <extracomment>TextSwitch for handling of completed task visibility</extracomment>
-        <translation>Ocultar tareas completadas</translation>
+        <translation>隐藏已完成任务</translation>
     </message>
 </context>
 <context>
     <name>RecentFiles</name>
     <message>
         <source>Deleting</source>
-        <translation>Borrando</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <source>unpin</source>
-        <translation>desanclar</translation>
+        <translation>取消钉住</translation>
     </message>
     <message>
         <source>pin</source>
-        <translation>anclar</translation>
+        <translation>钉住</translation>
     </message>
     <message>
         <source>remove</source>
-        <translation>eliminar</translation>
+        <translation>移除</translation>
     </message>
 </context>
 <context>
@@ -136,42 +136,42 @@
     <message>
         <source>About</source>
         <extracomment>Information on the app: version, author, source code etc.</extracomment>
-        <translation>Acerca de</translation>
+        <translation>关于</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Page Header for the Settings page</extracomment>
-        <translation>Ajustes</translation>
+        <translation>设置</translation>
     </message>
     <message>
         <source>Files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation>Archivos</translation>
+        <translation>文件</translation>
     </message>
     <message>
         <source>Path to todo.txt</source>
         <extracomment>Where - in which folder - is the todo.txt file located?</extracomment>
-        <translation>Ruta de todo.txt</translation>
+        <translation>保存 todo.txt 文件的位置</translation>
     </message>
     <message>
         <source>Choose file</source>
         <extracomment>Button for picking the file</extracomment>
-        <translation>Seleccionar archivo</translation>
+        <translation>选择文件</translation>
     </message>
     <message>
         <source>Fontsize in Tasklist</source>
         <extracomment>Slide control for font size</extracomment>
-        <translation>Tamaño de la fuente</translation>
+        <translation>任务清单字号</translation>
     </message>
     <message>
         <source>Auto add creation date.</source>
         <extracomment>TextSwitch for adding creation date</extracomment>
-        <translation>Añadir automáticamente fecha de creación</translation>
+        <translation>自动添加创建日期</translation>
     </message>
     <message>
         <source>Recent files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
-        <translation>Archivos recientes</translation>
+        <translation>最近文件</translation>
     </message>
 </context>
 <context>
@@ -179,89 +179,89 @@
     <message>
         <source>Reset</source>
         <extracomment>PullDown menu: reset SortPage</extracomment>
-        <translation>Reiniciar</translation>
+        <translation>重置</translation>
     </message>
     <message>
         <source>Sorting</source>
         <extracomment>SectionHeader for sorting</extracomment>
-        <translation>Orden</translation>
+        <translation>分类</translation>
     </message>
     <message>
         <source>Grouping</source>
         <extracomment>SectionHeader for grouping</extracomment>
-        <translation>Agrupación</translation>
+        <translation>分组</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
         <extracomment>Title of SortPage</extracomment>
-        <translation>Orden y agrupación</translation>
+        <translation>分类及分组</translation>
     </message>
     <message>
         <source>Toggle order (%1)</source>
         <extracomment>Button to toggle order</extracomment>
-        <translation>Cambiar orden (%1)</translation>
+        <translation>切换顺序 (%1)</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation>asc</translation>
+        <translation>升序</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation>desc</translation>
+        <translation>降序</translation>
     </message>
 </context>
 <context>
     <name>Sorting</name>
     <message>
         <source>Sorted by %1</source>
-        <translation>Ordenado por %1</translation>
+        <translation>分类方式 %1</translation>
     </message>
     <message>
         <source>asc</source>
-        <translation>asc</translation>
+        <translation>升序</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation>desc</translation>
+        <translation>降序</translation>
     </message>
     <message>
         <source>Grouped by %1, </source>
-        <translation>Agrupado por %1, </translation>
+        <translation>分组方式 %1, </translation>
     </message>
     <message>
         <source>Natural</source>
         <extracomment>SortPage, sorting by: Natural</extracomment>
-        <translation>Natural</translation>
+        <translation>自然顺序</translation>
     </message>
     <message>
         <source>Creation Date</source>
         <extracomment>SortPage, sorting by: Creation date</extracomment>
-        <translation>Fecha de creación</translation>
+        <translation>创建日期</translation>
     </message>
     <message>
         <source>Due date</source>
         <extracomment>SortPage, sorting by: Due date</extracomment>
-        <translation>Fecha límite</translation>
+        <translation>到期日</translation>
     </message>
     <message>
         <source>Subject</source>
         <extracomment>SortPage, sorting by: Subject</extracomment>
-        <translation>Tema</translation>
+        <translation>项目</translation>
     </message>
     <message>
         <source>None</source>
         <extracomment>SortPage, group by: None</extracomment>
-        <translation>Ninguna</translation>
+        <translation>无</translation>
     </message>
     <message>
         <source>Projects</source>
         <extracomment>SortPage, group by: projects</extracomment>
-        <translation>Proyectos</translation>
+        <translation>项目</translation>
     </message>
     <message>
         <source>Contexts</source>
         <extracomment>SortPage, group by: contexts</extracomment>
-        <translation>Contextos</translation>
+        <translation>文本</translation>
     </message>
 </context>
 <context>
@@ -269,42 +269,42 @@
     <message>
         <source>Add new task</source>
         <extracomment>DialogHeader for new task / edit task</extracomment>
-        <translation>Añadir nueva tarea</translation>
+        <translation>添加新任务</translation>
     </message>
     <message>
         <source>Edit task</source>
-        <translation>Editar tarea</translation>
+        <translation>编辑任务</translation>
     </message>
 </context>
 <context>
     <name>TaskListItem</name>
     <message>
         <source>Deleting</source>
-        <translation>Borrando</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <source>created:</source>
-        <translation>creado:</translation>
+        <translation>创建：</translation>
     </message>
     <message>
         <source>due:</source>
-        <translation>plazo:</translation>
+        <translation>到期：</translation>
     </message>
     <message>
         <source>Priority Up</source>
-        <translation>Subir prioridad</translation>
+        <translation>调高优先级</translation>
     </message>
     <message>
         <source>Priority Down</source>
-        <translation>Bajar prioridad</translation>
+        <translation>调低优先级</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Eliminar</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <source>completed:</source>
-        <translation>completada:</translation>
+        <translation>已完成：</translation>
     </message>
 </context>
 <context>
@@ -312,55 +312,55 @@
     <message>
         <source>Settings</source>
         <extracomment>PullDown menu: go to settings page</extracomment>
-        <translation>Ajustes</translation>
+        <translation>设置</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
         <extracomment>PullDown menu: go to sorting &amp; grouping page</extracomment>
-        <translation>Orden y agrupación</translation>
+        <translation>分类及群组</translation>
     </message>
     <message>
         <source>Add new task</source>
         <extracomment>PullDown menu: add new task</extracomment>
-        <translation>Añadir nueva tarea</translation>
+        <translation>添加新任务</translation>
     </message>
     <message>
         <source>Create file</source>
         <extracomment>PullDown menu: create todo.txt file. Entry only visible if a) path to todo.txt file exists and b) file was NOT created yet</extracomment>
-        <translation>Crear archivo</translation>
+        <translation>创建文件</translation>
     </message>
     <message>
         <source>Show</source>
         <extracomment>PushUp menu: show / hide completed tasks</extracomment>
-        <translation>Mostrar </translation>
+        <translation>显示</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Ocultar </translation>
+        <translation>隐藏</translation>
     </message>
     <message>
         <source> completed tasks</source>
-        <translation>tareas completadas</translation>
+        <translation>已完成任务</translation>
     </message>
     <message>
         <source>Tasklist</source>
         <extracomment>PageHeader for tasklist main page</extracomment>
-        <translation>Lista de tareas</translation>
+        <translation>任务清单</translation>
     </message>
     <message>
         <source>Filter: %1</source>
         <extracomment>Information about filter settings at the top of main page</extracomment>
-        <translation>Filtro: %1</translation>
+        <translation>F筛选: %1</translation>
     </message>
     <message>
         <source>No tasks</source>
         <extracomment>Placeholder when no visible tasks for various reasons (file error, empty file, filters)</extracomment>
-        <translation>No hay tareas</translation>
+        <translation>无任务</translation>
     </message>
     <message>
         <source>Clear filters</source>
         <extracomment>PullDown menu: clear filters</extracomment>
-        <translation>Borrar filtros</translation>
+        <translation>清除筛选</translation>
     </message>
 </context>
 <context>
@@ -368,50 +368,50 @@
     <message>
         <source>No entries</source>
         <extracomment>Placeholder</extracomment>
-        <translation>No hay entradas</translation>
+        <translation>暂无项目</translation>
     </message>
     <message>
         <source>Priorities</source>
-        <translation>Prioridades</translation>
+        <translation>优先事项</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation>Proyectos</translation>
+        <translation>项目</translation>
     </message>
     <message>
         <source>Contexts</source>
-        <translation>Contextos</translation>
+        <translation>文本</translation>
     </message>
 </context>
 <context>
     <name>harbour-zutun</name>
     <message>
         <source>File reading error</source>
-        <translation>Error al leer archivo</translation>
+        <translation>文件读取错误</translation>
     </message>
     <message>
         <source>File doesn't exist.
  Pull down to create it.</source>
-        <translation>El archivo no existe.
-Desliza hacia abajo para crearlo.</translation>
+        <translation>文件不存在。
+下拉以创建。</translation>
     </message>
     <message>
         <source>File seems to be empty.
  Pull down to create one.</source>
-        <translation>El archivo parece estar vacío.
-Desliza hacia abajo para crear uno.</translation>
+        <translation>文件似乎空空如也。
+下拉以创建文件。</translation>
     </message>
     <message>
         <source>No tasks found in file.
  Pull down to create one.</source>
-        <translation>No hay tareas en el archivo.
-Desliza hacia abajo para crear una.</translation>
+        <translation>未在文件找到任务。
+下拉以创建任务。</translation>
     </message>
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation>Todas las tareas están ocultas por los filtros.
-Desliza hacia abajo para borrar filtros.</translation>
+        <translation>所有文件已被筛选隐藏。
+下拉以清空筛选。</translation>
     </message>
 </context>
 </TS>
