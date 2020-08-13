@@ -71,9 +71,6 @@ ApplicationWindow {
         icon.name: "list-add"
         icon.source: "icons/list-add.svg"
         text: qsTr("&Add Task")
-//        onTriggered: {
-//            visualModel.addTaskItem(taskListModel.lineToJSON(""))
-//        }
     }
 
     Action {

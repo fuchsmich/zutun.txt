@@ -45,14 +45,18 @@ Page {
                 //TODO animate show/hide
                 id: addBar
                 property bool show: false
+                onShowChanged: {
+                    if (show) forceActiveFocus()
+                }
+
                 width: page.width
                 visible: show
                 Keys.onEscapePressed: {
-                    //loader.state = "view"
+                    console.log("escape pressed")
                     addBar.clear()
                     addBar.show = false
                 }
-                onEditingFinished: {
+                onAccepted: {
                     taskListModel.addTask(addBar.text.trim())
                     addBar.clear()
                     addBar.show = false
