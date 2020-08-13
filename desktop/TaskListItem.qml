@@ -2,28 +2,13 @@ import QtQuick 2.0
 import QtQuick.Controls 2.5
 
 import QtQml.Models 2.2
+import "qrc:/tdt/tdt/todotxt.js" as JS
 
 Loader {
     id: loader
     state: "view"
 
-    signal addTask(string text)
-
-    property string defaultPriority: "F"
-
-    function priorityUpDown(priority, up) {
-        //console.log("A"++)
-        if (up) {
-            if (priority === "") return String.fromCharCode(defaultPriority.charCodeAt(0));
-            else if (priority > "A") return String.fromCharCode(priority.charCodeAt(0) - 1);
-        } else  {
-            if (priority !== "") {
-                if (priority < "Z") return String.fromCharCode(priority.charCodeAt(0) + 1);
-                return ""
-            }
-        }
-        return priority
-    }
+    signal resortItem()
 
     Component {
         id: viewComp
@@ -31,15 +16,6 @@ Loader {
             id: taskListItem
 
             Row {
-//                CheckBox {
-//                    id: doneCB
-//                    checked: model.done
-//                    onClicked: {
-//                        model.done = !model.done
-//                        loader.DelegateModel.groups = "unsorted"
-//                    }
-//                    anchors.verticalCenter: id.verticalCenter
-//                }
                 ItemDelegate {
                     id: id
                     //text: model.formattedSubject
@@ -52,13 +28,13 @@ Loader {
                     }
                     CheckBox {
                         id: doneCB
-                        checked: model.done
-                        onClicked: {
-                            model.done = !model.done
-                            loader.DelegateModel.groups = "unsorted"
-                        }
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
+                        checked: model.done
+                        onClicked: {
+                            taskListModel.setTaskProperty(model.index, JS.baseFeatures.done, checked)
+                            resortItem()
+                        }
                     }
                     Label {
                         id: subjectLbl
@@ -90,8 +66,9 @@ Loader {
                             icon.name: "font-size-up"
                             text: "(B)" + "\u2191"
                             onClicked: {
-                                model.priority = priorityUpDown(model.priority, true)
-                                loader.DelegateModel.groups = "unsorted"
+                                var prio = taskListModel.alterPriority(model.priority, true)
+                                taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
+                                resortItem()
                             }
                         }
                         ToolButton {
@@ -99,8 +76,9 @@ Loader {
                             icon.name: "font-size-down"
                             text: "(A)" + "\u2193"
                             onClicked: {
-                                model.priority = priorityUpDown(model.priority, false)
-                                loader.DelegateModel.groups = "unsorted"
+                                var prio = taskListModel.alterPriority(model.priority, false)
+                                taskListModel.setTaskProperty(model.index, JS.baseFeatures.priority, prio)
+                                resortItem()
                             }
                         }
                         ToolButton {
@@ -148,9 +126,9 @@ Loader {
                 loader.state = "view"
             }
             onEditingFinished: {
-                model.fullTxt = text
+                taskListModel.setTaskProperty(model.index, JS.baseFeatures.fullTxt, text)
                 loader.state = "view"
-                loader.DelegateModel.groups = "unsorted"
+                resortItem()
             }
             Component.onCompleted: forceActiveFocus()
         }

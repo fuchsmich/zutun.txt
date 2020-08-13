@@ -29,50 +29,14 @@ Page {
         focus: true
 
         headerPositioning: ListView.OverlayHeader
-        header:
-        SearchBar {
-            width: page.width
-            z: 2
-            //visible: false
-        }
-
-
-            /*Item {
-            id: headerItem
-            width: page.width
-            height: 40* showSearchBarAction.checked //headerLoader.height//(headerLoader.status === Loader.Ready ? headerLoader.item.height : 0)
-            Loader {
-                id: headerLoader
-                Component {
-                    id: searchComp
-                    SearchBar {
-                        width: page.width
-                    }
-                }
-                states: [
-                    State {
-                        name: "search"
-                        when: showSearchBarAction.checked
-                        PropertyChanges {
-                            target: headerLoader
-                            sourceComponent: searchComp
-                            //height: headerLoader.item.height
-                        }
-                    }
-//                    ,
-//                    State {
-//                        name: "empty"
-//                        when: !showSearchBarAction.checked
-//                        PropertyChanges {
-//                            target: headerLoader
-//                            sourceComponent: emptyComp
-//                            height: 0
-//                        }
-//                    }
-                ]
-                onHeightChanged: console.log("height", height)
+        header: Item {
+            height: showSearchBarAction.checked * searchBar.height
+            SearchBar {
+                id: searchBar
+                width: page.width
+                visible: showSearchBarAction.checked
             }
-        }*/
+        }
 
         //Keys.onPressed: console.log(currentIndex)
         //Component.onCompleted: forceActiveFocus()

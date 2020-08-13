@@ -181,7 +181,7 @@ ApplicationWindow {
         delegate: TaskListItem {
             id: item
             width: app.width
-            onAddTask: taskListModel.addTask(text)
+            //onAddTask: taskListModel.addTask(text)
             //defaultPriority: visualModel.defaultPriority
         }
     }
