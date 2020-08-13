@@ -2,7 +2,6 @@ import QtQuick 2.0
 import "../tdt/todotxt.js" as JS
 
 
-//TODO save filter arrangments
 QtObject {
     id: filters
 

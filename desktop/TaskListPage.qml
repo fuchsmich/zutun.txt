@@ -60,7 +60,6 @@ Page {
 
                     TextField {
                         //TODO animate show/hide
-                        //TODO hide button
                         id: addTF
                         Layout.fillWidth: true
 
