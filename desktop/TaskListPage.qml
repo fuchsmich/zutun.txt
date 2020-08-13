@@ -18,16 +18,19 @@ Page {
 
         model: visualModel
 
-        section.delegate: Rectangle {
-            width: page.width
-            height: childrenRect.height
-            color: "lightsteelblue"
-            Label {
-                text: section
-                font.pixelSize: Qt.application.font.pixelSize * 1.6
+        section {
+            property: taskListModel.sorting.sectionProperty //"section"
+            criteria: ViewSection.FullString
+            delegate: Rectangle {
+                width: page.width
+                height: childrenRect.height
+                color: "lightsteelblue"
+                Label {
+                    text: section
+                    font.pixelSize: Qt.application.font.pixelSize * 1.4
+                }
             }
         }
-        section.property: "section"
 
         ScrollIndicator.vertical: ScrollIndicator { }
         focus: true
