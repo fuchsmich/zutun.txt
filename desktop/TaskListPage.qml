@@ -3,7 +3,6 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.1
 
 
-//TODO add task UI (in list header?)
 //TODO highlight follows mouse hover?
 
 Page {
