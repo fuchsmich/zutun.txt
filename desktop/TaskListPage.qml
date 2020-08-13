@@ -33,44 +33,60 @@ Page {
         focus: true
 
         headerPositioning: ListView.OverlayHeader
-        header: Item {
-            height: showSearchBarAction.checked * searchBar.height + addBar.height * addBar.visible
+        header: Column {
+            //height: showSearchBarAction.checked * searchBar.height + addBar.height * addBar.visible
             SearchBar {
                 //TODO animate show/hide
                 id: searchBar
                 width: page.width
                 visible: showSearchBarAction.checked
             }
-            TextField {
-                //TODO animate show/hide
-                //TODO hide button
+            ToolBar {
                 id: addBar
                 property bool show: false
                 onShowChanged: {
                     if (show) forceActiveFocus()
+                    else addTF.clear()
                 }
-
-                width: page.width
                 visible: show
-                Keys.onEscapePressed: {
-                    console.log("escape pressed")
-                    addBar.clear()
-                    addBar.show = false
-                }
-                onAccepted: {
-                    taskListModel.addTask(addBar.text.trim())
-                    addBar.clear()
-                    addBar.show = false
-                }
+                width: page.width
+                RowLayout {
+                    width: parent.width
+                    Label {
+                        text: qsTr("Add Task:")
+                    }
 
-                Completer {
-                   model: app.completerKeywords
-                   calendarKeywords: app.completerCalendardKeywords
-                }
-                Connections {
-                    target: addTaskAction
-                    function onTriggered() {
-                        addBar.show = true
+                    TextField {
+                        //TODO animate show/hide
+                        //TODO hide button
+                        id: addTF
+                        Layout.fillWidth: true
+
+                        Keys.onEscapePressed: {
+                            console.log("escape pressed")
+                            clear()
+                            addBar.show = false
+                        }
+                        onAccepted: {
+                            taskListModel.addTask(text.trim())
+                            clear()
+                            addBar.show = false
+                        }
+
+                        Completer {
+                            model: app.completerKeywords
+                            calendarKeywords: app.completerCalendardKeywords
+                        }
+                        Connections {
+                            target: addTaskAction
+                            function onTriggered() {
+                                addBar.show = true
+                            }
+                        }
+                    }
+                    ToolButton {
+                        icon.name: "dialog-close"
+                        onClicked: addBar.show = false
                     }
                 }
             }

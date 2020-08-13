@@ -62,9 +62,9 @@ ToolBar {
                 }
             }
         }
-//        ToolButton {
-//            icon.name: "edit-clear"
-//            onClicked: searchField.clear()
-//        }
+        ToolButton {
+            icon.name: "dialog-close"
+            onClicked: showSearchBarAction.checked = false
+        }
     }
 }
