@@ -26,7 +26,7 @@ ToolBar {
             Keys.onEscapePressed: showSearchBarAction.checked = false
             Connections {
                 target: filterActivateSearch
-                onTriggered: {
+                function onTriggered() {
                     searchField.forceActiveFocus()
                     searchField.selectAll()
                 }

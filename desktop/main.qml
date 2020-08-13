@@ -64,7 +64,7 @@ ApplicationWindow {
 //    }
 
 
-    //// Actions
+    //// ---> Actions Start
 
     Action {
         id: addTaskAction
@@ -97,8 +97,8 @@ ApplicationWindow {
         icon.source: "icons/checkbox.svg"
         text: qsTr("Hide &Done")
         checkable: true
-        checked: filters.hideDone
-        onToggled: filters.hideDone = !filters.hideDone
+        checked: taskListModel.filters.hideDone
+        onToggled: taskListModel.filters.hideDone = !taskListModel.filters.hideDone
         shortcut: "Ctrl+D"
     }
 
@@ -117,8 +117,8 @@ ApplicationWindow {
         //icon.cache: false
         text: (!checked ? "Ascendending" : "Descendending")
         checkable: true
-        checked: sorting.asc
-        onToggled: sorting.asc = !sorting.asc
+        checked: taskListModel.sorting.asc
+        onToggled: taskListModel.sorting.asc = !taskListModel.sorting.asc
         shortcut: "Ctrl+S"
     }
 
@@ -130,14 +130,19 @@ ApplicationWindow {
         checkable: true
     }
 
-    //// Actions Ende
+    //// ---> Actions Ende <---
 
     FileIO {
         id: todoTxtFile
         path: StandardPaths.writableLocation(StandardPaths.DocumentsLocation) + '/todo.txt'
 
+        onPathChanged: {
+            taskListModel.setFileContent("")
+            read("path changed")
+        }
+
         function read() {
-            taskListModel.setTextList(content)
+            taskListModel.setFileContent(content)
         }
 
         function save(text) {
@@ -148,25 +153,36 @@ ApplicationWindow {
     TaskListModel {
         id: taskListModel
         //section: sorting.grouping
-        projectColor: "red"
-        contextColor: "blue"
-        onSaveList: {
-            todoTxtFile.save(content)
+        onSaveTodoTxtFile: todoTxtFile.save(content)
+
+        filters {
+//            hideDone: filterSettings.hideDone
+//            and: filterSettings.and.value
+//            or: filterSettings.or.value
+//            not: filterSettings.not.value
+            onFiltersChanged: visualModel.update()
         }
 
-        onListChanged: {
-            visualModel.resort("listChanged")
+        sorting {
+//            asc: sortSettings.asc
+//            order: sortSettings.order
+//            groupBy: sortSettings.grouping
+            onSortingChanged: visualModel.update()
         }
+
+
     }
 
-    TaskDelegateModel {
+    SortFilterModel {
         id: visualModel
         model: taskListModel
+        visibilityFunc: taskListModel.filters.visibility
+        lessThanFunc: taskListModel.sorting.lessThanFunc
         delegate: TaskListItem {
             id: item
             width: app.width
             onAddTask: taskListModel.addTask(text)
-            defaultPriority: visualModel.defaultPriority
+            //defaultPriority: visualModel.defaultPriority
         }
     }
 
@@ -218,13 +234,13 @@ ApplicationWindow {
             ComboBox {
                 model: {
                     var m = []
-                    for (var i in sorting.groupFunctionList) {
-                        m.push(sorting.groupFunctionList[i][0])
+                    for (var i in taskListModel.sorting.groupFunctionList) {
+                        m.push(taskListModel.sorting.groupFunctionList[i][0])
                     }
                     return m
                 }
-                currentIndex: sorting.grouping
-                onCurrentIndexChanged: sorting.grouping = currentIndex
+                currentIndex: taskListModel.sorting.groupBy
+                onCurrentIndexChanged: taskListModel.sorting.groupBy = currentIndex
             }
         }
     }
