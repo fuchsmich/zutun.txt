@@ -2,6 +2,10 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.1
 
+
+//TODO add task UI (in list header?)
+//TODO highlight follows mouse hover?
+
 Page {
     id: page
     anchors.fill: app.window
@@ -30,11 +34,40 @@ Page {
 
         headerPositioning: ListView.OverlayHeader
         header: Item {
-            height: showSearchBarAction.checked * searchBar.height
+            height: showSearchBarAction.checked * searchBar.height + addBar.height * addBar.visible
             SearchBar {
+                //TODO animate show/hide
                 id: searchBar
                 width: page.width
                 visible: showSearchBarAction.checked
+            }
+            TextField {
+                //TODO animate show/hide
+                id: addBar
+                property bool show: false
+                width: page.width
+                visible: show
+                Keys.onEscapePressed: {
+                    //loader.state = "view"
+                    addBar.clear()
+                    addBar.show = false
+                }
+                onEditingFinished: {
+                    taskListModel.addTask(addBar.text.trim())
+                    addBar.clear()
+                    addBar.show = false
+                }
+
+                Completer {
+                   model: app.completerKeywords
+                   calendarKeywords: app.completerCalendardKeywords
+                }
+                Connections {
+                    target: addTaskAction
+                    function onTriggered() {
+                        addBar.show = true
+                    }
+                }
             }
         }
 
