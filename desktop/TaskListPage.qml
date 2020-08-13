@@ -43,6 +43,7 @@ Page {
             }
             TextField {
                 //TODO animate show/hide
+                //TODO hide button
                 id: addBar
                 property bool show: false
                 onShowChanged: {

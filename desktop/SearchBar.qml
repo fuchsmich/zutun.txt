@@ -43,10 +43,28 @@ ToolBar {
                 model: app.completerKeywords
                 calendarKeywords: app.completerCalendardKeywords
             }
+            ToolButton {
+                anchors {
+                    top: parent.top;
+                    right: parent.right
+                }
+                id: clearText
+                //fillMode: Image.PreserveAspectFit
+                background: Item {}
+                smooth: true
+                visible: searchField.text
+                icon.name: "edit-clear"
+                height: parent.height
+                width: height
+                onClicked: {
+                    searchField.text = ""
+                    searchField.forceActiveFocus()
+                }
+            }
         }
-        ToolButton {
-            icon.name: "edit-clear"
-            onClicked: searchField.clear()
-        }
+//        ToolButton {
+//            icon.name: "edit-clear"
+//            onClicked: searchField.clear()
+//        }
     }
 }
