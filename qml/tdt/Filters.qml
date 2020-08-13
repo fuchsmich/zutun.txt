@@ -7,12 +7,6 @@ QtObject {
     id: filters
 
     signal filtersChanged()
-    onFiltersChanged: {
-        filterSettings.and.value = and
-        filterSettings.or.value = or
-        filterSettings.not.value = not
-        //text = parseText()
-    }
 
     property bool hideDone: true
     onHideDoneChanged: filtersChanged()

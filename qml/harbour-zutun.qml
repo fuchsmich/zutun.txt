@@ -150,7 +150,12 @@ ApplicationWindow {
             and: filterSettings.and.value
             or: filterSettings.or.value
             not: filterSettings.not.value
-            onFiltersChanged: visualModel.update()
+            onFiltersChanged: {
+                filterSettings.and.value = and
+                filterSettings.or.value = or
+                filterSettings.not.value = not
+                visualModel.update()
+            }
         }
 
         sorting {
