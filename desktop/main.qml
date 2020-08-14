@@ -19,7 +19,9 @@ ApplicationWindow {
     visible: true
     width: 480
     height: 640
+    readonly property bool inPortrait: app.width < app.height
     title: qsTr("ZuTun.txt")
+
 
     property int currentTaskIndex: -1
     property var completerCalendardKeywords: ["due:", "t:"]
@@ -186,7 +188,9 @@ ApplicationWindow {
     header: ToolBar {
         contentHeight: menuButton.implicitHeight
         RowLayout {
-            width: app.width
+            //width: app.width
+            anchors.fill: parent
+            anchors.leftMargin: !inPortrait ? drawer.width : undefined
             ToolButton {
                 id: menuButton
                 text: stackView.depth > 1 ? "\u25C0" : "\u2630"
@@ -211,6 +215,8 @@ ApplicationWindow {
     menuBar:  ToolBar {
         //width: app.window.width
         RowLayout {
+            anchors.fill: parent
+            anchors.leftMargin: !inPortrait ? drawer.width : undefined
             //Actions
             ToolButton {
                 action: addTaskAction
@@ -261,8 +267,12 @@ ApplicationWindow {
 
     Drawer {
         id: drawer
-        width: app.width * 0.66
+        width: 300
         height: app.height
+        modal: inPortrait
+        interactive: inPortrait
+        position: inPortrait ? 0 : 1
+        visible: !inPortrait
 
         Column {
             anchors.fill: parent
@@ -311,6 +321,7 @@ ApplicationWindow {
         id: stackView
         initialItem: "TaskListPage.qml"
         anchors.fill: parent
+        anchors.leftMargin: !inPortrait ? drawer.width : undefined
     }
 
     //TODO Datei in edit mode vllt nicht lesen??
