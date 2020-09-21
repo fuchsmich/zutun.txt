@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es">
 <context>
     <name>About</name>
     <message>
@@ -172,6 +174,21 @@
         <source>Recent files</source>
         <extracomment>Section Header for the Files section in Settings page</extracomment>
         <translation>Archivos recientes</translation>
+    </message>
+    <message>
+        <source>Tasklist</source>
+        <extracomment>Section Header for the Tasklist section in Settings page</extracomment>
+        <translation type="unfinished">Lista de tareas</translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <extracomment>Section Header for the Edit section in Settings page</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically add creation date to newly added tasks.</source>
+        <extracomment>TextSwitch for adding creation date</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -390,7 +407,7 @@
         <translation>Error al leer archivo</translation>
     </message>
     <message>
-        <source>File doesn't exist.
+        <source>File doesn&apos;t exist.
  Pull down to create it.</source>
         <translation>El archivo no existe.
 Desliza hacia abajo para crearlo.</translation>

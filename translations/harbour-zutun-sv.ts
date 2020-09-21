@@ -175,6 +175,21 @@
         <extracomment>Section Header for the Files section in Settings page</extracomment>
         <translation>Tidigare filer</translation>
     </message>
+    <message>
+        <source>Tasklist</source>
+        <extracomment>Section Header for the Tasklist section in Settings page</extracomment>
+        <translation type="unfinished">Aktivitetslista</translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <extracomment>Section Header for the Edit section in Settings page</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically add creation date to newly added tasks.</source>
+        <extracomment>TextSwitch for adding creation date</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SortPage</name>

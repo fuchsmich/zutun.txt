@@ -165,6 +165,17 @@ ApplicationWindow {
             onSortingChanged: visualModel.update()
         }
     }
+
+    Connections {
+        target: Qt.application
+        onStateChanged: {
+            //console.log("app state", Qt.application.state)
+            if (Qt.application.state === Qt.ApplicationActive) {
+                todoTxtFile.read("app active")
+            }
+        }
+    }
+
 }
 
 
