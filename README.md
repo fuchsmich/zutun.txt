@@ -26,6 +26,9 @@ Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) b
   
 ## Changes
 
+### 2.1.4
+  - reload file when activating the app
+
 ### 2.1.3
   - update languages: es, zh
 
