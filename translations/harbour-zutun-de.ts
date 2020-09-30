@@ -178,17 +178,17 @@
     <message>
         <source>Tasklist</source>
         <extracomment>Section Header for the Tasklist section in Settings page</extracomment>
-        <translation type="unfinished">Aufgabenliste</translation>
+        <translation>Aufgabenliste</translation>
     </message>
     <message>
         <source>Edit Task</source>
         <extracomment>Section Header for the Edit section in Settings page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe bearbeiten</translation>
     </message>
     <message>
         <source>Automatically add creation date to newly added tasks.</source>
         <extracomment>TextSwitch for adding creation date</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Erstelldatum automatisch zu neuen Aufgaben hinzufügen.</translation>
     </message>
 </context>
 <context>
