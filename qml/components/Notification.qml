@@ -2,14 +2,16 @@ import Nemo.Notifications 1.0
 
 Notification {
     property var task
-    property var dueDate: (task.due ? Date.fromLocaleString(Qt.locale(), task.due, "yyyy-MM-dd") : new Date())
+    property var dueDate: (task.due ? Date.fromLocaleString(Qt.locale(), task.due, "yyyy-MM-dd") : undefined)
     //onDueDateChanged: dueDate.toLocaleDateString(Qt.locale())
 
     appName: "ZuTun.txt"
     appIcon: "harbour-zutun"
-    body: task.fullTxt //task.formattedSubject
+    //category: "x-nemo.general.reminder" //??
+    summary: task.subject
+    body: dueDate ? dueDate.toLocaleDateString(Qt.locale()) : ""
     timestamp: dueDate
-    summary: dueDate.toLocaleDateString(Qt.locale()) //task.due
+
 
 
     remoteActions: [{
@@ -32,5 +34,4 @@ Notification {
     ]
 
     onClosed: console.log(reason)
-
 }

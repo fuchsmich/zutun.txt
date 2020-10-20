@@ -17,7 +17,7 @@ Item {
                 var notification = notificationComp.createObject(null , {task: task}) //parent needed?
                 notification.publish()
                 settings.notificationIDs.value.push(notification.replacesId)
-                //console.log(notification.replacesId, notifications.idList);
+                console.log(notification.replacesId, notifications.idList);
             }
         }
     }
