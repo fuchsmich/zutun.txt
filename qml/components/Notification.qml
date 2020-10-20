@@ -2,7 +2,7 @@ import Nemo.Notifications 1.0
 
 Notification {
     property var task
-    property var dueDate: (task.due ? Date.fromLocaleString(Qt.locale(), task.due, "yyyy-MM-dd") : undefined)
+    property var dueDate: (task.due ? Date.fromLocaleString(Qt.locale(), task.due, "yyyy-MM-dd") : new Date())
     //onDueDateChanged: dueDate.toLocaleDateString(Qt.locale())
 
     appName: "ZuTun.txt"

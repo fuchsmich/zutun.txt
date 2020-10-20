@@ -404,31 +404,27 @@
     <name>harbour-zutun</name>
     <message>
         <source>File reading error</source>
-        <translation>Erreur lors de la lecture du fichier</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File doesn&apos;t exist.
  Pull down to create it.</source>
-        <translation>Le fichier n&apos;existe pas.
-Tirer pour le créer.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File seems to be empty.
  Pull down to create one.</source>
-        <translation>Le fichier semble vide. 
-Tirer pour le créer.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No tasks found in file.
  Pull down to create one.</source>
-        <translation>Aucune tâche trouvée dans le fichier.
-Tirer pour le créer.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation>Toutes les tâches sont masquées par des filtres.
-Tirer pour désactiver les filtres.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

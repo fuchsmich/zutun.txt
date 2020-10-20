@@ -122,7 +122,6 @@ ApplicationWindow {
 
     NotificationList {
         id: notificationList
-        //ids: settings.notificationIDs.value
         taskList: taskListModel
     }
 
@@ -176,6 +175,19 @@ ApplicationWindow {
         }
     }
 
+    Component.onCompleted: {
+//        console.log(settings.notificationIDs.value)
+//        //if (settings.notificationIDs.value.length === 0)
+//        var a = settings.notificationIDs.value
+//        a.push(1337)
+//        settings.notificationIDs.value = a
+//        console.log(settings.notificationIDs.value)
+    }
+
+    Component.onDestruction: {
+//            //  removeAll()
+//        console.log(settings.notificationIDs.value)
+    }
 }
 
 

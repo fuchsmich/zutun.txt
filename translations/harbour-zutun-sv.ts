@@ -404,31 +404,27 @@
     <name>harbour-zutun</name>
     <message>
         <source>File reading error</source>
-        <translation>Läsfel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File doesn&apos;t exist.
  Pull down to create it.</source>
-        <translation>Filen finns inte.
- Dra neråt för att skapa den.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File seems to be empty.
  Pull down to create one.</source>
-        <translation>Filen verkar tom.
- Dra neråt för att skapa en.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No tasks found in file.
  Pull down to create one.</source>
-        <translation>Inga aktiviteter hittades i filen.
- Dra neråt för att skapa en.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation>Alla ktiviteter är dolda av filter.
- Dra neråt för att rensa filter.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

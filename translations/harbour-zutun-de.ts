@@ -404,27 +404,27 @@
     <name>harbour-zutun</name>
     <message>
         <source>File reading error</source>
-        <translation>Dateilesefehler</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File doesn&apos;t exist.
  Pull down to create it.</source>
-        <translation>Datei existiert nicht.\n Runterziehen, um Datei zu erzeugen.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File seems to be empty.
  Pull down to create one.</source>
-        <translation>Datei scheint leer zu sein.\n Runterziehen, um sie zu erstellen.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No tasks found in file.
  Pull down to create one.</source>
-        <translation>Keine Aufgaben in Datei gefunden.\n Runterziehn, um eine zu erstellen.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation>Alle Aufgaben sind gefiltert.\n Runterziehen, um Filter zu entfernen.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
