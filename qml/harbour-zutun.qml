@@ -122,7 +122,7 @@ ApplicationWindow {
 
     NotificationList {
         id: notificationList
-        ids: settings.notificationIDs.value
+        //ids: settings.notificationIDs.value
         taskList: taskListModel
     }
 

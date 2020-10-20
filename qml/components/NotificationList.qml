@@ -4,7 +4,8 @@ import "../tdt/todotxt.js" as JS
 
 Item {
     id: notificationList
-    property var ids: []
+    property var replaceIds: settings.notificationIDs.value //[]
+    onReplaceIdsChanged: console.log(replaceIds)
     property var taskList: ListModel {}
 
     function publishNotifications() {
@@ -17,14 +18,15 @@ Item {
                 var notification = notificationComp.createObject(null , {task: task}) //parent needed?
                 notification.publish()
                 settings.notificationIDs.value.push(notification.replacesId)
-                console.log(notification.replacesId, notifications.idList);
+                settings.notificationIDs.sync()
+                console.log(notification.replacesId, replaceIds, settings.notificationIDs.value)
             }
         }
     }
 
     function removeAll() {
-        if (ids) {
-            ids.forEach(function(_id, index){
+        if (replaceIds) {
+            replaceIds.forEach(function(_id, index){
                 var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
                 var notification = notificationComp.createObject(null, {task: JS.tools.lineToJSON("")})
@@ -36,6 +38,12 @@ Item {
         }
     }
 
+
+    Component.onCompleted: {
+//        replaceIds = settings.notificationIDs.value
+//        console.log(replaceIds, settings.notificationIDs.value)
+//        removeAll()
+    }
 
     Component.onDestruction: {
             removeAll()
