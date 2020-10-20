@@ -32,8 +32,6 @@ ListModel {
         }
         tl.sort(); vl.sort()
         textList = tl; visibleTextList = vl
-        //filters.projectList = JS.projects.getList(textList)
-        //filters.contextList = JS.contexts.getList(textList)
 
         if (reason !== "read file") saveTodoTxtFile(textList.join("\n"))
     }
