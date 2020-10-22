@@ -1,13 +1,12 @@
 [Desktop Entry]
 Type=Application
+Name=ZuTun.txt
+#Name[de]=ZuTun.txt
+Comment=Todo list manager
 X-Nemo-Application-Type=silica-qt5
 Icon=harbour-zutun
 Exec=sailfish-qml harbour-zutun
-Name=ZuTun.txt
-# translation example:
-# your app name in German locale (de)
-#
-# Remember to comment out the following line, if you do not want to use
-# a different app name in German locale (de).
-#Name[de]=ZuTun.txt
-
+#X-Maemo-Service=info.fuxl.zutuntxt
+#X-Maemo-Object-Path=/info/fuxl/zutuntxt
+#X-Maemo-Method=info.fuxl.zutuntxt.showApp
+#X-Desktop-File-Install-Version=0.23

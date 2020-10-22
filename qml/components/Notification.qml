@@ -21,7 +21,7 @@ Notification {
             "service": "info.fuxl.zutuntxt",
             "path": "/info/fuxl/zutuntxt",
             "iface": "info.fuxl.zutuntxt",
-            "method": "showApp"
+            "method": "closeNotification"
         },{
             "name": "app",
             "displayName": "Call ZuTun.txt",
@@ -29,7 +29,7 @@ Notification {
             "service": "info.fuxl.zutuntxt",
             "path": "/info/fuxl/zutuntxt",
             "iface": "info.fuxl.zutuntxt",
-            "method": "showApp"
+            "method": "closeNotification"
         }
     ]
 

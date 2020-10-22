@@ -76,11 +76,16 @@ ApplicationWindow {
         iface: 'info.fuxl.zutuntxt'
         path: '/info/fuxl/zutuntxt'
 
-        function addTask() {
-            app.addTask("")
+        function addTask(txt) {
+            app.addTask(txt)
         }
 
-        function showApp() {
+        function closeNotification(reason) {
+            console.debug(reason)
+            notificationList.publishNotifications()
+        }
+
+        function showApp(arg) {
             app.activate()
             notificationList.publishNotifications()
         }
