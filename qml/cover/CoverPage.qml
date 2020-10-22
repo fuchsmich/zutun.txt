@@ -25,7 +25,7 @@ CoverBackground {
         CoverAction {
             iconSource: "image://theme/icon-cover-new"
             onTriggered: {
-                app.addTask();
+                app.addTask()
             }
         }
     }
