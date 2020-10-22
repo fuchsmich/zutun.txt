@@ -155,9 +155,9 @@ ApplicationWindow {
             or: filterSettings.or.value
             not: filterSettings.not.value
             onFiltersChanged: {
-                filterSettings.and.value = and
-                filterSettings.or.value = or
-                filterSettings.not.value = not
+                filterSettings.and.value = taskListModel.filters.and
+                filterSettings.or.value = taskListModel.filters.or
+                filterSettings.not.value = taskListModel.filters.not
                 visualModel.update()
             }
         }
