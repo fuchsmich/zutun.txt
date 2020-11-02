@@ -80,7 +80,7 @@ ListItem {
             Label {
                 id: cdLbl
                 visible: model.creationDate !== ""
-                text: JS.tools.isoToDate(model.creationDate, Locale.NarrowFormat)
+                text: JS.tools.isoToDateString(model.creationDate, Locale.NarrowFormat)
                 font.pixelSize: parent.fontSize
             }
             Label {
@@ -92,7 +92,7 @@ ListItem {
             Label {
                 id: dueLbl
                 visible: model.due !== ""
-                text: JS.tools.isoToDate(model.due, Locale.NarrowFormat)
+                text: JS.tools.isoToDateString(model.due, Locale.NarrowFormat)
                 font.pixelSize: parent.fontSize
             }
             Label {
@@ -104,7 +104,7 @@ ListItem {
             Label {
                 //id: compLbl
                 visible: model.completionDate !== ""
-                text: JS.tools.isoToDate(model.completionDate, Locale.NarrowFormat)
+                text: JS.tools.isoToDateString(model.completionDate, Locale.NarrowFormat)
                 font.pixelSize: parent.fontSize
             }
         }

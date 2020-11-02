@@ -67,6 +67,18 @@ ApplicationWindow {
             property int order: 0
             property int grouping: 0
         }
+
+        ConfigurationGroup {
+            id: notificationSettings
+            path: "notifications"
+            property bool showNotifications: true
+            property ConfigurationValue notificationIDs: ConfigurationValue {
+                key: settings.path + "/notificationIDs"
+                defaultValue: []
+            }
+            //dueLimit... 0 none, 1 one week, 2 one month
+            property int dueLimit: 0
+        }
     }
 
     DBusAdaptor {

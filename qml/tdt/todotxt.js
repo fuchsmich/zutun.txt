@@ -28,9 +28,13 @@ var tools = {
     today: function() {
         return Qt.formatDate(new Date(),"yyyy-MM-dd")
     },
-    //iso formatted date to Date object
-    isoToDate: function(text, format) {
-        return (Date.fromLocaleString(Qt.locale("en_US"), text, "yyyy-MM-dd")).toLocaleDateString(Qt.locale(), format)
+    //iso formatted date to Date
+    isoToDate: function(text) {
+        return new Date(Date.fromLocaleString(Qt.locale("en_US"), text, "yyyy-MM-dd"))
+    },
+    //iso formatted date to Date String
+    isoToDateString: function(text, format) {
+        return tools.isoToDate(text).toLocaleDateString(Qt.locale(), format)
     },
     //return JSON item for textline
     lineToJSON: function(line) {

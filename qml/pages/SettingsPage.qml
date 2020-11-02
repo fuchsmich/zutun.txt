@@ -149,6 +149,30 @@ Page {
                 checked: settings.creationDateOnAddTask
                 onClicked: settings.creationDateOnAddTask = checked
             }
+            SectionHeader {
+                //: Section Header for the notification section in settings page
+                text: qsTr("Notifications")
+            }
+            TextSwitch {
+                //: TextSwitch for wheter or not show notifications
+                text: qsTr("Show notifications")
+                //: TextSwitch for wheter or not show notifications
+                description: qsTr("Show notifications for tasks having a due date.")
+                checked: notificationSettings.showNotifications
+                onClicked: notificationSettings.showNotifications = checked
+            }
+            ComboBox {
+                //: ComboBox limt tasks within range of time
+                label: qsTr("Show tasks due within ")
+                enabled: notificationSettings.showNotifications
+                currentIndex: notificationSettings.dueLimit
+                menu: ContextMenu {
+                    MenuItem { text: qsTr("anytime") }
+                    MenuItem { text: qsTr("next 7 days") }
+                    MenuItem { text: qsTr("one month") }
+                    onActivated: notificationSettings.dueLimit = index
+                }
+            }
         }
         Component.onDestruction: {
             // write back settings and save

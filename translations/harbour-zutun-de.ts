@@ -190,6 +190,38 @@
         <extracomment>TextSwitch for adding creation date</extracomment>
         <translation>Erstelldatum automatisch zu neuen Aufgaben hinzufügen.</translation>
     </message>
+    <message>
+        <source>Notifications</source>
+        <extracomment>Section Header for the notification section in settings page</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show notifications for tasks having a due date.</source>
+        <extracomment>TextSwitch for wheter or not show notifications</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next 7 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>one month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show notifications</source>
+        <extracomment>TextSwitch for wheter or not show notifications</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show tasks due within </source>
+        <extracomment>ComboBox limt tasks within range of time</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>anytime</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SortPage</name>
