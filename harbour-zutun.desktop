@@ -1,12 +1,6 @@
 [Desktop Entry]
 Type=Application
 Name=ZuTun.txt
-#Name[de]=ZuTun.txt
-Comment=Todo list manager
 X-Nemo-Application-Type=silica-qt5
 Icon=harbour-zutun
 Exec=sailfish-qml harbour-zutun
-X-Maemo-Service=info.fuxl.zutuntxt
-X-Maemo-Object-Path=/info/fuxl/zutuntxt
-X-Maemo-Method=info.fuxl.zutuntxt.showApp
-X-Desktop-File-Install-Version=0.23
