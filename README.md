@@ -26,6 +26,11 @@ Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) b
   
 ## Changes
 
+### 2.2.0
+  - improved notifications (format, more stable handling)
+  - settings for notifications
+  - removed bug in onFiltersChanged
+
 ### 2.1.4
   - reload file when activating the app
 
