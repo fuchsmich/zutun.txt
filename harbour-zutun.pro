@@ -4,7 +4,6 @@ CONFIG += sailfishapp_qml
 
 DISTFILES += qml/harbour-zutun.qml \
     harbour-zutun.desktop \
-    info.fuxl.zutuntxt.service \
     qml/components/CoverListItem.qml \
     qml/components/Delegate.qml \
     qml/components/NotificationList.qml \
@@ -61,4 +60,4 @@ shortcut.files = info.fuxl.zutuntxt.json
 dbus.path = /usr/share/dbus-1/services
 dbus.files = info.fuxl.zutuntxt.service
 
-INSTALLS += quickaction shortcut
+INSTALLS += quickaction shortcut dbus
