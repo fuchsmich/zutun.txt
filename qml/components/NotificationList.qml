@@ -14,7 +14,7 @@ QtObject {
 
         if (task.due === "") return false
 
-        console.log(task.due)
+        //console.log(task.due)
         var today = new Date()
         var limit = new Date()
         switch (notificationSettings.dueLimit) {

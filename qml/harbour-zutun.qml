@@ -72,12 +72,13 @@ ApplicationWindow {
             id: notificationSettings
             path: "notifications"
             property bool showNotifications: true
+            //dueLimit... 0 none, 1 one week, 2 one month
+            property int dueLimit: 0
             property ConfigurationValue notificationIDs: ConfigurationValue {
                 key: settings.path + "/notificationIDs"
                 defaultValue: []
             }
-            //dueLimit... 0 none, 1 one week, 2 one month
-            property int dueLimit: 0
+            onValueChanged: notificationList.publishNotifications() //console.log("onValueChanged", showNotifications, notificationIDs.value, dueLimit, key)
         }
     }
 
