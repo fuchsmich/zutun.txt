@@ -193,34 +193,34 @@
     <message>
         <source>Notifications</source>
         <extracomment>Section Header for the notification section in settings page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen</translation>
     </message>
     <message>
         <source>Show notifications for tasks having a due date.</source>
         <extracomment>TextSwitch for wheter or not show notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Benachrichtigungen für Aufgaben mit Enddatum.</translation>
     </message>
     <message>
         <source>next 7 days</source>
-        <translation type="unfinished"></translation>
+        <translation>der nächsten 7 Tage</translation>
     </message>
     <message>
         <source>one month</source>
-        <translation type="unfinished"></translation>
+        <translation>eines Monats</translation>
     </message>
     <message>
         <source>Show notifications</source>
         <extracomment>TextSwitch for wheter or not show notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Benachrichtigungen</translation>
     </message>
     <message>
         <source>Show tasks due within </source>
         <extracomment>ComboBox limt tasks within range of time</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Aufgaben mit Enddatum innerhalb </translation>
     </message>
     <message>
         <source>anytime</source>
-        <translation type="unfinished"></translation>
+        <translation>jederzeit</translation>
     </message>
 </context>
 <context>
@@ -436,27 +436,27 @@
     <name>harbour-zutun</name>
     <message>
         <source>File reading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateilesefehler</translation>
     </message>
     <message>
         <source>File doesn&apos;t exist.
  Pull down to create it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei nicht vorhanden.\n Herunterziehen um sie zu erstellen.</translation>
     </message>
     <message>
         <source>File seems to be empty.
  Pull down to create one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei scheint leer zu sein.\n Herunterziehen, um eine Aufgabe zu ertellen.</translation>
     </message>
     <message>
         <source>No tasks found in file.
  Pull down to create one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Aufgaben in Datei gefunden.\n Herunterziehen um eine zu erstellen.</translation>
     </message>
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Aufgaben sind gefiltert.\n Herunterziehen, um Filter zu löschen.</translation>
     </message>
 </context>
 </TS>
