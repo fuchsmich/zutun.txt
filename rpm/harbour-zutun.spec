@@ -75,4 +75,5 @@ desktop-file-install --delete-original       \
 # >> files
 %{_datadir}/lipstick/quickactions/info.fuxl.zutuntxt.conf
 %{_datadir}/jolla-settings/entries/info.fuxl.zutuntxt.json
+%{_datadir}/dbus-1/services/info.fuxl.zutuntxt.service
 # << files

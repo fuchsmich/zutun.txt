@@ -4,6 +4,7 @@ CONFIG += sailfishapp_qml
 
 DISTFILES += qml/harbour-zutun.qml \
     harbour-zutun.desktop \
+    info.fuxl.zutuntxt.service \
     qml/components/CoverListItem.qml \
     qml/components/Delegate.qml \
     qml/components/NotificationList.qml \
@@ -50,13 +51,14 @@ TRANSLATIONS += \
     translations/harbour-zutun-nl_BE.ts \
     translations/harbour-zutun-ru.ts \
     translations/harbour-zutun-sv.ts
-#//TODO mf: harbour-zutun.ts SEEMS not TO BE included when adding comments for translators?
-#//TODO mf: Swedish version is not included when adding comments for translators
 
 quickaction.path = /usr/share/lipstick/quickactions
 quickaction.files = info.fuxl.zutuntxt.conf
 
 shortcut.path = /usr/share/jolla-settings/entries
 shortcut.files = info.fuxl.zutuntxt.json
+
+dbus.path = /usr/share/dbus-1/services
+dbus.files = info.fuxl.zutuntxt.service
 
 INSTALLS += quickaction shortcut
