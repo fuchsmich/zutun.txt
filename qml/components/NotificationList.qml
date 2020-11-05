@@ -8,8 +8,6 @@ QtObject {
     property var taskList: ListModel {}
 
     function filterTask(task) {
-        if (!notificationSettings.showNotifications) return false
-
         if (task.done === true) return false
 
         if (task.due === "") return false
@@ -40,25 +38,43 @@ QtObject {
                  i < taskList.count; i++){
                 var task = taskList.get(i)
                 if (filterTask(task)) {
-                    var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
+//                    var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
-                    var notification = notificationComp.createObject(null , {task: task}) //parent needed?
-                    publishQueue.push(notification)
+//                    var notification = notificationComp.createObject(null , {task: task}) //parent needed?
+                    publishQueue.push(task)
                     //notification.publish()
                     //replaceIDs.push(notification.replacesId)
                 }
             }
+            console.log(publishQueue, publishQueue[0].subject)
+            //sort by due date
             publishQueue.sort(function(a,b){
-                console.log(a.dueDate.getTime(), b.dueDate.getTime(),a.dueDate.getTime() - b.dueDate.getTime())
-                return a.dueDate.getTime() - b.dueDate.getTime()
+                //console.log(a.dueDate.getTime(), b.dueDate.getTime(),a.dueDate.getTime() - b.dueDate.getTime())
+                return JS.tools.isoToDate(a.due).getTime() - JS.tools.isoToDate(b.due).getTime()
             })
+            console.log(publishQueue, publishQueue[0].subject)
+
             //crop publishQueue
-            //revers publicQueue
-            publishQueue.forEach(function(item){
-                if (notificationSettings.maxCount === 0 || replaceIDs.length < notificationSettings.maxCount) {
-                    item.publish()
-                    replaceIDs.push(item.replacesId)
-                }
+            if (notificationSettings.maxCount > 0) {
+                publishQueue.splice(notificationSettings.maxCount, publishQueue.length)
+            }
+            console.log(notificationSettings.maxCount, publishQueue, publishQueue[0].subject)
+
+            //revers publicQueue (has no effect?)
+            //publishQueue = publishQueue.reverse()
+            console.log(publishQueue, publishQueue[0].subject)
+            var notificationComp, notification
+            publishQueue.forEach(function(task){
+                notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
+                notification = notificationComp.createObject(null , {task: task}) //parent needed?
+                notification.publish()
+                replaceIDs.push(notification.replacesId)
+            })
+            publishQueue.forEach(function(task){
+                notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
+                notification = notificationComp.createObject(null , {task: task}) //parent needed?
+                notification.publish()
+                replaceIDs.push(notification.replacesId)
             })
             settings.notificationIDs.value = replaceIDs
             //console.log("added", replaceIDs, settings.notificationIDs.value)
