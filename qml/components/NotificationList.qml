@@ -38,46 +38,41 @@ QtObject {
                  i < taskList.count; i++){
                 var task = taskList.get(i)
                 if (filterTask(task)) {
-//                    var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
+                    //                    var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
-//                    var notification = notificationComp.createObject(null , {task: task}) //parent needed?
+                    //                    var notification = notificationComp.createObject(null , {task: task}) //parent needed?
                     publishQueue.push(task)
                     //notification.publish()
                     //replaceIDs.push(notification.replacesId)
                 }
             }
-            console.log(publishQueue, publishQueue[0].subject)
-            //sort by due date
-            publishQueue.sort(function(a,b){
-                //console.log(a.dueDate.getTime(), b.dueDate.getTime(),a.dueDate.getTime() - b.dueDate.getTime())
-                return JS.tools.isoToDate(a.due).getTime() - JS.tools.isoToDate(b.due).getTime()
-            })
-            console.log(publishQueue, publishQueue[0].subject)
+            if (publishQueue.length > 0) {
+                console.log(publishQueue, publishQueue[0].subject)
+                //sort by due date
+                publishQueue.sort(function(a,b){
+                    //console.log(a.dueDate.getTime(), b.dueDate.getTime(),a.dueDate.getTime() - b.dueDate.getTime())
+                    return JS.tools.isoToDate(a.due).getTime() - JS.tools.isoToDate(b.due).getTime()
+                })
+                console.log(publishQueue, publishQueue[0].subject)
 
-            //crop publishQueue
-            if (notificationSettings.maxCount > 0) {
-                publishQueue.splice(notificationSettings.maxCount, publishQueue.length)
+                //crop publishQueue
+                if (notificationSettings.maxCount > 0) {
+                    publishQueue.splice(notificationSettings.maxCount, publishQueue.length)
+                }
+                console.log(notificationSettings.maxCount, publishQueue, publishQueue[0].subject)
+
+                //revers publicQueue (has no effect? how do get notifications sorted in the end?)
+                //publishQueue = publishQueue.reverse()
+                console.log(publishQueue, publishQueue[0].subject)
+                var notificationComp, notification
+                publishQueue.forEach(function(task){
+                    notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
+                    notification = notificationComp.createObject(null , {task: task}) //parent needed?
+                    notification.publish()
+                    replaceIDs.push(notification.replacesId)
+                })
             }
-            console.log(notificationSettings.maxCount, publishQueue, publishQueue[0].subject)
-
-            //revers publicQueue (has no effect?)
-            //publishQueue = publishQueue.reverse()
-            console.log(publishQueue, publishQueue[0].subject)
-            var notificationComp, notification
-            publishQueue.forEach(function(task){
-                notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
-                notification = notificationComp.createObject(null , {task: task}) //parent needed?
-                notification.publish()
-                replaceIDs.push(notification.replacesId)
-            })
-            publishQueue.forEach(function(task){
-                notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
-                notification = notificationComp.createObject(null , {task: task}) //parent needed?
-                notification.publish()
-                replaceIDs.push(notification.replacesId)
-            })
             settings.notificationIDs.value = replaceIDs
-            //console.log("added", replaceIDs, settings.notificationIDs.value)
         }
     }
 
