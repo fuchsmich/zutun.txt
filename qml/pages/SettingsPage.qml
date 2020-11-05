@@ -163,7 +163,7 @@ Page {
             }
             ComboBox {
                 //: ComboBox limt tasks within range of time
-                label: qsTr("Show tasks due within ")
+                label: qsTr("Show tasks due within")
                 enabled: notificationSettings.showNotifications
                 currentIndex: notificationSettings.dueLimit
                 menu: ContextMenu {
@@ -171,6 +171,24 @@ Page {
                     MenuItem { text: qsTr("next 7 days") }
                     MenuItem { text: qsTr("one month") }
                     onActivated: notificationSettings.dueLimit = index
+                }
+            }
+            ComboBox {
+                //: ComboBox limt number of notifications
+                label: qsTr("Max count of notifications")
+                enabled: notificationSettings.showNotifications
+                currentIndex: notificationSettings.dueLimit
+                menu: ContextMenu {
+                    Repeater {
+                        model: 6
+                        MenuItem {
+                            text: (model.index === 0?
+                                       //: unlimited number of notifications
+                                       qsTr("unlimited") :
+                                       model.index)
+                        }
+                    }
+                    onActivated: notificationSettings.maxCount = index
                 }
             }
         }

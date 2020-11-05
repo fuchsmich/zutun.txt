@@ -33,7 +33,10 @@ QtObject {
         //check if replaceIDs is restored from settings
         if (replaceIDs) {
             removeAll()
-            for (var i = 0; i < taskList.count; i++){
+            for (var i = 0;
+                 notificationSettings.showNotifications &&
+                 (notificationSettings.maxCount === 0 || notificationList.replaceIDs.length < notificationSettings.maxCount) &&
+                 i < taskList.count; i++){
                 var task = taskList.get(i)
                 if (filterTask(task)) {
                     var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))

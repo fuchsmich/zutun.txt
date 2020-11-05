@@ -214,12 +214,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show tasks due within </source>
+        <source>anytime</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show tasks due within</source>
         <extracomment>ComboBox limt tasks within range of time</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>anytime</source>
+        <source>Max count of notifications</source>
+        <extracomment>ComboBox limt number of notifications</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unlimited</source>
+        <extracomment>unlimited number of notifications</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>

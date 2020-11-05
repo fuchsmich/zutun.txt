@@ -214,13 +214,23 @@
         <translation>Zeige Benachrichtigungen</translation>
     </message>
     <message>
-        <source>Show tasks due within </source>
-        <extracomment>ComboBox limt tasks within range of time</extracomment>
-        <translation>Zeige Aufgaben mit Enddatum innerhalb </translation>
-    </message>
-    <message>
         <source>anytime</source>
         <translation>jederzeit</translation>
+    </message>
+    <message>
+        <source>Show tasks due within</source>
+        <extracomment>ComboBox limt tasks within range of time</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max count of notifications</source>
+        <extracomment>ComboBox limt number of notifications</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unlimited</source>
+        <extracomment>unlimited number of notifications</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

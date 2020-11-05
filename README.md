@@ -27,6 +27,7 @@ Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) b
 ## Changes
 
 ### 2.2.0
+  - start zutun.txt with shortcut (pulldown menu)
   - improved notifications (format, more stable handling)
   - settings for notifications
   - removed bug in onFiltersChanged

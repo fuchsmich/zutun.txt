@@ -72,6 +72,8 @@ ApplicationWindow {
             id: notificationSettings
             path: "notifications"
             property bool showNotifications: true
+            //maxCount... 0 unlimited
+            property int maxCount: 0
             //dueLimit... 0 none, 1 one week, 2 one month
             property int dueLimit: 0
             property ConfigurationValue notificationIDs: ConfigurationValue {
