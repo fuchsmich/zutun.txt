@@ -33,19 +33,31 @@ QtObject {
         //check if replaceIDs is restored from settings
         if (replaceIDs) {
             removeAll()
+            var publishQueue = []
             for (var i = 0;
                  notificationSettings.showNotifications &&
-                 (notificationSettings.maxCount === 0 || notificationList.replaceIDs.length < notificationSettings.maxCount) &&
+                 //(notificationSettings.maxCount === 0 || publishQueue.length < notificationSettings.maxCount) &&
                  i < taskList.count; i++){
                 var task = taskList.get(i)
                 if (filterTask(task)) {
                     var notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
 
                     var notification = notificationComp.createObject(null , {task: task}) //parent needed?
-                    notification.publish()
-                    replaceIDs.push(notification.replacesId)
+                    publishQueue.push(notification)
+                    //notification.publish()
+                    //replaceIDs.push(notification.replacesId)
                 }
             }
+            publishQueue.sort(function(a,b){
+                console.log(a.dueDate.getTime(), b.dueDate.getTime(),a.dueDate.getTime() - b.dueDate.getTime())
+                return a.dueDate.getTime() - b.dueDate.getTime()
+            })
+            publishQueue.forEach(function(item){
+                if (notificationSettings.maxCount === 0 || replaceIDs.length < notificationSettings.maxCount) {
+                    item.publish()
+                    replaceIDs.push(item.replacesId)
+                }
+            })
             settings.notificationIDs.value = replaceIDs
             //console.log("added", replaceIDs, settings.notificationIDs.value)
         }

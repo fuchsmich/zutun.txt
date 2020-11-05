@@ -177,7 +177,7 @@ Page {
                 //: ComboBox limt number of notifications
                 label: qsTr("Max count of notifications")
                 enabled: notificationSettings.showNotifications
-                currentIndex: notificationSettings.dueLimit
+                currentIndex: notificationSettings.maxCount
                 menu: ContextMenu {
                     Repeater {
                         model: 6
