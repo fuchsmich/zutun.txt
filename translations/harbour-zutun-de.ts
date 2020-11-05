@@ -220,17 +220,17 @@
     <message>
         <source>Show tasks due within</source>
         <extracomment>ComboBox limt tasks within range of time</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Aufgaben mit Enddatum innerhalb</translation>
     </message>
     <message>
         <source>Max count of notifications</source>
         <extracomment>ComboBox limt number of notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Max. Anzahl der Benachrichtigungen</translation>
     </message>
     <message>
         <source>unlimited</source>
         <extracomment>unlimited number of notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>unbegrenzt</translation>
     </message>
 </context>
 <context>
