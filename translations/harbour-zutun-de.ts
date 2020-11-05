@@ -163,7 +163,7 @@
     <message>
         <source>Fontsize in Tasklist</source>
         <extracomment>Slide control for font size</extracomment>
-        <translation>Zeichengröße in Aufgabenliste</translation>
+        <translation>Schriftgröße in Aufgabenliste</translation>
     </message>
     <message>
         <source>Auto add creation date.</source>
