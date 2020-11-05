@@ -52,6 +52,8 @@ QtObject {
                 console.log(a.dueDate.getTime(), b.dueDate.getTime(),a.dueDate.getTime() - b.dueDate.getTime())
                 return a.dueDate.getTime() - b.dueDate.getTime()
             })
+            //crop publishQueue
+            //revers publicQueue
             publishQueue.forEach(function(item){
                 if (notificationSettings.maxCount === 0 || replaceIDs.length < notificationSettings.maxCount) {
                     item.publish()
