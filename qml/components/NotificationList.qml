@@ -47,23 +47,23 @@ QtObject {
                 }
             }
             if (publishQueue.length > 0) {
-                console.log(publishQueue, publishQueue[0].subject)
+                //console.log(publishQueue, publishQueue[0].subject)
                 //sort by due date
                 publishQueue.sort(function(a,b){
                     //console.log(a.dueDate.getTime(), b.dueDate.getTime(),a.dueDate.getTime() - b.dueDate.getTime())
                     return JS.tools.isoToDate(a.due).getTime() - JS.tools.isoToDate(b.due).getTime()
                 })
-                console.log(publishQueue, publishQueue[0].subject)
+                //console.log(publishQueue, publishQueue[0].subject)
 
                 //crop publishQueue
                 if (notificationSettings.maxCount > 0) {
                     publishQueue.splice(notificationSettings.maxCount, publishQueue.length)
                 }
-                console.log(notificationSettings.maxCount, publishQueue, publishQueue[0].subject)
+                //console.log(notificationSettings.maxCount, publishQueue, publishQueue[0].subject)
 
                 //revers publicQueue (has no effect? how do get notifications sorted in the end?)
                 //publishQueue = publishQueue.reverse()
-                console.log(publishQueue, publishQueue[0].subject)
+                //console.log(publishQueue, publishQueue[0].subject)
                 var notificationComp, notification
                 publishQueue.forEach(function(task){
                     notificationComp = Qt.createComponent(Qt.resolvedUrl("./Notification.qml"))
