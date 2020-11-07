@@ -173,6 +173,63 @@
         <extracomment>Section Header for the Files section in Settings page</extracomment>
         <translation>最近文件</translation>
     </message>
+    <message>
+        <source>Tasklist</source>
+        <extracomment>Section Header for the Tasklist section in Settings page</extracomment>
+        <translation>任务列表</translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <extracomment>Section Header for the Edit section in Settings page</extracomment>
+        <translation>编辑列表</translation>
+    </message>
+    <message>
+        <source>Automatically add creation date to newly added tasks.</source>
+        <extracomment>TextSwitch for adding creation date</extracomment>
+        <translation>自动添加创建日期到新添加的任务。</translation>
+    </message>
+    <message>
+        <source>Notifications</source>
+        <extracomment>Section Header for the notification section in settings page</extracomment>
+        <translation>通知</translation>
+    </message>
+    <message>
+        <source>Show notifications for tasks having a due date.</source>
+        <extracomment>TextSwitch for wheter or not show notifications</extracomment>
+        <translation>显示拥有到期时间的任务通知</translation>
+    </message>
+    <message>
+        <source>next 7 days</source>
+        <translation>接下来7天</translation>
+    </message>
+    <message>
+        <source>one month</source>
+        <translation>一月</translation>
+    </message>
+    <message>
+        <source>Show notifications</source>
+        <extracomment>TextSwitch for wheter or not show notifications</extracomment>
+        <translation>显示通知</translation>
+    </message>
+    <message>
+        <source>anytime</source>
+        <translation>任何时间</translation>
+    </message>
+    <message>
+        <source>Show tasks due within</source>
+        <extracomment>ComboBox limt tasks within range of time</extracomment>
+        <translation>显示任务截止时间</translation>
+    </message>
+    <message>
+        <source>Max count of notifications</source>
+        <extracomment>ComboBox limt number of notifications</extracomment>
+        <translation>最大通知数量</translation>
+    </message>
+    <message>
+        <source>unlimited</source>
+        <extracomment>unlimited number of notifications</extracomment>
+        <translation>无限制</translation>
+    </message>
 </context>
 <context>
     <name>SortPage</name>

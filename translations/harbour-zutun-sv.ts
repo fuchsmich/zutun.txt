@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -178,59 +176,59 @@
     <message>
         <source>Tasklist</source>
         <extracomment>Section Header for the Tasklist section in Settings page</extracomment>
-        <translation type="unfinished">Aktivitetslista</translation>
+        <translation>Aktivitetslista</translation>
     </message>
     <message>
         <source>Edit Task</source>
         <extracomment>Section Header for the Edit section in Settings page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Redigera aktivitet</translation>
     </message>
     <message>
         <source>Automatically add creation date to newly added tasks.</source>
         <extracomment>TextSwitch for adding creation date</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Lägg automatiskt till tidsstämpel i nyskapade aktiviteter.</translation>
     </message>
     <message>
         <source>Notifications</source>
         <extracomment>Section Header for the notification section in settings page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Aviseringar</translation>
     </message>
     <message>
         <source>Show notifications for tasks having a due date.</source>
         <extracomment>TextSwitch for wheter or not show notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Visa aviseringar för aktiviteter som har ett förfallodatum.</translation>
     </message>
     <message>
         <source>next 7 days</source>
-        <translation type="unfinished"></translation>
+        <translation>nästkommande 7 dagar</translation>
     </message>
     <message>
         <source>one month</source>
-        <translation type="unfinished"></translation>
+        <translation>en månad</translation>
     </message>
     <message>
         <source>Show notifications</source>
         <extracomment>TextSwitch for wheter or not show notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Visa aviseringar</translation>
     </message>
     <message>
         <source>anytime</source>
-        <translation type="unfinished"></translation>
+        <translation>Alltid</translation>
     </message>
     <message>
         <source>Show tasks due within</source>
         <extracomment>ComboBox limt tasks within range of time</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Visa aktiviteter som förfaller inom</translation>
     </message>
     <message>
         <source>Max count of notifications</source>
         <extracomment>ComboBox limt number of notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Max antal aviseringar</translation>
     </message>
     <message>
         <source>unlimited</source>
         <extracomment>unlimited number of notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>obegränsat</translation>
     </message>
 </context>
 <context>
@@ -446,27 +444,31 @@
     <name>harbour-zutun</name>
     <message>
         <source>File reading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Läsfel</translation>
     </message>
     <message>
-        <source>File doesn&apos;t exist.
+        <source>File doesn't exist.
  Pull down to create it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen finns inte.
+ Dra neråt för att skapa den.</translation>
     </message>
     <message>
         <source>File seems to be empty.
  Pull down to create one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen verkar tom.
+ Dra neråt för att skapa en.</translation>
     </message>
     <message>
         <source>No tasks found in file.
  Pull down to create one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga aktiviteter hittades i filen.
+ Dra neråt för att skapa en.</translation>
     </message>
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla ktiviteter är dolda av filter.
+ Dra neråt för att rensa filter.</translation>
     </message>
 </context>
 </TS>
