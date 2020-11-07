@@ -1,4 +1,4 @@
-# zutun.txt
+# ZuTun.txt
 
 Manage tasklists in todo.txt format on SailfishOS.
 
@@ -6,7 +6,7 @@ Todo.txt uses simple text files for managing tasklists: http://todotxt.com/
 
 ## Installation
 
-Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) by downloading the rpm or via [storeman](https://openrepos.net/content/osetr/storeman).
+Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) or [releases](https://github.com/fuchsmich/zutun.txt/releases/latest) by downloading the rpm or via [storeman](https://openrepos.net/content/osetr/storeman).
 
 ## Features
 
@@ -25,6 +25,7 @@ Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) b
     - show tasks with due date in notifications
     - add task from top menu (app must be running)
   - configureable notifications for tasks with due date
+  - add task via global top menu
   
   
 ## Changes
