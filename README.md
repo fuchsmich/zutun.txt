@@ -4,6 +4,14 @@ Manage tasklists in todo.txt format on SailfishOS.
 
 Todo.txt uses simple text files for managing tasklists: http://todotxt.com/
 
+## Source
+
+https://github.com/fuchsmich/zutun.txt
+
+## Translation 
+
+https://www.transifex.com/none-496/zutuntxt/dashboard/
+
 ## Installation
 
 Download the rpm from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) or [releases](https://github.com/fuchsmich/zutun.txt/releases/latest).
