@@ -6,7 +6,8 @@ Todo.txt uses simple text files for managing tasklists: http://todotxt.com/
 
 ## Installation
 
-Install the app from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) or [releases](https://github.com/fuchsmich/zutun.txt/releases/latest) by downloading the rpm or via [storeman](https://openrepos.net/content/osetr/storeman).
+Download the rpm from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) or [releases](https://github.com/fuchsmich/zutun.txt/releases/latest).
+
 
 ## Features
 
