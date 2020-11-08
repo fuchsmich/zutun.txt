@@ -39,6 +39,9 @@ Download the rpm from [openrepos](https://openrepos.net/content/fooxl/zutuntxt) 
   
 ## Changes
 
+### 2.2.2
+  - update languages: fr, zh
+
 ### 2.2.1
   - update languages: sv, zh
 
