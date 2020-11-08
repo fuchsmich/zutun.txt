@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -38,7 +36,7 @@
     <message>
         <source>Select due date</source>
         <extracomment>Calendar is shown below text to pick a date</extracomment>
-        <translation>Sélectionner date d&apos;échéance</translation>
+        <translation>Choix Date d&apos;échéance</translation>
     </message>
 </context>
 <context>
@@ -46,7 +44,7 @@
     <message>
         <source>Hide complete</source>
         <extracomment>text about active filters</extracomment>
-        <translation>Masquer tâches accomplies</translation>
+        <translation>Accomplis masqués</translation>
     </message>
     <message>
         <source>None</source>
@@ -59,11 +57,11 @@
     <message>
         <source>Active Filters: %1</source>
         <extracomment>PageHeader for currently set filters</extracomment>
-        <translation>Filtre actif: %1</translation>
+        <translation>Filtres actifs: %1</translation>
     </message>
     <message>
         <source>Clear Filters</source>
-        <translation>Désactiver Filtres</translation>
+        <translation>Réinitialiser Filtres</translation>
     </message>
     <message>
         <source>Filters</source>
@@ -101,7 +99,7 @@
     <message>
         <source>Back to Tasklist</source>
         <extracomment>PullDown menu: go to task list</extracomment>
-        <translation>Retour à la liste des tâches</translation>
+        <translation>Retour à Liste des tâches</translation>
     </message>
     <message>
         <source>Other filters</source>
@@ -122,11 +120,11 @@
     </message>
     <message>
         <source>unpin</source>
-        <translation>Détacher Tâche</translation>
+        <translation>Détacher</translation>
     </message>
     <message>
         <source>pin</source>
-        <translation>Épingler Tâche</translation>
+        <translation>Épingler</translation>
     </message>
     <message>
         <source>remove</source>
@@ -143,7 +141,7 @@
     <message>
         <source>Settings</source>
         <extracomment>Page Header for the Settings page</extracomment>
-        <translation>Paramètres</translation>
+        <translation>Réglages</translation>
     </message>
     <message>
         <source>Files</source>
@@ -163,7 +161,7 @@
     <message>
         <source>Fontsize in Tasklist</source>
         <extracomment>Slide control for font size</extracomment>
-        <translation>Taille Police de caractère dans Liste des tâches</translation>
+        <translation>Taille Police dans Liste Tâches</translation>
     </message>
     <message>
         <source>Auto add creation date.</source>
@@ -178,59 +176,59 @@
     <message>
         <source>Tasklist</source>
         <extracomment>Section Header for the Tasklist section in Settings page</extracomment>
-        <translation type="unfinished">Liste de tâches</translation>
+        <translation>Liste des tâches</translation>
     </message>
     <message>
         <source>Edit Task</source>
         <extracomment>Section Header for the Edit section in Settings page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Editer les tâches</translation>
     </message>
     <message>
         <source>Automatically add creation date to newly added tasks.</source>
         <extracomment>TextSwitch for adding creation date</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ajoute automatiquement une date de création à chaque nouvelle tâche.</translation>
     </message>
     <message>
         <source>Notifications</source>
         <extracomment>Section Header for the notification section in settings page</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Notifications</translation>
     </message>
     <message>
         <source>Show notifications for tasks having a due date.</source>
         <extracomment>TextSwitch for wheter or not show notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Affiche des notifications pour les tâches avec date d&apos;échéance.</translation>
     </message>
     <message>
         <source>next 7 days</source>
-        <translation type="unfinished"></translation>
+        <translation>7 prochains jours</translation>
     </message>
     <message>
         <source>one month</source>
-        <translation type="unfinished"></translation>
+        <translation>Un mois</translation>
     </message>
     <message>
         <source>Show notifications</source>
         <extracomment>TextSwitch for wheter or not show notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Afficher notifications</translation>
     </message>
     <message>
         <source>anytime</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours</translation>
     </message>
     <message>
         <source>Show tasks due within</source>
         <extracomment>ComboBox limt tasks within range of time</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Afficher tâches à échéance:</translation>
     </message>
     <message>
         <source>Max count of notifications</source>
         <extracomment>ComboBox limt number of notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Limite de notifications</translation>
     </message>
     <message>
         <source>unlimited</source>
         <extracomment>unlimited number of notifications</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Illimité</translation>
     </message>
 </context>
 <context>
@@ -262,11 +260,11 @@
     </message>
     <message>
         <source>asc</source>
-        <translation>tri croissant</translation>
+        <translation>croissant</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation>tri décroissant</translation>
+        <translation>décroissant</translation>
     </message>
 </context>
 <context>
@@ -277,11 +275,11 @@
     </message>
     <message>
         <source>asc</source>
-        <translation>tri croissant</translation>
+        <translation>croissant</translation>
     </message>
     <message>
         <source>desc</source>
-        <translation>tri décroissant</translation>
+        <translation>décroissant</translation>
     </message>
     <message>
         <source>Grouped by %1, </source>
@@ -295,12 +293,12 @@
     <message>
         <source>Creation Date</source>
         <extracomment>SortPage, sorting by: Creation date</extracomment>
-        <translation>Date de création</translation>
+        <translation>Date Création</translation>
     </message>
     <message>
         <source>Due date</source>
         <extracomment>SortPage, sorting by: Due date</extracomment>
-        <translation>Date d&apos;échéance</translation>
+        <translation>Échéance</translation>
     </message>
     <message>
         <source>Subject</source>
@@ -343,7 +341,7 @@
     </message>
     <message>
         <source>created:</source>
-        <translation>Créé le:</translation>
+        <translation>créée le:</translation>
     </message>
     <message>
         <source>due:</source>
@@ -371,7 +369,7 @@
     <message>
         <source>Settings</source>
         <extracomment>PullDown menu: go to settings page</extracomment>
-        <translation>Paramètres</translation>
+        <translation>Réglages</translation>
     </message>
     <message>
         <source>Sorting &amp; Grouping</source>
@@ -391,11 +389,11 @@
     <message>
         <source>Show</source>
         <extracomment>PushUp menu: show / hide completed tasks</extracomment>
-        <translation>Afficher</translation>
+        <translation>Afficher </translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Masquer</translation>
+        <translation>Masquer </translation>
     </message>
     <message>
         <source> completed tasks</source>
@@ -404,7 +402,7 @@
     <message>
         <source>Tasklist</source>
         <extracomment>PageHeader for tasklist main page</extracomment>
-        <translation>Liste de tâches</translation>
+        <translation>Liste des tâches</translation>
     </message>
     <message>
         <source>Filter: %1</source>
@@ -419,7 +417,7 @@
     <message>
         <source>Clear filters</source>
         <extracomment>PullDown menu: clear filters</extracomment>
-        <translation>Désactiver Filtres</translation>
+        <translation>Réinitialiser Filtres</translation>
     </message>
 </context>
 <context>
@@ -446,27 +444,31 @@
     <name>harbour-zutun</name>
     <message>
         <source>File reading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la lecture du fichier</translation>
     </message>
     <message>
-        <source>File doesn&apos;t exist.
+        <source>File doesn't exist.
  Pull down to create it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier n&apos;existe pas.
+Tirer pour le créer.</translation>
     </message>
     <message>
         <source>File seems to be empty.
  Pull down to create one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier semble vide. 
+Tirer pour le créer.</translation>
     </message>
     <message>
         <source>No tasks found in file.
  Pull down to create one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune tâche trouvée dans le fichier.
+Tirer pour le créer.</translation>
     </message>
     <message>
         <source>All tasks are hidden by filters.
  Pull down to clear filters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les tâches sont masquées par des filtres.
+Tirer pour réinitialiser les filtres.</translation>
     </message>
 </context>
 </TS>

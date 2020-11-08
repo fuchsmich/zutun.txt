@@ -49,6 +49,7 @@ TRANSLATIONS += \
     translations/harbour-zutun-nl.ts \
     translations/harbour-zutun-nl_BE.ts \
     translations/harbour-zutun-ru.ts \
+    translations/harbour-zutun-zh.ts \
     translations/harbour-zutun-sv.ts
 
 quickaction.path = /usr/share/lipstick/quickactions
